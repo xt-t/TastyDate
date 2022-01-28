@@ -46,7 +46,7 @@
 
 	<build>
 		<finalName>
-			TastyDate
+			tastydate
 		</finalName>
 		<plugins>
 			<plugin>
