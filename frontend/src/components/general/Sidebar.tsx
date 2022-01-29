@@ -1,21 +1,17 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Link} from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from '@mui/icons-material/Close';
 import {SidebarData} from "../../models/general/SidebarData"
 import "./Sidebar.scss"
 
-export default function Sidebar () {
-    const [sidebarStatus, setsidebarStatus ] = useState(false);
-    const showSidebar = () => setsidebarStatus(!sidebarStatus);
+interface SidebarProps {
+    sidebarStatus: boolean
+    showSidebar: () => void
+}
+export default function Sidebar ({sidebarStatus, showSidebar}:SidebarProps) {
 
     return (
         <>
-            <div className="horizontalbar">
-                <Link to="#" className="icons-menu-close">
-                        <MenuIcon onClick={showSidebar}/>
-                </Link>
-            </div>
             <nav className={sidebarStatus ? "sidebaractive" : "sidebar"}>
                 <ul className="side-items" onClick={showSidebar}>
                     <li className="sidebar-toggle">
