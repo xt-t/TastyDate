@@ -12,7 +12,7 @@ export default function Sidebar ({sidebarStatus, showSidebar}:SidebarProps) {
 
     return (
         <>
-            <nav className={sidebarStatus ? "sidebaractive" : "sidebar"}>
+            <nav className={sidebarStatus ? "sidebaractive" : "sidebarinactive"}>
                 <ul className="side-items" onClick={showSidebar}>
                     <li className="sidebar-toggle">
                         <Link to="#" className="icons-menu-close">
