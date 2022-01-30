@@ -1,32 +1,18 @@
-import TextField from "@mui/material/TextField";
+import DateSetter from "../../models/appointmentsettings/DateSetter";
+import TimeSetter from "../../models/appointmentsettings/TimeSetter";
+
 
 export default function Appointtwo() {
 
     return (
-        <div>
-            <div className="formelements">
-                <TextField
-                    required
-                    id="standard-required"
-                    label="TastyDate: Name"
-                    variant="standard"
-                />
+        <div className="addDateTime">
+            <div className="elementDateTime">
+                <DateSetter/>
             </div>
-            <div className="formelements">
-                <TextField
-                    id="outlined-multiline-static"
-                    label="TastyDate Notes"
-                    multiline
-                    rows={4}
-                />
+            <div className="elementDateTime">
+                <TimeSetter/>
             </div>
-            <div className="formelements">
-                <TextField
-                    required
-                    id="standard-required"
-                    label="Your name"
-                    variant="standard"
-                />
+            <div className="elementDateTime">
             </div>
         </div>
     )
