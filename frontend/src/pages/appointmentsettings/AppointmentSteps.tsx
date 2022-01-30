@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import AppointmentPages from "./AppointmentPages";
 import Card from '@mui/material/Card';
 import {CardContent} from "@mui/material";
+import "./Appointment.scss"
 
 const steps = ['General information', 'Pick your dates and times', 'Pick your restaurant'];
 
@@ -58,8 +59,10 @@ export default function AppointmentSteps() {
 
 
     return (
+        <div>
         <Box sx={{width: '95%', mt:6}}>
 
+            <div>
             <Stepper activeStep={activeStep}>
 
                 {steps.map((label, index) => {
@@ -85,7 +88,10 @@ export default function AppointmentSteps() {
                 })}
             </Stepper>
 
-            <Card sx={ {mt: 10, border: 2, borderColor: "#1c54b2", height: 430}}>
+            </div>
+            <div className="card">
+
+            <Card sx={ {border: 2, borderColor: "#1c54b2"}}>
             <CardContent>
 
 
@@ -141,6 +147,9 @@ export default function AppointmentSteps() {
             </CardContent>
             </Card>
 
+            </div>
+
         </Box>
+            </div>
     );
 }

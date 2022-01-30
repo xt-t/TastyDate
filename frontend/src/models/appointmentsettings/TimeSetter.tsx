@@ -4,19 +4,41 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TimePicker from '@mui/lab/TimePicker';
 
-export default function TimeSetter() {
-    const [value, setValue] = React.useState<Date | null>(null);
+interface TimeSetterProps {
+    startTime: Date | null
+    setStartTime: Function
+    endTime: Date | null
+    setEndTime: Function
+    range: string
+}
 
-    return (
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <TimePicker
-                label="Basic example"
-                value={value}
-                onChange={(newValue) => {
-                    setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-            />
-        </LocalizationProvider>
-    );
+export default function TimeSetter ({range, startTime, setStartTime, endTime, setEndTime}: TimeSetterProps) {
+
+    if (range === "start Time") {
+        return (
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TimePicker
+                    label="Start time"
+                    value={startTime}
+                    onChange={(newValue) => {
+                        setStartTime(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                />
+            </LocalizationProvider>
+        );
+    } else {
+        return (
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TimePicker
+                    label="End time"
+                    value={endTime}
+                    onChange={(newValue) => {
+                        setEndTime(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                />
+            </LocalizationProvider>
+        );
+    }
 }

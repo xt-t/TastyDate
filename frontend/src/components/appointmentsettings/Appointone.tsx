@@ -5,11 +5,22 @@ export default function Appointone() {
 
     return (
         <div className="form">
+            <div>
+                <h2>Settings for your TastyDate</h2>
+            </div>
             <div className="formelements">
                 <TextField
                     required
                     id="standard-required"
                     label="TastyDate: Name"
+                    variant="standard"
+                />
+            </div>
+            <div className="formelements">
+                <TextField
+                    required
+                    id="standard-required"
+                    label="Location"
                     variant="standard"
                 />
             </div>

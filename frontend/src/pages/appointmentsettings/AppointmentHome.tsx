@@ -1,6 +1,6 @@
 import DisplayMenus from "../../components/general/DisplayMenus";
 import AppointmentSteps from "./AppointmentSteps";
-import "./AppointmentHome.scss"
+import "./Appointment.scss"
 
 export default function AppointmentHome() {
 

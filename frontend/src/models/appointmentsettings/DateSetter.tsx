@@ -4,16 +4,20 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
-export default function DateSetter() {
-    const [value, setValue] = React.useState<Date | null>(null);
+interface DateSetterProps {
+    date: Date | null
+    setDate: Function
+}
+
+export default function DateSetter({date, setDate} : DateSetterProps) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-                label="Basic example"
-                value={value}
+                label="Pick your date"
+                value={date}
                 onChange={(newValue) => {
-                    setValue(newValue);
+                    setDate(newValue);
                 }}
                 renderInput={(params) => <TextField {...params} />}
             />

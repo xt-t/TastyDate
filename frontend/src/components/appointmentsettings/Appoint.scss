@@ -7,5 +7,50 @@
   .formelements {
     margin: 10px;
   }
+}
+
+
+.cardTwo {
+  height: 30rem;
+  width: 60rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: flex-start;
+  align-items: center;
+
+  span {
+    margin-bottom: 10px;
+  }
+
+  .addDateTime {
+    margin: 20px;
+    padding: 20px;
+    height: 270px;
+    width: 500px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: stretch;
+
+    .setTime {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .addDateTimeButtons {
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+
+  .displayChosenDates {
+    margin: 20px;
+    height: 270px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
 
 }
