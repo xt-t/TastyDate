@@ -4,14 +4,37 @@ import TimeSetter from "../../models/appointmentsettings/TimeSetter";
 import AddIcon from '@mui/icons-material/Add';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import {Card, CardContent} from "@mui/material";
-import * as React from "react";
-
+import {useState} from "react";
+import {dataAppointment} from "../../models/appointmentsettings/dataAppointment"
 
 export default function Appointtwo() {
-    const [date, setDate] = React.useState<Date | null>(null);
-    const [startTime, setStartTime] = React.useState<Date | null>(null);
-    const [endTime, setEndTime] = React.useState<Date | null>(null);
 
+    const [date, setDate] = useState<Date | null>(null);
+    const [startTime, setStartTime] = useState<Date | null>(null);
+    const [endTime, setEndTime] = useState<Date | null>(null);
+    const [count, setCount] = useState<number>(1);
+    const STORAGE_KEY = "DateTimeKey"
+    const [dataDateTimes, setDataDateTimes] = useState<dataAppointment[]>(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
+
+    const saveAppointmentData = () => {
+        if ((date !== null) && (startTime !== null) && (endTime !== null)) {
+            const newDataDateTime = {
+                counter: count,
+                pickedDate: date,
+                pickedStart: startTime,
+                pickedEnd: endTime
+            }
+            setDataDateTimes([...dataDateTimes, newDataDateTime]);
+
+            setDate(null);
+            setStartTime(null);
+            setEndTime(null);
+            setCount(count+1);
+
+            console.log(dataDateTimes);
+        }
+
+    }
 
     return (
         <div className="cardTwo">
@@ -44,8 +67,8 @@ export default function Appointtwo() {
                         </div>
 
                         <div className="addDateTimeButtons">
-                            <Button variant="outlined"><RestartAltIcon/>Reset</Button>
-                            <Button variant="contained"><AddIcon/>Add</Button>
+                            <Button variant="outlined"> <RestartAltIcon/> Reset </Button>
+                            <Button variant="contained" onClick={saveAppointmentData}> <AddIcon/> Add </Button>
                         </div>
 
                     </CardContent>
@@ -55,6 +78,14 @@ export default function Appointtwo() {
             <div>
                 <Card>
                     <CardContent className="displayChosenDates">
+                        {dataDateTimes.map((dataDateTime, index) => (
+                            <span>
+                                {index}
+                            {dataDateTime.counter}
+                                {dataDateTime.pickedDate}
+                                {dataDateTime.pickedStart}
+                                {dataDateTime.pickedEnd}
+                            </span>))}
                         <span>Termin 1 12.03.22: 17:00 Uhr - 19:00 Uhr</span>
                     </CardContent>
                 </Card>

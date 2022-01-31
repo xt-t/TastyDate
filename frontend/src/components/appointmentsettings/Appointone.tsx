@@ -5,9 +5,9 @@ export default function Appointone() {
 
     return (
         <div className="form">
-            <div>
+            <header>
                 <h2>Settings for your TastyDate</h2>
-            </div>
+            </header>
             <div className="formelements">
                 <TextField
                     required
