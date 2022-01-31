@@ -1,11 +1,12 @@
 import TextField from "@mui/material/TextField";
 import "./Appoint.scss"
+import {Box} from "@mui/material";
 
 export default function AppointOne() {
 
     return (
-        <div className="form">
-                <h2>Settings for your TastyDate</h2>
+        <Box className="form">
+            <h2>Settings for your TastyDate</h2>
                 <TextField
                     required
                     id="standard-required"
@@ -34,6 +35,6 @@ export default function AppointOne() {
                     variant="standard"
                     className="formelements"
                 />
-        </div>
+        </Box>
     )
 }

@@ -47,7 +47,7 @@ export default function AppointmentStepsWindow(
 
                         <React.Fragment>
 
-                            <Typography sx={{mt: 2, mb: 1}}>
+                            <Typography component={'span'} sx={{mt: 2, mb: 1}}>
                                 <AppointmentStepsPages activepage={activeStep}/>
                             </Typography>
 

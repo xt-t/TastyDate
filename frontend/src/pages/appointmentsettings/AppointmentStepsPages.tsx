@@ -10,23 +10,17 @@ export default function AppointmentStepsPages({activepage}:Appointmentpagesprops
 
     if (activepage === 0) {
         return (
-            <div>
                 <AppointOne/>
-            </div>
         )
     }
     else if (activepage === 1) {
         return (
-        <div>
             <AppointTwo/>
-        </div>
         )
     }
     else {
         return (
-        <div>
             <AppointThree/>
-        </div>
         )
     }
 }
