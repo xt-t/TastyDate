@@ -1,45 +1,39 @@
 import TextField from "@mui/material/TextField";
 import "./Appoint.scss"
 
-export default function Appointone() {
+export default function AppointOne() {
 
     return (
         <div className="form">
-            <header>
                 <h2>Settings for your TastyDate</h2>
-            </header>
-            <div className="formelements">
                 <TextField
                     required
                     id="standard-required"
                     label="TastyDate: Name"
                     variant="standard"
+                    className="formelements"
                 />
-            </div>
-            <div className="formelements">
                 <TextField
                     required
                     id="standard-required"
                     label="Location"
                     variant="standard"
+                    className="formelements"
                 />
-            </div>
-            <div className="formelements">
                 <TextField
                     id="outlined-multiline-static"
                     label="TastyDate Notes"
                     multiline
                     rows={4}
+                    className="formelements"
                 />
-            </div>
-            <div className="formelements">
                 <TextField
                     required
                     id="standard-required"
                     label="Your name"
                     variant="standard"
+                    className="formelements"
                 />
-            </div>
         </div>
     )
 }

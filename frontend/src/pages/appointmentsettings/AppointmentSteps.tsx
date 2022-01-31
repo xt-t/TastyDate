@@ -3,12 +3,9 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import AppointmentPages from "./AppointmentPages";
-import Card from '@mui/material/Card';
-import {CardContent} from "@mui/material";
 import "./Appointment.scss"
+import AppointmentStepsWindow from "./AppointmentStepsWindow";
 
 const steps = ['General information', 'Pick your dates and times', 'Pick your restaurant'];
 
@@ -59,10 +56,8 @@ export default function AppointmentSteps() {
 
 
     return (
-        <div>
         <Box sx={{width: '95%', mt:6}}>
 
-            <div>
             <Stepper activeStep={activeStep}>
 
                 {steps.map((label, index) => {
@@ -88,68 +83,16 @@ export default function AppointmentSteps() {
                 })}
             </Stepper>
 
-            </div>
-            <div className="card">
-
-            <Card sx={ {border: 2, borderColor: "#1c54b2"}}>
-            <CardContent>
-
-
-                {activeStep === steps.length ? (
-                    <React.Fragment>
-                        <Typography sx={{mt: 2, mb: 1}}>
-                            All steps completed - you&apos;re finished
-                        </Typography>
-                        <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
-                            <Box sx={{flex: '1 1 auto'}}/>
-                            <Button onClick={handleReset}>Reset</Button>
-                        </Box>
-                    </React.Fragment>
-
-
-                ) : (
-
-
-
-                    <React.Fragment>
-
-                        <Typography sx={{mt: 2, mb: 1}}>
-                            <AppointmentPages activepage={activeStep}/>
-                        </Typography>
-
-                        <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
-                            <Button
-                                color="inherit"
-                                disabled={activeStep === 0}
-                                onClick={handleBack}
-                                sx={{mr: 1}}
-                            >
-                                Back
-                            </Button>
-
-                            <Box sx={{flex: '1 1 auto'}}/>
-
-                            {isStepOptional(activeStep) && (
-                                <Button color="inherit" onClick={handleSkip} sx={{mr:1}}>
-                                    Skip
-                                </Button>
-                            )}
-
-
-                            <Button onClick={handleNext}>
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
-
-
-                        </Box>
-                    </React.Fragment>
-                )}
-            </CardContent>
-            </Card>
-
-            </div>
+            <AppointmentStepsWindow
+                activeStep={activeStep}
+            steps={steps}
+            isStepOptional={isStepOptional}
+            handleReset={handleReset}
+            handleBack={handleBack}
+            handleSkip={handleSkip}
+            handleNext={handleNext}
+            />
 
         </Box>
-            </div>
     );
 }

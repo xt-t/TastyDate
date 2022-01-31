@@ -20,6 +20,7 @@ export default function TimeSetter ({range, startTime, setStartTime, endTime, se
                 <TimePicker
                     label="Start time"
                     value={startTime}
+                    ampm={false}
                     onChange={(newValue) => {
                         setStartTime(newValue);
                     }}
@@ -33,6 +34,7 @@ export default function TimeSetter ({range, startTime, setStartTime, endTime, se
                 <TimePicker
                     label="End time"
                     value={endTime}
+                    ampm={false}
                     onChange={(newValue) => {
                         setEndTime(newValue);
                     }}

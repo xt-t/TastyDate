@@ -1,4 +1,4 @@
-export default function Appointthree() {
+export default function AppointThree() {
 
     return (
         <div>

@@ -28,8 +28,9 @@ export default function NavigationBar({showSidebar}:NavigationBarProps) {
                                 color="inherit"
                                 aria-label="open drawer"
                                 sx={{ mr: 2 }}
+                                onClick={showSidebar}
                             >
-                                <MenuIcon onClick={showSidebar}/>
+                                <MenuIcon/>
                             </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         TastyDate
