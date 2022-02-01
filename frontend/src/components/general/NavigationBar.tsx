@@ -6,12 +6,13 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from "@mui/icons-material/Menu";
+import {Link} from 'react-router-dom';
 
 interface NavigationBarProps {
     showSidebar: () => void
 }
 
-export default function NavigationBar({showSidebar}:NavigationBarProps) {
+export default function NavigationBar({showSidebar}: NavigationBarProps) {
     const [auth, setAuth] = React.useState(true);
 
     const handleLogin = () => {
@@ -19,39 +20,39 @@ export default function NavigationBar({showSidebar}:NavigationBarProps) {
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="open drawer"
-                                sx={{ mr: 2 }}
-                                onClick={showSidebar}
-                            >
-                                <MenuIcon/>
-                            </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        TastyDate
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        sx={{mr: 2}}
+                        onClick={showSidebar}
+                    >
+                        <MenuIcon/>
+                    </IconButton>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                        <Link to="/" className="logo">TastyDate</Link>
                     </Typography>
-                        <div className="Login" onClick={() => handleLogin()}>
-                            <IconButton
-                                size="large"
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                                {auth ? (
-                                    <>
-                                        Login
-                                    </>
-                                    ): (
-                                        <>
-                                        Logout
-                                        </>
-                                    )}
-                        </div>
+                    <div className="Login" onClick={() => handleLogin()}>
+                        <IconButton
+                            size="large"
+                            color="inherit"
+                        >
+                            <AccountCircle/>
+                        </IconButton>
+                        {auth ? (
+                            <>
+                                Login
+                            </>
+                        ) : (
+                            <>
+                                Logout
+                            </>
+                        )}
+                    </div>
                 </Toolbar>
             </AppBar>
         </Box>

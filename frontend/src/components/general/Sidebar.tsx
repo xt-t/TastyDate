@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 import {SidebarData} from "../../models/general/SidebarData"
-import "./Sidebar.scss"
+import "./DisplayMenus.scss"
 
 interface SidebarProps {
     sidebarStatus: boolean

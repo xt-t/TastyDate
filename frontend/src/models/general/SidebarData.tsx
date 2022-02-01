@@ -3,7 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import BallotIcon from '@mui/icons-material/Ballot';
 import HomeIcon from '@mui/icons-material/Home';
-import "../../components/general/Sidebar.scss"
+import "../../components/general/DisplayMenus.scss"
 
 interface sidebarElement {
     title: string

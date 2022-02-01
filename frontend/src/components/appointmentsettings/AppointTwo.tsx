@@ -1,5 +1,4 @@
-import React from "react";
-import { useState} from "react";
+import React, { useState } from "react";
 import {dataAppointment} from "../../models/appointmentsettings/dataAppointment"
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
 import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
@@ -35,7 +34,6 @@ export default function AppointTwo() {
         }
     }
 
-
     const resetDateInput = () => {
         setDate(null);
         setStartTime(null);
@@ -63,7 +61,6 @@ export default function AppointTwo() {
                 resetDateInput={resetDateInput}
                 saveAppointmentData={saveAppointmentData}
             />
-
 
             <AppointTwoCardDisplayDate dataDateTimes={dataDateTimes} deletePickedDate={deletePickedDate} deleteAllPickedDates={deleteAllPickedDates}/>
 

@@ -28,8 +28,12 @@ export default function AppointTwoCardDisplayDate
                     <Button variant="text">
         <DeleteIcon onClick={() => deletePickedDate(dataDateTime.id)}/></Button>
                             </span>))}
-                <Button variant="text">
-                    <DeleteIcon onClick={() => deleteAllPickedDates()} color="error"/>Delete All</Button>
+
+
+                {dataDateTimes.length !== 0 ? (
+                <Button variant="text" onClick={() => deleteAllPickedDates()}>
+                    <DeleteIcon color="error"/>Delete All</Button>) : (<></>)}
+
             </CardContent>
         </Card>
     )
