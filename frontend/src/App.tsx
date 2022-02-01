@@ -5,16 +5,22 @@ import Homepage from "./pages/general/Homepage"
 import AppointmentHome from "./pages/appointmentsettings/AppointmentHome"
 import OverviewRestaurants from "./pages/restaurants/OverviewRestaurants"
 import VoteResult from "./pages/result/VoteResult"
+import RequireAuth from './components/login/RequireAuth';
+import AuthProvider from './context/AuthProvider';
+import LoginPage from './pages/login/LoginPage';
 
 function App() {
   return (
     <div className="App">
+        <AuthProvider>
       <Routes>
-              <Route path="/" element={<Homepage/>}/>
-              <Route path="/createDate" element={<AppointmentHome/>}/>
-              <Route path="/restaurants" element={<OverviewRestaurants/>}/>
-              <Route path="/overview" element={<VoteResult/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
+              <Route path="/" element={<RequireAuth><Homepage/></RequireAuth>}/>
+              <Route path="/createDate" element={<RequireAuth><AppointmentHome/></RequireAuth>}/>
+              <Route path="/restaurants" element={<RequireAuth><OverviewRestaurants/></RequireAuth>}/>
+              <Route path="/overview" element={<RequireAuth><VoteResult/></RequireAuth>}/>
       </Routes>
+        </AuthProvider>
     </div>
   );
 }
