@@ -15,7 +15,7 @@ function App() {
         <AuthProvider>
       <Routes>
           <Route path="/login" element={<LoginPage/>}/>
-              <Route path="/" element={<RequireAuth><Homepage/></RequireAuth>}/>
+              <Route path="/" element={<Homepage/>}/>
               <Route path="/createDate" element={<RequireAuth><AppointmentHome/></RequireAuth>}/>
               <Route path="/restaurants" element={<RequireAuth><OverviewRestaurants/></RequireAuth>}/>
               <Route path="/overview" element={<RequireAuth><VoteResult/></RequireAuth>}/>

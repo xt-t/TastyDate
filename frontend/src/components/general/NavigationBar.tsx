@@ -6,17 +6,31 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from "@mui/icons-material/Menu";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import {useContext} from "react";
+import {AuthContext} from "../../context/AuthProvider";
 
 interface NavigationBarProps {
     showSidebar: () => void
 }
 
 export default function NavigationBar({showSidebar}: NavigationBarProps) {
-    const [auth, setAuth] = React.useState(true);
 
-    const handleLogin = () => {
-        setAuth(!auth);
+
+    const {token, setJwt} = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    const handleLogin = () =>
+    {
+        if (token !== "") {
+        setJwt("")
+            navigate("/login")
+        }
+        else {
+            navigate("/login")
+        }
+
     }
 
     return (
@@ -43,13 +57,13 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
                         >
                             <AccountCircle/>
                         </IconButton>
-                        {auth ? (
+                        {token ? (
                             <>
-                                Login
+                                Logout
                             </>
                         ) : (
                             <>
-                                Logout
+                                Login
                             </>
                         )}
                     </div>
