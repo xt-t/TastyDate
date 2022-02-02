@@ -15,7 +15,7 @@ export default function AppointTwoCardDisplayDate
             <CardContent className="displayChosenDates">
                 {dataDateTimes.map((dataDateTime, index) => (
                     <span key={index}>
-                                <span>Termin </span>
+                                <span>Date </span>
                         {index + 1}
                         <span>: </span>
                         {dataDateTime.pickedDate}

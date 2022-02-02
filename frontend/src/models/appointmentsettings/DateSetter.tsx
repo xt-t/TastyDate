@@ -13,7 +13,7 @@ interface DateSetterProps {
 export default function DateSetter({date, setDate} : DateSetterProps) {
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDateFns} locale={deLocale}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
                 label="Pick your date"
                 value={date}

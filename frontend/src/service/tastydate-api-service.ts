@@ -5,5 +5,5 @@ export interface LoginData {
     password: string | undefined,
 }
 
-export const loginPost = (login:LoginData) =>
+export const loginPost = (login:LoginData) : Promise<string> =>
     axios.post(`auth/login`, login).then(response => response.data)

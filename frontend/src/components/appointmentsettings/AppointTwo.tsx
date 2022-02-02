@@ -19,14 +19,14 @@ export default function AppointTwo() {
         if ((date !== null) && (startTime !== null) && (endTime !== null)) {
             const newDataDateTime = {
                 id: id,
-                pickedDate: date.toLocaleDateString("de-DE", {
+                pickedDate: date.toLocaleDateString("en-US", {
                     weekday: "short",
                     year: "numeric",
                     month: "short",
                     day: "2-digit"
                 }),
-                pickedStart: startTime.toLocaleTimeString("de-DE", {hour: '2-digit', minute: '2-digit', hour12: false}),
-                pickedEnd: endTime.toLocaleTimeString("de-DE", {hour: '2-digit', minute: '2-digit', hour12: false})
+                pickedStart: startTime.toLocaleTimeString( "en-US", {hour: '2-digit', minute: '2-digit', hour12: false}),
+                pickedEnd: endTime.toLocaleTimeString("en-US", {hour: '2-digit', minute: '2-digit', hour12: false})
             }
             setDataDateTimes([...dataDateTimes, newDataDateTime]);
             resetDateInput();

@@ -1,4 +1,4 @@
-import {createContext, ReactElement, useState} from "react";
+import {createContext, ReactElement, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 
 export interface AuthContextType {
@@ -12,11 +12,14 @@ export const AuthContext = createContext<AuthContextType> ({
 })
 
 export default function AuthProvider({children}:{children: ReactElement<any, any>}) {
-    const [token, setToken] = useState<string>()
+    const STORAGE_KEY = "Token"
+    const [token, setToken] = useState<string>(localStorage.getItem(STORAGE_KEY) || "");
     const [jwtDecoded, setJwtDecoded] = useState({})
+
 
     const setJwt = (jwt: string) => {
         setToken(jwt)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(token));
         setJwtDecoded(jwt_decode(jwt.toString()))
     }
 
