@@ -25,12 +25,7 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
     {
         if (token !== "") {
         setJwt("")
-            navigate("/login")
         }
-        else {
-            navigate("/login")
-        }
-
     }
 
     return (
@@ -58,13 +53,13 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
                             <AccountCircle/>
                         </IconButton>
                         {token ? (
-                            <>
-                                Logout
-                            </>
+                            <span className="logintext">
+                                <Link to={"/"}>Logout</Link>
+                            </span>
                         ) : (
-                            <>
-                                Login
-                            </>
+                            <span className="logintext">
+                                <Link to={"/login"}>Login</Link>
+                            </span>
                         )}
                     </div>
                 </Toolbar>
