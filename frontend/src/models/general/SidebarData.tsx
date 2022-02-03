@@ -17,24 +17,24 @@ export const SidebarData: sidebarElement[]= [
     title: "Home",
     path: "/",
     icon: <HomeIcon/>,
-    cName: "sidebartext"
+    cName: "sidebarText"
 },
 {
     title: "Create TastyDate",
     path: "/createDate",
     icon: <AddIcon/>,
-    cName: "sidebartext"
+    cName: "sidebarText"
 },
 {
     title: "Restaurants",
     path: "/restaurants",
     icon: <RestaurantIcon/>,
-    cName: "sidebartext"
+    cName: "sidebarText"
 },
 {
     title: "Overview Vote",
     path: "/overview",
     icon: <BallotIcon/>,
-    cName: "sidebartext"
+    cName: "sidebarText"
 }
 ]
