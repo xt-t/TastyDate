@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from "@mui/icons-material/Menu";
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useContext} from "react";
 import {AuthContext} from "../../context/AuthProvider";
 
@@ -16,12 +16,9 @@ interface NavigationBarProps {
 
 export default function NavigationBar({showSidebar}: NavigationBarProps) {
 
-
     const {token, setJwt} = useContext(AuthContext);
 
-    const navigate = useNavigate();
-
-    const handleLogin = () =>
+    const handleLogout = () =>
     {
         if (token !== "") {
         setJwt("")
@@ -30,7 +27,7 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
 
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static">
+            <AppBar position="static" className="bar">
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -45,7 +42,7 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         <Link to="/" className="logo">TastyDate</Link>
                     </Typography>
-                    <div className="Login" onClick={() => handleLogin()}>
+                    <div className="login" onClick={() => handleLogout()}>
                         <IconButton
                             size="large"
                             color="inherit"
@@ -54,7 +51,7 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
                         </IconButton>
                         {token ? (
                             <span className="logintext">
-                                <Link to={"/"}>Logout</Link>
+                                <Link to={"/"}>Logout </Link>
                             </span>
                         ) : (
                             <span className="logintext">

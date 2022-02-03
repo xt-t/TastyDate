@@ -21,7 +21,8 @@ public class User implements UserDetails {
 
     public static User newUser(String username, String password, List<GrantedAuthority> authorities) {
         return User.builder()
-                .username(username).password(password)
+                .username(username)
+                .password(password)
                 .authorities(authorities)
                 .enabled(true)
                 .accountNonExpired(true)

@@ -17,6 +17,7 @@ export default function AuthProvider({children}:{children: ReactElement<any, any
     const [jwtDecoded, setJwtDecoded] = useState({});
 
 
+
     const setJwt = (jwt: string) => {
         setToken(jwt);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(token));
