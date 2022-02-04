@@ -7,21 +7,27 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from "@mui/icons-material/Menu";
 import {Link} from 'react-router-dom';
+import {useContext} from "react";
+import {AuthContext} from "../../context/AuthProvider";
 
 interface NavigationBarProps {
     showSidebar: () => void
 }
 
 export default function NavigationBar({showSidebar}: NavigationBarProps) {
-    const [auth, setAuth] = React.useState(true);
 
-    const handleLogin = () => {
-        setAuth(!auth);
+    const {token, setJwt} = useContext(AuthContext);
+
+    const handleLogout = () =>
+    {
+        if (token !== "") {
+        setJwt("")
+        }
     }
 
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static">
+            <AppBar position="static" className="bar">
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -36,21 +42,21 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         <Link to="/" className="logo">TastyDate</Link>
                     </Typography>
-                    <div className="Login" onClick={() => handleLogin()}>
+                    <div className="login" onClick={() => handleLogout()}>
                         <IconButton
                             size="large"
                             color="inherit"
                         >
                             <AccountCircle/>
                         </IconButton>
-                        {auth ? (
-                            <>
-                                Login
-                            </>
+                        {token ? (
+                            <span className="logintext">
+                                <Link to={"/"}>Logout </Link>
+                            </span>
                         ) : (
-                            <>
-                                Logout
-                            </>
+                            <span className="logintext">
+                                <Link to={"/login"}>Login</Link>
+                            </span>
                         )}
                     </div>
                 </Toolbar>

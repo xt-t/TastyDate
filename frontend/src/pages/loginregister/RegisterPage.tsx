@@ -1,13 +1,14 @@
 import DisplayMenus from "../../components/general/DisplayMenus";
-import LoginComponent from "../../components/login/LoginComponent";
+import RegisterComponent from "../../components/loginregister/RegisterComponent";
 
 
-export default  function LoginPage() {
+export default  function RegisterPage() {
+
     return (
         <div>
             <div>
                 <DisplayMenus/>
-                <LoginComponent/>
+                <RegisterComponent/>
             </div>
         </div>
     )

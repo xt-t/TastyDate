@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/auth/login")
+@RequestMapping("/auth")
 public class LoginController {
 
     final AuthenticationManager authenticationManager;
@@ -24,7 +24,7 @@ public class LoginController {
         this.jwtUtils = jwtUtils;
     }
 
-    @PostMapping()
+    @PostMapping("/login")
     public String login(@RequestBody LoginData loginData){
         try{
             final UsernamePasswordAuthenticationToken token =

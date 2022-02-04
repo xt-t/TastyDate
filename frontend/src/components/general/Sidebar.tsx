@@ -8,6 +8,7 @@ interface SidebarProps {
     sidebarStatus: boolean
     showSidebar: () => void
 }
+
 export default function Sidebar ({sidebarStatus, showSidebar}:SidebarProps) {
 
     return (
