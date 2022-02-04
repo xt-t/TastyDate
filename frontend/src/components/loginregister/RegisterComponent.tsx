@@ -1,5 +1,5 @@
 import {FormEvent, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import * as React from "react";
 import {RegisterData, registerPost} from "../../service/tastydate-api-service";
 import {Button, TextField } from "@mui/material";
@@ -42,6 +42,7 @@ export default function RegisterComponent() {
                 <TextField variant="filled" label="Password" type="password" value={userPasswordVerify}
                            onChange={(e) => setUserPasswordVerify(e.target.value)}/>
                 <Button type="submit" variant="outlined">Register</Button>
+                <Link to="/login">Back to login</Link>
             </form>
         </div>
     )
