@@ -5,7 +5,7 @@ import Homepage from "./pages/general/Homepage"
 import AppointmentHome from "./pages/appointmentsettings/AppointmentHome"
 import OverviewRestaurants from "./pages/restaurants/OverviewRestaurants"
 import VoteResult from "./pages/result/VoteResult"
-import RequireAuth from './components/login/RequireAuth';
+import RequireAuth from './components/loginregister/RequireAuth';
 import AuthProvider from './context/AuthProvider';
 import LoginPage from './pages/loginregister/LoginPage';
 import RegisterPage from './pages/loginregister/RegisterPage';

@@ -1,14 +1,13 @@
 import axios from 'axios'
 
 export interface LoginData {
-    name: string | undefined,
-    password: string | undefined,
+    name: string,
+    password: string,
 }
 
 export interface RegisterData {
-    name: string | undefined,
-    password: string | undefined,
-    passwordVerify: string | undefined,
+    name: string,
+    password: string,
 }
 
 export const loginPost = (login:LoginData) : Promise<string> =>

@@ -1,5 +1,5 @@
 import DisplayMenus from "../../components/general/DisplayMenus";
-import LoginComponent from "../../components/login/LoginComponent";
+import LoginComponent from "../../components/loginregister/LoginComponent";
 import * as React from "react";
 
 

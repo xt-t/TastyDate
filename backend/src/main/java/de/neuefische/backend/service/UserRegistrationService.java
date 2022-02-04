@@ -1,11 +1,8 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.BackendApplication;
 import de.neuefische.backend.model.RegistrationData;
 import de.neuefische.backend.model.User;
 import de.neuefische.backend.repository.MongoUserRepository;
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
@@ -19,8 +16,6 @@ import java.util.List;
 @Service
 public class UserRegistrationService {
 
-    Log LOG = LogFactory.getLog(BackendApplication.class);
-
     @Autowired
     MongoUserRepository repository;
 
@@ -28,7 +23,6 @@ public class UserRegistrationService {
     PasswordEncoder encoder;
 
     public String register(RegistrationData registerUser) {
-        LOG.info(registerUser.getName()+ " " +registerUser.getPassword());
         String encodedPassword = encoder.encode(registerUser.getPassword());
         final User user = User.newUser(registerUser.getName(), encodedPassword,
                 List.of(new SimpleGrantedAuthority(MongoUserDetailsService.AUTHORITY_API_READWRITE)));

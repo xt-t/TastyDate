@@ -1,5 +1,5 @@
 import DisplayMenus from "../../components/general/DisplayMenus";
-import RegisterComponent from "../../components/login/RegisterComponent";
+import RegisterComponent from "../../components/loginregister/RegisterComponent";
 
 
 export default  function RegisterPage() {

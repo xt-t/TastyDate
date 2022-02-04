@@ -11,5 +11,4 @@ import lombok.NoArgsConstructor;
 public class RegistrationData {
     String name;
     String password;
-    String passwordVerify;
 }

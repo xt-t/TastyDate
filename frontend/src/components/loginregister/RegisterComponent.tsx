@@ -6,22 +6,30 @@ import {Button, TextField } from "@mui/material";
 
 export default function RegisterComponent() {
 
-    const [userName, setUserName] = useState<string>();
-    const [userPassword, setUserPassword] = useState<string>();
-    const [userPasswordVerify, setUserPasswordVerify] = useState<string>();
+    const [userName, setUserName] = useState<string>("");
+    const [userPassword, setUserPassword] = useState<string>("");
+    const [userPasswordVerify, setUserPasswordVerify] = useState<string>("");
 
     const navigate = useNavigate();
 
+    const passwordCheck = () => {
+        if (userPassword === userPasswordVerify) return true;
+        else {return false;}
+    }
+
     const register = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const register: RegisterData = {name: userName, password: userPassword, passwordVerify: userPasswordVerify}
-        registerPost(register)
-            .then(()=> {
-                navigate("/login")}
-            )
-            .catch((err) => {
-                console.error(err.message)
-            })
+            if (passwordCheck()) {
+            const register: RegisterData = {name: userName, password: userPassword}
+            registerPost(register)
+                .then(() => {
+                        navigate("/login")
+                    }
+                )
+                .catch((err) => {
+                    console.error(err.message)
+                })
+            }
     };
 
     return (

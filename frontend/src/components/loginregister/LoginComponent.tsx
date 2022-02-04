@@ -9,9 +9,9 @@ import "./Login.scss"
 
 export default function LoginComponent() {
 
-    const [userName, setUserName] = useState<string>();
-    const [userPassword, setUserPassword] = useState<string>();
-    const [errorMessage, setErrorMessage] = useState<boolean>();
+    const [userName, setUserName] = useState<string>("");
+    const [userPassword, setUserPassword] = useState<string>("");
+    const [errorMessage, setErrorMessage] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -19,17 +19,17 @@ export default function LoginComponent() {
 
     const login = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const login: LoginData = {name: userName, password: userPassword}
-        loginPost(login)
-            .then((data) => {
-                setJwt(data)
-                navigate("/")
-            })
-            .catch((err) => {
-                console.error(err.message);
-                setErrorMessage(true)
-            })
-    };
+            const login: LoginData = {name: userName, password: userPassword}
+            loginPost(login)
+                .then((data) => {
+                    setJwt(data)
+                    navigate("/")
+                })
+                .catch((err) => {
+                    console.error(err.message);
+                    setErrorMessage(true)
+                })
+        };
 
     return (
         <div>
