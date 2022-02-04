@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from "@mui/icons-material/Menu";
 import {Link} from 'react-router-dom';
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {AuthContext} from "../../context/AuthProvider";
 
 interface NavigationBarProps {
@@ -21,8 +21,9 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
     const handleLogout = () =>
     {
         if (token !== "") {
-        setJwt("")
+            setJwt("");
         }
+
     }
 
     return (
@@ -49,7 +50,7 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
                         >
                             <AccountCircle/>
                         </IconButton>
-                        {token ? (
+                        {token? (
                             <span className="logintext">
                                 <Link to={"/"}>Logout </Link>
                             </span>
