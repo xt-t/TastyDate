@@ -1,0 +1,85 @@
+
+body {
+  padding: 0;
+  margin: 0;
+  color: black;
+}
+
+.cardListBox{
+  margin:100px;
+}
+.card-list {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  overflow-x: scroll;
+}
+
+.card-list::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.card-list::-webkit-scrollbar-thumb {
+  background: #201c29;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
+}
+
+.card-list::-webkit-scrollbar-track {
+  background: linear-gradient(90deg,#201c29,#201c29 1px,#17141d 0,#17141d);
+}
+
+.card {
+  height: 300px;
+  width: 200px;
+  min-width: 250px;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: whitesmoke;
+  box-shadow: -0.2rem 0 0.3rem #000;
+  display: flex;
+  flex-direction: column;
+  transition: .2s;
+  margin: 0;
+  scroll-snap-align: start;
+  clear: both;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-2rem);
+}
+
+.card:hover~.card {
+  transform: translateX(180px);
+}
+
+.card:focus-within~.card, .card:not(:first-child) {
+  margin-left: -180px;
+}
+
+.card-author {
+  margin: 3rem 0 0;
+  display: grid;
+  grid-template-columns: 75px 1fr;
+  align-items: center;
+  position: relative;
+}
+
+.author-avatar {
+  grid-area: auto;
+  align-self: start;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.author-name {
+  grid-area: auto;
+  box-sizing: border-box;
+}
+
+.author-name-prefix {
+  font-style: normal;
+  font-weight: 700;
+  color: #7a7a8c;
+}

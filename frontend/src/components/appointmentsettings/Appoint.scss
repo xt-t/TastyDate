@@ -1,4 +1,4 @@
-//Appointone
+//AppointOne
 .form {
   margin: 20px;
   display: flex;
@@ -10,7 +10,7 @@
   }
 }
 
-//Appointtwo
+//AppointTwo
 .cardTwo {
   height: 25rem;
   width: 60rem;
@@ -53,5 +53,19 @@
     flex-wrap: nowrap;
     flex-direction: column;
   }
+}
 
+//AppointThree
+.formRestaurant {
+  width: 400px;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .menuIcons {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+  }
 }

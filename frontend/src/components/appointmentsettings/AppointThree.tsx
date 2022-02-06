@@ -1,6 +1,14 @@
+import * as React from "react";
+import AppointThreeAddRestaurant from "./AppointThreeAddRestaurant";
+import AppointThreeDisplayRestaurant from "./AppointThreeDisplayRestaurant";
+
 export default function AppointThree() {
 
+
     return (
-            <span>Appointthree</span>
+        <div>
+            <AppointThreeAddRestaurant/>
+            <AppointThreeDisplayRestaurant/>
+        </div>
     )
 }

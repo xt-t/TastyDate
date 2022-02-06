@@ -2,7 +2,7 @@ import {FormEvent, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import * as React from "react";
 import {RegisterData, registerPost} from "../../service/tastydate-api-service";
-import {Button, TextField } from "@mui/material";
+import {Button, Card, CardContent, TextField } from "@mui/material";
 
 export default function RegisterComponent() {
 
@@ -33,7 +33,10 @@ export default function RegisterComponent() {
     };
 
     return (
-        <div>
+        <div className="window">
+            <div className="registerCard">
+                <Card><CardContent>
+                    <h3>Register</h3>
             <form onSubmit={(e) => register(e)} className="form">
                 <TextField variant="outlined" label="Username" type="username" value={userName}
                            onChange={(e) => setUserName(e.target.value)}/>
@@ -44,6 +47,8 @@ export default function RegisterComponent() {
                 <Button type="submit" variant="outlined">Register</Button>
                 <Link to="/login">Back to login</Link>
             </form>
+                </CardContent></Card>
+            </div>
         </div>
     )
 }
