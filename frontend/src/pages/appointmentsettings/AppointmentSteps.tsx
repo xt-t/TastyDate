@@ -54,7 +54,7 @@ export default function AppointmentSteps() {
 
 
     return (
-        <Box sx={{width: '95%', mt:6}}>
+        <Box sx={{width: '95%', mt: 6}}>
 
             <Stepper activeStep={activeStep}>
 
@@ -83,12 +83,12 @@ export default function AppointmentSteps() {
 
             <AppointmentStepsWindow
                 activeStep={activeStep}
-            steps={steps}
-            isStepOptional={isStepOptional}
-            handleReset={handleReset}
-            handleBack={handleBack}
-            handleSkip={handleSkip}
-            handleNext={handleNext}
+                steps={steps}
+                isStepOptional={isStepOptional}
+                handleReset={handleReset}
+                handleBack={handleBack}
+                handleSkip={handleSkip}
+                handleNext={handleNext}
             />
 
         </Box>

@@ -10,17 +10,19 @@ interface AppointThreeDisplayRestaurantProps {
 }
 
 export default function AppointThreeDisplayRestaurant(
-    {restaurantData,
+    {
+        restaurantData,
         deleteRestaurantCard,
-        deleteAllRestaurantCards}:AppointThreeDisplayRestaurantProps) {
-    return(
+        deleteAllRestaurantCards
+    }: AppointThreeDisplayRestaurantProps) {
+    return (
         <div>
             <Card>
                 <CardContent className="displayPickedRestaurants">
                     {restaurantData.map((restaurantData, index) => (
                         <span key={index}>
                         {index + 1}
-                        <span>: </span>
+                            <span>: </span>
                             {restaurantData.pickedCategory}
                             <span> </span>
                             {restaurantData.pickedPostcode}
@@ -33,7 +35,7 @@ export default function AppointThreeDisplayRestaurant(
                             <span> - </span>
                             {restaurantData.pickedPrice}
 
-                    <Button variant="text">
+                            <Button variant="text">
         <DeleteIcon onClick={() => deleteRestaurantCard(restaurantData.id)}/></Button>
                             </span>))}
 

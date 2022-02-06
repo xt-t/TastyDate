@@ -6,19 +6,17 @@ interface Appointmentpagesprops {
     activepage: number
 }
 
-export default function AppointmentStepsPages({activepage}:Appointmentpagesprops) {
+export default function AppointmentStepsPages({activepage}: Appointmentpagesprops) {
 
     if (activepage === 0) {
         return (
-                <AppointOne/>
+            <AppointOne/>
         )
-    }
-    else if (activepage === 1) {
+    } else if (activepage === 1) {
         return (
             <AppointTwo/>
         )
-    }
-    else {
+    } else {
         return (
             <AppointThree/>
         )

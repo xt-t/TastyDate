@@ -60,6 +60,5 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
                     </div>
                 </Toolbar>
             </AppBar>
-        </Box>
-    );
+        </Box>)
 }

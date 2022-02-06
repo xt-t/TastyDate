@@ -1,6 +1,6 @@
 export interface dataAppointment {
     id: number,
-    pickedDate:  string,
+    pickedDate: string,
     pickedStart: string,
     pickedEnd: string
 }

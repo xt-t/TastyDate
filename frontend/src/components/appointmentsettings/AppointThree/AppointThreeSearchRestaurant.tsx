@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -10,7 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import SearchIcon from '@mui/icons-material/Search';
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
     },
@@ -26,10 +26,10 @@ export interface DialogTitleProps {
 }
 
 const BootstrapDialogTitle = (props: DialogTitleProps) => {
-    const { children, onClose, ...other } = props;
+    const {children, onClose, ...other} = props;
 
     return (
-        <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+        <DialogTitle sx={{m: 0, p: 2}} {...other}>
             {children}
             {onClose ? (
                 <IconButton
@@ -42,7 +42,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
                         color: (theme) => theme.palette.grey[500],
                     }}
                 >
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
             ) : null}
         </DialogTitle>

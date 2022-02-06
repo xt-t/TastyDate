@@ -50,8 +50,7 @@ export default function AppointThreeAddRestaurant(
             <Card>
                 <CardContent className="formRestaurant">
 
-                    <h2>Add your restaurant</h2>
-
+                    <h3>Add your restaurant</h3>
 
                     <CategoryMenu category={category} setCategory={setCategory}/>
 
@@ -95,7 +94,6 @@ export default function AppointThreeAddRestaurant(
                     />
 
                     <RestaurantRating rating={rating} setRating={setRating} price={price} setPrice={setPrice}/>
-
 
                     <Box className="menuIcons">
                         <AppointThreeSearchRestaurant/>

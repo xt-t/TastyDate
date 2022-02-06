@@ -3,7 +3,7 @@ import LoginComponent from "../../components/loginregister/LoginComponent";
 import * as React from "react";
 
 
-export default  function LoginPage() {
+export default function LoginPage() {
 
     return (
         <div>

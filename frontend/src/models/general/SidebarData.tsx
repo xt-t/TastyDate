@@ -7,34 +7,34 @@ import "../../components/general/DisplayMenus.scss"
 
 interface sidebarElement {
     title: string
-        path: string
+    path: string
     icon: JSX.Element
-        cName: string
+    cName: string
 }
 
-export const SidebarData: sidebarElement[]= [
-{
-    title: "Home",
-    path: "/",
-    icon: <HomeIcon/>,
-    cName: "sidebarText"
-},
-{
-    title: "Create TastyDate",
-    path: "/createDate",
-    icon: <AddIcon/>,
-    cName: "sidebarText"
-},
-{
-    title: "Restaurants",
-    path: "/restaurants",
-    icon: <RestaurantIcon/>,
-    cName: "sidebarText"
-},
-{
-    title: "Overview Vote",
-    path: "/overview",
-    icon: <BallotIcon/>,
-    cName: "sidebarText"
-}
+export const SidebarData: sidebarElement[] = [
+    {
+        title: "Home",
+        path: "/",
+        icon: <HomeIcon/>,
+        cName: "sidebarText"
+    },
+    {
+        title: "Create TastyDate",
+        path: "/createDate",
+        icon: <AddIcon/>,
+        cName: "sidebarText"
+    },
+    {
+        title: "Restaurants",
+        path: "/restaurants",
+        icon: <RestaurantIcon/>,
+        cName: "sidebarText"
+    },
+    {
+        title: "Overview Vote",
+        path: "/overview",
+        icon: <BallotIcon/>,
+        cName: "sidebarText"
+    }
 ]

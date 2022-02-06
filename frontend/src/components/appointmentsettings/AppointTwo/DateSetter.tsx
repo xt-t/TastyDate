@@ -10,7 +10,7 @@ interface DateSetterProps {
     setDate: Function
 }
 
-export default function DateSetter({date, setDate} : DateSetterProps) {
+export default function DateSetter({date, setDate}: DateSetterProps) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>

@@ -24,7 +24,7 @@ export default function AppointThree() {
             (restaurantName !== null) &&
             (rating !== 0) &&
             (price !== 0)
-            ) {
+        ) {
             const newRestaurantData = {
                 id: id,
                 pickedCategory: category,
@@ -55,30 +55,30 @@ export default function AppointThree() {
     const deleteAllRestaurantCards = () => {
         setRestaurantData([]);
     }
-        return (
-            <div className="cardThree">
-                <AppointThreeAddRestaurant
-                    category={category}
-                    setCategory={setCategory}
-                    postcode={postcode}
-                    setPostcode={setPostcode}
-                    city={city}
-                    setCity={setCity}
-                    restaurantName={restaurantName}
-                    setRestaurantName={setRestaurantName}
-                    rating={rating}
-                    setRating={setRating}
-                    price={price}
-                    setPrice={setPrice}
-                    saveRestaurantData={saveRestaurantData}
-                    resetDataInput={resetDataInput}
-                />
+    return (
+        <div className="cardThree">
+            <AppointThreeAddRestaurant
+                category={category}
+                setCategory={setCategory}
+                postcode={postcode}
+                setPostcode={setPostcode}
+                city={city}
+                setCity={setCity}
+                restaurantName={restaurantName}
+                setRestaurantName={setRestaurantName}
+                rating={rating}
+                setRating={setRating}
+                price={price}
+                setPrice={setPrice}
+                saveRestaurantData={saveRestaurantData}
+                resetDataInput={resetDataInput}
+            />
 
-                <AppointThreeDisplayRestaurant
-                    restaurantData={restaurantData}
-                    deleteRestaurantCard={deleteRestaurantCard}
-                    deleteAllRestaurantCards={deleteAllRestaurantCards}
-                />
-            </div>
-        )
+            <AppointThreeDisplayRestaurant
+                restaurantData={restaurantData}
+                deleteRestaurantCard={deleteRestaurantCard}
+                deleteAllRestaurantCards={deleteAllRestaurantCards}
+            />
+        </div>
+    )
 }

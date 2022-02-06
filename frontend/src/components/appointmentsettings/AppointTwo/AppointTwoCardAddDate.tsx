@@ -26,12 +26,11 @@ export default function AppointTwoCardAddDate(
         setEndTime,
         resetDateInput,
         saveAppointmentData
-    }: AppointTwoCardAddDateProps)
-{
+    }: AppointTwoCardAddDateProps) {
     return (
         <Card>
             <CardContent className="addDateTime">
-                <span>Add your date and pick a time range</span>
+                <h3>Add your date and pick a time range</h3>
 
                 <DateSetter date={date} setDate={setDate}/>
 
@@ -56,8 +55,8 @@ export default function AppointTwoCardAddDate(
                 </div>
 
                 <div className="addDateTimeButtons">
-                    <Button variant="outlined" onClick={()=>resetDateInput()}> <RestartAltIcon/> Reset </Button>
-                    <Button variant="contained" onClick={()=>saveAppointmentData()}> <AddIcon/> Add </Button>
+                    <Button variant="outlined" onClick={() => resetDateInput()}> <RestartAltIcon/> Reset </Button>
+                    <Button variant="contained" onClick={() => saveAppointmentData()}> <AddIcon/> Add </Button>
                 </div>
 
             </CardContent>

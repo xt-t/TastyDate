@@ -16,7 +16,7 @@ export default function AppointTwoCardDisplayDate
                 {dataDateTimes.map((dataDateTime, index) => (
                     <span key={index}>
                         {index + 1}
-                                <span>. Date </span>
+                        <span>. Date </span>
                         <span>: </span>
                         {dataDateTime.pickedDate}
                         <span> </span>
@@ -31,8 +31,8 @@ export default function AppointTwoCardDisplayDate
 
 
                 {dataDateTimes.length !== 0 ? (
-                <Button variant="text" onClick={() => deleteAllPickedDates()}>
-                    <DeleteIcon color="error"/>Delete All</Button>) : (<></>)}
+                    <Button variant="text" onClick={() => deleteAllPickedDates()}>
+                        <DeleteIcon color="error"/>Delete All</Button>) : (<></>)}
 
             </CardContent>
         </Card>

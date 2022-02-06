@@ -6,7 +6,7 @@ interface CategoryMenuProps {
     setCategory: Function
 }
 
-export default function CategoryMenu({category, setCategory} : CategoryMenuProps) {
+export default function CategoryMenu({category, setCategory}: CategoryMenuProps) {
 
     return (
         <Box sx={{minWidth: 120}}>

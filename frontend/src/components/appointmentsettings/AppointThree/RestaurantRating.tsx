@@ -9,7 +9,7 @@ interface RestaurantRatingProps {
     setPrice: Function
 }
 
-export default function RestaurantRating({rating, setRating, price, setPrice} : RestaurantRatingProps) {
+export default function RestaurantRating({rating, setRating, price, setPrice}: RestaurantRatingProps) {
 
     const StyledRating = styled(Rating)({
         '& .MuiRating-iconFilled': {
@@ -22,43 +22,43 @@ export default function RestaurantRating({rating, setRating, price, setPrice} : 
 
     return (
         <div>
-        <Box
-            sx={{
-                '& > legend': {mt: 2},
-            }}
-        >
-            <Typography component="legend">Your rating</Typography>
-            <Rating
-                name="simple-controlled"
-                value={rating}
-                onChange={(event, newRating) => {
-                    if (typeof newRating === "number") {
-                        setRating(newRating);
-                    }
+            <Box
+                sx={{
+                    '& > legend': {mt: 2},
                 }}
-            />
-        </Box>
+            >
+                <Typography component="legend">Your rating</Typography>
+                <Rating
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={(event, newRating) => {
+                        if (typeof newRating === "number") {
+                            setRating(newRating);
+                        }
+                    }}
+                />
+            </Box>
 
-    <Box
-        sx={{
-            '& > legend': {mt: 2},
-        }}
-    >
-        <Typography component="legend">Price</Typography>
-        <StyledRating
-            name="customized-color"
-            value={price}
-            onChange={(event, newPrice) => {
-                if (typeof newPrice === "number") {
-                    setPrice(newPrice);
-                }
-            }}
-            precision={0.5}
-            max={3}
-            icon={<EuroIcon fontSize="inherit"/>}
-            emptyIcon={<EuroIcon fontSize="inherit"/>}
-        />
-    </Box>
+            <Box
+                sx={{
+                    '& > legend': {mt: 2},
+                }}
+            >
+                <Typography component="legend">Price</Typography>
+                <StyledRating
+                    name="customized-color"
+                    value={price}
+                    onChange={(event, newPrice) => {
+                        if (typeof newPrice === "number") {
+                            setPrice(newPrice);
+                        }
+                    }}
+                    precision={0.5}
+                    max={3}
+                    icon={<EuroIcon fontSize="inherit"/>}
+                    emptyIcon={<EuroIcon fontSize="inherit"/>}
+                />
+            </Box>
         </div>
-)
+    )
 }

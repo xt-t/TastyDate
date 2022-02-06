@@ -9,7 +9,7 @@ interface SidebarProps {
     showSidebar: () => void
 }
 
-export default function Sidebar ({sidebarStatus, showSidebar}:SidebarProps) {
+export default function Sidebar({sidebarStatus, showSidebar}: SidebarProps) {
 
     return (
         <>
@@ -20,7 +20,7 @@ export default function Sidebar ({sidebarStatus, showSidebar}:SidebarProps) {
                             <CloseIcon></CloseIcon>
                         </Link>
                     </li>
-                    {SidebarData.map((item,index)=> {
+                    {SidebarData.map((item, index) => {
                         return (
                             <li key={index} className={item.cName}>
                                 <Link to={item.path}>

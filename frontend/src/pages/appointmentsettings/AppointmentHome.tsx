@@ -6,10 +6,10 @@ export default function AppointmentHome() {
 
     return (
         <div>
-                <DisplayMenus/>
-                <div className="settingsdate">
-                <AppointmentSteps />
-                </div>
+            <DisplayMenus/>
+            <div className="settingsdate">
+                <AppointmentSteps/>
+            </div>
         </div>
     )
 }

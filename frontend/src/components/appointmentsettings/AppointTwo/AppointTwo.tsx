@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { dataAppointment } from "../../../models/appointmentsettings/dataAppointment";
+import React, {useState} from "react";
+import {dataAppointment} from "../../../models/appointmentsettings/dataAppointment";
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
 import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
 
@@ -14,8 +14,9 @@ export default function AppointTwo() {
 
     const [dataDateTimes, setDataDateTimes] = useState<dataAppointment[]>(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
 
-    React.useEffect(()=>{
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataDateTimes))}, [dataDateTimes])
+    React.useEffect(() => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataDateTimes))
+    }, [dataDateTimes])
 
     const saveAppointmentData = () => {
         if ((date !== null) && (startTime !== null) && (endTime !== null)) {
@@ -27,7 +28,7 @@ export default function AppointTwo() {
                     month: "short",
                     day: "2-digit"
                 }),
-                pickedStart: startTime.toLocaleTimeString( "en-US", {hour: '2-digit', minute: '2-digit', hour12: false}),
+                pickedStart: startTime.toLocaleTimeString("en-US", {hour: '2-digit', minute: '2-digit', hour12: false}),
                 pickedEnd: endTime.toLocaleTimeString("en-US", {hour: '2-digit', minute: '2-digit', hour12: false})
             }
             setDataDateTimes([...dataDateTimes, newDataDateTime]);
