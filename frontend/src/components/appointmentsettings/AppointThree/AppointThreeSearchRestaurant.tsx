@@ -8,7 +8,6 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import {Fab} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -63,10 +62,7 @@ export default function AppointThreeSearchRestaurant() {
 
     return (
         <div>
-
-            <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
-                <SearchIcon/>
-            </Fab>
+            <Button variant="outlined" onClick={handleClickOpen}> <SearchIcon/> Search </Button>
 
             <BootstrapDialog
                 onClose={handleClose}
@@ -103,5 +99,5 @@ export default function AppointThreeSearchRestaurant() {
             </BootstrapDialog>
 
         </div>
-    );
+    )
 }

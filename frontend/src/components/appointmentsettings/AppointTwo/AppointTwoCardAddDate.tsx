@@ -1,6 +1,6 @@
 import {Card, CardContent} from "@mui/material";
-import DateSetter from "../../models/appointmentsettings/DateSetter";
-import TimeSetter from "../../models/appointmentsettings/TimeSetter";
+import DateSetter from "./DateSetter";
+import TimeSetter from "./TimeSetter";
 import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import AddIcon from "@mui/icons-material/Add";

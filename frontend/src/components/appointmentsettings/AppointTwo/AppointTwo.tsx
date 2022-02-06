@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import {dataAppointment} from "../../models/appointmentsettings/dataAppointment"
+import { dataAppointment } from "../../../models/appointmentsettings/dataAppointment";
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
 import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
+
 
 export default function AppointTwo() {
 
@@ -63,7 +64,11 @@ export default function AppointTwo() {
                 saveAppointmentData={saveAppointmentData}
             />
 
-            <AppointTwoCardDisplayDate dataDateTimes={dataDateTimes} deletePickedDate={deletePickedDate} deleteAllPickedDates={deleteAllPickedDates}/>
+            <AppointTwoCardDisplayDate
+                dataDateTimes={dataDateTimes}
+                deletePickedDate={deletePickedDate}
+                deleteAllPickedDates={deleteAllPickedDates}
+            />
 
         </div>
     )

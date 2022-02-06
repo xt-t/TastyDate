@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AppointmentStepsPages from "./AppointmentStepsPages";
+import {Navigate, useNavigate} from "react-router-dom";
 
 interface AppointmentStepsWindowProps {
     activeStep: number,
@@ -27,6 +28,8 @@ export default function AppointmentStepsWindow(
         handleNext
     }: AppointmentStepsWindowProps) {
 
+    const navigate = useNavigate();
+
     return (
         <div className="window">
             <Card sx={{border: 2, borderColor: "#1c54b2"}}>
@@ -38,8 +41,9 @@ export default function AppointmentStepsWindow(
                                 All steps completed - you&apos;re finished
                             </Typography>
                             <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
-                                <Box sx={{flex: '1 1 auto'}}/>
                                 <Button onClick={() => handleReset()}>Reset</Button>
+                                <Box sx={{flex: '1 1 auto'}}/>
+                                <Button onClick={() => navigate("/overview")}>Proceed</Button>
                             </Box>
                         </React.Fragment>
 

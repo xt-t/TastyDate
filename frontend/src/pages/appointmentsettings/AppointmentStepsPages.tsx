@@ -1,6 +1,6 @@
-import AppointOne from "../../components/appointmentsettings/AppointOne"
-import AppointTwo from "../../components/appointmentsettings/AppointTwo";
-import AppointThree from "../../components/appointmentsettings/AppointThree";
+import AppointOne from "../../components/appointmentsettings/AppointOne/AppointOne"
+import AppointTwo from "../../components/appointmentsettings/AppointTwo/AppointTwo";
+import AppointThree from "../../components/appointmentsettings/AppointThree/AppointThree";
 
 interface Appointmentpagesprops {
     activepage: number
