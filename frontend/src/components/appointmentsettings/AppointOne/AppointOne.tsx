@@ -1,14 +1,30 @@
 import TextField from "@mui/material/TextField";
 import "../Appoint.scss"
 import {Box} from "@mui/material";
-import {useState} from "react";
 
-export default function AppointOne() {
+interface AppointOneProps {
+    tastyDateName: string
+setTastyDateName: Function
+location: string
+setLocation: Function
+notes: string
+setNotes: Function
+chosenDisplayName: string
+setChosenDisplayName: Function
+}
 
-    const [tastyDateName, setTastyDateName] = useState("");
-    const [location, setLocation] = useState("");
-    const [notes, setNotes] = useState("");
-    const [chosenDisplayName, setChosenDisplayName] = useState("");
+export default function AppointOne(
+    {tastyDateName,
+setTastyDateName,
+location,
+setLocation,
+notes,
+setNotes,
+chosenDisplayName,
+setChosenDisplayName,}:AppointOneProps
+) {
+
+
 
     return (
         <Box className="form">

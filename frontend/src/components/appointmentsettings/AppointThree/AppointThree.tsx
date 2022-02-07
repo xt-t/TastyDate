@@ -1,21 +1,47 @@
 import * as React from "react";
 import AppointThreeAddRestaurant from "./AppointThreeAddRestaurant";
 import AppointThreeDisplayRestaurant from "./AppointThreeDisplayRestaurant";
-import {useState} from "react";
 import {dataPickedRestaurant} from "../../../models/appointmentsettings/dataPickedRestaurant";
 
+interface AppointThreeProps {
+    category: string,
+    setCategory: Function,
+    rating: number,
+    setRating: Function,
+    price: number,
+    setPrice: Function,
+    restaurantName: string | null,
+    setRestaurantName: Function,
+    postcode: number | null,
+    setPostcode: Function,
+    city: string | null,
+    setCity: Function
+    idPickedRestaurant: number
+    setIdPickedRestaurant: Function
+    restaurantData: dataPickedRestaurant[]
+    setRestaurantData: Function
+}
 
-export default function AppointThree() {
+export default function AppointThree(
+    {
+        category,
+        setCategory,
+        rating,
+        setRating,
+        price,
+        setPrice,
+        restaurantName,
+        setRestaurantName,
+        postcode,
+        setPostcode,
+        city,
+        setCity,
+        idPickedRestaurant,
+        setIdPickedRestaurant,
+        restaurantData,
+        setRestaurantData
+    }: AppointThreeProps) {
 
-    const [category, setCategory] = useState<string>("");
-    const [postcode, setPostcode] = useState<number | null>(null);
-    const [city, setCity] = useState<string | null>(null);
-    const [restaurantName, setRestaurantName] = useState<string | null>(null);
-    const [rating, setRating] = useState<number>(0);
-    const [price, setPrice] = useState<number>(0);
-    const [id, setId] = useState<number>(1);
-
-    const [restaurantData, setRestaurantData] = useState<dataPickedRestaurant[]>([]);
 
     const saveRestaurantData = () => {
         if ((category !== "") &&
@@ -26,7 +52,7 @@ export default function AppointThree() {
             (price !== 0)
         ) {
             const newRestaurantData = {
-                id: id,
+                id: idPickedRestaurant,
                 pickedCategory: category,
                 pickedPostcode: postcode,
                 pickedCity: city,
@@ -35,7 +61,7 @@ export default function AppointThree() {
                 pickedPrice: price
             }
             setRestaurantData([...restaurantData, newRestaurantData]);
-            setId(id + 1);
+            setIdPickedRestaurant(idPickedRestaurant + 1);
         }
     }
 

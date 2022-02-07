@@ -2,26 +2,39 @@ import React, {useState} from "react";
 import {dataPickedTime} from "../../../models/appointmentsettings/dataPickedTime";
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
 import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
+import {dataPickedRestaurant} from "../../../models/appointmentsettings/dataPickedRestaurant";
 
+interface AppointTwoProps {
+    date: Date | null,
+    setDate: Function,
+    startTime: Date | null,
+    setStartTime: Function,
+    endTime: Date | null,
+    setEndTime: Function,
+    idPickedTime: number
+    setIdPickedTime: Function
+    dataDateTimes: dataPickedTime[]
+    setDataDateTimes: Function
+}
 
-export default function AppointTwo() {
-
-    const [date, setDate] = useState<Date | null>(null);
-    const [startTime, setStartTime] = useState<Date | null>(null);
-    const [endTime, setEndTime] = useState<Date | null>(null);
-    const [id, setId] = useState<number>(1);
-    const STORAGE_KEY = "DateTimeKey"
-
-    const [dataDateTimes, setDataDateTimes] = useState<dataPickedTime[]>(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
-
-    React.useEffect(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataDateTimes))
-    }, [dataDateTimes])
+export default function AppointTwo(
+    {
+        date,
+        setDate,
+        startTime,
+        setStartTime,
+        endTime,
+        setEndTime,
+        idPickedTime,
+        setIdPickedTime,
+        dataDateTimes,
+        setDataDateTimes
+    }: AppointTwoProps) {
 
     const saveAppointmentData = () => {
         if ((date !== null) && (startTime !== null) && (endTime !== null)) {
             const newDataDateTime = {
-                id: id,
+                id: idPickedTime,
                 pickedDate: date.toLocaleDateString("en-US", {
                     weekday: "short",
                     year: "numeric",
@@ -33,7 +46,7 @@ export default function AppointTwo() {
             }
             setDataDateTimes([...dataDateTimes, newDataDateTime]);
             resetDateInput();
-            setId(id + 1);
+            setIdPickedTime(idPickedTime + 1);
         }
     }
 

@@ -48,10 +48,9 @@ export default function AppointmentSteps() {
         });
     };
 
-    const handleReset = () => {
+    const handleEdit = () => {
         setActiveStep(0);
     };
-
 
     return (
         <Box sx={{width: '95%', mt: 6}}>
@@ -83,9 +82,10 @@ export default function AppointmentSteps() {
 
             <AppointmentStepsWindow
                 activeStep={activeStep}
+                setActiveStep={setActiveStep}
                 steps={steps}
                 isStepOptional={isStepOptional}
-                handleReset={handleReset}
+                handleEdit={handleEdit}
                 handleBack={handleBack}
                 handleSkip={handleSkip}
                 handleNext={handleNext}

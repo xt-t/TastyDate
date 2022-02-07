@@ -21,6 +21,7 @@
   display: flex;
   justify-content: center;
   position: fixed;
+  z-index: 99;
   top: 0;
   left: 0;
   transition: 70ms;
@@ -33,6 +34,7 @@
   display: flex;
   justify-content: center;
   position: fixed;
+  z-index: 99;
   top: 0;
   left: -100%;
   transition: 2s;

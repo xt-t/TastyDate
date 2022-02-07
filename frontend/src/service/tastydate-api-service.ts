@@ -1,4 +1,7 @@
 import axios from 'axios'
+import {dataInfoDate} from "../models/appointmentsettings/dataInfoDate";
+import {dataPickedRestaurant} from "../models/appointmentsettings/dataPickedRestaurant";
+import {dataPickedTime} from "../models/appointmentsettings/dataPickedTime";
 
 //Login
 
@@ -12,79 +15,17 @@ export interface RegisterData {
     password: string,
 }
 
+export interface dataCompleteDateInfos {
+    infoDate: dataInfoDate,
+    infoDateTimes: dataPickedTime[],
+    infoRestaurantData: dataPickedRestaurant[]
+}
+
 export const loginPost = (login:LoginData) : Promise<string> =>
     axios.post(`auth/login`, login).then(response => response.data)
 
 export const registerPost = (register:RegisterData) : Promise<string> =>
     axios.post(`registration/user`, register).then(response => response.data)
 
-//AppointOne
-
-// export const getGeneralTastyDateData = (token?: string) =>
-//     axios.get(`/api/settings/one`, token? {headers:{"Authorization": "Bearer" + token}}:{}).then(response => response.data)
-//
-// export const getShoppingitemById = (id: string, token?: string) =>
-//     axios.get(`/api/shop/settings/one/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{}).then(response => response.data)
-//
-// export const updateShoppingitem = (product: Shoppingitem, token?: string) =>
-//     axios.put(`/api/shop/${product.id}/update`, product, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const addShoppingitem = (product: { quantity: number; name: string; checked: boolean; id: string }, token?: string) => axios.post(`/api/shop/`, product, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const deleteWholeList = (token?: string) => axios.delete(`/api/shop/`, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const deleteShoppingitem = (id:string, token?: string) => axios.delete(`/api/shop/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{})
-
-
-//AppointTwo
-
-// export const getGeneralTastyDateData = (token?: string) =>
-//     axios.get(`/api/settings/one`, token? {headers:{"Authorization": "Bearer" + token}}:{}).then(response => response.data)
-//
-// export const getShoppingitemById = (id: string, token?: string) =>
-//     axios.get(`/api/shop/settings/one/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{}).then(response => response.data)
-//
-// export const updateShoppingitem = (product: Shoppingitem, token?: string) =>
-//     axios.put(`/api/shop/${product.id}/update`, product, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const addShoppingitem = (product: { quantity: number; name: string; checked: boolean; id: string }, token?: string) => axios.post(`/api/shop/`, product, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const deleteWholeList = (token?: string) => axios.delete(`/api/shop/`, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const deleteShoppingitem = (id:string, token?: string) => axios.delete(`/api/shop/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{})
-
-
-//AppointThree
-
-// export const getGeneralTastyDateData = (token?: string) =>
-//     axios.get(`/api/settings/one`, token? {headers:{"Authorization": "Bearer" + token}}:{}).then(response => response.data)
-//
-// export const getShoppingitemById = (id: string, token?: string) =>
-//     axios.get(`/api/shop/settings/one/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{}).then(response => response.data)
-//
-// export const updateShoppingitem = (product: Shoppingitem, token?: string) =>
-//     axios.put(`/api/shop/${product.id}/update`, product, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const addShoppingitem = (product: { quantity: number; name: string; checked: boolean; id: string }, token?: string) => axios.post(`/api/shop/`, product, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const deleteWholeList = (token?: string) => axios.delete(`/api/shop/`, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const deleteShoppingitem = (id:string, token?: string) => axios.delete(`/api/shop/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{})
-
-
-//Result
-
-// export const getGeneralTastyDateData = (token?: string) =>
-//     axios.get(`/api/settings/one`, token? {headers:{"Authorization": "Bearer" + token}}:{}).then(response => response.data)
-//
-// export const getShoppingitemById = (id: string, token?: string) =>
-//     axios.get(`/api/shop/settings/one/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{}).then(response => response.data)
-//
-// export const updateShoppingitem = (product: Shoppingitem, token?: string) =>
-//     axios.put(`/api/shop/${product.id}/update`, product, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const addShoppingitem = (product: { quantity: number; name: string; checked: boolean; id: string }, token?: string) => axios.post(`/api/shop/`, product, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const deleteWholeList = (token?: string) => axios.delete(`/api/shop/`, token? {headers:{"Authorization": "Bearer" + token}}:{})
-//
-// export const deleteShoppingitem = (id:string, token?: string) => axios.delete(`/api/shop/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{})
+export const transferDataToDB = (allDateInfos:dataCompleteDateInfos, token? :string) : Promise<string> =>
+    axios.post(`api/appointment/completeSettings`, allDateInfos, token? {headers:{"Authorization": "Bearer" + token}}:{})

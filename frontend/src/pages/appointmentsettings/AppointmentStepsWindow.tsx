@@ -5,13 +5,19 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AppointmentStepsPages from "./AppointmentStepsPages";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {useContext, useState} from "react";
+import {dataPickedTime} from "../../models/appointmentsettings/dataPickedTime";
+import {dataPickedRestaurant} from "../../models/appointmentsettings/dataPickedRestaurant";
+import {dataCompleteDateInfos, transferDataToDB} from "../../service/tastydate-api-service";
+import {AuthContext} from "../../context/AuthProvider";
 
 interface AppointmentStepsWindowProps {
     activeStep: number,
+    setActiveStep: Function,
     steps: string[],
     isStepOptional: Function,
-    handleReset: Function,
+    handleEdit: Function,
     handleBack: Function,
     handleSkip: Function,
     handleNext: Function
@@ -20,15 +26,84 @@ interface AppointmentStepsWindowProps {
 export default function AppointmentStepsWindow(
     {
         activeStep,
+        setActiveStep,
         steps,
         isStepOptional,
-        handleReset,
+        handleEdit,
         handleBack,
         handleSkip,
         handleNext
     }: AppointmentStepsWindowProps) {
 
+    const {token}=useContext(AuthContext)
+
     const navigate = useNavigate();
+
+    //AppointOne
+    const [tastyDateName, setTastyDateName] = useState("");
+    const [location, setLocation] = useState("");
+    const [notes, setNotes] = useState("");
+    const [chosenDisplayName, setChosenDisplayName] = useState("");
+
+    //AppointTwo
+    const [date, setDate] = useState<Date | null>(null);
+    const [startTime, setStartTime] = useState<Date | null>(null);
+    const [endTime, setEndTime] = useState<Date | null>(null);
+    const [idPickedTime, setIdPickedTime] = useState<number>(1);
+    const [dataDateTimes, setDataDateTimes] = useState<dataPickedTime[]>([]);
+
+    //AppointThree
+    const [category, setCategory] = useState<string>("");
+    const [postcode, setPostcode] = useState<number | null>(null);
+    const [city, setCity] = useState<string | null>(null);
+    const [restaurantName, setRestaurantName] = useState<string | null>(null);
+    const [rating, setRating] = useState<number>(0);
+    const [price, setPrice] = useState<number>(0);
+    const [idPickedRestaurant, setIdPickedRestaurant] = useState<number>(1);
+    const [restaurantData, setRestaurantData] = useState<dataPickedRestaurant[]>([]);
+
+    const handleDelete = () => {
+        setTastyDateName("");
+        setLocation("");
+        setNotes("");
+        setChosenDisplayName("");
+        setDate(null);
+        setStartTime(null);
+        setEndTime(null);
+        setIdPickedTime(1);
+        setDataDateTimes([]);
+        setCategory("");
+        setPostcode(null);
+        setCity(null);
+        setRestaurantName(null);
+        setRating(0);
+        setPrice(0);
+        setIdPickedRestaurant(1);
+        setRestaurantData([]);
+        setActiveStep(0);
+    }
+
+    const proceedToVote = () => {
+        const newDataInfoDate = {
+            pickedTastyDateName: tastyDateName,
+            pickedLocation: location,
+            pickedNotes: notes,
+            pickedChosenDisplayName:  chosenDisplayName
+        }
+        const allDateInfos : dataCompleteDateInfos =
+            {infoDate: newDataInfoDate,
+                infoDateTimes: dataDateTimes,
+                infoRestaurantData: restaurantData
+            };
+        transferDataToDB(allDateInfos, token)
+            .then((data) => {
+                navigate("/overview");
+            })
+            .catch((err) => {
+                console.error(err.message);
+            })
+    }
+
 
     return (
         <div className="window">
@@ -41,9 +116,13 @@ export default function AppointmentStepsWindow(
                                 All steps completed - you&apos;re finished
                             </Typography>
                             <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
-                                <Button onClick={() => handleReset()}>Reset</Button>
+                                <Button onClick={() => handleDelete()}>Delete</Button>
                                 <Box sx={{flex: '1 1 auto'}}/>
-                                <Button onClick={() => navigate("/overview")}>Proceed</Button>
+                                <Button onClick={() => handleEdit()}>Edit</Button>
+                                <Box sx={{flex: '1 1 auto'}}/>
+
+                                <Button onClick={() => proceedToVote()}>Proceed</Button>
+
                             </Box>
                         </React.Fragment>
 
@@ -52,7 +131,31 @@ export default function AppointmentStepsWindow(
                         <React.Fragment>
 
                             <Typography component={'span'} sx={{mt: 2, mb: 1}}>
-                                <AppointmentStepsPages activepage={activeStep}/>
+                                <AppointmentStepsPages
+                                    activepage={activeStep}
+                                    //AppointOne
+                                    tastyDateName={tastyDateName}
+                                    setTastyDateName={setTastyDateName}
+                                    location={location} setLocation={setLocation}
+                                    notes={notes} setNotes={setNotes}
+                                    chosenDisplayName={chosenDisplayName}
+                                    setChosenDisplayName={setChosenDisplayName}
+                                    //AppointTwo
+                                    date={date} setDate={setDate}
+                                    startTime={startTime} setStartTime={setStartTime}
+                                    endTime={endTime} setEndTime={setEndTime}
+                                    idPickedTime={idPickedTime} setIdPickedTime={setIdPickedTime}
+                                    dataDateTimes={dataDateTimes} setDataDateTimes={setDataDateTimes}
+                                    //AppointThree
+                                    category={category} setCategory={setCategory}
+                                    postcode={postcode} setPostcode={setPostcode}
+                                    city={city} setCity={setCity}
+                                    restaurantName={restaurantName} setRestaurantName={setRestaurantName}
+                                    rating={rating} setRating={setRating}
+                                    price={price} setPrice={setPrice}
+                                    idPickedRestaurant={idPickedRestaurant} setIdPickedRestaurant={setIdPickedRestaurant}
+                                    restaurantData={restaurantData} setRestaurantData={setRestaurantData}
+                                />
                             </Typography>
 
                             <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
