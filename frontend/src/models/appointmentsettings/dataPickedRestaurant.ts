@@ -1,4 +1,4 @@
-export interface restaurantCard {
+export interface dataPickedRestaurant {
     id: number,
     pickedCategory: string,
     pickedPostcode: number,

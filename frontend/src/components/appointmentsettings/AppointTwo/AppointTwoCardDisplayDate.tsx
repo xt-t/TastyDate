@@ -1,9 +1,9 @@
 import {Button, Card, CardContent} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import {dataAppointment} from "../../../models/appointmentsettings/dataAppointment";
+import {dataPickedTime} from "../../../models/appointmentsettings/dataPickedTime";
 
 interface AppointTwoCardDisplayDateProps {
-    dataDateTimes: dataAppointment[]
+    dataDateTimes: dataPickedTime[]
     deletePickedDate: Function
     deleteAllPickedDates: Function
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import AppointThreeAddRestaurant from "./AppointThreeAddRestaurant";
 import AppointThreeDisplayRestaurant from "./AppointThreeDisplayRestaurant";
 import {useState} from "react";
-import {restaurantCard} from "../../../models/appointmentsettings/restaurantCard";
+import {dataPickedRestaurant} from "../../../models/appointmentsettings/dataPickedRestaurant";
 
 
 export default function AppointThree() {
@@ -15,7 +15,7 @@ export default function AppointThree() {
     const [price, setPrice] = useState<number>(0);
     const [id, setId] = useState<number>(1);
 
-    const [restaurantData, setRestaurantData] = useState<restaurantCard[]>([]);
+    const [restaurantData, setRestaurantData] = useState<dataPickedRestaurant[]>([]);
 
     const saveRestaurantData = () => {
         if ((category !== "") &&

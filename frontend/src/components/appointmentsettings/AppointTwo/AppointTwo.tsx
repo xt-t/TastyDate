@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {dataAppointment} from "../../../models/appointmentsettings/dataAppointment";
+import {dataPickedTime} from "../../../models/appointmentsettings/dataPickedTime";
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
 import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
 
@@ -12,7 +12,7 @@ export default function AppointTwo() {
     const [id, setId] = useState<number>(1);
     const STORAGE_KEY = "DateTimeKey"
 
-    const [dataDateTimes, setDataDateTimes] = useState<dataAppointment[]>(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
+    const [dataDateTimes, setDataDateTimes] = useState<dataPickedTime[]>(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
 
     React.useEffect(() => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(dataDateTimes))
