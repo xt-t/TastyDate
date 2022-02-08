@@ -1,7 +1,7 @@
 package de.neuefische.backend.controller;
 
 
-import de.neuefische.backend.model.LoginData;
+import de.neuefische.backend.model.loginregister.LoginData;
 import de.neuefische.backend.service.JWTUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;

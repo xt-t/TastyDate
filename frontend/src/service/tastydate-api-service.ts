@@ -16,16 +16,17 @@ export interface RegisterData {
 }
 
 export interface dataCompleteDateInfos {
+    idVote: string,
     infoDate: dataInfoDate,
     infoDateTimes: dataPickedTime[],
     infoRestaurantData: dataPickedRestaurant[]
 }
 
 export const loginPost = (login:LoginData) : Promise<string> =>
-    axios.post(`auth/login`, login).then(response => response.data)
+    axios.post(`/auth/login`, login).then(response => response.data)
 
 export const registerPost = (register:RegisterData) : Promise<string> =>
-    axios.post(`registration/user`, register).then(response => response.data)
+    axios.post(`/registration/user`, register).then(response => response.data)
 
-export const transferDataToDB = (allDateInfos:dataCompleteDateInfos, token? :string) : Promise<string> =>
-    axios.post(`api/appointment/completeSettings`, allDateInfos, token? {headers:{"Authorization": "Bearer" + token}}:{})
+export const transferVoteDataToDB = (allDateInfos:dataCompleteDateInfos, token? :string) : Promise<string> =>
+    axios.post(`/api/appointment/completeSettings`, allDateInfos, token? {headers:{"Authorization": "Bearer" + token}}:{})

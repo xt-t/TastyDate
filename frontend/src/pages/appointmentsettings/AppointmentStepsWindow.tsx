@@ -9,8 +9,9 @@ import {useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import {dataPickedTime} from "../../models/appointmentsettings/dataPickedTime";
 import {dataPickedRestaurant} from "../../models/appointmentsettings/dataPickedRestaurant";
-import {dataCompleteDateInfos, transferDataToDB} from "../../service/tastydate-api-service";
+import {dataCompleteDateInfos, transferVoteDataToDB} from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
+import { v4 as uuidv4 } from 'uuid';
 
 interface AppointmentStepsWindowProps {
     activeStep: number,
@@ -20,7 +21,8 @@ interface AppointmentStepsWindowProps {
     handleEdit: Function,
     handleBack: Function,
     handleSkip: Function,
-    handleNext: Function
+    handleNext: Function,
+    setTransferSettingsItem: Function
 }
 
 export default function AppointmentStepsWindow(
@@ -32,7 +34,8 @@ export default function AppointmentStepsWindow(
         handleEdit,
         handleBack,
         handleSkip,
-        handleNext
+        handleNext,
+        setTransferSettingsItem
     }: AppointmentStepsWindowProps) {
 
     const {token}=useContext(AuthContext)
@@ -88,15 +91,19 @@ export default function AppointmentStepsWindow(
             pickedTastyDateName: tastyDateName,
             pickedLocation: location,
             pickedNotes: notes,
-            pickedChosenDisplayName:  chosenDisplayName
+            pickedChosenDisplayName: chosenDisplayName
         }
         const allDateInfos : dataCompleteDateInfos =
-            {infoDate: newDataInfoDate,
+            {
+                idVote: uuidv4(),
+                infoDate: newDataInfoDate,
                 infoDateTimes: dataDateTimes,
                 infoRestaurantData: restaurantData
             };
-        transferDataToDB(allDateInfos, token)
+        console.log(token);
+        transferVoteDataToDB(allDateInfos, token)
             .then((data) => {
+                setTransferSettingsItem(data);
                 navigate("/overview");
             })
             .catch((err) => {

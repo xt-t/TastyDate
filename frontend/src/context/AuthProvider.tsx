@@ -1,4 +1,4 @@
-import {createContext, ReactElement, useState} from "react";
+import React, {createContext, ReactElement, useState} from "react";
 import jwt_decode from "jwt-decode";
 
 export interface AuthContextType {
@@ -18,15 +18,19 @@ export default function AuthProvider({children}: { children: ReactElement<any, a
     const [token, setToken] = useState<string | undefined>(localStorage.getItem(STORAGE_KEY) || undefined);
     const [jwtDecoded, setJwtDecoded] = useState();
 
+        React.useEffect(() => {
+            if (token !== undefined) {
+            localStorage.setItem(STORAGE_KEY, token)}
+        }, [token]);
+
     const setJwt = (jwt: string) => {
         if (jwt === "") {
             setToken(undefined);
-            localStorage.removeItem(STORAGE_KEY);
             setJwtDecoded(undefined);
+            localStorage.removeItem(STORAGE_KEY)
         } else {
-            setToken(jwt);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(token));
-            setJwtDecoded(jwt_decode(jwt.toString()));
+            setToken(jwt)
+            setJwtDecoded(jwt_decode(jwt));
         }
     }
 

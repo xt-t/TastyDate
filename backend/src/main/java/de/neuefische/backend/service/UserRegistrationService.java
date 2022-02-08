@@ -1,7 +1,7 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.model.RegistrationData;
-import de.neuefische.backend.model.User;
+import de.neuefische.backend.model.loginregister.RegistrationData;
+import de.neuefische.backend.model.loginregister.User;
 import de.neuefische.backend.repository.MongoUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;

@@ -2,13 +2,17 @@ import DisplayMenus from "../../components/general/DisplayMenus";
 import AppointmentSteps from "./AppointmentSteps";
 import "./Appointment.scss"
 
-export default function AppointmentHome() {
+interface AppointmentHomeProps{
+    setTransferSettingsItem: Function
+}
+
+export default function AppointmentHome({setTransferSettingsItem}:AppointmentHomeProps) {
 
     return (
         <div>
             <DisplayMenus/>
             <div className="settingsdate">
-                <AppointmentSteps/>
+                <AppointmentSteps setTransferSettingsItem={setTransferSettingsItem}/>
             </div>
         </div>
     )

@@ -47,7 +47,7 @@ export default function LoginComponent() {
                     {errorMessage ? (
                         <Alert severity="error">
                             <AlertTitle>Error</AlertTitle>
-                            The combination is not corret — <strong>please retry your login!</strong>
+                            The combination is not correct — <strong>please retry your login!</strong>
                         </Alert>
                     ) : (
                         <></>

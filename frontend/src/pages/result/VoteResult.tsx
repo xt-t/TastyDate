@@ -4,8 +4,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import DisplayMenus from "../../components/general/DisplayMenus";
-import VoteTimeTable from "./VoteTimeTable";
-import VoteRestaurantTable from "./VoteRestaurantTable";
+import VoteTimeTable from "../../components/result/VoteTimeTable";
+import VoteRestaurantTable from "../../components/result/VoteRestaurantTable";
+import {dataCompleteDateInfos} from "../../service/tastydate-api-service";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -40,7 +41,11 @@ function a11yProps(index: number) {
     };
 }
 
-export default function VoteResult() {
+interface VoteResultProps {
+    transferSettingsItem: dataCompleteDateInfos
+}
+
+export default function VoteResult({transferSettingsItem}:VoteResultProps) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -60,10 +65,10 @@ export default function VoteResult() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <VoteTimeTable/>
+                <VoteTimeTable transferSettingsItem={transferSettingsItem}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <VoteRestaurantTable/>
+                <VoteRestaurantTable transferSettingsItem={transferSettingsItem}/>
             </TabPanel>
         </Box>
             </div>
