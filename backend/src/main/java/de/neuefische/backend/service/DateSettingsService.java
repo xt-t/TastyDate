@@ -4,10 +4,6 @@ import de.neuefische.backend.model.DateSettingsItem;
 import de.neuefische.backend.repository.DateSettingsRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
 
 @Service
 public class DateSettingsService {
@@ -22,14 +18,5 @@ public class DateSettingsService {
         return dateSettingsRepo.save(settingsItem);
     }
 
-    public String removeSettingsItemById(String id) {
-        if (dateSettingsRepo.existsById(id)) {
-            dateSettingsRepo.deleteById(id);
-            return "Deleted!";
-        }
-        else {return "Something went wrong";}
-    }
-
-    public Optional<DateSettingsItem> findSettingsById(String id) {return dateSettingsRepo.findById(id);}
 
 }

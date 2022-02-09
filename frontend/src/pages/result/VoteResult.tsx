@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import DisplayMenus from "../../components/general/DisplayMenus";
 import VoteTimeTable from "../../components/result/VoteTimeTable";
 import VoteRestaurantTable from "../../components/result/VoteRestaurantTable";
-import {dataCompleteDateInfos} from "../../service/tastydate-api-service";
+import {DataCompleteDateInfos} from "../../service/tastydate-api-service";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -42,7 +42,7 @@ function a11yProps(index: number) {
 }
 
 interface VoteResultProps {
-    transferSettingsItem: dataCompleteDateInfos
+    transferSettingsItem: DataCompleteDateInfos
 }
 
 export default function VoteResult({transferSettingsItem}:VoteResultProps) {

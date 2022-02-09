@@ -2,8 +2,8 @@ import AppointOne from "../../components/appointmentsettings/AppointOne/AppointO
 import AppointTwo from "../../components/appointmentsettings/AppointTwo/AppointTwo";
 import AppointThree from "../../components/appointmentsettings/AppointThree/AppointThree";
 import {useState} from "react";
-import {dataPickedRestaurant} from "../../models/appointmentsettings/dataPickedRestaurant";
-import {dataPickedTime} from "../../models/appointmentsettings/dataPickedTime";
+import {dataPickedRestaurant} from "../../models/appointmentsettings/DataPickedRestaurant";
+import {dataPickedTime} from "../../models/appointmentsettings/DataPickedTime";
 
 interface Appointmentpagesprops {
     activepage: number
@@ -34,11 +34,11 @@ interface Appointmentpagesprops {
     setRating: Function,
     price: number,
     setPrice: Function,
-    restaurantName: string | null,
+    restaurantName: string,
     setRestaurantName: Function,
     postcode: number | null,
     setPostcode: Function,
-    city: string | null,
+    city: string,
     setCity: Function
     idPickedRestaurant: number
     setIdPickedRestaurant: Function

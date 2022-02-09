@@ -15,11 +15,11 @@ interface AppointThreeAddRestaurantProps {
     setRating: Function,
     price: number,
     setPrice: Function,
-    restaurantName: string | null,
+    restaurantName: string,
     setRestaurantName: Function,
     postcode: number | null,
     setPostcode: Function,
-    city: string | null,
+    city: string,
     setCity: Function
     saveRestaurantData: Function,
     resetDataInput: Function

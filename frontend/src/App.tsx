@@ -9,10 +9,15 @@ import RequireAuth from './components/loginregister/RequireAuth';
 import AuthProvider from './context/AuthProvider';
 import LoginPage from './pages/loginregister/LoginPage';
 import RegisterPage from './pages/loginregister/RegisterPage';
-import {dataCompleteDateInfos} from "./service/tastydate-api-service";
+import {DataCompleteDateInfos} from "./service/tastydate-api-service";
 
 function App() {
-    const [transferSettingsItem, setTransferSettingsItem] = useState<dataCompleteDateInfos>({idVote:"",infoDate:{pickedTastyDateName:"",pickedLocation:"",pickedNotes:"",pickedChosenDisplayName:""} ,infoDateTimes: [], infoRestaurantData: []});
+    const [transferSettingsItem, setTransferSettingsItem] = useState<DataCompleteDateInfos>({
+        idVote:"1",infoDate:{pickedTastyDateName:"Test",pickedLocation:"Köln",pickedNotes:"Keine",pickedChosenDisplayName:"Bernd"} ,
+        infoDateTimes: [ {id:1, pickedDate: "Thu, Feb 10, 2022", pickedStart: "14:33", pickedEnd: "16:43"},
+            {id:2, pickedDate: "Fri, Feb 11, 2022", pickedStart: "14:24", pickedEnd: "16:12"},
+            {id:3, pickedDate: "Sat, Feb 12, 2022", pickedStart: "14:33", pickedEnd: "16:54"}],
+        infoRestaurantData: []});
 
     return (
         <div className="App">

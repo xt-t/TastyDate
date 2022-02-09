@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Button, Card, CardContent} from "@mui/material";
-import {dataPickedRestaurant} from "../../../models/appointmentsettings/dataPickedRestaurant";
+import {dataPickedRestaurant} from "../../../models/appointmentsettings/DataPickedRestaurant";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 interface AppointThreeDisplayRestaurantProps {
@@ -19,24 +19,24 @@ export default function AppointThreeDisplayRestaurant(
         <div>
             <Card>
                 <CardContent className="displayPickedRestaurants">
-                    {restaurantData.map((restaurantData, index) => (
+                    {restaurantData.map((restaurant, index) => (
                         <span key={index}>
                         {index + 1}
                             <span>: </span>
-                            {restaurantData.pickedCategory}
+                            {restaurant.pickedCategory}
                             <span> </span>
-                            {restaurantData.pickedPostcode}
+                            {restaurant.pickedPostcode}
                             <span> </span>
-                            {restaurantData.pickedCity}
+                            {restaurant.pickedCity}
                             <span> </span>
-                            {restaurantData.pickedRestaurantName}
+                            {restaurant.pickedRestaurantName}
                             <span> </span>
-                            {restaurantData.pickedRating}
+                            {restaurant.pickedRating}
                             <span> - </span>
-                            {restaurantData.pickedPrice}
+                            {restaurant.pickedPrice}
 
                             <Button variant="text">
-        <DeleteIcon onClick={() => deleteRestaurantCard(restaurantData.id)}/></Button>
+        <DeleteIcon onClick={() => deleteRestaurantCard(restaurant.id)}/></Button>
                             </span>))}
 
 

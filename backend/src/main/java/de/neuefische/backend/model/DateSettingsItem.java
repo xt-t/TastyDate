@@ -21,7 +21,7 @@ public class DateSettingsItem {
     @Id
     private String idVote;
 
-    private GeneralInfoDateItem dataInfoDate;
-    private TimeItem[] dataPickedTime;
-    private RestaurantItem[] dataPickedRestaurant;
+    private GeneralInfoDateItem infoDate;
+    private TimeItem[] infoDateTimes;
+    private RestaurantItem[] infoRestaurantData;
     }

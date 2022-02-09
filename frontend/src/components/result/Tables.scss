@@ -1,0 +1,35 @@
+.grid-container {
+  grid-auto-flow: row;
+}
+
+.grid-item {
+border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userName {
+  grid-column-start: 1;
+  grid-row-start: 2;
+}
+
+//grid-auto-flow controls how auto-placed items are inserted in the grid.
+//<div class="grid-container" style="grid-auto-flow: column;">
+
+//grid-template-columns: 100px 100px 100px;
+//grid-template-rows: 100px 100px 100px;
+
+//grid-column-gap: 50px;
+//grid-column: 2 / 4;
+//grid-column-start: 2; grid-column-end: 4;
+// grid-column-start: 1 / span 2
+
+
+//grid-area: 1/1/1/1;  (grid-row-start, grid-column-start, grid-row-end, followed by grid-column-end)
+//grid-template: 50% 50% / 200px; (2 rows/1 column)
+
+//repeat(5, 20%)
+//1 fr
+//minmax(100px, auto);

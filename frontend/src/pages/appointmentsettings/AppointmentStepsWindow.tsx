@@ -7,9 +7,9 @@ import Button from "@mui/material/Button";
 import AppointmentStepsPages from "./AppointmentStepsPages";
 import {useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
-import {dataPickedTime} from "../../models/appointmentsettings/dataPickedTime";
-import {dataPickedRestaurant} from "../../models/appointmentsettings/dataPickedRestaurant";
-import {dataCompleteDateInfos, transferVoteDataToDB} from "../../service/tastydate-api-service";
+import {dataPickedTime} from "../../models/appointmentsettings/DataPickedTime";
+import {dataPickedRestaurant} from "../../models/appointmentsettings/DataPickedRestaurant";
+import {DataCompleteDateInfos, transferSettingsToDB} from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -57,9 +57,9 @@ export default function AppointmentStepsWindow(
 
     //AppointThree
     const [category, setCategory] = useState<string>("");
-    const [postcode, setPostcode] = useState<number | null>(null);
-    const [city, setCity] = useState<string | null>(null);
-    const [restaurantName, setRestaurantName] = useState<string | null>(null);
+    const [postcode, setPostcode] = useState<number>(1);
+    const [city, setCity] = useState<string>("");
+    const [restaurantName, setRestaurantName] = useState<string>("");
     const [rating, setRating] = useState<number>(0);
     const [price, setPrice] = useState<number>(0);
     const [idPickedRestaurant, setIdPickedRestaurant] = useState<number>(1);
@@ -76,9 +76,9 @@ export default function AppointmentStepsWindow(
         setIdPickedTime(1);
         setDataDateTimes([]);
         setCategory("");
-        setPostcode(null);
-        setCity(null);
-        setRestaurantName(null);
+        setPostcode(1);
+        setCity("");
+        setRestaurantName("");
         setRating(0);
         setPrice(0);
         setIdPickedRestaurant(1);
@@ -93,17 +93,16 @@ export default function AppointmentStepsWindow(
             pickedNotes: notes,
             pickedChosenDisplayName: chosenDisplayName
         }
-        const allDateInfos : dataCompleteDateInfos =
+        const allDateInfos : DataCompleteDateInfos =
             {
                 idVote: uuidv4(),
                 infoDate: newDataInfoDate,
                 infoDateTimes: dataDateTimes,
                 infoRestaurantData: restaurantData
             };
-        console.log(token);
-        transferVoteDataToDB(allDateInfos, token)
-            .then((data) => {
-                setTransferSettingsItem(data);
+        transferSettingsToDB(allDateInfos, token)
+            .then((response) => {
+                setTransferSettingsItem(response.data);
                 navigate("/overview");
             })
             .catch((err) => {

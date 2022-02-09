@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {dataPickedTime} from "../../../models/appointmentsettings/dataPickedTime";
+import {dataPickedTime} from "../../../models/appointmentsettings/DataPickedTime";
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
 import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
-import {dataPickedRestaurant} from "../../../models/appointmentsettings/dataPickedRestaurant";
+import {dataPickedRestaurant} from "../../../models/appointmentsettings/DataPickedRestaurant";
 
 interface AppointTwoProps {
     date: Date | null,

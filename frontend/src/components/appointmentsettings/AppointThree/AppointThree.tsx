@@ -1,7 +1,7 @@
 import * as React from "react";
 import AppointThreeAddRestaurant from "./AppointThreeAddRestaurant";
 import AppointThreeDisplayRestaurant from "./AppointThreeDisplayRestaurant";
-import {dataPickedRestaurant} from "../../../models/appointmentsettings/dataPickedRestaurant";
+import {dataPickedRestaurant} from "../../../models/appointmentsettings/DataPickedRestaurant";
 
 interface AppointThreeProps {
     category: string,
@@ -10,11 +10,11 @@ interface AppointThreeProps {
     setRating: Function,
     price: number,
     setPrice: Function,
-    restaurantName: string | null,
+    restaurantName: string,
     setRestaurantName: Function,
     postcode: number | null,
     setPostcode: Function,
-    city: string | null,
+    city: string,
     setCity: Function
     idPickedRestaurant: number
     setIdPickedRestaurant: Function
