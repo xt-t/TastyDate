@@ -9,9 +9,8 @@ import {useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import {dataPickedTime} from "../../models/appointmentsettings/DataPickedTime";
 import {dataPickedRestaurant} from "../../models/appointmentsettings/DataPickedRestaurant";
-import {DataCompleteDateInfos, transferSettingsToDB} from "../../service/tastydate-api-service";
+import {DateSettingsItemDTO, transferSettingsToDB} from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
-import { v4 as uuidv4 } from 'uuid';
 
 interface AppointmentStepsWindowProps {
     activeStep: number,
@@ -93,14 +92,13 @@ export default function AppointmentStepsWindow(
             pickedNotes: notes,
             pickedChosenDisplayName: chosenDisplayName
         }
-        const allDateInfos : DataCompleteDateInfos =
+        const settingsItem : DateSettingsItemDTO =
             {
-                idVote: uuidv4(),
                 infoDate: newDataInfoDate,
                 infoDateTimes: dataDateTimes,
                 infoRestaurantData: restaurantData
             };
-        transferSettingsToDB(allDateInfos, token)
+        transferSettingsToDB(settingsItem, token)
             .then((response) => {
                 setTransferSettingsItem(response.data);
                 navigate("/overview");

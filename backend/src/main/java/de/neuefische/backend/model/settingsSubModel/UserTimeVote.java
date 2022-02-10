@@ -1,4 +1,4 @@
-package de.neuefische.backend.model;
+package de.neuefische.backend.model.settingsSubModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Builder
 
-@Document("TimeVoteItem")
-public class TimeVoteItem {
+public class UserTimeVote {
     @Id
     private String displayedName;
 
     private boolean[] votedTimes;
+    private int[] sumIfVotedPerTime;
 }

@@ -8,7 +8,6 @@ export default function DisplayRestaurants() {
 
     return (
         <div className="cardListBox">
-            <body>
             <section className="card-list">
 
                 <article className="card">
@@ -129,7 +128,6 @@ export default function DisplayRestaurants() {
                 </article>
 
             </section>
-            </body>
         </div>
     )
 }

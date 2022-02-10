@@ -1,30 +1,14 @@
 import axios from 'axios'
+import {UserTimeVote} from "../models/result/UserTimeVote";
+import {LoginData, RegisterData} from "../models/loginregister/loginregister"
 import {dataInfoDate} from "../models/appointmentsettings/DataInfoDate";
-import {dataPickedRestaurant} from "../models/appointmentsettings/DataPickedRestaurant";
 import {dataPickedTime} from "../models/appointmentsettings/DataPickedTime";
+import {dataPickedRestaurant} from "../models/appointmentsettings/DataPickedRestaurant";
 
-//Login
-
-export interface LoginData {
-    name: string,
-    password: string,
-}
-
-export interface RegisterData {
-    name: string,
-    password: string,
-}
-
-export interface DataCompleteDateInfos {
-    idVote: string,
+export interface DateSettingsItemDTO {
     infoDate: dataInfoDate,
     infoDateTimes: dataPickedTime[],
     infoRestaurantData: dataPickedRestaurant[]
-}
-
-export interface UserTimeVote {
-    displayedName: string,
-    votedTimes: boolean[]
 }
 
 export const loginPost = (login:LoginData) : Promise<string> =>
@@ -33,8 +17,8 @@ export const loginPost = (login:LoginData) : Promise<string> =>
 export const registerPost = (register:RegisterData) : Promise<string> =>
     axios.post(`/registration/user`, register).then(response => response.data)
 
-export const transferSettingsToDB = (allDateInfos:DataCompleteDateInfos, token? :string) =>
-    axios.post(`/api/appointment/completeSettings`, allDateInfos, token? {headers:{"Authorization": "Bearer" + token}}:{})
+export const transferSettingsToDB = (settingsItem:DateSettingsItemDTO, token? :string) =>
+    axios.post(`/api/appointment/completeSettings`, settingsItem, token? {headers:{"Authorization": "Bearer" + token}}:{})
 
 export const transferUserTimeVote = (timeVote:UserTimeVote, token? :string) =>
     axios.post(`/api/appointment/timeVote`, timeVote, token? {headers:{"Authorization": "Bearer" + token}}:{})
