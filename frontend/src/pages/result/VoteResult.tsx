@@ -4,9 +4,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import DisplayMenus from "../../components/general/DisplayMenus";
-import VoteTimeTable from "../../components/result/VoteTimeTable";
-import VoteRestaurantTable from "../../components/result/VoteRestaurantTable";
 import {TastyDateItem} from "../../models/result/TastyDateItem";
+import VoteTimeTable from '../../components/result/VoteTimeTable';
+import VoteRestaurantTable from '../../components/result/VoteRestaurantTable';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -66,10 +66,10 @@ export default function VoteResult({transferSettingsItem, setTransferSettingsIte
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <VoteTimeTable transferSettingsItem={transferSettingsItem}/>
+                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem}/>
+                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} />
             </TabPanel>
         </Box>
             </div>

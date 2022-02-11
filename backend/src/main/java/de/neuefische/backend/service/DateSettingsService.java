@@ -17,7 +17,7 @@ import java.util.UUID;
 public class DateSettingsService {
 
     private final DateSettingsRepository dateSettingsRepo;
-    private static final Log LOG = LogFactory.getLog(BackendApplication.class);
+    private static final Log LOG = LogFactory.getLog(BackendApplication.class);   //LOG herausnehmen
 
     public DateSettingsService(DateSettingsRepository dateSettingsRepo) {
         this.dateSettingsRepo = dateSettingsRepo;
@@ -65,47 +65,8 @@ public class DateSettingsService {
     }
 }
 
-
-//
-//    public Optional<TastyDateItem> addVoteTimeItemToDateSettings(TimeVoteItem voteTime, String tastyDateId) {
-////        if (findToDoById(changedToDo.getId()).isEmpty()) {
-////            return Optional.empty();
-////        }
-////        return Optional.of(toDoRepo.changeToDo(changedToDo.getId(), changedToDo));
-////    }
-//            try {
-//                TastyDateItem settingsTemp = dateSettingsRepo.findById(tastyDateId).get();
-//                List<TimeVoteItem> listTemp = settingsTemp.getTimeVotes();
-//                listTemp.
-//                        add(voteTime);
-//                settingsTemp.setTimeVotes(listTemp);
-//                dateSettingsRepo.save(settingsTemp);
-//
-//                dateSettingsRepo.save(voteTime, tastyDateId );
-//
-//            public ToDo changeToDo(String id, ToDo changedToDo) {
-//                toDoRepo.replace(id, changedToDo);
-//                return changedToDo;
-//            }
-//
-//        if (dateSettingsRepo.findById(tastyDateId).isEmpty()) {
-//            return Optional.empty();
-//        }
-//        return Optional.of(dateSettingsRepo.
-//                        findById(tastyDateId)
-//
-//
-//
-//                    dateSettingsRepo.save(TastyDateItem);
-//        }
-//        catch (IllegalArgumentException e) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "According TastyDateItem doesn't exist");
-//        }
-//        }
         //Optional - existiert das SettingsItem? Fehlermeldung
-        //Algorithmus
-        //upgedatete Settingsitem in DB abspeichern
-        //ganze Settingsitem zurückgeben
+
 
 
 

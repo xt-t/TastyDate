@@ -1,13 +1,11 @@
 import AppointOne from "../../components/appointmentsettings/AppointOne/AppointOne"
 import AppointTwo from "../../components/appointmentsettings/AppointTwo/AppointTwo";
 import AppointThree from "../../components/appointmentsettings/AppointThree/AppointThree";
-import {useState} from "react";
-import {dataPickedRestaurant} from "../../models/appointmentsettings/DataPickedRestaurant";
 import {dataPickedTime} from "../../models/appointmentsettings/DataPickedTime";
+import {dataPickedRestaurant} from "../../models/appointmentsettings/DataPickedRestaurant";
 
-interface Appointmentpagesprops {
+export interface Appointmentpagesprops {
     activepage: number
-    //AppointOne
     tastyDateName: string
     setTastyDateName: Function
     location: string
@@ -16,7 +14,6 @@ interface Appointmentpagesprops {
     setNotes: Function
     chosenDisplayName: string
     setChosenDisplayName: Function
-    //AppointTwo
     date: Date | null,
     setDate: Function,
     startTime: Date | null,
@@ -27,7 +24,6 @@ interface Appointmentpagesprops {
     setIdPickedTime: Function
     dataDateTimes: dataPickedTime[]
     setDataDateTimes: Function
-    //AppointThree
     category: string,
     setCategory: Function,
     rating: number,
