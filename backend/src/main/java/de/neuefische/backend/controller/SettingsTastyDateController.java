@@ -1,10 +1,12 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.model.DateSettingsItem;
+import de.neuefische.backend.model.TastyDateItem;
 import de.neuefische.backend.model.settingsSubModel.UserTimeVote;
 import de.neuefische.backend.service.DateSettingsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -19,13 +21,14 @@ public class SettingsTastyDateController {
     }
 
     @PostMapping("/completeSettings")
-    private ResponseEntity<DateSettingsItem> postSettingsItem (@RequestBody DateSettingsItem settingsItem) {
+    private ResponseEntity<TastyDateItem> postSettingsItem (@RequestBody TastyDateItem settingsItem) {
         return ok(dateInfoService.addDateSettings(settingsItem));
     }
 
 
-    @PostMapping("/{tastyDateId}/timeVote")
-    private ResponseEntity<DateSettingsItem> updateDateSettingsWithVoteTimeItem (@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
-        return ok(dateInfoService.addVoteTimeItemToDateSettings(timeVote, tastyDateId));
+    @PutMapping("/{tastyDateId}/timeVote")
+    private ResponseEntity<TastyDateItem> updateTastyDateWithVoteTimeItem (@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
+        Optional<TastyDateItem> optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
+        return ResponseEntity.of(optTastyDate);
     }
 }

@@ -15,7 +15,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class UserTimeVote {
     @Id
     private String displayedName;
-
     private boolean[] votedTimes;
-    private int[] sumIfVotedPerTime;
 }

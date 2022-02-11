@@ -1,10 +1,11 @@
 import {FormEvent, useContext, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../context/AuthProvider";
-import {LoginData, loginPost} from "../../service/tastydate-api-service";
+import { loginPost} from "../../service/tastydate-api-service";
 import {Alert, AlertTitle, Button, Card, CardContent, TextField} from "@mui/material";
 import * as React from "react";
 import "./Login.scss"
+import {LoginData} from "../../models/loginregister/loginregister";
 
 
 export default function LoginComponent() {

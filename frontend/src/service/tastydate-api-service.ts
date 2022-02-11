@@ -20,5 +20,5 @@ export const registerPost = (register:RegisterData) : Promise<string> =>
 export const transferSettingsToDB = (settingsItem:DateSettingsItemDTO, token? :string) =>
     axios.post(`/api/appointment/completeSettings`, settingsItem, token? {headers:{"Authorization": "Bearer" + token}}:{})
 
-export const transferUserTimeVote = (timeVote:UserTimeVote, token? :string) =>
-    axios.post(`/api/appointment/timeVote`, timeVote, token? {headers:{"Authorization": "Bearer" + token}}:{})
+export const updateTastyDateWithVoteTimeItem = (tastyDateId: string, timeVote:UserTimeVote, token? :string) =>
+    axios.put(`/api/appointment/${tastyDateId}/timeVote`, timeVote, token? {headers:{"Authorization": "Bearer" + token}}:{})

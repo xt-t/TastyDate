@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import DisplayMenus from "../../components/general/DisplayMenus";
 import VoteTimeTable from "../../components/result/VoteTimeTable";
 import VoteRestaurantTable from "../../components/result/VoteRestaurantTable";
-import {DataCompleteDateInfos} from "../../service/tastydate-api-service";
+import {TastyDateItem} from "../../models/result/TastyDateItem";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -42,10 +42,11 @@ function a11yProps(index: number) {
 }
 
 interface VoteResultProps {
-    transferSettingsItem: DataCompleteDateInfos
+    transferSettingsItem: TastyDateItem
+    setTransferSettingsItem: Function
 }
 
-export default function VoteResult({transferSettingsItem}:VoteResultProps) {
+export default function VoteResult({transferSettingsItem, setTransferSettingsItem}:VoteResultProps) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -68,7 +69,7 @@ export default function VoteResult({transferSettingsItem}:VoteResultProps) {
                 <VoteTimeTable transferSettingsItem={transferSettingsItem}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <VoteRestaurantTable transferSettingsItem={transferSettingsItem}/>
+                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem}/>
             </TabPanel>
         </Box>
             </div>

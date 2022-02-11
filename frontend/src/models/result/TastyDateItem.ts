@@ -3,10 +3,11 @@ import {dataPickedTime} from "../appointmentsettings/DataPickedTime";
 import {dataPickedRestaurant} from "../appointmentsettings/DataPickedRestaurant";
 import {UserTimeVote} from "./UserTimeVote";
 
-export interface DateSettingsItem {
-    idVote: string,
+export interface TastyDateItem {
+    tastyDateId: string,
     infoDate: dataInfoDate,
     infoDateTimes: dataPickedTime[],
     infoRestaurantData: dataPickedRestaurant[],
     timeVotes: UserTimeVote[]
+    voteResults: number[]
 }

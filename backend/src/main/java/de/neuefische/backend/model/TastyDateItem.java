@@ -18,16 +18,16 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 
-@Document("DateSettingsItem")
-public class DateSettingsItem {
+@Document("TastyDateItem")
+public class TastyDateItem {
 
     @Id
-    private String idVote;
+    private String tastyDateId;
 
     private GeneralInfoDateItem infoDate;
     private TimeItem[] infoDateTimes;
     private RestaurantItem[] infoRestaurantData;
 
     private List<UserTimeVote> timeVotes;
-    private List<Integer> results;
+    private int[] voteResults;
     }

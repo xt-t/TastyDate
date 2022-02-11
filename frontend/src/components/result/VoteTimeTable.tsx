@@ -7,11 +7,10 @@
 //
 // Länge durch TimeItemAnzahl => Anzahl Checkboxe
 import * as React from 'react';
-
-import {DataCompleteDateInfos} from "../../service/tastydate-api-service";
+import {TastyDateItem} from "../../models/result/TastyDateItem";
 
 interface VoteTimeTableProps {
-    transferSettingsItem: DataCompleteDateInfos
+    transferSettingsItem: TastyDateItem
 }
 
 export default function VoteTimeTable({transferSettingsItem}: VoteTimeTableProps) {

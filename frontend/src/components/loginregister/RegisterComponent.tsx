@@ -1,8 +1,9 @@
 import {FormEvent, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import * as React from "react";
-import {RegisterData, registerPost} from "../../service/tastydate-api-service";
+import {registerPost} from "../../service/tastydate-api-service";
 import {Button, Card, CardContent, TextField} from "@mui/material";
+import {RegisterData} from "../../models/loginregister/loginregister";
 
 export default function RegisterComponent() {
 
