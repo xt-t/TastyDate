@@ -18,10 +18,9 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
 
     const {token, setJwt} = useContext(AuthContext);
 
-    const handleLogout = () =>
-    {
+    const handleLogout = () => {
         if (token !== "") {
-        setJwt("")
+            setJwt("");
         }
     }
 
@@ -61,6 +60,5 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
                     </div>
                 </Toolbar>
             </AppBar>
-        </Box>
-    );
+        </Box>)
 }

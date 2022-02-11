@@ -12,7 +12,7 @@ interface TimeSetterProps {
     range: string
 }
 
-export default function TimeSetter ({range, startTime, setStartTime, endTime, setEndTime}: TimeSetterProps) {
+export default function TimeSetter({range, startTime, setStartTime, endTime, setEndTime}: TimeSetterProps) {
 
     if (range === "start Time") {
         return (

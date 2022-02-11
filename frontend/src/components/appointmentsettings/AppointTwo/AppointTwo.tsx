@@ -1,36 +1,52 @@
-import React, { useState } from "react";
-import {dataAppointment} from "../../models/appointmentsettings/dataAppointment"
+import React, {useState} from "react";
+import {dataPickedTime} from "../../../models/appointmentsettings/DataPickedTime";
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
 import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
+import {dataPickedRestaurant} from "../../../models/appointmentsettings/DataPickedRestaurant";
 
-export default function AppointTwo() {
+interface AppointTwoProps {
+    date: Date | null,
+    setDate: Function,
+    startTime: Date | null,
+    setStartTime: Function,
+    endTime: Date | null,
+    setEndTime: Function,
+    idPickedTime: number
+    setIdPickedTime: Function
+    dataDateTimes: dataPickedTime[]
+    setDataDateTimes: Function
+}
 
-    const [date, setDate] = useState<Date | null>(null);
-    const [startTime, setStartTime] = useState<Date | null>(null);
-    const [endTime, setEndTime] = useState<Date | null>(null);
-    const [id, setId] = useState<number>(1);
-    const STORAGE_KEY = "DateTimeKey"
-    const [dataDateTimes, setDataDateTimes] = useState<dataAppointment[]>(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
-
-    React.useEffect(()=>{
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataDateTimes))}, [dataDateTimes])
+export default function AppointTwo(
+    {
+        date,
+        setDate,
+        startTime,
+        setStartTime,
+        endTime,
+        setEndTime,
+        idPickedTime,
+        setIdPickedTime,
+        dataDateTimes,
+        setDataDateTimes
+    }: AppointTwoProps) {
 
     const saveAppointmentData = () => {
         if ((date !== null) && (startTime !== null) && (endTime !== null)) {
             const newDataDateTime = {
-                id: id,
+                id: idPickedTime,
                 pickedDate: date.toLocaleDateString("en-US", {
                     weekday: "short",
                     year: "numeric",
                     month: "short",
                     day: "2-digit"
                 }),
-                pickedStart: startTime.toLocaleTimeString( "en-US", {hour: '2-digit', minute: '2-digit', hour12: false}),
+                pickedStart: startTime.toLocaleTimeString("en-US", {hour: '2-digit', minute: '2-digit', hour12: false}),
                 pickedEnd: endTime.toLocaleTimeString("en-US", {hour: '2-digit', minute: '2-digit', hour12: false})
             }
             setDataDateTimes([...dataDateTimes, newDataDateTime]);
             resetDateInput();
-            setId(id + 1);
+            setIdPickedTime(idPickedTime + 1);
         }
     }
 
@@ -62,7 +78,11 @@ export default function AppointTwo() {
                 saveAppointmentData={saveAppointmentData}
             />
 
-            <AppointTwoCardDisplayDate dataDateTimes={dataDateTimes} deletePickedDate={deletePickedDate} deleteAllPickedDates={deleteAllPickedDates}/>
+            <AppointTwoCardDisplayDate
+                dataDateTimes={dataDateTimes}
+                deletePickedDate={deletePickedDate}
+                deleteAllPickedDates={deleteAllPickedDates}
+            />
 
         </div>
     )

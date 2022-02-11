@@ -1,9 +1,9 @@
 import {Button, Card, CardContent} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import {dataAppointment} from "../../models/appointmentsettings/dataAppointment";
+import {dataPickedTime} from "../../../models/appointmentsettings/DataPickedTime";
 
 interface AppointTwoCardDisplayDateProps {
-    dataDateTimes: dataAppointment[]
+    dataDateTimes: dataPickedTime[]
     deletePickedDate: Function
     deleteAllPickedDates: Function
 }
@@ -13,26 +13,26 @@ export default function AppointTwoCardDisplayDate
     return (
         <Card>
             <CardContent className="displayChosenDates">
-                {dataDateTimes.map((dataDateTime, index) => (
+                {dataDateTimes.map((dateTime, index) => (
                     <span key={index}>
                         {index + 1}
-                                <span>Date </span>
+                        <span>. Date </span>
                         <span>: </span>
-                        {dataDateTime.pickedDate}
+                        {dateTime.pickedDate}
                         <span> </span>
-                        {dataDateTime.pickedStart}
+                        {dateTime.pickedStart}
                         <span> - </span>
-                        {dataDateTime.pickedEnd}
+                        {dateTime.pickedEnd}
                         <span> </span>
 
                     <Button variant="text">
-        <DeleteIcon onClick={() => deletePickedDate(dataDateTime.id)}/></Button>
+        <DeleteIcon onClick={() => deletePickedDate(dateTime.id)}/></Button>
                             </span>))}
 
 
                 {dataDateTimes.length !== 0 ? (
-                <Button variant="text" onClick={() => deleteAllPickedDates()}>
-                    <DeleteIcon color="error"/>Delete All</Button>) : (<></>)}
+                    <Button variant="text" onClick={() => deleteAllPickedDates()}>
+                        <DeleteIcon color="error"/>Delete All</Button>) : (<></>)}
 
             </CardContent>
         </Card>

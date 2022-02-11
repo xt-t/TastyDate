@@ -1,4 +1,4 @@
-//Appointone
+//AppointOne
 .form {
   margin: 20px;
   display: flex;
@@ -10,7 +10,7 @@
   }
 }
 
-//Appointtwo
+//AppointTwo
 .cardTwo {
   height: 25rem;
   width: 60rem;
@@ -39,6 +39,7 @@
       display: flex;
       justify-content: space-between;
     }
+
     .addDateTimeButtons {
       margin-top: 40px;
       display: flex;
@@ -53,5 +54,42 @@
     flex-wrap: nowrap;
     flex-direction: column;
   }
+}
 
+//AppointThree
+.cardThree {
+  height: 30rem;
+  width: 60rem;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: flex-start;
+  align-items: center;
+}
+
+.formRestaurant {
+  width: 400px;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.menuIcons {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.displayPickedRestaurants {
+  margin: 20px;
+  height: 270px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
 }

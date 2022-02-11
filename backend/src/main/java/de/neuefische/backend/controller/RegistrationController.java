@@ -1,6 +1,6 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.model.RegistrationData;
+import de.neuefische.backend.model.loginregister.RegistrationData;
 import de.neuefische.backend.service.UserRegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

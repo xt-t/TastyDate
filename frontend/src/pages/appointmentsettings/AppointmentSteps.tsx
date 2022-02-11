@@ -7,9 +7,13 @@ import Typography from '@mui/material/Typography';
 import "./Appointment.scss"
 import AppointmentStepsWindow from "./AppointmentStepsWindow";
 
+interface AppointmentStepsProps{
+setTransferSettingsItem: Function
+}
+
 const steps = ['General information', 'Pick your dates and times', 'Pick your restaurant'];
 
-export default function AppointmentSteps() {
+export default function AppointmentSteps({setTransferSettingsItem}:AppointmentStepsProps) {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set<number>());
 
@@ -37,8 +41,6 @@ export default function AppointmentSteps() {
 
     const handleSkip = () => {
         if (!isStepOptional(activeStep)) {
-            // You probably want to guard against something like this,
-            // it should never occur unless someone's actively trying to break something.
             throw new Error("You can't skip a step that isn't optional.");
         }
 
@@ -50,13 +52,12 @@ export default function AppointmentSteps() {
         });
     };
 
-    const handleReset = () => {
+    const handleEdit = () => {
         setActiveStep(0);
     };
 
-
     return (
-        <Box sx={{width: '95%', mt:6}}>
+        <Box sx={{width: '95%', mt: 6}}>
 
             <Stepper activeStep={activeStep}>
 
@@ -85,12 +86,14 @@ export default function AppointmentSteps() {
 
             <AppointmentStepsWindow
                 activeStep={activeStep}
-            steps={steps}
-            isStepOptional={isStepOptional}
-            handleReset={handleReset}
-            handleBack={handleBack}
-            handleSkip={handleSkip}
-            handleNext={handleNext}
+                setActiveStep={setActiveStep}
+                steps={steps}
+                isStepOptional={isStepOptional}
+                handleEdit={handleEdit}
+                handleBack={handleBack}
+                handleSkip={handleSkip}
+                handleNext={handleNext}
+                setTransferSettingsItem={setTransferSettingsItem}
             />
 
         </Box>

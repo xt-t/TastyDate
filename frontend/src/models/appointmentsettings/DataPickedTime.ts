@@ -1,6 +1,6 @@
-export interface dataAppointment {
+export interface dataPickedTime {
     id: number,
-    pickedDate:  string,
+    pickedDate: string,
     pickedStart: string,
     pickedEnd: string
 }
