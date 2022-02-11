@@ -1,30 +1,15 @@
 import TextField from "@mui/material/TextField";
 import "../Appoint.scss"
 import {Box} from "@mui/material";
+import {AppointOneType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 
 interface AppointOneProps {
-    tastyDateName: string
-setTastyDateName: Function
-location: string
-setLocation: Function
-notes: string
-setNotes: Function
-chosenDisplayName: string
-setChosenDisplayName: Function
+    appointOne: AppointOneType
 }
 
 export default function AppointOne(
-    {tastyDateName,
-setTastyDateName,
-location,
-setLocation,
-notes,
-setNotes,
-chosenDisplayName,
-setChosenDisplayName,}:AppointOneProps
+    {appointOne}:AppointOneProps
 ) {
-
-
 
     return (
         <Box className="form">
@@ -35,9 +20,9 @@ setChosenDisplayName,}:AppointOneProps
                 label="TastyDate: Name"
                 variant="standard"
                 className="formelements"
-                value={tastyDateName}
+                value={appointOne.tastyDateName}
                 onChange={(event) => {
-                    setTastyDateName(event.target.value);
+                    appointOne.setTastyDateName(event.target.value);
                 }}
             />
             <TextField
@@ -46,9 +31,9 @@ setChosenDisplayName,}:AppointOneProps
                 label="Location"
                 variant="standard"
                 className="formelements"
-                value={location}
+                value={appointOne.location}
                 onChange={(event) => {
-                    setLocation(event.target.value);
+                    appointOne.setLocation(event.target.value);
                 }}
             />
             <TextField
@@ -57,9 +42,9 @@ setChosenDisplayName,}:AppointOneProps
                 multiline
                 rows={4}
                 className="formelements"
-                value={notes}
+                value={appointOne.notes}
                 onChange={(event) => {
-                    setNotes(event.target.value);
+                    appointOne.setNotes(event.target.value);
                 }}
             />
             <TextField
@@ -68,9 +53,9 @@ setChosenDisplayName,}:AppointOneProps
                 label="Your name"
                 variant="standard"
                 className="formelements"
-                value={chosenDisplayName}
+                value={appointOne.chosenDisplayName}
                 onChange={(event) => {
-                    setChosenDisplayName(event.target.value);
+                    appointOne.setChosenDisplayName(event.target.value);
                 }
                 }
             />

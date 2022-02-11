@@ -27,7 +27,25 @@ export default function UseAppointSteps() {
     const [idPickedRestaurant, setIdPickedRestaurant] = useState<number>(1);
     const [restaurantData, setRestaurantData] = useState<dataPickedRestaurant[]>([]);
 
-
+    const handleDelete = () => {
+        setTastyDateName("");
+        setLocation("");
+        setNotes("");
+        setChosenDisplayName("");
+        setDate(null);
+        setStartTime(null);
+        setEndTime(null);
+        setIdPickedTime(1);
+        setDataDateTimes([]);
+        setCategory("");
+        setPostcode(1);
+        setCity("");
+        setRestaurantName("");
+        setRating(0);
+        setPrice(0);
+        setIdPickedRestaurant(1);
+        setRestaurantData([]);
+    }
 
     return {
         appointOne: {
@@ -64,5 +82,7 @@ export default function UseAppointSteps() {
             idPickedRestaurant, setIdPickedRestaurant,
             restaurantData, setRestaurantData
         }
+        ,
+        handleDelete
     }
 }

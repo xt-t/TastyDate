@@ -4,29 +4,19 @@ import TimeSetter from "./TimeSetter";
 import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import AddIcon from "@mui/icons-material/Add";
+import {AppointTwoType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 
 interface AppointTwoCardAddDateProps {
-    date: Date | null,
-    setDate: Function,
-    startTime: Date | null,
-    setStartTime: Function,
-    endTime: Date | null,
-    setEndTime: Function,
+    appointTwo: AppointTwoType
     resetDateInput: Function,
     saveAppointmentData: Function
 }
 
 export default function AppointTwoCardAddDate(
-    {
-        date,
-        setDate,
-        startTime,
-        setStartTime,
-        endTime,
-        setEndTime,
-        resetDateInput,
-        saveAppointmentData
-    }: AppointTwoCardAddDateProps) {
+    {appointTwo, resetDateInput, saveAppointmentData}: AppointTwoCardAddDateProps) {
+
+    const {date, setDate, startTime, setStartTime, endTime, setEndTime}=appointTwo;
+
     return (
         <Card>
             <CardContent className="addDateTime">

@@ -7,38 +7,17 @@ import CategoryMenu from "./CategoryMenu";
 import RestaurantRating from "./RestaurantRating";
 import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import {AppointThreeType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 
 interface AppointThreeAddRestaurantProps {
-    category: string,
-    setCategory: Function,
-    rating: number,
-    setRating: Function,
-    price: number,
-    setPrice: Function,
-    restaurantName: string,
-    setRestaurantName: Function,
-    postcode: number | null,
-    setPostcode: Function,
-    city: string,
-    setCity: Function
-    saveRestaurantData: Function,
+    appointThree: AppointThreeType
+    saveRestaurantData: Function
     resetDataInput: Function
 }
 
 export default function AppointThreeAddRestaurant(
     {
-        category,
-        setCategory,
-        rating,
-        setRating,
-        price,
-        setPrice,
-        restaurantName,
-        setRestaurantName,
-        postcode,
-        setPostcode,
-        city,
-        setCity,
+        appointThree,
         saveRestaurantData,
         resetDataInput
     }: AppointThreeAddRestaurantProps
@@ -52,7 +31,7 @@ export default function AppointThreeAddRestaurant(
 
                     <h3>Add your restaurant</h3>
 
-                    <CategoryMenu category={category} setCategory={setCategory}/>
+                    <CategoryMenu category={appointThree.category} setCategory={appointThree.setCategory}/>
 
                     <div>
                         <TextField
@@ -61,9 +40,9 @@ export default function AppointThreeAddRestaurant(
                             label="Postcode"
                             variant="standard"
                             className="formelements"
-                            value={postcode}
+                            value={appointThree.postcode}
                             onChange={(event) => {
-                                setPostcode(parseInt(event.target.value));
+                                appointThree.setPostcode(parseInt(event.target.value));
                             }
                             }
                         />
@@ -73,9 +52,9 @@ export default function AppointThreeAddRestaurant(
                             label="City"
                             variant="standard"
                             className="formelements"
-                            value={city}
+                            value={appointThree.city}
                             onChange={(event) => {
-                                setCity(event.target.value);
+                                appointThree.setCity(event.target.value);
                             }
                             }
                         />
@@ -87,13 +66,13 @@ export default function AppointThreeAddRestaurant(
                         label="Restaurant name"
                         variant="standard"
                         className="formelements"
-                        value={restaurantName}
+                        value={appointThree.restaurantName}
                         onChange={(event) => {
-                            setRestaurantName(event.target.value);
+                            appointThree.setRestaurantName(event.target.value);
                         }}
                     />
 
-                    <RestaurantRating rating={rating} setRating={setRating} price={price} setPrice={setPrice}/>
+                    <RestaurantRating rating={appointThree.rating} setRating={appointThree.setRating} price={appointThree.price} setPrice={appointThree.setPrice}/>
 
                     <Box className="menuIcons">
                         <AppointThreeSearchRestaurant/>
