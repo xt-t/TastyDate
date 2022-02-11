@@ -14,10 +14,7 @@ export default function RegisterComponent() {
     const navigate = useNavigate();
 
     const passwordCheck = () => {
-        if (userPassword === userPasswordVerify) return true;
-        else {
-            return false;
-        }
+        return (userPassword === userPasswordVerify);
     }
 
     const register = (event: FormEvent<HTMLFormElement>) => {

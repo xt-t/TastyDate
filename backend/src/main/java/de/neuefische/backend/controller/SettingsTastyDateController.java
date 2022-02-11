@@ -20,13 +20,13 @@ public class SettingsTastyDateController {
         this.dateInfoService = dateInfoService;
     }
 
-    @PostMapping("/completeSettings")
+    @PostMapping("/completesettings")
     private ResponseEntity<TastyDateItem> postSettingsItem (@RequestBody TastyDateItem settingsItem) {
         return ok(dateInfoService.addDateSettings(settingsItem));
     }
 
 
-    @PutMapping("/{tastyDateId}/timeVote")
+    @PutMapping("/{tastyDateId}/timevote")
     private ResponseEntity<TastyDateItem> updateTastyDateWithVoteTimeItem (@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
         Optional<TastyDateItem> optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
         return ResponseEntity.of(optTastyDate);

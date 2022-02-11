@@ -18,7 +18,7 @@ export const registerPost = (register:RegisterData) : Promise<string> =>
     axios.post(`/registration/user`, register).then(response => response.data)
 
 export const transferSettingsToDB = (settingsItem:DateSettingsItemDTO, token? :string) =>
-    axios.post(`/api/appointment/completeSettings`, settingsItem, token? {headers:{"Authorization": "Bearer" + token}}:{})
+    axios.post(`/api/appointment/completesettings`, settingsItem, token? {headers:{"Authorization": "Bearer" + token}}:{})
 
 export const updateTastyDateWithVoteTimeItem = (tastyDateId: string, timeVote:UserTimeVote, token? :string) =>
-    axios.put(`/api/appointment/${tastyDateId}/timeVote`, timeVote, token? {headers:{"Authorization": "Bearer" + token}}:{})
+    axios.put(`/api/appointment/${tastyDateId}/timevote`, timeVote, token? {headers:{"Authorization": "Bearer" + token}}:{})

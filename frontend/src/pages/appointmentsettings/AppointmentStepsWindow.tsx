@@ -11,6 +11,7 @@ import {dataPickedTime} from "../../models/appointmentsettings/DataPickedTime";
 import {dataPickedRestaurant} from "../../models/appointmentsettings/DataPickedRestaurant";
 import {DateSettingsItemDTO, transferSettingsToDB} from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
+import UseAppointSteps from "./UseAppointSteps";
 
 interface AppointmentStepsWindowProps {
     activeStep: number,
@@ -41,28 +42,8 @@ export default function AppointmentStepsWindow(
 
     const navigate = useNavigate();
 
-    //AppointOne
-    const [tastyDateName, setTastyDateName] = useState("");
-    const [location, setLocation] = useState("");
-    const [notes, setNotes] = useState("");
-    const [chosenDisplayName, setChosenDisplayName] = useState("");
-
-    //AppointTwo
-    const [date, setDate] = useState<Date | null>(null);
-    const [startTime, setStartTime] = useState<Date | null>(null);
-    const [endTime, setEndTime] = useState<Date | null>(null);
-    const [idPickedTime, setIdPickedTime] = useState<number>(1);
-    const [dataDateTimes, setDataDateTimes] = useState<dataPickedTime[]>([]);
-
-    //AppointThree
-    const [category, setCategory] = useState<string>("");
-    const [postcode, setPostcode] = useState<number>(1);
-    const [city, setCity] = useState<string>("");
-    const [restaurantName, setRestaurantName] = useState<string>("");
-    const [rating, setRating] = useState<number>(0);
-    const [price, setPrice] = useState<number>(0);
-    const [idPickedRestaurant, setIdPickedRestaurant] = useState<number>(1);
-    const [restaurantData, setRestaurantData] = useState<dataPickedRestaurant[]>([]);
+    //UseStateAppointVariables
+    const {appointOne, appointTwo, appointThree } = UseAppointSteps();
 
     const handleDelete = () => {
         setTastyDateName("");
