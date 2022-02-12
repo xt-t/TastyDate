@@ -13,9 +13,9 @@ export default function AppointThree(
 
     const saveRestaurantData = () => {
         if ((appointThree.category !== "") &&
-            (appointThree.postcode !== null) &&
-            (appointThree.city !== null) &&
-            (appointThree.restaurantName !== null) &&
+            (appointThree.postcode !== 0) &&
+            (appointThree.city !== "") &&
+            (appointThree.restaurantName !== "") &&
             (appointThree.rating !== 0) &&
             (appointThree.price !== 0)
         ) {
@@ -37,9 +37,9 @@ export default function AppointThree(
         appointThree.setCategory("");
         appointThree.setRating(0);
         appointThree.setPrice(0);
-        appointThree.setRestaurantName(null);
-        appointThree.setPostcode(null);
-        appointThree.setCity(null);
+        appointThree.setRestaurantName("");
+        appointThree.setPostcode(0);
+        appointThree.setCity("");
     }
 
     const deleteRestaurantCard = (id: number) => {
@@ -57,11 +57,14 @@ export default function AppointThree(
                 resetDataInput={resetDataInput}
             />
 
+            {appointThree.restaurantData.length !== 0 ? (
             <AppointThreeDisplayRestaurant
                 restaurantData={appointThree.restaurantData}
                 deleteRestaurantCard={deleteRestaurantCard}
                 deleteAllRestaurantCards={deleteAllRestaurantCards}
-            />
+            />)
+                :
+                (<></>)}
         </div>
     )
 }

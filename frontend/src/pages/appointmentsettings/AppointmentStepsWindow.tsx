@@ -55,12 +55,14 @@ export default function AppointmentStepsWindow(
             pickedNotes: appointOne.notes,
             pickedChosenDisplayName: appointOne.chosenDisplayName
         }
+        console.log(newDataInfoDate)
         const settingsItem : DateSettingsItemDTO =
             {
                 infoDate: newDataInfoDate,
                 infoDateTimes: appointTwo.dataDateTimes,
                 infoRestaurantData: appointThree.restaurantData
             };
+        console.log(settingsItem)
         transferSettingsToDB(settingsItem, token)
             .then((response) => {
                 setTransferSettingsItem(response.data);

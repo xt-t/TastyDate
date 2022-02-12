@@ -1,3 +1,4 @@
+//VoteTimeTable
 .grid-container {
   grid-auto-flow: row;
 }
@@ -13,4 +14,70 @@ border: 1px solid black;
 .userName {
   grid-column-start: 1;
   grid-row-start: 2;
+}
+
+//VoteRestaurantTable
+.container{
+  border: 1px solid black;
+  height: 600px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 30px;
+}
+
+.container .resultcard {
+  position: relative;
+  width: 300px;
+  height: 260px;
+  background: #fff;
+  padding: 0.5rem 0.5rem;
+  margin: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease-in-out;
+  border-radius: 1rem;
+}
+
+.container .resultcard:hover
+{
+  height: 420px;
+  .arrow {
+    visibility: hidden;
+  }
+}
+
+.container .resultcard .imgBx {
+  position: relative;
+  width: 290px;
+  height: 200px;
+  z-index: 1;
+}
+
+.container .resultcard .imgBx img
+{
+  max-width: 100%;
+  border-radius: 1rem;
+}
+
+.container .resultcard .content {
+  position: relative;
+  margin-top: -200px;
+  padding: 10px 15px;
+  text-align: center;
+  color: #111;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+
+.container .resultcard:hover .content {
+  visibility: visible;
+  opacity: 1;
+  margin-top: -30px;
+  transition-delay: 0.3s;
 }

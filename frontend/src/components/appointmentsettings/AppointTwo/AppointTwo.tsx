@@ -1,5 +1,4 @@
 import React from "react";
-import {dataPickedTime} from "../../../models/appointmentsettings/DataPickedTime";
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
 import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
 import {AppointTwoType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
@@ -55,12 +54,16 @@ export default function AppointTwo(
                 saveAppointmentData={saveAppointmentData}
             />
 
-            <AppointTwoCardDisplayDate
+            {appointTwo.dataDateTimes.length !== 0 ? (
+            < AppointTwoCardDisplayDate
                 dataDateTimes={appointTwo.dataDateTimes}
                 deletePickedDate={deletePickedDate}
                 deleteAllPickedDates={deleteAllPickedDates}
-            />
-
+                />
+            ):(
+                <></>
+            )
+            }
         </div>
     )
 }
