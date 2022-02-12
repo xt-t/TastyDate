@@ -37,7 +37,9 @@ function App() {
             }],
             "infoRestaurantData": [],
             "timeVotes": [],
-            "voteResults": []});
+            "restaurantVotes": [],
+            "votingResultsForOneDate": [],
+            "votingResultsForOneRestaurant": []});
 
     return (
         <div className="App">

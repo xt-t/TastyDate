@@ -37,7 +37,7 @@ export default function VoteResult({transferSettingsItem, setTransferSettingsIte
                 <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} />
+                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem}/>
             </TabPanel>
         </Box>
             </div>

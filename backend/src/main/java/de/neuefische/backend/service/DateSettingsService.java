@@ -2,6 +2,7 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.BackendApplication;
 import de.neuefische.backend.model.TastyDateItem;
+import de.neuefische.backend.model.settingsSubModel.UserRestaurantVote;
 import de.neuefische.backend.model.settingsSubModel.UserTimeVote;
 import de.neuefische.backend.repository.DateSettingsRepository;
 import org.apache.juli.logging.Log;
@@ -31,41 +32,70 @@ public class DateSettingsService {
     }
 
     public Optional<TastyDateItem> addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
+
+        //Optional - existiert das SettingsItem? Fehlermeldung
+
+        //checking and updating the List of the UserVotes for the DateTimes
         if (dateSettingsRepo.findById(tastyDateId).isEmpty()) {
             return Optional.empty();
         }
-        LOG.info(timeVote);
         TastyDateItem test = dateSettingsRepo.findById(tastyDateId).get();
-        LOG.info(test);
         List<UserTimeVote> tempList = test.getTimeVotes();
-        LOG.info(tempList);
         tempList.add(timeVote);
-        LOG.info(tempList);
         test.setTimeVotes(tempList);
-        LOG.info(tempList);
         dateSettingsRepo.save(test);
 
-
-
-        boolean[] checksVoteItem = timeVote.getVotedTimes();
+        //generate sums of voteResult
+        boolean[] checksVoteItem = timeVote.getVotedDateTimesFromOneUser();
         int [] amount = new int[checksVoteItem.length];
 
         for (UserTimeVote item:tempList) {
-            boolean[] checksItem = item.getVotedTimes();
+            boolean[] checksItem = item.getVotedDateTimesFromOneUser();
             for (int i=0; i < amount.length; i++) {
                 if (checksItem[i]) {
                     amount[i]++;
                 }
                 }
             }
-        test.setVoteResults(amount);
+        test.setVotingResultsForOneDate(amount);
         dateSettingsRepo.save(test);
 
         return dateSettingsRepo.findById(tastyDateId);
     }
-}
+
+    public Optional<TastyDateItem> addVoteRestaurantItemToTastyDate(UserRestaurantVote restaurantVote, String tastyDateId) {
 
         //Optional - existiert das SettingsItem? Fehlermeldung
+
+        //checking and updating the List of the UserVotes for the DateTimes
+        if (dateSettingsRepo.findById(tastyDateId).isEmpty()) {
+            return Optional.empty();
+        }
+        TastyDateItem test = dateSettingsRepo.findById(tastyDateId).get();
+        List<UserRestaurantVote> tempList = test.getRestaurantVotes();
+        tempList.add(restaurantVote);
+        test.setRestaurantVotes(tempList);
+        dateSettingsRepo.save(test);
+
+        //generate sums of voteResult
+        boolean[] checksVoteItem = restaurantVote.getVotedRestaurantsFromOneUser();
+        int [] amount = new int[checksVoteItem.length];
+
+        for (UserRestaurantVote item:tempList) {
+            boolean[] checksItem = item.getVotedRestaurantsFromOneUser();
+            for (int i=0; i < amount.length; i++) {
+                if (checksItem[i]) {
+                    amount[i]++;
+                }
+            }
+        }
+        test.setVotingResultsForOneRestaurant(amount);
+        dateSettingsRepo.save(test);
+
+        return dateSettingsRepo.findById(tastyDateId);
+    }
+
+}
 
 
 

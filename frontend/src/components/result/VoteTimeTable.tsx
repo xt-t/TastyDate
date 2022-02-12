@@ -23,31 +23,31 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
     const {token} = useContext(AuthContext);
 
     const [userName, setUserName] = useState<string>("");
-    const [checked, setChecked] = useState<boolean[]>(Array(transferSettingsItem.infoDateTimes.length).fill(false));
+    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(transferSettingsItem.infoDateTimes.length).fill(false));
 
     const [rowsUserTimeVote, setRowsUserTimeVote] = useState<UserTimeVote[]>([]);
     const [countersVotesPerTime, setCountersVotesPerTime] = useState<number[]>([]);
 
-    const handleChange = (index: number) => {
-        const newChecked = [...checked];
+    const checkForDateTime = (index: number) => {
+        const newChecked = [...checkDateTime];
         newChecked[index] = !newChecked[index];
-        setChecked(newChecked);
+        setCheckDateTime(newChecked);
     }
 
-    console.log(checked);
+    console.log(checkDateTime);
 
     const addUserVote = () => {
         if (userName !== "") {
             const tastyDateId = transferSettingsItem.tastyDateId;
             const timeVote = {
                 displayedName: userName,
-                votedTimes: checked
+                votesPerDateTimeFromOneUser: checkDateTime
             }
             updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
                 .then((response) => {
                     setTransferSettingsItem(response.data);
                     setRowsUserTimeVote(response.data.timeVotes);
-                    setCountersVotesPerTime(response.data.voteResults)
+                    setCountersVotesPerTime(response.data.votingResultsForOneDate)
                 })
                 .catch((err) => {
                     console.error(err.message);
@@ -57,7 +57,6 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
 
 
     return (
-        <div>
             <Card>
                 <CardContent>
                     {/*Description*/}
@@ -88,15 +87,15 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
 
                         {/*//VoteOneUserPerRow*/}
                         {rowsUserTimeVote.map((timeVote, index) => (
-                            <React.Fragment>
+                            <React.Fragment key={index}>
 
                                 <div>
                                     {timeVote.displayedName}
                                 </div>
 
 
-                                {timeVote.votedTimes.map((voteTime, index) => (
-                                    <React.Fragment>
+                                {timeVote.votesPerDateTimeFromOneUser.map((voteTime, index) => (
+                                    <React.Fragment key={index}>
                                         {voteTime ?
                                             (<div><CheckIcon></CheckIcon></div>)
                                             :
@@ -120,9 +119,9 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                                         <div key={index}>{counterVotesPerTime}</div>
 
                                     ))}
-
-
                                     <div></div>
+
+
                                     <TextField value={userName || ""}
                                                onChange={(event) => {
                                                    setUserName(event.target.value)
@@ -152,10 +151,10 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
 
                         {/*User Input*/}
                         {transferSettingsItem.infoDateTimes.map((itemTime, index) => (
-                            <div>
+                            <div key={index}>
                                 <Checkbox
-                                    checked={checked[index]}
-                                    onChange={(event) => handleChange(index)}
+                                    checked={checkDateTime[index]}
+                                    onChange={(event) => checkForDateTime(index)}
                                     inputProps={{'aria-label': 'controlled'}}
                                 />
                             </div>
@@ -166,6 +165,5 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
 
                 </CardContent>
             </Card>
-        </div>
     );
 }

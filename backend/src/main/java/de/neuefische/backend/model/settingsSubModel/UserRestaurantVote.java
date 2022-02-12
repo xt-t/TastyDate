@@ -9,8 +9,9 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class UserTimeVote {
+public class UserRestaurantVote {
     @Id
     private String displayedName;
-    private boolean[] votedDateTimesFromOneUser;
+    private boolean[] votedRestaurantsFromOneUser;
 }
+
