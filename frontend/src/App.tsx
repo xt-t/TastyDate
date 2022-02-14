@@ -13,13 +13,13 @@ import {TastyDateItem} from "./models/result/TastyDateItem";
 
 function App() {
     const [transferSettingsItem, setTransferSettingsItem] = useState<TastyDateItem>(
-        {tastyDateId: "620574685446918038a34c0a" , "infoDate": {
+        {tastyDateId: "620574685446918038a34c0a" , "infoTastyDate": {
                 "pickedTastyDateName": "Test",
                 "pickedLocation": "Köln",
                 "pickedNotes": "Keine",
                 "pickedChosenDisplayName": "Bernd"
             },
-            "infoDateTimes": [{
+            "infoTastyDateTimes": [{
                 "id": 1,
                 "pickedDate": "Thu, Feb 10, 2022",
                 "pickedStart": "14:33",

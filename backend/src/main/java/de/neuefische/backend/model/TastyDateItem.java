@@ -1,6 +1,10 @@
 package de.neuefische.backend.model;
 
-import de.neuefische.backend.model.settingsSubModel.*;
+import de.neuefische.backend.model.settingsSubModel.appointmentsettings.GeneralInfoDateItem;
+import de.neuefische.backend.model.settingsSubModel.appointmentsettings.RestaurantItem;
+import de.neuefische.backend.model.settingsSubModel.appointmentsettings.TimeItem;
+import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
+import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,8 +25,8 @@ public class TastyDateItem {
     @Id
     private String tastyDateId;
 
-    private GeneralInfoDateItem infoDate;
-    private TimeItem[] infoDateTimes;
+    private GeneralInfoDateItem infoTastyDate;
+    private TimeItem[] infoTastyDateTimes;
     private RestaurantItem[] infoRestaurantData;
     private List<UserTimeVote> timeVotes;
     private List<UserRestaurantVote> restaurantVotes;

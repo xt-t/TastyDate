@@ -1,14 +1,16 @@
-import {dataInfoDate} from "../appointmentsettings/DataInfoDate";
-import {dataPickedTime} from "../appointmentsettings/DataPickedTime";
-import {dataPickedRestaurant} from "../appointmentsettings/DataPickedRestaurant";
+import {GeneralInfoDateItem} from "../appointmentsettings/GeneralInfoDateItem";
 import {UserTimeVote} from "./UserTimeVote";
 import {UserRestaurantVote} from "./UserRestaurantVote";
+import {RestaurantItem} from "../appointmentsettings/RestaurantItem";
+import {TimeItem} from "../appointmentsettings/TimeItem";
+
 
 export interface TastyDateItem {
     tastyDateId: string,
-    infoDate: dataInfoDate,
-    infoDateTimes: dataPickedTime[],
-    infoRestaurantData: dataPickedRestaurant[],
+
+    infoTastyDate: GeneralInfoDateItem,
+    infoTastyDateTimes: TimeItem[],
+    infoRestaurantData: RestaurantItem[],
     timeVotes: UserTimeVote[],
     restaurantVotes: UserRestaurantVote[],
     votingResultsForOneDate: number[]

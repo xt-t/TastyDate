@@ -2,7 +2,6 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
-import SearchIcon from '@mui/icons-material/Search';
 import CategoryMenu from "./Subcomponents/CategoryMenu";
 import TextField from "@mui/material/TextField";
 import RestaurantRating from "./Subcomponents/RestaurantRating";
@@ -36,7 +35,7 @@ export default function AppointThreeAddRestaurantManually({
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}> <AddIcon/> Manual input</Button>
+            Add restaurants  <Button variant="contained" onClick={handleClickOpen}> <AddIcon/> manually</Button>
 
             <BootstrapDialog
                 onClose={handleClose}

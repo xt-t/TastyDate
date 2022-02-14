@@ -1,5 +1,5 @@
-import {dataPickedRestaurant} from "./DataPickedRestaurant";
-import {dataPickedTime} from "./DataPickedTime";
+import {RestaurantItem} from "./RestaurantItem";
+import {TimeItem} from "./TimeItem";
 
 export interface AppointOneType {
         tastyDateName: string
@@ -21,7 +21,7 @@ export interface AppointOneType {
             setEndTime: Function,
             idPickedTime: number
             setIdPickedTime: Function
-            dataDateTimes: dataPickedTime[]
+            dataDateTimes: TimeItem[]
             setDataDateTimes: Function
     }
 
@@ -40,6 +40,6 @@ export interface AppointOneType {
             setCity: Function
             idPickedRestaurant: number
             setIdPickedRestaurant: Function
-            restaurantData: dataPickedRestaurant[]
+            restaurantData: RestaurantItem[]
             setRestaurantData: Function
     }

@@ -1,15 +1,16 @@
 import axios from 'axios'
+import {GeneralInfoDateItem} from "../models/appointmentsettings/GeneralInfoDateItem";
+import {RestaurantItem} from "../models/appointmentsettings/RestaurantItem";
+import {TimeItem} from "../models/appointmentsettings/TimeItem";
+import {LoginData, RegisterData} from "../models/loginregister/loginregister";
 import {UserTimeVote} from "../models/result/UserTimeVote";
-import {LoginData, RegisterData} from "../models/loginregister/loginregister"
-import {dataInfoDate} from "../models/appointmentsettings/DataInfoDate";
-import {dataPickedTime} from "../models/appointmentsettings/DataPickedTime";
-import {dataPickedRestaurant} from "../models/appointmentsettings/DataPickedRestaurant";
 import {UserRestaurantVote} from "../models/result/UserRestaurantVote";
 
+
 export interface DateSettingsItemDTO {
-    infoDate: dataInfoDate,
-    infoDateTimes: dataPickedTime[],
-    infoRestaurantData: dataPickedRestaurant[]
+    infoTastyDate: GeneralInfoDateItem,
+    infoTastyDateTimes: TimeItem[],
+    infoRestaurantData: RestaurantItem[]
 }
 
 export const loginPost = (login:LoginData) : Promise<string> =>

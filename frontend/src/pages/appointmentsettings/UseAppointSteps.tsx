@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {dataPickedTime} from "../../models/appointmentsettings/DataPickedTime";
-import {dataPickedRestaurant} from "../../models/appointmentsettings/DataPickedRestaurant";
+import {TimeItem} from "../../models/appointmentsettings/TimeItem";
+import {RestaurantItem} from "../../models/appointmentsettings/RestaurantItem";
 
 export default function UseAppointSteps() {
 
@@ -15,7 +15,7 @@ export default function UseAppointSteps() {
     const [startTime, setStartTime] = useState<Date | null>(null);
     const [endTime, setEndTime] = useState<Date | null>(null);
     const [idPickedTime, setIdPickedTime] = useState<number>(1);
-    const [dataDateTimes, setDataDateTimes] = useState<dataPickedTime[]>([]);
+    const [dataDateTimes, setDataDateTimes] = useState<TimeItem[]>([]);
 
     //AppointThree
     const [category, setCategory] = useState<string>("");
@@ -25,7 +25,7 @@ export default function UseAppointSteps() {
     const [rating, setRating] = useState<number>(0);
     const [price, setPrice] = useState<number>(0);
     const [idPickedRestaurant, setIdPickedRestaurant] = useState<number>(1);
-    const [restaurantData, setRestaurantData] = useState<dataPickedRestaurant[]>([]);
+    const [restaurantData, setRestaurantData] = useState<RestaurantItem[]>([]);
 
     const handleDelete = () => {
         setTastyDateName("");

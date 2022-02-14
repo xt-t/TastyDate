@@ -2,8 +2,8 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.BackendApplication;
 import de.neuefische.backend.model.TastyDateItem;
-import de.neuefische.backend.model.settingsSubModel.UserRestaurantVote;
-import de.neuefische.backend.model.settingsSubModel.UserTimeVote;
+import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
+import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
 import de.neuefische.backend.repository.DateSettingsRepository;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
@@ -25,9 +25,12 @@ public class DateSettingsService {
     }
 
     public TastyDateItem addDateSettings(TastyDateItem settingsItem) {
+        LOG.info(settingsItem);
         UUID uuid = UUID.randomUUID();
         settingsItem.setTastyDateId(uuid.toString());
         settingsItem.setTimeVotes(new ArrayList<>());
+        settingsItem.setRestaurantVotes(new ArrayList<>());
+        LOG.info(settingsItem);
         return dateSettingsRepo.save(settingsItem);
     }
 
@@ -41,16 +44,19 @@ public class DateSettingsService {
         }
         TastyDateItem test = dateSettingsRepo.findById(tastyDateId).get();
         List<UserTimeVote> tempList = test.getTimeVotes();
+        LOG.info(tempList);
         tempList.add(timeVote);
+        LOG.info(tempList);
         test.setTimeVotes(tempList);
+        LOG.info(test);
         dateSettingsRepo.save(test);
 
         //generate sums of voteResult
-        boolean[] checksVoteItem = timeVote.getVotedDateTimesFromOneUser();
+        boolean[] checksVoteItem = timeVote.getVotesPerDateTimeFromOneUser();
         int [] amount = new int[checksVoteItem.length];
 
         for (UserTimeVote item:tempList) {
-            boolean[] checksItem = item.getVotedDateTimesFromOneUser();
+            boolean[] checksItem = item.getVotesPerDateTimeFromOneUser();
             for (int i=0; i < amount.length; i++) {
                 if (checksItem[i]) {
                     amount[i]++;
@@ -78,11 +84,11 @@ public class DateSettingsService {
         dateSettingsRepo.save(test);
 
         //generate sums of voteResult
-        boolean[] checksVoteItem = restaurantVote.getVotedRestaurantsFromOneUser();
+        boolean[] checksVoteItem = restaurantVote.getVotesPerRestaurantFromOneUser();
         int [] amount = new int[checksVoteItem.length];
 
         for (UserRestaurantVote item:tempList) {
-            boolean[] checksItem = item.getVotedRestaurantsFromOneUser();
+            boolean[] checksItem = item.getVotesPerRestaurantFromOneUser();
             for (int i=0; i < amount.length; i++) {
                 if (checksItem[i]) {
                     amount[i]++;

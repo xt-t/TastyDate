@@ -1,4 +1,4 @@
-package de.neuefische.backend.model.settingsSubModel;
+package de.neuefische.backend.model.settingsSubModel.appointmentsettings;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

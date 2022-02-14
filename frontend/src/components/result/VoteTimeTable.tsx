@@ -21,10 +21,9 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
 
 
     const {token} = useContext(AuthContext);
-
+    console.log(transferSettingsItem);
+    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(transferSettingsItem.infoTastyDateTimes.length).fill(false));
     const [userName, setUserName] = useState<string>("");
-    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(transferSettingsItem.infoDateTimes.length).fill(false));
-
     const [rowsUserTimeVote, setRowsUserTimeVote] = useState<UserTimeVote[]>([]);
     const [countersVotesPerTime, setCountersVotesPerTime] = useState<number[]>([]);
 
@@ -46,6 +45,7 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
             updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
                 .then((response) => {
                     setTransferSettingsItem(response.data);
+                    console.log(transferSettingsItem);
                     setRowsUserTimeVote(response.data.timeVotes);
                     setCountersVotesPerTime(response.data.votingResultsForOneDate)
                 })
@@ -55,21 +55,20 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
         }
     }
 
-
     return (
             <Card>
                 <CardContent>
                     {/*Description*/}
-                    <div>{transferSettingsItem.infoDate.pickedTastyDateName} {transferSettingsItem.infoDate.pickedLocation} {transferSettingsItem.infoDate.pickedChosenDisplayName}</div>
 
+                    <div>{transferSettingsItem.infoTastyDate.pickedTastyDateName} {transferSettingsItem.infoTastyDate.pickedLocation} {transferSettingsItem.infoTastyDate.pickedChosenDisplayName}</div>
                     {/*TableHeader*/}
                     <div className="grid-container" style={{
                         display: "grid",
-                        gridTemplateColumns: `repeat(${transferSettingsItem.infoDateTimes.length + 2}, 1fr)`
+                        gridTemplateColumns: `repeat(${transferSettingsItem.infoTastyDateTimes.length + 2}, 1fr)`
                     }}>
                         <div className="grid-item"></div>
 
-                        {transferSettingsItem.infoDateTimes.map((itemTime, index) => (
+                        {transferSettingsItem.infoTastyDateTimes.map((itemTime, index) => (
                             <div key={index} className="grid-item">
                                 <div className="th-firstrow">
                                     {itemTime.pickedDate}
@@ -150,7 +149,7 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                         }
 
                         {/*User Input*/}
-                        {transferSettingsItem.infoDateTimes.map((itemTime, index) => (
+                        {transferSettingsItem.infoTastyDateTimes.map((itemTime, index) => (
                             <div key={index}>
                                 <Checkbox
                                     checked={checkDateTime[index]}

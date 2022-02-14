@@ -15,14 +15,15 @@ import {AuthContext} from "../../context/AuthProvider";
 interface VoteRestaurantTableProps {
     transferSettingsItem: TastyDateItem
     setTransferSettingsItem: Function
+    userName: string
+    setUserName: Function
 }
 
-export default function VoteRestaurantTable({transferSettingsItem, setTransferSettingsItem}: VoteRestaurantTableProps) {
+export default function VoteRestaurantTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName}: VoteRestaurantTableProps) {
 
     const {token} = useContext(AuthContext);
 
     const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(3).fill(false));
-    const [userName, setUserName] = useState<string>("");
     const [countersVotesPerRestaurant, setCountersVotesPerRestaurant] = useState<number[]>([]);
 
 
@@ -70,7 +71,7 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                     <div className="imgBx">
                         <img src={image} alt="A pic would be nicer" className="picture"></img>
                     </div>
-                    <h3>Card One</h3>
+                    <h3>sad</h3>
                     <ArrowDropDownIcon className="arrow"/>
                     <div className="content">
                         <Box
@@ -98,11 +99,6 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                         <p>
                         Category
                         Address
-                        Opening hours
-                        Website
-                        Menu
-                        Phone number
-                            Recommended dishes:
                         </p>
                     </div>
                 </div>

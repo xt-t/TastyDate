@@ -1,4 +1,4 @@
-export interface dataPickedTime {
+export interface TimeItem {
     id: number,
     pickedDate: string,
     pickedStart: string,

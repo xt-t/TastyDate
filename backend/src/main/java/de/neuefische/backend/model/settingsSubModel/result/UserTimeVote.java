@@ -1,4 +1,4 @@
-package de.neuefische.backend.model.settingsSubModel;
+package de.neuefische.backend.model.settingsSubModel.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,5 +12,5 @@ import org.springframework.data.annotation.Id;
 public class UserTimeVote {
     @Id
     private String displayedName;
-    private boolean[] votedDateTimesFromOneUser;
+    private boolean[] votesPerDateTimeFromOneUser;
 }

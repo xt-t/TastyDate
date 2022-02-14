@@ -1,8 +1,8 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.model.TastyDateItem;
-import de.neuefische.backend.model.settingsSubModel.UserRestaurantVote;
-import de.neuefische.backend.model.settingsSubModel.UserTimeVote;
+import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
+import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
 import de.neuefische.backend.service.DateSettingsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-export interface dataPickedRestaurant {
+export interface RestaurantItem {
     id: number,
     pickedCategory: string,
     pickedPostcode: number,

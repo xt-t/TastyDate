@@ -69,13 +69,27 @@
 }
 
 .formRestaurant {
-  width: 400px;
+  width: 24rem;
   margin: 10px;
-  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
 
+.favouritesRowButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2rem;
+  justify-content: space-between;
+}
+
+.favouriteButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
 }
 
 .addElements {
@@ -83,9 +97,8 @@
 }
 
 .menuIcons {
-  width: 300px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   margin: 10px;
 }

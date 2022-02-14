@@ -1,10 +1,10 @@
 import * as React from "react";
 import {Button, Card, CardContent} from "@mui/material";
-import {dataPickedRestaurant} from "../../../models/appointmentsettings/DataPickedRestaurant";
+import {RestaurantItem} from "../../../models/appointmentsettings/RestaurantItem";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 interface AppointThreeDisplayRestaurantProps {
-    restaurantData: dataPickedRestaurant[]
+    restaurantData: RestaurantItem[]
     deleteRestaurantCard: Function
     deleteAllRestaurantCards: Function
 }
