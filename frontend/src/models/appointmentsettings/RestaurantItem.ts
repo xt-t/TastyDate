@@ -1,9 +1,9 @@
 export interface RestaurantItem {
     id: number,
-    pickedCategory: string,
-    pickedPostcode: number,
-    pickedCity: string,
     pickedRestaurantName: string,
+    pickedCategory: string,
     pickedRating: number,
-    pickedPrice: number
+    pickedPrice: number,
+    pickedPostcode: number,
+    pickedCity: string
 }
