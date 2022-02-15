@@ -1,0 +1,16 @@
+export interface NewRestaurantCardType{
+    id: number
+    setId: Function
+    restaurantName: string
+    setRestaurantName: Function
+    category: string
+    setCategory: Function
+    rating: number
+    setRating: Function
+    price: number
+    setPrice: Function
+    postcode: number
+    setPostcode: Function
+    city: string
+    setCity: Function
+}

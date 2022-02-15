@@ -30,6 +30,7 @@ export default function AppointThree(
             }
             appointThree.setRestaurantData([...appointThree.restaurantData, newRestaurantData]);
             appointThree.setIdPickedRestaurant(appointThree.idPickedRestaurant + 1);
+            resetDataInput();
         }
     }
 
