@@ -6,6 +6,8 @@ import DisplayMenus from "../../components/general/DisplayMenus";
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import VoteTimeTable from '../../components/result/VoteTimeTable';
 import {a11yProps, TabPanel} from "./ResultTab";
+import {useState} from "react";
+import VoteRestaurantTable from "../../components/result/VoteRestaurantTable";
 
 
 interface VoteResultProps {
@@ -15,6 +17,7 @@ interface VoteResultProps {
 
 export default function VoteResult({transferSettingsItem, setTransferSettingsItem}:VoteResultProps) {
     const [value, setValue] = React.useState(0);
+    const [userName, setUserName] = useState<string>("");
 
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -34,10 +37,10 @@ export default function VoteResult({transferSettingsItem, setTransferSettingsIte
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem}/>
+                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                {/*<VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName}/>*/}
+                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName}/>
             </TabPanel>
         </Box>
             </div>

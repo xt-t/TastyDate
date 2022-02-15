@@ -39,7 +39,8 @@ function App() {
             "timeVotes": [],
             "restaurantVotes": [],
             "votingResultsForOneDate": [],
-            "votingResultsForOneRestaurant": []});
+            "positiveVotingResultsForOneRestaurant": [],
+            "negativeVotingResultsForOneRestaurant": []});
 
     return (
         <div className="App">

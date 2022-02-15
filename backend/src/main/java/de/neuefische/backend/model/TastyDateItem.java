@@ -31,5 +31,6 @@ public class TastyDateItem {
     private List<UserTimeVote> timeVotes;
     private List<UserRestaurantVote> restaurantVotes;
     private int[] votingResultsForOneDate;
-    private int[] votingResultsForOneRestaurant;
+    private int[] positiveVotingResultsForOneRestaurant;
+    private int[] negativeVotingResultsForOneRestaurant;
     }

@@ -45,7 +45,7 @@ border: 1px solid black;
 
 .container .resultcard:hover
 {
-  height: 420px;
+  height: 350px;
   .arrow {
     visibility: hidden;
   }
@@ -85,4 +85,9 @@ border: 1px solid black;
 .applyRestaurantVote {
   display: flex;
   justify-content: flex-end;
+}
+
+.checkboxAndResults {
+  display: flex;
+  flex-direction: column;
 }

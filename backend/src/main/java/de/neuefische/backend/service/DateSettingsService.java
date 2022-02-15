@@ -85,17 +85,21 @@ public class DateSettingsService {
 
         //generate sums of voteResult
         boolean[] checksVoteItem = restaurantVote.getVotesPerRestaurantFromOneUser();
-        int [] amount = new int[checksVoteItem.length];
-
+        int [] positiveAmount = new int[checksVoteItem.length];
+        int [] negativeAmount = new int[checksVoteItem.length];
         for (UserRestaurantVote item:tempList) {
             boolean[] checksItem = item.getVotesPerRestaurantFromOneUser();
-            for (int i=0; i < amount.length; i++) {
+            for (int i=0; i < checksVoteItem.length; i++) {
                 if (checksItem[i]) {
-                    amount[i]++;
+                    positiveAmount[i]++;
+                }
+                else {
+                    negativeAmount[i]++;
                 }
             }
         }
-        test.setVotingResultsForOneRestaurant(amount);
+        test.setPositiveVotingResultsForOneRestaurant(positiveAmount);
+        test.setNegativeVotingResultsForOneRestaurant(negativeAmount);
         dateSettingsRepo.save(test);
 
         return dateSettingsRepo.findById(tastyDateId);

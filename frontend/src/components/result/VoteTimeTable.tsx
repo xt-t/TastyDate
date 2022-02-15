@@ -15,15 +15,16 @@ import {updateTastyDateWithVoteTimeItem} from "../../service/tastydate-api-servi
 interface VoteTimeTableProps {
     transferSettingsItem: TastyDateItem
     setTransferSettingsItem: Function
+    userName: string
+    setUserName: Function
 }
 
-export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem}: VoteTimeTableProps) {
+export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName}: VoteTimeTableProps) {
 
 
     const {token} = useContext(AuthContext);
     console.log(transferSettingsItem);
     const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(transferSettingsItem.infoTastyDateTimes.length).fill(false));
-    const [userName, setUserName] = useState<string>("");
     const [rowsUserTimeVote, setRowsUserTimeVote] = useState<UserTimeVote[]>([]);
     const [countersVotesPerTime, setCountersVotesPerTime] = useState<number[]>([]);
 
@@ -93,8 +94,8 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                                 </div>
 
 
-                                {timeVote.votesPerDateTimeFromOneUser.map((voteTime, index) => (
-                                    <React.Fragment key={index}>
+                                {timeVote.votesPerDateTimeFromOneUser.map((voteTime, innerindex) => (
+                                    <React.Fragment key={innerindex}>
                                         {voteTime ?
                                             (<div><CheckIcon></CheckIcon></div>)
                                             :
@@ -133,7 +134,6 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                                 </React.Fragment>
 
                             )
-
                             :
                             (<React.Fragment>
                                 <TextField value={userName || ""}

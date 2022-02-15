@@ -14,5 +14,6 @@ export interface TastyDateItem {
     timeVotes: UserTimeVote[],
     restaurantVotes: UserRestaurantVote[],
     votingResultsForOneDate: number[]
-    votingResultsForOneRestaurant: number[]
+    positiveVotingResultsForOneRestaurant: number[]
+    negativeVotingResultsForOneRestaurant: number[]
 }

@@ -7,6 +7,8 @@ import {useContext, useState} from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {Box, Button, Rating, styled, TextField} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import {
     updateTastyDateWithVoteRestaurantItem,
 } from "../../service/tastydate-api-service";
@@ -23,12 +25,10 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
 
     const {token} = useContext(AuthContext);
 
-    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(3).fill(false));
-    const [countersVotesPerRestaurant, setCountersVotesPerRestaurant] = useState<number[]>([]);
+    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(transferSettingsItem.infoRestaurantData.length).fill(false));
+    const [positiveVotesPerTime, setPositiveVotesPerTime] = useState<number[]>([]);
+    const [negativeVotesPerTime, setnegativeVotesPerTime] = useState<number[]>([]);
 
-
-    const ratingValue = 2;
-    const price = 1;
 
     const StyledRating = styled(Rating)({
         '& .MuiRating-iconFilled': {
@@ -55,7 +55,9 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
             updateTastyDateWithVoteRestaurantItem(tastyDateId, restaurantVote, token)
                 .then((response) => {
                     setTransferSettingsItem(response.data);
-                    setCountersVotesPerRestaurant(response.data.votingResultsForOneRestaurant)
+                    console.log(response.data)
+                    setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
+                    setnegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant)
                 })
                 .catch((err) => {
                     console.error(err.message);
@@ -67,19 +69,24 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
         <body>
 
             <div className="container">
+                {transferSettingsItem.infoRestaurantData.map((restaurant,index) => (
+                    <React.Fragment>
                 <div className="resultcard">
                     <div className="imgBx">
                         <img src={image} alt="A pic would be nicer" className="picture"></img>
                     </div>
-                    <h3>sad</h3>
+                    <h3>{restaurant.pickedRestaurantName}</h3>
                     <ArrowDropDownIcon className="arrow"/>
                     <div className="content">
+                        <p>
+                            {restaurant.pickedCategory}
+                        </p>
                         <Box
                             sx={{
                                 '& > legend': { mt: 2 },
                             }}
                         >
-                        <Rating name="read-only" value={ratingValue} readOnly />
+                        <Rating name="read-only" value={restaurant.pickedRating} readOnly />
                         </Box>
                             <Box
                                 sx={{
@@ -89,7 +96,7 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                                 <StyledRating
                                     name="read-only"
                                     readOnly
-                                    value={price}
+                                    value={restaurant.pickedPrice}
                                     precision={0.5}
                                     max={3}
                                     icon={<EuroIcon fontSize="inherit"/>}
@@ -97,37 +104,38 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                                 />
                             </Box>
                         <p>
-                        Category
-                        Address
+                            {restaurant.pickedPostcode} {restaurant.pickedCity}
                         </p>
                     </div>
                 </div>
                 <div className="checkboxAndResults">
                 <Checkbox
-                    checked={checkRestaurants[1]}
-                    onChange={(event) => handleChange(1)}
+                    checked={checkRestaurants[index]}
+                    onChange={(event) => handleChange(index)}
                     inputProps={{'aria-label': 'controlled'}}
                 />
-                    {(countersVotesPerRestaurant.length !==0) ?
+                    {(positiveVotesPerTime.length !==0) ?
                         (
-                            <React.Fragment>
-                                {countersVotesPerRestaurant.map((counterVotesPerRestaurant, index) => (
-
-                                    <div key={index}>{counterVotesPerRestaurant}</div>
-
-                                ))}</React.Fragment>
+                            <div>
+                                <CloseIcon></CloseIcon>{negativeVotesPerTime[index]} <CheckIcon></CheckIcon>{positiveVotesPerTime[index]}
+                            </div>
                         )
                         :
                         (<></>)
                     }
                 </div>
-
+                    </React.Fragment>
+                ))}
             </div>
             <div className="applyRestaurantVote">
+                {(userName==="")? (
             <TextField value={userName || ""}
                        onChange={(event) => {
                            setUserName(event.target.value)
                        }}>Username</TextField>
+                    )
+                    :
+                    (<span>{userName}</span>)}
             <Button className="voteRestaurantButton" onClick={addUserVote}>Apply vote</Button>
             </div>
             </body>
