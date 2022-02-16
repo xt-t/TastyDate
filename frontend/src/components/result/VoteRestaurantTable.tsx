@@ -1,168 +1,143 @@
-import {Button, CardContent, TextField} from '@mui/material';
-import Card from '@mui/material/Card';
-import {DataCompleteDateInfos, transferUserTimeVote, UserTimeVote} from "../../service/tastydate-api-service";
+import * as React from 'react';
+import {TastyDateItem} from "../../models/result/TastyDateItem";
 import "./Tables.scss"
-import Checkbox from '@mui/material/Checkbox';
+import image from "./dummypic.jpg";
+import Checkbox from "@mui/material/Checkbox";
 import {useContext, useState} from "react";
-import {AuthContext} from "../../context/AuthProvider";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import {Box, Button, Rating, styled, TextField} from "@mui/material";
+import EuroIcon from "@mui/icons-material/Euro";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import React from 'react';
+import {
+    updateTastyDateWithVoteRestaurantItem,
+} from "../../service/tastydate-api-service";
+import {AuthContext} from "../../context/AuthProvider";
 
 interface VoteRestaurantTableProps {
-    transferSettingsItem: DataCompleteDateInfos
+    transferSettingsItem: TastyDateItem
+    setTransferSettingsItem: Function
+    userName: string
+    setUserName: Function
 }
 
-export default function VoteRestaurantTable({transferSettingsItem}: VoteRestaurantTableProps) {
+export default function VoteRestaurantTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName}: VoteRestaurantTableProps) {
 
     const {token} = useContext(AuthContext);
 
-    const [userName, setUserName] = useState<string>("");
-        const [checked, setChecked] = useState<boolean[]>([false]);
+    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(transferSettingsItem.infoRestaurantData.length).fill(false));
+    const [positiveVotesPerTime, setPositiveVotesPerTime] = useState<number[]>([]);
+    const [negativeVotesPerTime, setnegativeVotesPerTime] = useState<number[]>([]);
 
-        const [rowUserTimeVote, setRowUserTimeVote] = useState<UserTimeVote[]>([]);
 
-        const handleChange = (index: number) => {
-            const newChecked=[...checked];
-            newChecked[index]=!newChecked[index];
-            setChecked(newChecked);
+    const StyledRating = styled(Rating)({
+        '& .MuiRating-iconFilled': {
+            color: 'hsl(222, 100%, 50%)',
+        },
+        '& .MuiRating-iconHover': {
+            color: 'hsl(222, 100%, 41%)',
+        },
+    });
+
+    const handleChange = (index: number) => {
+        const newChecked = [...checkRestaurants];
+        newChecked[index] = !newChecked[index];
+        setCheckRestaurants(newChecked);
+    }
+
+    const addUserVote = () => {
+        if (userName !== "") {
+            const tastyDateId = transferSettingsItem.tastyDateId;
+            const restaurantVote = {
+                displayedName: userName,
+                votesPerRestaurantFromOneUser: checkRestaurants
             }
+            updateTastyDateWithVoteRestaurantItem(tastyDateId, restaurantVote, token)
+                .then((response) => {
+                    setTransferSettingsItem(response.data);
+                    console.log(response.data)
+                    setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
+                    setnegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant)
+                })
+                .catch((err) => {
+                    console.error(err.message);
+                })
+        }
+    }
 
-            const addUserVote = () => {
-                if (userName !== "") {
-                    const newUserVote = {
-                        displayedName: userName,
-                        votedTimes: checked
-                    }
-                    transferUserTimeVote(newUserVote, token)
-                        .then((response) => {
-                            setRowUserTimeVote([...rowUserTimeVote, response.data])
-                        })
-                        .catch((err) => {
-                            console.error(err.message);
-                        })
-                }
-            }
-
-            if (rowUserTimeVote.length === 0) {
     return (
-        <div>
-            <Card>
-                <CardContent>
-                    <div>{transferSettingsItem.infoDate.pickedTastyDateName} {transferSettingsItem.infoDate.pickedLocation} {transferSettingsItem.infoDate.pickedChosenDisplayName}</div>
+        <body>
 
-                    <div className="grid-container" style={{display: "grid", gridTemplateColumns: `repeat(${transferSettingsItem.infoDateTimes.length+2}, 1fr)`}}>
-                        <div className="grid-item"></div>
-
-                        {transferSettingsItem.infoDateTimes.map((itemTime, index) => (
-                        <div key={index} className="grid-item">
-                            <div className="th-firstrow">
-                             {itemTime.pickedDate}
-                            </div>
-                            <div className="th-secondrow">
-                            {itemTime.pickedStart}
-                            <span> - </span>
-                            {itemTime.pickedEnd}
-                            </div>
-                        </div>
-                    ))
-                        }
-
-                        <div className="grid-item"></div>
-                        <TextField className="userName" value={userName||""}
-                                   onChange={(event) => {
-                                       setUserName(event.target.value)}}>Username</TextField>
-
-
-                            {transferSettingsItem.infoDateTimes.map((itemTime, index) => (
-                                <div>
-                                <Checkbox
-                                    checked={checked[index]|| false}
-                                    onChange={(event)=>handleChange(index)}
-                                        inputProps={{ 'aria-label': 'controlled' }}
-                                />
-                                </div>
-                            ))
-                        }
-                        <Button onClick={addUserVote}>Add</Button>
-                         </div>
-
-                </CardContent>
-            </Card>
-        </div>
-    );
-            }
-            else {
-                return(
-                    <div>
-                        <Card>
-                            <CardContent>
-                                <div>{transferSettingsItem.infoDate.pickedTastyDateName} {transferSettingsItem.infoDate.pickedLocation} {transferSettingsItem.infoDate.pickedChosenDisplayName}</div>
-
-                                <div className="grid-container" style={{display: "grid", gridTemplateColumns: `repeat(${transferSettingsItem.infoDateTimes.length+2}, 1fr)`}}>
-                                    <div className="grid-item"></div>
-
-                                    {transferSettingsItem.infoDateTimes.map((itemTime, index) => (
-                                        <div key={index} className="grid-item">
-                                            <div className="th-firstrow">
-                                                {itemTime.pickedDate}
-                                            </div>
-                                            <div className="th-secondrow">
-                                                {itemTime.pickedStart}
-                                                <span> - </span>
-                                                {itemTime.pickedEnd}
-                                            </div>
-                                        </div>
-                                    ))
-                                    }
-                                    <div className="grid-item"></div>
-
-                                    {rowUserTimeVote.map((timeVote, index) => (
-                                        <React.Fragment>
-
-                                            <div>
-                                            {timeVote.displayedName}
-                                        </div>
-
-
-                                            {timeVote.votedTimes.map((voteTime, index) => (
-                                                <React.Fragment>
-                                            {voteTime?
-                                                (<div><CheckIcon></CheckIcon></div>)
-                                                :
-                                                (<div><CloseIcon></CloseIcon></div>)
-                                            }
-                                                </React.Fragment>
-                                            ))}
-                                            <div className="grid-item"></div>
-                                            </React.Fragment>
-
-                                    ))}
-
-
-                                    <TextField value={userName||""}
-                                               onChange={(event) => {
-                                                   setUserName(event.target.value)}}
-                                               style={{gridColumnStart:"1",gridRowStart: `${rowUserTimeVote.length+2}`}}
-                                    >Username</TextField>
-
-
-                                    {transferSettingsItem.infoDateTimes.map((itemTime, index) => (
-                                        <div>
-                                            <Checkbox
-                                                checked={checked[index]|| false}
-                                                onChange={(event)=>handleChange(index)}
-                                                inputProps={{ 'aria-label': 'controlled' }}
-                                            />
-                                        </div>
-                                    ))
-                                    }
-                                    <Button onClick={addUserVote}>Add</Button>
-                                </div>
-
-                            </CardContent>
-                        </Card>
+            <div className="container">
+                {transferSettingsItem.infoRestaurantData.map((restaurant,index) => (
+                    <React.Fragment>
+                <div className="resultcard">
+                    <div className="imgBx">
+                        <img src={image} alt="A pic would be nicer" className="picture"></img>
                     </div>
-                );}
+                    <h3>{restaurant.pickedRestaurantName}</h3>
+                    <ArrowDropDownIcon className="arrow"/>
+                    <div className="content">
+                        <p>
+                            {restaurant.pickedCategory}
+                        </p>
+                        <Box
+                            sx={{
+                                '& > legend': { mt: 2 },
+                            }}
+                        >
+                        <Rating name="read-only" value={restaurant.pickedRating} readOnly />
+                        </Box>
+                            <Box
+                                sx={{
+                                    '& > legend': {mt: 2},
+                                }}
+                            >
+                                <StyledRating
+                                    name="read-only"
+                                    readOnly
+                                    value={restaurant.pickedPrice}
+                                    precision={0.5}
+                                    max={3}
+                                    icon={<EuroIcon fontSize="inherit"/>}
+                                    emptyIcon={<EuroIcon fontSize="inherit"/>}
+                                />
+                            </Box>
+                        <p>
+                            {restaurant.pickedPostcode} {restaurant.pickedCity}
+                        </p>
+                    </div>
+                </div>
+                <div className="checkboxAndResults">
+                <Checkbox
+                    checked={checkRestaurants[index]}
+                    onChange={(event) => handleChange(index)}
+                    inputProps={{'aria-label': 'controlled'}}
+                />
+                    {(positiveVotesPerTime.length !==0) ?
+                        (
+                            <div>
+                                <CloseIcon></CloseIcon>{negativeVotesPerTime[index]} <CheckIcon></CheckIcon>{positiveVotesPerTime[index]}
+                            </div>
+                        )
+                        :
+                        (<></>)
+                    }
+                </div>
+                    </React.Fragment>
+                ))}
+            </div>
+            <div className="applyRestaurantVote">
+                {(userName==="")? (
+            <TextField value={userName || ""}
+                       onChange={(event) => {
+                           setUserName(event.target.value)
+                       }}>Username</TextField>
+                    )
+                    :
+                    (<span>{userName}</span>)}
+            <Button className="voteRestaurantButton" onClick={addUserVote}>Apply vote</Button>
+            </div>
+            </body>
+    )
 }
-

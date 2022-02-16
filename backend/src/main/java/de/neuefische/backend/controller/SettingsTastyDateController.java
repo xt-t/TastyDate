@@ -1,11 +1,13 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.model.DateSettingsItem;
-import de.neuefische.backend.model.TimeVoteItem;
+import de.neuefische.backend.model.TastyDateItem;
+import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
+import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
 import de.neuefische.backend.service.DateSettingsService;
-import de.neuefische.backend.service.VoteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -15,20 +17,24 @@ public class SettingsTastyDateController {
 
     private final DateSettingsService dateInfoService;
 
-    private final VoteService voteService;
-
-    public SettingsTastyDateController(DateSettingsService dateInfoService, VoteService voteService) {
+    public SettingsTastyDateController(DateSettingsService dateInfoService) {
         this.dateInfoService = dateInfoService;
-        this.voteService = voteService;
     }
 
-    @PostMapping("/completeSettings")
-    private ResponseEntity<DateSettingsItem> postSettingsItem (@RequestBody DateSettingsItem settingsItem) {
+    @PostMapping("/completesettings")
+    private ResponseEntity<TastyDateItem> postSettingsItem (@RequestBody TastyDateItem settingsItem) {
         return ok(dateInfoService.addDateSettings(settingsItem));
     }
 
-    @PostMapping("/timeVote")
-    private ResponseEntity<TimeVoteItem> postVoteTimeItem (@RequestBody TimeVoteItem voteTime) {
-        return ok(voteService.addVoteTimeItem(voteTime));
+    @PutMapping("/{tastyDateId}/timevote")
+    private ResponseEntity<TastyDateItem> updateTastyDateWithVoteTimeItem (@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
+        Optional<TastyDateItem> optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
+        return ResponseEntity.of(optTastyDate);
+    }
+
+    @PutMapping("/{tastyDateId}/restaurantvote")
+    private ResponseEntity<TastyDateItem> updateTastyDateWithVoteRestaurantItem (@RequestBody UserRestaurantVote restaurantVote, @PathVariable String tastyDateId) {
+        Optional<TastyDateItem> optTastyDate = dateInfoService.addVoteRestaurantItemToTastyDate(restaurantVote, tastyDateId);
+        return ResponseEntity.of(optTastyDate);
     }
 }

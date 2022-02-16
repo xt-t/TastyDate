@@ -9,15 +9,38 @@ import RequireAuth from './components/loginregister/RequireAuth';
 import AuthProvider from './context/AuthProvider';
 import LoginPage from './pages/loginregister/LoginPage';
 import RegisterPage from './pages/loginregister/RegisterPage';
-import {DataCompleteDateInfos} from "./service/tastydate-api-service";
+import {TastyDateItem} from "./models/result/TastyDateItem";
 
 function App() {
-    const [transferSettingsItem, setTransferSettingsItem] = useState<DataCompleteDateInfos>({
-        idVote:"1",infoDate:{pickedTastyDateName:"Test",pickedLocation:"Köln",pickedNotes:"Keine",pickedChosenDisplayName:"Bernd"} ,
-        infoDateTimes: [ {id:1, pickedDate: "Thu, Feb 10, 2022", pickedStart: "14:33", pickedEnd: "16:43"},
-            {id:2, pickedDate: "Fri, Feb 11, 2022", pickedStart: "14:24", pickedEnd: "16:12"},
-            {id:3, pickedDate: "Sat, Feb 12, 2022", pickedStart: "14:33", pickedEnd: "16:54"}],
-        infoRestaurantData: []});
+    const [transferSettingsItem, setTransferSettingsItem] = useState<TastyDateItem>(
+        {tastyDateId: "620574685446918038a34c0a" , "infoTastyDate": {
+                "pickedTastyDateName": "Test",
+                "pickedLocation": "Köln",
+                "pickedNotes": "Keine",
+                "pickedChosenDisplayName": "Bernd"
+            },
+            "infoTastyDateTimes": [{
+                "id": 1,
+                "pickedDate": "Thu, Feb 10, 2022",
+                "pickedStart": "14:33",
+                "pickedEnd": "16:43"
+            }, {
+                "id": 2,
+                "pickedDate": "Fri, Feb 11, 2022",
+                "pickedStart": "14:24",
+                "pickedEnd": "16:12"
+            }, {
+                "id": 3,
+                "pickedDate": "Sat, Feb 12, 2022",
+                "pickedStart": "14:33",
+                "pickedEnd": "16:54"
+            }],
+            "infoRestaurantData": [],
+            "timeVotes": [],
+            "restaurantVotes": [],
+            "votingResultsForOneDate": [],
+            "positiveVotingResultsForOneRestaurant": [],
+            "negativeVotingResultsForOneRestaurant": []});
 
     return (
         <div className="App">
@@ -28,7 +51,7 @@ function App() {
                     <Route path="/" element={<Homepage/>}/>
                     <Route path="/createDate" element={<RequireAuth><AppointmentHome setTransferSettingsItem={setTransferSettingsItem}/></RequireAuth>}/>
                     <Route path="/restaurants" element={<RequireAuth><OverviewRestaurants/></RequireAuth>}/>
-                    <Route path="/overview" element={<RequireAuth><VoteResult transferSettingsItem={transferSettingsItem}/></RequireAuth>}/>
+                    <Route path="/overview" element={<RequireAuth><VoteResult setTransferSettingsItem= {setTransferSettingsItem} transferSettingsItem={transferSettingsItem}/></RequireAuth>}/>
                 </Routes>
             </AuthProvider>
         </div>

@@ -1,89 +1,69 @@
-import React, {useState} from "react";
-import {dataPickedTime} from "../../../models/appointmentsettings/DataPickedTime";
+import React from "react";
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
 import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
-import {dataPickedRestaurant} from "../../../models/appointmentsettings/DataPickedRestaurant";
+import {AppointTwoType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 
 interface AppointTwoProps {
-    date: Date | null,
-    setDate: Function,
-    startTime: Date | null,
-    setStartTime: Function,
-    endTime: Date | null,
-    setEndTime: Function,
-    idPickedTime: number
-    setIdPickedTime: Function
-    dataDateTimes: dataPickedTime[]
-    setDataDateTimes: Function
+    appointTwo: AppointTwoType
 }
 
 export default function AppointTwo(
-    {
-        date,
-        setDate,
-        startTime,
-        setStartTime,
-        endTime,
-        setEndTime,
-        idPickedTime,
-        setIdPickedTime,
-        dataDateTimes,
-        setDataDateTimes
-    }: AppointTwoProps) {
+    {appointTwo}: AppointTwoProps) {
 
     const saveAppointmentData = () => {
-        if ((date !== null) && (startTime !== null) && (endTime !== null)) {
+        if ((appointTwo.date !== null) && (appointTwo.startTime !== null) && (appointTwo.endTime !== null)) {
             const newDataDateTime = {
-                id: idPickedTime,
-                pickedDate: date.toLocaleDateString("en-US", {
+                id: appointTwo.idPickedTime,
+                pickedDate: appointTwo.date.toLocaleDateString("en-US", {
                     weekday: "short",
                     year: "numeric",
                     month: "short",
                     day: "2-digit"
                 }),
-                pickedStart: startTime.toLocaleTimeString("en-US", {hour: '2-digit', minute: '2-digit', hour12: false}),
-                pickedEnd: endTime.toLocaleTimeString("en-US", {hour: '2-digit', minute: '2-digit', hour12: false})
+                pickedStart: appointTwo.startTime.toLocaleTimeString
+                ("en-US", {hour: '2-digit', minute: '2-digit', hour12: false}),
+                pickedEnd: appointTwo.endTime.toLocaleTimeString
+                ("en-US", {hour: '2-digit', minute: '2-digit', hour12: false})
             }
-            setDataDateTimes([...dataDateTimes, newDataDateTime]);
+            appointTwo.setDataDateTimes([...appointTwo.dataDateTimes, newDataDateTime]);
             resetDateInput();
-            setIdPickedTime(idPickedTime + 1);
+            appointTwo.setIdPickedTime(appointTwo.idPickedTime + 1);
         }
     }
 
     const resetDateInput = () => {
-        setDate(null);
-        setStartTime(null);
-        setEndTime(null);
+        appointTwo.setDate(null);
+        appointTwo.setStartTime(null);
+        appointTwo.setEndTime(null);
     }
 
     const deletePickedDate = (id: number) => {
-        setDataDateTimes(dataDateTimes.filter(keepDataDateTime => keepDataDateTime.id !== id));
+        appointTwo.setDataDateTimes(appointTwo.dataDateTimes.filter(keepDataDateTime => keepDataDateTime.id !== id));
     }
 
     const deleteAllPickedDates = () => {
-        setDataDateTimes([]);
+        appointTwo.setDataDateTimes([]);
     }
 
     return (
         <div className="cardTwo">
 
             <AppointTwoCardAddDate
-                date={date}
-                setDate={setDate}
-                startTime={startTime}
-                setStartTime={setStartTime}
-                endTime={endTime}
-                setEndTime={setEndTime}
+                appointTwo={appointTwo}
                 resetDateInput={resetDateInput}
                 saveAppointmentData={saveAppointmentData}
             />
 
-            <AppointTwoCardDisplayDate
-                dataDateTimes={dataDateTimes}
+            {appointTwo.dataDateTimes.length !== 0 ? (
+            < AppointTwoCardDisplayDate
+                dataDateTimes={appointTwo.dataDateTimes}
                 deletePickedDate={deletePickedDate}
                 deleteAllPickedDates={deleteAllPickedDates}
-            />
-
+                />
+            ):(
+                <></>
+            )
+            }
         </div>
     )
 }

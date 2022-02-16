@@ -1,5 +1,5 @@
 import DisplayMenus from "../../components/general/DisplayMenus";
-import DisplayRestaurants from "../../components/restaurants/DisplayRestaurants";
+import DisplayListRestaurants from "../../components/restaurants/DisplayListRestaurants";
 
 export default function OverviewRestaurants() {
 
@@ -7,7 +7,7 @@ export default function OverviewRestaurants() {
         <div>
             <div>
                 <DisplayMenus/>
-                <DisplayRestaurants/>
+                <DisplayListRestaurants/>
             </div>
         </div>
     )
