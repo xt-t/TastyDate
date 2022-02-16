@@ -1,5 +1,6 @@
 export interface RestaurantCard {
-    id: number,
+    id: string,
+    cardCreator: string;
     restaurantName: string,
     category: string,
     rating: number,

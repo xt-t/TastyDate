@@ -10,10 +10,9 @@ interface RestaurantCardItemProps {
     restaurantCard: RestaurantCard
     deleteRestaurantCard: Function,
     editRestaurantCard: Function,
-    key: number
 }
 
-export default function RestaurantCardItem({key, restaurantCard, deleteRestaurantCard, editRestaurantCard}:RestaurantCardItemProps) {
+export default function RestaurantCardItem({restaurantCard, deleteRestaurantCard, editRestaurantCard}:RestaurantCardItemProps) {
 
     const StyledRating = styled(Rating)({
         '& .MuiRating-iconFilled': {

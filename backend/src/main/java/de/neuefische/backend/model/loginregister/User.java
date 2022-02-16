@@ -35,6 +35,7 @@ public class User implements UserDetails {
     String username;
     String password;
     List<GrantedAuthority> authorities;
+    List<String> favouriteRestaurantsIds;
     boolean enabled;
     boolean accountNonExpired;
     boolean accountNonLocked;

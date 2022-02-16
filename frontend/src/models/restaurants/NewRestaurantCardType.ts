@@ -1,6 +1,8 @@
 export interface NewRestaurantCardType{
-    id: number
+    id: string | null
     setId: Function
+    cardCreator: string
+    setCardCreator: Function
     restaurantName: string
     setRestaurantName: Function
     category: string

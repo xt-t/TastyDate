@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import {Box, Fab} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import {BootstrapDialog, BootstrapDialogTitle} from "../appointmentsettings/AppointThree/Subcomponents/DialogTitle";
 import CategoryMenu from "../appointmentsettings/AppointThree/Subcomponents/CategoryMenu";
@@ -13,20 +12,18 @@ import {NewRestaurantCardType} from "../../models/restaurants/NewRestaurantCardT
 
 interface AddRestaurantCardProps {
     newRestaurantCard: NewRestaurantCardType
-    addRestaurantCard: Function
+    saveRestaurantCard: Function
     resetRestaurantCardInput: Function
     open: boolean
-    setOpen: Function
-    handleClickOpen: Function
     handleClose: Function
+    addFavouriteText: boolean
+    addRestaurantCard: Function
 }
 
 export default function AddEditRestaurantCard(
-    {newRestaurantCard, addRestaurantCard, resetRestaurantCardInput,
+    {newRestaurantCard, saveRestaurantCard, resetRestaurantCardInput,
         open,
-        setOpen,
-        handleClickOpen,
-        handleClose}:AddRestaurantCardProps) {
+        handleClose, addFavouriteText, addRestaurantCard}:AddRestaurantCardProps) {
 
 
 
@@ -40,7 +37,10 @@ export default function AddEditRestaurantCard(
                 open={open}
             >
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={()=>handleClose()}>
-                    Add a new favourite restaurant
+                    {addFavouriteText?
+                        (<span>Add a new favourite restaurant</span>
+                        ):(
+                            <span>Edit your favourite restaurant</span>)}
                 </BootstrapDialogTitle>
 
                 <DialogContent dividers>
@@ -94,8 +94,17 @@ export default function AddEditRestaurantCard(
                 <DialogActions>
                     <Button variant="outlined" onClick={() => resetRestaurantCardInput()}> <RestartAltIcon/> Reset
                     </Button>
+                    {addFavouriteText?
+                        (
                     <Button variant="contained" autoFocus onClick={() =>
-                        addRestaurantCard()}> <AddIcon/> Add </Button>
+                        addRestaurantCard()}> <AddIcon/> Add </Button>)
+                        :
+                        (
+                            <Button variant="contained" autoFocus onClick={() =>
+                                saveRestaurantCard()}> <AddIcon/> Save </Button>
+                        )}
+
+
                 </DialogActions>
             </BootstrapDialog>
         </div>

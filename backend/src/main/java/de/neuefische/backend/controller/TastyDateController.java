@@ -13,16 +13,16 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/api/appointment")
-public class SettingsTastyDateController {
+public class TastyDateController {
 
     private final DateSettingsService dateInfoService;
 
-    public SettingsTastyDateController(DateSettingsService dateInfoService) {
+    public TastyDateController(DateSettingsService dateInfoService) {
         this.dateInfoService = dateInfoService;
     }
 
     @PostMapping("/completesettings")
-    private ResponseEntity<TastyDateItem> postSettingsItem (@RequestBody TastyDateItem settingsItem) {
+    private ResponseEntity<TastyDateItem> transferSettingsToDB (@RequestBody TastyDateItem settingsItem) {
         return ok(dateInfoService.addDateSettings(settingsItem));
     }
 
