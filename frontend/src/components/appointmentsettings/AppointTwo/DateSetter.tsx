@@ -11,6 +11,8 @@ interface DateSetterProps {
 
 export default function DateSetter({date, setDate}: DateSetterProps) {
 
+    var currentDate = new Date();
+
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
@@ -19,6 +21,7 @@ export default function DateSetter({date, setDate}: DateSetterProps) {
                 onChange={(newValue) => {
                     setDate(newValue);
                 }}
+                minDate={currentDate.setDate(currentDate.getDate()+1)}
                 renderInput={(params) => <TextField {...params} />}
             />
         </LocalizationProvider>

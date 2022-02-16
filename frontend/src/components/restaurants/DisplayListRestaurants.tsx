@@ -1,5 +1,5 @@
 import "./Restaurants.scss"
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {RestaurantCard} from "../../models/restaurants/RestaurantCard";
 import RestaurantCardItem from "./RestaurantCardItem";
 import AddEditRestaurantCard from "./AddEditRestaurantCard";
@@ -20,13 +20,14 @@ export default function DisplayListRestaurants() {
 
     const {token} = useContext(AuthContext);
 
+    useEffect(() => {
+        getEveryRestaurantCard()
+    }, []);
+
 const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
 
     const {newRestaurantCard, resetRestaurantCardInput} = UseNewRestaurantCard();
 
-    React.useEffect(() => {
-        getEveryRestaurantCard()
-    }, []);
 
     const addRestaurantCard = () => {
         if ((newRestaurantCard.category !== "") &&

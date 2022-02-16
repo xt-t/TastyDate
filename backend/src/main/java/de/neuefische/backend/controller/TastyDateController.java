@@ -28,13 +28,13 @@ public class TastyDateController {
 
     @PutMapping("/{tastyDateId}/timevote")
     private ResponseEntity<TastyDateItem> updateTastyDateWithVoteTimeItem (@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
-        Optional<TastyDateItem> optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
-        return ResponseEntity.of(optTastyDate);
+        TastyDateItem optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
+        return ok(optTastyDate);
     }
 
     @PutMapping("/{tastyDateId}/restaurantvote")
     private ResponseEntity<TastyDateItem> updateTastyDateWithVoteRestaurantItem (@RequestBody UserRestaurantVote restaurantVote, @PathVariable String tastyDateId) {
-        Optional<TastyDateItem> optTastyDate = dateInfoService.addVoteRestaurantItemToTastyDate(restaurantVote, tastyDateId);
-        return ResponseEntity.of(optTastyDate);
+        TastyDateItem optTastyDate = dateInfoService.addVoteRestaurantItemToTastyDate(restaurantVote, tastyDateId);
+        return ok(optTastyDate);
     }
 }
