@@ -29,7 +29,7 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
 
     const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(transferSettingsItem.infoRestaurantData.length).fill(false));
     const [positiveVotesPerTime, setPositiveVotesPerTime] = useState<number[]>([]);
-    const [negativeVotesPerTime, setnegativeVotesPerTime] = useState<number[]>([]);
+    const [negativeVotesPerTime, setNegativeVotesPerTime] = useState<number[]>([]);
 
 
     const StyledRating = styled(Rating)({
@@ -58,9 +58,8 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
             updateTastyDateWithVoteRestaurantItem(tastyDateId, restaurantVote, token)
                 .then((response) => {
                     setTransferSettingsItem(response.data);
-                    console.log(response.data)
                     setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
-                    setnegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant)
+                    setNegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant)
                 })
                 .catch((err) => {
                     console.error(err.message);
@@ -69,21 +68,20 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
     }
 
     return (
-        <body>
-
+        <div>
             <div className="container">
                 {transferSettingsItem.infoRestaurantData.map((restaurant,index) => (
-                    <React.Fragment>
+                    <React.Fragment key={index}>
                 <div className="resultcard">
-                    <div className="imgBx">
+                    <Box className="imgBx">
                         <img src={image} alt="A pic would be nicer" className="picture"></img>
-                    </div>
+                    </Box>
                     <h3>{restaurant.pickedRestaurantName}</h3>
                     <ArrowDropDownIcon className="arrow"/>
-                    <div className="content">
-                        <p>
+                    <Box className="content">
+                        <Box>
                             {restaurant.pickedCategory}
-                        </p>
+                        </Box>
                         <Box
                             sx={{
                                 '& > legend': { mt: 2 },
@@ -106,10 +104,10 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                                     emptyIcon={<EuroIcon fontSize="inherit"/>}
                                 />
                             </Box>
-                        <p>
+                        <Box>
                             {restaurant.pickedPostcode} {restaurant.pickedCity}
-                        </p>
-                    </div>
+                        </Box>
+                    </Box>
                 </div>
                 <div className="checkboxAndResults">
                 <Checkbox
@@ -132,7 +130,7 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
             </div>
             <div className="applyRestaurantVote">
                 {(userName === "")? (
-            <TextField value={tempName || ""}
+            <TextField value={tempName}
                        onChange={(event) => {
                            setTempName(event.target.value)
                        }}>Username</TextField>
@@ -141,6 +139,6 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                     (<span>{userName}</span>)}
             <Button className="voteRestaurantButton" onClick={addUserVote}>Apply vote</Button>
             </div>
-            </body>
+        </div>
     )
 }

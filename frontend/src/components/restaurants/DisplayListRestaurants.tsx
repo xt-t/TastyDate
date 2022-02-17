@@ -22,6 +22,7 @@ export default function DisplayListRestaurants() {
 
     useEffect(() => {
         getEveryRestaurantCard()
+        //eslint-disable-next-line
     }, []);
 
 const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
@@ -86,7 +87,7 @@ const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
                 price: newRestaurantCard.price
             }
             updateRestaurantCard(newRestaurantData, token)
-                 .then((response)=> {
+                 .then(()=> {
                      getEveryRestaurantCard()
                  })
             resetRestaurantCardInput();
@@ -96,14 +97,14 @@ const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
 
     const deleteRestaurantCard = (restaurantId: string) => {
         removeRestaurantCard(restaurantId, token)
-            .then((response)=>(
+            .then(()=>(
                 getEveryRestaurantCard()
             )
         )
     }
 
     const deleteRestaurantList = () => {
-        removeRestaurantList(token).then((response)=>(
+        removeRestaurantList(token).then(()=>(
             getEveryRestaurantCard()
         ))
     }

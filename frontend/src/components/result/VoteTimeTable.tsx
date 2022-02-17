@@ -2,13 +2,12 @@ import {Button, CardContent, TextField} from '@mui/material';
 import Card from '@mui/material/Card';
 import "./Tables.scss"
 import Checkbox from '@mui/material/Checkbox';
-import {useContext, useState} from "react";
 import {AuthContext} from "../../context/AuthProvider";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import {UserTimeVote} from "../../models/result/UserTimeVote";
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {updateTastyDateWithVoteTimeItem} from "../../service/tastydate-api-service";
 
 
@@ -23,9 +22,7 @@ interface VoteTimeTableProps {
 
 export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName, tempName, setTempName}: VoteTimeTableProps) {
 
-
     const {token} = useContext(AuthContext);
-    console.log(transferSettingsItem);
     const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(transferSettingsItem.infoTastyDateTimes.length).fill(false));
     const [rowsUserTimeVote, setRowsUserTimeVote] = useState<UserTimeVote[]>([]);
     const [countersVotesPerTime, setCountersVotesPerTime] = useState<number[]>([]);
@@ -36,21 +33,22 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
         setCheckDateTime(newChecked);
     }
 
-    console.log(checkDateTime);
-
     const addUserVote = () => {
+        console.log(tempName)
         if (tempName !== "") {
-            setUserName(tempName);
+            setUserName(tempName); //Fehler
             const tastyDateId = transferSettingsItem.tastyDateId;
+            console.log(userName)
             const timeVote = {
                 displayedName: userName,
                 votesPerDateTimeFromOneUser: checkDateTime
             }
+            console.log(timeVote)
             updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
                 .then((response) => {
                     setTransferSettingsItem(response.data);
-                    console.log(transferSettingsItem);
                     setRowsUserTimeVote(response.data.timeVotes);
+                    console.log(rowsUserTimeVote)
                     setCountersVotesPerTime(response.data.votingResultsForOneDate)
                 })
                 .catch((err) => {
