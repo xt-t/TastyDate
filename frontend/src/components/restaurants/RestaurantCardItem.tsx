@@ -5,13 +5,14 @@ import React from "react";
 import {RestaurantCard} from "../../models/restaurants/RestaurantCard";
 import {Box, Rating, styled} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 interface RestaurantCardItemProps {
     restaurantCard: RestaurantCard
+    deleteRestaurantCard: Function,
+    editRestaurantCard: Function,
 }
 
-export default function RestaurantCardItem({restaurantCard}:RestaurantCardItemProps) {
+export default function RestaurantCardItem({restaurantCard, deleteRestaurantCard, editRestaurantCard}:RestaurantCardItemProps) {
 
     const StyledRating = styled(Rating)({
         '& .MuiRating-iconFilled': {
@@ -26,8 +27,8 @@ export default function RestaurantCardItem({restaurantCard}:RestaurantCardItemPr
         <React.Fragment>
         <article className="card">
             <header className="card-header">
-                <p>{restaurantCard.restaurantName}</p>
-                <h2>{restaurantCard.category}</h2>
+                <p>{restaurantCard.category}</p>
+                <h2>{restaurantCard.restaurantName}</h2>
             </header>
             <Box
                 sx={{
@@ -62,9 +63,8 @@ export default function RestaurantCardItem({restaurantCard}:RestaurantCardItemPr
             {/*    </div>*/}
             {/*</div>*/}
             <div className="cardIcons">
-            <DeleteIcon/>
-            <VisibilityIcon/>
-            <EditIcon/>
+            <DeleteIcon onClick={()=>deleteRestaurantCard(restaurantCard.id)}/>
+            <EditIcon onClick={()=>editRestaurantCard(restaurantCard.id)}/>
             </div>
         </article>
         </React.Fragment>

@@ -13,28 +13,28 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/api/appointment")
-public class SettingsTastyDateController {
+public class TastyDateController {
 
     private final DateSettingsService dateInfoService;
 
-    public SettingsTastyDateController(DateSettingsService dateInfoService) {
+    public TastyDateController(DateSettingsService dateInfoService) {
         this.dateInfoService = dateInfoService;
     }
 
     @PostMapping("/completesettings")
-    private ResponseEntity<TastyDateItem> postSettingsItem (@RequestBody TastyDateItem settingsItem) {
+    private ResponseEntity<TastyDateItem> transferSettingsToDB (@RequestBody TastyDateItem settingsItem) {
         return ok(dateInfoService.addDateSettings(settingsItem));
     }
 
     @PutMapping("/{tastyDateId}/timevote")
     private ResponseEntity<TastyDateItem> updateTastyDateWithVoteTimeItem (@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
-        Optional<TastyDateItem> optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
-        return ResponseEntity.of(optTastyDate);
+        TastyDateItem optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
+        return ok(optTastyDate);
     }
 
     @PutMapping("/{tastyDateId}/restaurantvote")
     private ResponseEntity<TastyDateItem> updateTastyDateWithVoteRestaurantItem (@RequestBody UserRestaurantVote restaurantVote, @PathVariable String tastyDateId) {
-        Optional<TastyDateItem> optTastyDate = dateInfoService.addVoteRestaurantItemToTastyDate(restaurantVote, tastyDateId);
-        return ResponseEntity.of(optTastyDate);
+        TastyDateItem optTastyDate = dateInfoService.addVoteRestaurantItemToTastyDate(restaurantVote, tastyDateId);
+        return ok(optTastyDate);
     }
 }

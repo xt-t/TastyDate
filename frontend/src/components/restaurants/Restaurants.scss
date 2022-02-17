@@ -85,3 +85,13 @@ body {
   font-weight: 700;
   color: #7a7a8c;
 }
+
+.addRestaurantCardButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cardActionButtons {
+  display: flex;
+  justify-content: space-between;
+}

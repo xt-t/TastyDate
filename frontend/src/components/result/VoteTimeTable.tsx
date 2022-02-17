@@ -17,9 +17,11 @@ interface VoteTimeTableProps {
     setTransferSettingsItem: Function
     userName: string
     setUserName: Function
+    tempName: string
+    setTempName: Function
 }
 
-export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName}: VoteTimeTableProps) {
+export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName, tempName, setTempName}: VoteTimeTableProps) {
 
 
     const {token} = useContext(AuthContext);
@@ -37,7 +39,8 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
     console.log(checkDateTime);
 
     const addUserVote = () => {
-        if (userName !== "") {
+        if (tempName !== "") {
+            setUserName(tempName);
             const tastyDateId = transferSettingsItem.tastyDateId;
             const timeVote = {
                 displayedName: userName,
@@ -122,9 +125,9 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                                     <div></div>
 
 
-                                    <TextField value={userName || ""}
+                                    <TextField value={tempName || ""}
                                                onChange={(event) => {
-                                                   setUserName(event.target.value)
+                                                   setTempName(event.target.value)
                                                }}
                                                style={{
                                                    gridColumnStart: "1",
@@ -136,9 +139,9 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                             )
                             :
                             (<React.Fragment>
-                                <TextField value={userName || ""}
+                                <TextField value={tempName || ""}
                                            onChange={(event) => {
-                                               setUserName(event.target.value)
+                                               setTempName(event.target.value)
                                            }}
                                            style={{
                                                gridColumnStart: "1",

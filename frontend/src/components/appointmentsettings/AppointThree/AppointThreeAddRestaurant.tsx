@@ -18,14 +18,12 @@ export default function AppointThreeAddRestaurant(
     }: AppointThreeAddRestaurantProps
 ) {
 
-
     return (
         <Box>
             <Card>
                 <CardContent className="formRestaurant">
-<h3>Add your restaurant</h3>
+                    <h3>Add your restaurant</h3>
                     <span>Your options:</span>
-
                     <Box className="menuIcons">
                         <div className="favouritesRowButton"><span>Add restaurants from your </span><Button variant="contained" className="favouriteButton"><FavoriteIcon> </FavoriteIcon> Favourites </Button></div>
                         <AppointThreeAddRestaurantManually appointThree={appointThree} resetDataInput={resetDataInput} saveRestaurantData={saveRestaurantData}/>
@@ -34,5 +32,4 @@ export default function AppointThreeAddRestaurant(
             </Card>
         </Box>
     )
-
 }

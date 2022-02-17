@@ -14,6 +14,14 @@ interface TimeSetterProps {
 
 export default function TimeSetter({range, startTime, setStartTime, endTime, setEndTime}: TimeSetterProps) {
 
+    const timeRestriction = () => {
+        if (startTime !== null) {
+            var tempTime = new Date (startTime)
+            tempTime.setMinutes(startTime.getMinutes()+30)
+            return tempTime;
+        }
+    }
+
     if (range === "start Time") {
         return (
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -38,6 +46,7 @@ export default function TimeSetter({range, startTime, setStartTime, endTime, set
                     onChange={(newValue) => {
                         setEndTime(newValue);
                     }}
+                    minTime={timeRestriction()}
                     renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>

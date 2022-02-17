@@ -18,7 +18,7 @@ interface VoteResultProps {
 export default function VoteResult({transferSettingsItem, setTransferSettingsItem}:VoteResultProps) {
     const [value, setValue] = React.useState(0);
     const [userName, setUserName] = useState<string>("");
-
+    const [tempName, setTempName] = useState<string>("");
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -37,10 +37,10 @@ export default function VoteResult({transferSettingsItem, setTransferSettingsIte
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName}/>
+                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName} tempName={tempName} setTempName={setTempName}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName}/>
+                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName} tempName={tempName} setTempName={setTempName}/>
             </TabPanel>
         </Box>
             </div>

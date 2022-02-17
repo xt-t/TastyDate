@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
@@ -10,6 +9,7 @@ import {BootstrapDialog, BootstrapDialogTitle} from './Subcomponents/DialogTitle
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import AddIcon from "@mui/icons-material/Add";
 import "../Appoint.scss"
+import {useState} from "react";
 
 interface AppointThreeSearchRestaurantProps {
     appointThree: AppointThreeType
@@ -22,7 +22,7 @@ export default function AppointThreeAddRestaurantManually({
                                                          saveRestaurantData,
                                                          resetDataInput
                                                      }: AppointThreeSearchRestaurantProps) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);

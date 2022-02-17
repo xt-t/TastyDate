@@ -5,50 +5,38 @@ import de.neuefische.backend.model.TastyDateItem;
 import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
 import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
 import de.neuefische.backend.repository.DateSettingsRepository;
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+
+import java.util.*;
 
 
 @Service
 public class DateSettingsService {
 
     private final DateSettingsRepository dateSettingsRepo;
-    private static final Log LOG = LogFactory.getLog(BackendApplication.class);   //LOG herausnehmen
 
     public DateSettingsService(DateSettingsRepository dateSettingsRepo) {
         this.dateSettingsRepo = dateSettingsRepo;
     }
 
     public TastyDateItem addDateSettings(TastyDateItem settingsItem) {
-        LOG.info(settingsItem);
         UUID uuid = UUID.randomUUID();
         settingsItem.setTastyDateId(uuid.toString());
         settingsItem.setTimeVotes(new ArrayList<>());
         settingsItem.setRestaurantVotes(new ArrayList<>());
-        LOG.info(settingsItem);
         return dateSettingsRepo.save(settingsItem);
     }
 
-    public Optional<TastyDateItem> addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
+    public TastyDateItem addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
 
         //Optional - existiert das SettingsItem? Fehlermeldung
 
         //checking and updating the List of the UserVotes for the DateTimes
-        if (dateSettingsRepo.findById(tastyDateId).isEmpty()) {
-            return Optional.empty();
-        }
-        TastyDateItem test = dateSettingsRepo.findById(tastyDateId).get();
+        Optional<TastyDateItem> optionalTastyDateItem = dateSettingsRepo.findById(tastyDateId);
+        TastyDateItem test = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
         List<UserTimeVote> tempList = test.getTimeVotes();
-        LOG.info(tempList);
         tempList.add(timeVote);
-        LOG.info(tempList);
         test.setTimeVotes(tempList);
-        LOG.info(test);
         dateSettingsRepo.save(test);
 
         //generate sums of voteResult
@@ -64,20 +52,17 @@ public class DateSettingsService {
                 }
             }
         test.setVotingResultsForOneDate(amount);
-        dateSettingsRepo.save(test);
-
-        return dateSettingsRepo.findById(tastyDateId);
+        return dateSettingsRepo.save(test);
     }
 
-    public Optional<TastyDateItem> addVoteRestaurantItemToTastyDate(UserRestaurantVote restaurantVote, String tastyDateId) {
+    public TastyDateItem addVoteRestaurantItemToTastyDate(UserRestaurantVote restaurantVote, String tastyDateId) {
 
         //Optional - existiert das SettingsItem? Fehlermeldung
 
         //checking and updating the List of the UserVotes for the DateTimes
-        if (dateSettingsRepo.findById(tastyDateId).isEmpty()) {
-            return Optional.empty();
-        }
-        TastyDateItem test = dateSettingsRepo.findById(tastyDateId).get();
+
+        Optional<TastyDateItem> optionalTastyDateItem = dateSettingsRepo.findById(tastyDateId);
+        TastyDateItem test = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
         List<UserRestaurantVote> tempList = test.getRestaurantVotes();
         tempList.add(restaurantVote);
         test.setRestaurantVotes(tempList);
@@ -100,9 +85,8 @@ public class DateSettingsService {
         }
         test.setPositiveVotingResultsForOneRestaurant(positiveAmount);
         test.setNegativeVotingResultsForOneRestaurant(negativeAmount);
-        dateSettingsRepo.save(test);
 
-        return dateSettingsRepo.findById(tastyDateId);
+        return dateSettingsRepo.save(test);
     }
 
 }
