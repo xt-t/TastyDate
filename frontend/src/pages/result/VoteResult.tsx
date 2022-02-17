@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -6,8 +5,9 @@ import DisplayMenus from "../../components/general/DisplayMenus";
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import VoteTimeTable from '../../components/result/VoteTimeTable';
 import {TabPanel} from "./TabPanelFunctions";
-import {useState} from "react";
+import React, {useState} from "react";
 import VoteRestaurantTable from "../../components/result/VoteRestaurantTable";
+import {TextField} from "@mui/material";
 
 
 interface VoteResultProps {
@@ -16,9 +16,9 @@ interface VoteResultProps {
 }
 
 export default function VoteResult({transferSettingsItem, setTransferSettingsItem}:VoteResultProps) {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
     const [userName, setUserName] = useState<string>("");
-    const [tempName, setTempName] = useState<string>("");
+    const [displayNameEntered, setDisplayNameEntered] = useState<boolean>(false);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -37,10 +37,18 @@ export default function VoteResult({transferSettingsItem, setTransferSettingsIte
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName} tempName={tempName} setTempName={setTempName}/>
+                <TextField value={userName}
+                           onChange={(event) => {
+                               setUserName(event.target.value)
+                           }}>Username</TextField>
+                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName} tempName={tempName} setTempName={setTempName}/>
+                <TextField value={userName}
+                           onChange={(event) => {
+                               setUserName(event.target.value)
+                           }}>Username</TextField>
+                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName}/>
             </TabPanel>
         </Box>
             </div>

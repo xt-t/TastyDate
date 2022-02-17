@@ -18,12 +18,9 @@ interface VoteRestaurantTableProps {
     transferSettingsItem: TastyDateItem
     setTransferSettingsItem: Function
     userName: string
-    setUserName: Function
-    tempName: string
-    setTempName: Function
 }
 
-export default function VoteRestaurantTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName, tempName, setTempName}: VoteRestaurantTableProps) {
+export default function VoteRestaurantTable({transferSettingsItem, setTransferSettingsItem, userName}: VoteRestaurantTableProps) {
 
     const {token} = useContext(AuthContext);
 
@@ -48,8 +45,7 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
     }
 
     const addUserVote = () => {
-        if (tempName !== "") {
-            setUserName(tempName);
+        if (userName !== "") {
             const tastyDateId = transferSettingsItem.tastyDateId;
             const restaurantVote = {
                 displayedName: userName,
@@ -129,14 +125,6 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                 ))}
             </div>
             <div className="applyRestaurantVote">
-                {(userName === "")? (
-            <TextField value={tempName}
-                       onChange={(event) => {
-                           setTempName(event.target.value)
-                       }}>Username</TextField>
-                    )
-                    :
-                    (<span>{userName}</span>)}
             <Button className="voteRestaurantButton" onClick={addUserVote}>Apply vote</Button>
             </div>
         </div>

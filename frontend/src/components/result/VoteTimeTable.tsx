@@ -16,11 +16,9 @@ interface VoteTimeTableProps {
     setTransferSettingsItem: Function
     userName: string
     setUserName: Function
-    tempName: string
-    setTempName: Function
 }
 
-export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName, tempName, setTempName}: VoteTimeTableProps) {
+export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName}: VoteTimeTableProps) {
 
     const {token} = useContext(AuthContext);
     const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(transferSettingsItem.infoTastyDateTimes.length).fill(false));
@@ -34,16 +32,12 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
     }
 
     const addUserVote = () => {
-        console.log(tempName)
-        if (tempName !== "") {
-            setUserName(tempName); //Fehler
+        if (userName !== "") {
             const tastyDateId = transferSettingsItem.tastyDateId;
-            console.log(userName)
             const timeVote = {
                 displayedName: userName,
                 votesPerDateTimeFromOneUser: checkDateTime
             }
-            console.log(timeVote)
             updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
                 .then((response) => {
                     setTransferSettingsItem(response.data);
@@ -123,9 +117,9 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                                     <div></div>
 
 
-                                    <TextField value={tempName || ""}
+                                    <TextField value={userName || ""}
                                                onChange={(event) => {
-                                                   setTempName(event.target.value)
+                                                   setUserName(event.target.value)
                                                }}
                                                style={{
                                                    gridColumnStart: "1",
@@ -137,9 +131,9 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                             )
                             :
                             (<React.Fragment>
-                                <TextField value={tempName || ""}
+                                <TextField value={userName || ""}
                                            onChange={(event) => {
-                                               setTempName(event.target.value)
+                                               setUserName(event.target.value)
                                            }}
                                            style={{
                                                gridColumnStart: "1",
