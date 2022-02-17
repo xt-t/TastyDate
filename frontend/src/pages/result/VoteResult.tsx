@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import DisplayMenus from "../../components/general/DisplayMenus";
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import VoteTimeTable from '../../components/result/VoteTimeTable';
-import {a11yProps, TabPanel} from "./ResultTab";
+import {TabPanel} from "./TabPanelFunctions";
 import {useState} from "react";
 import VoteRestaurantTable from "../../components/result/VoteRestaurantTable";
 
@@ -32,8 +32,8 @@ export default function VoteResult({transferSettingsItem, setTransferSettingsIte
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Vote Time" {...a11yProps(0)} />
-                    <Tab label="Vote Restaurant" {...a11yProps(1)} />
+                    <Tab label="Vote Time"/>
+                    <Tab label="Vote Restaurant"/>
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
