@@ -5,51 +5,26 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TimePicker from '@mui/lab/TimePicker';
 
 interface TimeSetterProps {
-    startTime: Date | null
-    setStartTime: Function
-    endTime: Date | null
-    setEndTime: Function
-    range: string
+    timeInput: Date | null
+    setTimeInput: Function
+    testIfTimeRestrictionAvailable: Function
 }
 
-export default function TimeSetter({range, startTime, setStartTime, endTime, setEndTime}: TimeSetterProps) {
+export default function TimeSetter({timeInput, setTimeInput, testIfTimeRestrictionAvailable}: TimeSetterProps) {
 
-    const timeRestriction = () => {
-        if (startTime !== null) {
-            var tempTime = new Date (startTime)
-            tempTime.setMinutes(startTime.getMinutes()+30)
-            return tempTime;
-        }
-    }
 
-    if (range === "start Time") {
         return (
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <TimePicker
                     label="Start time"
-                    value={startTime}
+                    value={timeInput}
                     ampm={false}
                     onChange={(newValue) => {
-                        setStartTime(newValue);
+                        setTimeInput(newValue);
                     }}
+                    minTime={testIfTimeRestrictionAvailable()}
                     renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>
         );
-    } else {
-        return (
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <TimePicker
-                    label="End time"
-                    value={endTime}
-                    ampm={false}
-                    onChange={(newValue) => {
-                        setEndTime(newValue);
-                    }}
-                    minTime={timeRestriction()}
-                    renderInput={(params) => <TextField {...params} />}
-                />
-            </LocalizationProvider>
-        );
-    }
 }

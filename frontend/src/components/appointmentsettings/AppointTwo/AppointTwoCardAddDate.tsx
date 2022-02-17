@@ -17,6 +17,18 @@ export default function AppointTwoCardAddDate(
 
     const {date, setDate, startTime, setStartTime, endTime, setEndTime}=appointTwo;
 
+    const timeRestriction = () => {
+        if (startTime !== null) {
+            var tempTime = new Date (startTime)
+            tempTime.setMinutes(startTime.getMinutes()+30)
+            return tempTime
+        }
+    }
+
+    const noTimeRestriction = () => {
+        return null;
+    }
+
     return (
         <Card>
             <CardContent className="addDateTime">
@@ -27,19 +39,15 @@ export default function AppointTwoCardAddDate(
                 <div className="setTime">
 
                     <TimeSetter
-                        range="start Time"
-                        startTime={startTime}
-                        setStartTime={setStartTime}
-                        endTime={endTime}
-                        setEndTime={setEndTime}
+                        timeInput={startTime}
+                        setTimeInput={setStartTime}
+                        testIfTimeRestrictionAvailable={noTimeRestriction}
                     />
 
                     <TimeSetter
-                        range="end Time"
-                        startTime={startTime}
-                        setStartTime={setStartTime}
-                        endTime={endTime}
-                        setEndTime={setEndTime}
+                        timeInput={endTime}
+                        setTimeInput={setEndTime}
+                        testIfTimeRestrictionAvailable={timeRestriction}
                     />
 
                 </div>
