@@ -32,7 +32,7 @@ body {
 //RestaurantCardItem
 
 .card {
-  height: 300px;
+  height: 350px;
   width: 200px;
   min-width: 250px;
   padding: 1.5rem;
@@ -46,6 +46,18 @@ body {
   scroll-snap-align: start;
   clear: both;
   position: relative;
+
+  .imgBx {
+    position: relative;
+    width: 200px;
+    height: 150px;
+  }
+
+  .imgBx img
+  {
+    max-width: 100%;
+    border-radius: 1rem;
+  }
 }
 
 .card:hover {

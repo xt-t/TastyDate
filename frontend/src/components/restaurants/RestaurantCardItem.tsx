@@ -5,6 +5,7 @@ import React from "react";
 import {RestaurantCard} from "../../models/restaurants/RestaurantCard";
 import {Box, Rating, styled} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
+import image from "../result/dummypic.jpg";
 
 interface RestaurantCardItemProps {
     restaurantCard: RestaurantCard
@@ -30,6 +31,9 @@ export default function RestaurantCardItem({restaurantCard, deleteRestaurantCard
                 <p>{restaurantCard.category}</p>
                 <h2>{restaurantCard.restaurantName}</h2>
             </header>
+            <Box className="imgBx">
+                <img src={image} alt="A pic would be nicer" className="picture"></img>
+            </Box>
             <Box
                 sx={{
                     '& > legend': { mt: 2 },
