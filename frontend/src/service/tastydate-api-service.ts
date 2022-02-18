@@ -29,6 +29,9 @@ export const loginPost = (login:LoginData) : Promise<string> =>
 export const registerPost = (register:RegisterData) : Promise<string> =>
     axios.post(`/registration/user`, register).then(response => response.data)
 
+export const getAllTastyDateItems = (token?: string) =>
+    axios.get(`/api/appointment`, token? {headers:{"Authorization": "Bearer" + token}}:{})
+
 export const transferSettingsToDB = (settingsItem:DateSettingsItemDTO, token? :string) =>
     axios.post(`/api/appointment/completesettings`, settingsItem, token? {headers:{"Authorization": "Bearer" + token}}:{})
 
@@ -50,6 +53,9 @@ export const transferRestaurantCardToDB = (newRestaurantCard:RestaurantCardDTO, 
 export const updateRestaurantCard = (changeRestaurantCard: RestaurantCard, token?: string) =>
     axios.put(`/api/restaurantlists/${changeRestaurantCard.id}/update`, changeRestaurantCard, token? {headers:{"Authorization": "Bearer" + token}}:{})
 
-export const removeRestaurantCard = (id:string, token?: string) => axios.delete(`/api/restaurantlists/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{})
+export const removeRestaurantCard = (id:string, token?: string) =>
+    axios.delete(`/api/restaurantlists/${id}`, token? {headers:{"Authorization": "Bearer" + token}}:{})
 
-export const removeRestaurantList = (token?: string) => axios.delete(`/api/restaurantlists`, token? {headers:{"Authorization": "Bearer" + token}}:{})
+export const removeRestaurantList = (token?: string) =>
+    axios.delete(`/api/restaurantlists`, token? {headers:{"Authorization": "Bearer" + token}}:{})
+

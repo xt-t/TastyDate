@@ -7,7 +7,7 @@ import de.neuefische.backend.service.DateSettingsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -19,6 +19,13 @@ public class TastyDateController {
 
     public TastyDateController(DateSettingsService dateInfoService) {
         this.dateInfoService = dateInfoService;
+    }
+
+
+    @GetMapping("/completesettings")
+    private ResponseEntity<List<TastyDateItem>> getAllTastyDateItems() {
+        List<TastyDateItem> allTastyDateItems = dateInfoService.getEveryTastyDateItem();
+        return ok(allTastyDateItems);
     }
 
     @PostMapping("/completesettings")

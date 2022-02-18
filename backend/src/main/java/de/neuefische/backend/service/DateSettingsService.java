@@ -1,6 +1,5 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.BackendApplication;
 import de.neuefische.backend.model.TastyDateItem;
 import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
 import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
@@ -25,6 +24,10 @@ public class DateSettingsService {
         settingsItem.setTimeVotes(new ArrayList<>());
         settingsItem.setRestaurantVotes(new ArrayList<>());
         return dateSettingsRepo.save(settingsItem);
+    }
+
+    public List<TastyDateItem> getEveryTastyDateItem() {
+        return dateSettingsRepo.findAll();
     }
 
     public TastyDateItem addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
