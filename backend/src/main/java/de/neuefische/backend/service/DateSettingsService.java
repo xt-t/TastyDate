@@ -1,5 +1,6 @@
 package de.neuefische.backend.service;
 
+import de.neuefische.backend.model.RestaurantCard;
 import de.neuefische.backend.model.TastyDateItem;
 import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
 import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
@@ -29,6 +30,8 @@ public class DateSettingsService {
     public List<TastyDateItem> getEveryTastyDateItem() {
         return dateSettingsRepo.findAll();
     }
+
+    public Optional<TastyDateItem> findTastyDateById(String id) {return dateSettingsRepo.findById(id);}
 
     public TastyDateItem addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
 

@@ -19,8 +19,7 @@ interface AppointmentStepsWindowProps {
     handleEdit: Function,
     handleBack: Function,
     handleSkip: Function,
-    handleNext: Function,
-    setTransferSettingsItem: Function
+    handleNext: Function
 }
 
 export default function AppointmentStepsWindow(
@@ -32,8 +31,7 @@ export default function AppointmentStepsWindow(
         handleEdit,
         handleBack,
         handleSkip,
-        handleNext,
-        setTransferSettingsItem
+        handleNext
     }: AppointmentStepsWindowProps) {
 
     const {token}=useContext(AuthContext)
@@ -63,7 +61,6 @@ export default function AppointmentStepsWindow(
             };
         transferSettingsToDB(settingsItem, token)
             .then((response) => {
-                setTransferSettingsItem(response.data);
                 navigate(`/overview/${response.data.tastyDateId}`);
             })
             .catch((err) => {

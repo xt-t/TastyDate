@@ -12,17 +12,17 @@ import {updateTastyDateWithVoteTimeItem} from "../../service/tastydate-api-servi
 
 
 interface VoteTimeTableProps {
-    transferSettingsItem: TastyDateItem
-    setTransferSettingsItem: Function
+    tastyDateItemForVote: TastyDateItem
+    setTastyDateItemForVote: Function
     userName: string
     setUserName: Function
     setDisplayNameEntered: Function
 }
 
-export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setDisplayNameEntered}: VoteTimeTableProps) {
+export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setDisplayNameEntered}: VoteTimeTableProps) {
 
     const {token} = useContext(AuthContext);
-    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(transferSettingsItem.infoTastyDateTimes.length).fill(false));
+    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(tastyDateItemForVote.infoTastyDateTimes.length).fill(false));
     const [rowsUserTimeVote, setRowsUserTimeVote] = useState<UserTimeVote[]>([]);
     const [countersVotesPerTime, setCountersVotesPerTime] = useState<number[]>([]);
 
@@ -35,14 +35,14 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
     const addUserVote = () => {
         if (userName !== "") {
             setDisplayNameEntered(true);
-            const tastyDateId = transferSettingsItem.tastyDateId;
+            const tastyDateId = tastyDateItemForVote.tastyDateId;
             const timeVote = {
                 displayedName: userName,
                 votesPerDateTimeFromOneUser: checkDateTime
             }
             updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
                 .then((response) => {
-                    setTransferSettingsItem(response.data);
+                    setTastyDateItemForVote(response.data);
                     setRowsUserTimeVote(response.data.timeVotes);
                     console.log(rowsUserTimeVote)
                     setCountersVotesPerTime(response.data.votingResultsForOneDate)
@@ -58,15 +58,15 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                 <CardContent>
                     {/*Description*/}
 
-                    <div>{transferSettingsItem.infoTastyDate.pickedTastyDateName} {transferSettingsItem.infoTastyDate.pickedLocation} {transferSettingsItem.infoTastyDate.pickedChosenDisplayName}</div>
+                    <div>{tastyDateItemForVote.infoTastyDate.pickedTastyDateName} {tastyDateItemForVote.infoTastyDate.pickedLocation} {tastyDateItemForVote.infoTastyDate.pickedChosenDisplayName}</div>
                     {/*TableHeader*/}
                     <div className="grid-container" style={{
                         display: "grid",
-                        gridTemplateColumns: `repeat(${transferSettingsItem.infoTastyDateTimes.length + 2}, 1fr)`
+                        gridTemplateColumns: `repeat(${tastyDateItemForVote.infoTastyDateTimes.length + 2}, 1fr)`
                     }}>
                         <div className="grid-item"></div>
 
-                        {transferSettingsItem.infoTastyDateTimes.map((itemTime, index) => (
+                        {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
                             <div key={index} className="grid-item">
                                 <div className="th-firstrow">
                                     {itemTime.pickedDate}
@@ -135,7 +135,7 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                         }
 
                         {/*User Input*/}
-                        {transferSettingsItem.infoTastyDateTimes.map((itemTime, index) => (
+                        {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
                             <div key={index}>
                                 <Checkbox
                                     checked={checkDateTime[index]}

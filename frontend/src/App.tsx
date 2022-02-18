@@ -13,19 +13,19 @@ import {TastyDateItem} from "./models/result/TastyDateItem";
 import OverviewTastyDateItems from "./pages/result/OverviewTastyDateItems";
 
 function App() {
-    const [transferSettingsItem, setTransferSettingsItem] = useState<TastyDateItem>(
-        {tastyDateId: "" ,
-            infoTastyDate: { pickedTastyDateName:"",
-                pickedLocation: "",
-                pickedNotes: "",
-                pickedChosenDisplayName: ""},
-        infoTastyDateTimes: [],
-        infoRestaurantData: [],
-        timeVotes: [],
-        restaurantVotes: [],
-        votingResultsForOneDate: [],
-        positiveVotingResultsForOneRestaurant: [],
-        negativeVotingResultsForOneRestaurant: []});
+    // const [transferSettingsItem, setTransferSettingsItem] = useState<TastyDateItem>(
+    //     {tastyDateId: "" ,
+    //         infoTastyDate: { pickedTastyDateName:"",
+    //             pickedLocation: "",
+    //             pickedNotes: "",
+    //             pickedChosenDisplayName: ""},
+    //     infoTastyDateTimes: [],
+    //     infoRestaurantData: [],
+    //     timeVotes: [],
+    //     restaurantVotes: [],
+    //     votingResultsForOneDate: [],
+    //     positiveVotingResultsForOneRestaurant: [],
+    //     negativeVotingResultsForOneRestaurant: []});
 
 
     return (
@@ -35,10 +35,10 @@ function App() {
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/register" element={<RegisterPage/>}/>
                     <Route path="/" element={<Homepage/>}/>
-                    <Route path="/createDate" element={<RequireAuth><AppointmentHome setTransferSettingsItem={setTransferSettingsItem}/></RequireAuth>}/>
+                    <Route path="/createDate" element={<RequireAuth><AppointmentHome/></RequireAuth>}/>
                     <Route path="/restaurants" element={<RequireAuth><OverviewRestaurants/></RequireAuth>}/>
                     <Route path="/overview" element={<RequireAuth><OverviewTastyDateItems/></RequireAuth>}/>
-                    <Route path="/overview/:Id" element={<VoteResult setTransferSettingsItem= {setTransferSettingsItem} transferSettingsItem={transferSettingsItem}/>}/>
+                    <Route path="/overview/:tastyDateId" element={<VoteResult/>}/>
                 </Routes>
             </AuthProvider>
         </div>

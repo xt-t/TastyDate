@@ -7,13 +7,9 @@ import Typography from '@mui/material/Typography';
 import "./Appointment.scss"
 import AppointmentStepsWindow from "./AppointmentStepsWindow";
 
-interface AppointmentStepsProps{
-setTransferSettingsItem: Function
-}
-
 const steps = ['General information', 'Pick your dates and times', 'Pick your restaurant'];
 
-export default function AppointmentSteps({setTransferSettingsItem}:AppointmentStepsProps) {
+export default function AppointmentSteps() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set<number>());
 
@@ -93,7 +89,6 @@ export default function AppointmentSteps({setTransferSettingsItem}:AppointmentSt
                 handleBack={handleBack}
                 handleSkip={handleSkip}
                 handleNext={handleNext}
-                setTransferSettingsItem={setTransferSettingsItem}
             />
 
         </Box>

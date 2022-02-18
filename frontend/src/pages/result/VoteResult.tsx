@@ -2,28 +2,48 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import DisplayMenus from "../../components/general/DisplayMenus";
-import {TastyDateItem} from "../../models/result/TastyDateItem";
 import VoteTimeTable from '../../components/result/VoteTimeTable';
 import {TabPanel} from "./TabPanelFunctions";
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import VoteRestaurantTable from "../../components/result/VoteRestaurantTable";
 import {TextField} from "@mui/material";
+import {useParams} from "react-router-dom";
+import {TastyDateItem} from "../../models/result/TastyDateItem";
+import {AuthContext} from "../../context/AuthProvider";
+import {getTastyDateItemById} from "../../service/tastydate-api-service";
 
 
-interface VoteResultProps {
-    transferSettingsItem: TastyDateItem
-    setTransferSettingsItem: Function
-}
+export default function VoteResult() {
 
-export default function VoteResult({transferSettingsItem, setTransferSettingsItem}:VoteResultProps) {
-    const [value, setValue] = useState(0);
+    const {tastyDateId}:{tastyDateId?:string} = useParams();
+
+    const {token}=useContext(AuthContext)
+
+    const [tastyDateItemForVote, setTastyDateItemForVote] = useState<TastyDateItem>();
+
+    const getTastyDateItem = () => {
+        if (tastyDateId) {
+            console.log(tastyDateId)
+        getTastyDateItemById(tastyDateId, token)
+            .then((response)=>setTastyDateItemForVote(response.data))
+        }
+    }
+
+    useEffect(()=>{
+        getTastyDateItem()
+        //eslint-disable-next-line
+    },[])
+
+
+    const [voteType, setVoteType] = useState(0);
     const [userName, setUserName] = useState<string>("");
     const [displayNameEntered, setDisplayNameEntered] = useState<boolean>(false);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
+        setVoteType(newValue);
     };
 
+    if (typeof tastyDateItemForVote === "object") {
     return (
         <div>
             <div>
@@ -31,32 +51,33 @@ export default function VoteResult({transferSettingsItem, setTransferSettingsIte
 
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <Tabs value={voteType} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Vote Time"/>
                     <Tab label="Vote Restaurant"/>
                 </Tabs>
             </Box>
-            <TabPanel value={value} index={0}>
+            <TabPanel value={voteType} index={0}>
                 <TextField label="Your voting name" variant="standard"
                            value={userName}
                            onChange={(event) => {
                                setUserName(event.target.value)}}
                                InputProps={{readOnly: displayNameEntered}}/>
 
-                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName} setDisplayNameEntered={setDisplayNameEntered}/>
+                <VoteTimeTable tastyDateItemForVote={tastyDateItemForVote} setTastyDateItemForVote={setTastyDateItemForVote} userName={userName} setUserName={setUserName} setDisplayNameEntered={setDisplayNameEntered}/>
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={voteType} index={1}>
                 <TextField label="Your voting name" variant="standard"  value={userName}
                            onChange={(event) => {
                                setUserName(event.target.value)}}
                                InputProps={{readOnly: displayNameEntered}}/>
 
-                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setDisplayNameEntered={setDisplayNameEntered}/>
+                <VoteRestaurantTable tastyDateItemForVote={tastyDateItemForVote} setTastyDateItemForVote={setTastyDateItemForVote} userName={userName} setDisplayNameEntered={setDisplayNameEntered}/>
             </TabPanel>
         </Box>
             </div>
         </div>
-    );
+    );}
+    else {return (<></>);}
 }
 
 

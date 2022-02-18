@@ -15,17 +15,17 @@ import {
 import {AuthContext} from "../../context/AuthProvider";
 
 interface VoteRestaurantTableProps {
-    transferSettingsItem: TastyDateItem
-    setTransferSettingsItem: Function
+    tastyDateItemForVote: TastyDateItem
+    setTastyDateItemForVote: Function
     userName: string
     setDisplayNameEntered: Function
 }
 
-export default function VoteRestaurantTable({transferSettingsItem, setTransferSettingsItem, userName, setDisplayNameEntered}: VoteRestaurantTableProps) {
+export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setDisplayNameEntered}: VoteRestaurantTableProps) {
 
     const {token} = useContext(AuthContext);
 
-    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(transferSettingsItem.infoRestaurantData.length).fill(false));
+    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(tastyDateItemForVote.infoRestaurantData.length).fill(false));
     const [positiveVotesPerTime, setPositiveVotesPerTime] = useState<number[]>([]);
     const [negativeVotesPerTime, setNegativeVotesPerTime] = useState<number[]>([]);
 
@@ -48,14 +48,14 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
     const addUserVote = () => {
         if (userName !== "") {
             setDisplayNameEntered(true);
-            const tastyDateId = transferSettingsItem.tastyDateId;
+            const tastyDateId = tastyDateItemForVote.tastyDateId;
             const restaurantVote = {
                 displayedName: userName,
                 votesPerRestaurantFromOneUser: checkRestaurants
             }
             updateTastyDateWithVoteRestaurantItem(tastyDateId, restaurantVote, token)
                 .then((response) => {
-                    setTransferSettingsItem(response.data);
+                    setTastyDateItemForVote(response.data);
                     setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
                     setNegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant)
                 })
@@ -68,7 +68,7 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
     return (
         <div>
             <div className="container">
-                {transferSettingsItem.infoRestaurantData.map((restaurant,index) => (
+                {tastyDateItemForVote.infoRestaurantData.map((restaurant, index) => (
                     <React.Fragment key={index}>
                 <div className="resultcard">
                     <Box className="imgBx">

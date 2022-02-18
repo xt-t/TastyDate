@@ -1,5 +1,6 @@
 package de.neuefische.backend.controller;
 
+import de.neuefische.backend.model.RestaurantCard;
 import de.neuefische.backend.model.TastyDateItem;
 import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
 import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -26,6 +28,12 @@ public class TastyDateController {
     private ResponseEntity<List<TastyDateItem>> getAllTastyDateItems() {
         List<TastyDateItem> allTastyDateItems = dateInfoService.getEveryTastyDateItem();
         return ok(allTastyDateItems);
+    }
+
+    @GetMapping(value="/{tastyDateId}")
+    public ResponseEntity<TastyDateItem> getTastyDateById  (@PathVariable String tastyDateId) {
+        Optional<TastyDateItem> opt = dateInfoService.findTastyDateById(tastyDateId);
+        return ResponseEntity.of(opt);
     }
 
     @PostMapping("/completesettings")
