@@ -5,21 +5,27 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import {getAllTastyDateItems} from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
+import {Button, Card, CardContent} from "@mui/material";
+import "./OverviewVoting.scss"
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import {useNavigate} from "react-router-dom";
 
 
 export default function OverviewTastyDateItems() {
 
     const {token}=useContext(AuthContext);
 
-    const [selectedTastyDateId, setSelectedTastyDateId]=useState<string>();
+    const [selectedTastyDateId, setSelectedTastyDateId]=useState<string>("");
     const [tastyDateItems, setTastyDateItems]=useState<TastyDateItem[]>([]);
 
-    const handleChange = (event: SelectChangeEvent) => {
-            setSelectedTastyDateId(event.target.value as string);
-        };
+    const navigate = useNavigate();
+
+    const switchPageToCertainVote = () => {
+        navigate(`/overview/${selectedTastyDateId}`);
+    }
 
     const getEveryTastyDateId = () => {
         getAllTastyDateItems(token)
@@ -34,15 +40,17 @@ export default function OverviewTastyDateItems() {
 return (
     <div>
             <DisplayMenus/>
-        <div>
-            <Box sx={{ minWidth: 120 }}>
+        <div className="votingCard">
+            <Card className="cardItems">
+                <CardContent>
+                    <h3 className="votingCardElement">Select and vote for a TastyDate</h3>
+            <Box sx={{ minWidth: 120 }} className="votingCardElement">
                 <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                    <InputLabel variant="outlined">TastyDate</InputLabel>
                     <Select
-                        labelId="demo-simple-select-label"
                         value={selectedTastyDateId}
-                        label="Age"
-                        onChange={handleChange}
+                        label="TastyDate"
+                        onChange={(event)=>setSelectedTastyDateId(event.target.value)}
                     >
                         {tastyDateItems.map((tastyDateItem, index) => (
                           <MenuItem value={tastyDateItem.tastyDateId}>{tastyDateItem.infoTastyDate.pickedTastyDateName}</MenuItem>
@@ -51,6 +59,9 @@ return (
                     </Select>
                 </FormControl>
             </Box>
+                    <Button variant="text" className="votingCardElement" onClick={switchPageToCertainVote}>Go to vote<NavigateNextIcon/></Button>
+                </CardContent>
+            </Card>
         </div>
     </div>
 )

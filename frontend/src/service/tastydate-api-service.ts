@@ -30,7 +30,7 @@ export const registerPost = (register:RegisterData) : Promise<string> =>
     axios.post(`/registration/user`, register).then(response => response.data)
 
 export const getAllTastyDateItems = (token?: string) =>
-    axios.get(`/api/appointment`, token? {headers:{"Authorization": "Bearer" + token}}:{})
+    axios.get(`/api/appointment/getAllTastyDateItems`, token? {headers:{"Authorization": "Bearer" + token}}:{})
 
 export const transferSettingsToDB = (settingsItem:DateSettingsItemDTO, token? :string) =>
     axios.post(`/api/appointment/completesettings`, settingsItem, token? {headers:{"Authorization": "Bearer" + token}}:{})

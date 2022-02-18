@@ -1,0 +1,25 @@
+.votingCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .cardItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    width: 40%;
+  }
+  Box {
+    min-width: 200px;
+  }
+  .votingCardElement {
+    margin: 1rem;
+  }
+
+  .votingCardElement:first-child{
+    width: 300px;
+    padding:10px;
+  }
+
+}

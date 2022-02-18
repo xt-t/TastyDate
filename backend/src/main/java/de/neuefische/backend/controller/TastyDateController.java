@@ -22,7 +22,7 @@ public class TastyDateController {
     }
 
 
-    @GetMapping("/completesettings")
+    @GetMapping("/getAllTastyDateItems")
     private ResponseEntity<List<TastyDateItem>> getAllTastyDateItems() {
         List<TastyDateItem> allTastyDateItems = dateInfoService.getEveryTastyDateItem();
         return ok(allTastyDateItems);
