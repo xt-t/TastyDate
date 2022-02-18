@@ -64,7 +64,7 @@ export default function AppointmentStepsWindow(
         transferSettingsToDB(settingsItem, token)
             .then((response) => {
                 setTransferSettingsItem(response.data);
-                navigate("/overview");
+                navigate(`/overview/${response.data.tastyDateId}`);
             })
             .catch((err) => {
                 console.error(err.message);
@@ -129,7 +129,7 @@ export default function AppointmentStepsWindow(
 
 
                                 <Button onClick={() => handleNext()}>
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                    {(activeStep === steps.length - 1) ? 'Finish' : 'Next'}
                                 </Button>
 
 

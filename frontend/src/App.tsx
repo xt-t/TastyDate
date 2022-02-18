@@ -10,6 +10,7 @@ import AuthProvider from './context/AuthProvider';
 import LoginPage from './pages/loginregister/LoginPage';
 import RegisterPage from './pages/loginregister/RegisterPage';
 import {TastyDateItem} from "./models/result/TastyDateItem";
+import OverviewTastyDateItems from "./pages/result/OverviewTastyDateItems";
 
 function App() {
     const [transferSettingsItem, setTransferSettingsItem] = useState<TastyDateItem>(
@@ -26,6 +27,7 @@ function App() {
         positiveVotingResultsForOneRestaurant: [],
         negativeVotingResultsForOneRestaurant: []});
 
+
     return (
         <div className="App">
             <AuthProvider>
@@ -35,7 +37,8 @@ function App() {
                     <Route path="/" element={<Homepage/>}/>
                     <Route path="/createDate" element={<RequireAuth><AppointmentHome setTransferSettingsItem={setTransferSettingsItem}/></RequireAuth>}/>
                     <Route path="/restaurants" element={<RequireAuth><OverviewRestaurants/></RequireAuth>}/>
-                    <Route path="/overview" element={<RequireAuth><VoteResult setTransferSettingsItem= {setTransferSettingsItem} transferSettingsItem={transferSettingsItem}/></RequireAuth>}/>
+                    <Route path="/overview" element={<RequireAuth><OverviewTastyDateItems setTransferSettingsItem= {setTransferSettingsItem} transferSettingsItem={transferSettingsItem}/></RequireAuth>}/>
+                    <Route path="/overview/:Id" element={<VoteResult setTransferSettingsItem= {setTransferSettingsItem} transferSettingsItem={transferSettingsItem}/>}/>
                 </Routes>
             </AuthProvider>
         </div>
