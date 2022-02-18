@@ -37,7 +37,7 @@ function App() {
                     <Route path="/" element={<Homepage/>}/>
                     <Route path="/createDate" element={<RequireAuth><AppointmentHome setTransferSettingsItem={setTransferSettingsItem}/></RequireAuth>}/>
                     <Route path="/restaurants" element={<RequireAuth><OverviewRestaurants/></RequireAuth>}/>
-                    <Route path="/overview" element={<RequireAuth><OverviewTastyDateItems setTransferSettingsItem= {setTransferSettingsItem} transferSettingsItem={transferSettingsItem}/></RequireAuth>}/>
+                    <Route path="/overview" element={<RequireAuth><OverviewTastyDateItems/></RequireAuth>}/>
                     <Route path="/overview/:Id" element={<VoteResult setTransferSettingsItem= {setTransferSettingsItem} transferSettingsItem={transferSettingsItem}/>}/>
                 </Routes>
             </AuthProvider>
