@@ -5,7 +5,7 @@ import image from "./dummypic.jpg";
 import Checkbox from "@mui/material/Checkbox";
 import {useContext, useState} from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import {Box, Button, Rating, styled, TextField} from "@mui/material";
+import {Box, Button, Rating, styled} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -18,9 +18,10 @@ interface VoteRestaurantTableProps {
     transferSettingsItem: TastyDateItem
     setTransferSettingsItem: Function
     userName: string
+    setDisplayNameEntered: Function
 }
 
-export default function VoteRestaurantTable({transferSettingsItem, setTransferSettingsItem, userName}: VoteRestaurantTableProps) {
+export default function VoteRestaurantTable({transferSettingsItem, setTransferSettingsItem, userName, setDisplayNameEntered}: VoteRestaurantTableProps) {
 
     const {token} = useContext(AuthContext);
 
@@ -46,6 +47,7 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
 
     const addUserVote = () => {
         if (userName !== "") {
+            setDisplayNameEntered(true);
             const tastyDateId = transferSettingsItem.tastyDateId;
             const restaurantVote = {
                 displayedName: userName,
@@ -114,7 +116,7 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                     {(positiveVotesPerTime.length !==0) ?
                         (
                             <div>
-                                <CloseIcon></CloseIcon>{negativeVotesPerTime[index]} <CheckIcon></CheckIcon>{positiveVotesPerTime[index]}
+                                <CloseIcon/>{negativeVotesPerTime[index]} <CheckIcon/>{positiveVotesPerTime[index]}
                             </div>
                         )
                         :

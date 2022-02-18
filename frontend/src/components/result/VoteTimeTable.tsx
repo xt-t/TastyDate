@@ -1,4 +1,4 @@
-import {Button, CardContent, TextField} from '@mui/material';
+import {Box, Button, CardContent} from '@mui/material';
 import Card from '@mui/material/Card';
 import "./Tables.scss"
 import Checkbox from '@mui/material/Checkbox';
@@ -16,9 +16,10 @@ interface VoteTimeTableProps {
     setTransferSettingsItem: Function
     userName: string
     setUserName: Function
+    setDisplayNameEntered: Function
 }
 
-export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName}: VoteTimeTableProps) {
+export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setDisplayNameEntered}: VoteTimeTableProps) {
 
     const {token} = useContext(AuthContext);
     const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(transferSettingsItem.infoTastyDateTimes.length).fill(false));
@@ -33,6 +34,7 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
 
     const addUserVote = () => {
         if (userName !== "") {
+            setDisplayNameEntered(true);
             const tastyDateId = transferSettingsItem.tastyDateId;
             const timeVote = {
                 displayedName: userName,
@@ -117,29 +119,18 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                                     <div></div>
 
 
-                                    <TextField value={userName || ""}
-                                               onChange={(event) => {
-                                                   setUserName(event.target.value)
-                                               }}
-                                               style={{
+                                    <Box style={{
                                                    gridColumnStart: "1",
                                                    gridRowStart: `${rowsUserTimeVote.length + 3}`
                                                }}
-                                    >Username</TextField>
+                                    >Enter your vote:</Box>
                                 </React.Fragment>
 
                             )
                             :
                             (<React.Fragment>
-                                <TextField value={userName || ""}
-                                           onChange={(event) => {
-                                               setUserName(event.target.value)
-                                           }}
-                                           style={{
-                                               gridColumnStart: "1",
-                                               gridRowStart: `${rowsUserTimeVote.length + 2}`
-                                           }}
-                                >Username</TextField></React.Fragment>)
+                                <Box style={{gridColumnStart: "1", gridRowStart: `${rowsUserTimeVote.length + 2}`}}>
+                                    Enter your vote: </Box></React.Fragment>)
 
                         }
 

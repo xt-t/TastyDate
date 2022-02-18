@@ -37,18 +37,21 @@ export default function VoteResult({transferSettingsItem, setTransferSettingsIte
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <TextField value={userName}
+                <TextField label="Your voting name" variant="standard"
+                           value={userName}
                            onChange={(event) => {
-                               setUserName(event.target.value)
-                           }}>Username</TextField>
-                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName}/>
+                               setUserName(event.target.value)}}
+                               InputProps={{readOnly: displayNameEntered}}/>
+
+                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName} setDisplayNameEntered={setDisplayNameEntered}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <TextField value={userName}
+                <TextField label="Your voting name" variant="standard"  value={userName}
                            onChange={(event) => {
-                               setUserName(event.target.value)
-                           }}>Username</TextField>
-                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName}/>
+                               setUserName(event.target.value)}}
+                               InputProps={{readOnly: displayNameEntered}}/>
+
+                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setDisplayNameEntered={setDisplayNameEntered}/>
             </TabPanel>
         </Box>
             </div>
