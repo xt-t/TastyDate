@@ -91,3 +91,19 @@ border: 1px solid black;
   display: flex;
   flex-direction: column;
 }
+
+//Invitationlink
+.invitationCard{
+  width: 650px;
+}
+
+.invitationCardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .invitationText {
+    margin: 20px;
+    width: 630px;
+  }
+}

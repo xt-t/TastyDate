@@ -11,6 +11,7 @@ import {useParams} from "react-router-dom";
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import {AuthContext} from "../../context/AuthProvider";
 import {getTastyDateItemById} from "../../service/tastydate-api-service";
+import Invitationlink from "../../components/result/Invitationlink";
 
 
 export default function VoteResult() {
@@ -53,6 +54,7 @@ export default function VoteResult() {
                 <Tabs value={voteType} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Vote Time"/>
                     <Tab label="Vote Restaurant"/>
+                    <Tab label="Invitationlink"/>
                 </Tabs>
             </Box>
             <TabPanel value={voteType} index={0}>
@@ -71,6 +73,9 @@ export default function VoteResult() {
                                InputProps={{readOnly: checkIfNameConfirmed}}/>
 
                 <VoteRestaurantTable tastyDateItemForVote={tastyDateItemForVote} setTastyDateItemForVote={setTastyDateItemForVote} userName={userName} setCheckIfNameConfirmed={setCheckIfNameConfirmed}/>
+        </TabPanel>
+            <TabPanel value={voteType} index={2}>
+                <Invitationlink tastyDateId={tastyDateId}/>
             </TabPanel>
         </Box>
             </div>
