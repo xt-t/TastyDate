@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
     public class RestaurantItem {
 
         private int id;
+        private String creatorName;
         private String pickedCategory;
         private int pickedPostcode;
         private String pickedCity;

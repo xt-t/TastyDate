@@ -59,13 +59,10 @@ export default function RestaurantCardItem({restaurantCard, deleteRestaurantCard
             <p>
                 {restaurantCard.postcode} {restaurantCard.city}
             </p>
-            {/*<div className="card-author">*/}
-            {/*    <AccountCircleIcon className="author-avatar"></AccountCircleIcon>*/}
-            {/*    <div className="author-name">*/}
-            {/*        <div className="author-name-prefix">Profile</div>*/}
-            {/*        User*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+                <div className="author-name">
+                    <div className="author-name-prefix">Recommended by:</div>
+                    {restaurantCard.cardCreator}
+                </div>
             <div className="cardIcons">
             <DeleteIcon onClick={()=>deleteRestaurantCard(restaurantCard.id)}/>
             <EditIcon onClick={()=>editRestaurantCard(restaurantCard.id)}/>

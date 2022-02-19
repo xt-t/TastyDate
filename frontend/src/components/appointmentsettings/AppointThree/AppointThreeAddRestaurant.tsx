@@ -3,6 +3,7 @@ import {Box, Button, Card, CardContent} from "@mui/material";
 import "../Appoint.scss"
 import {AppointThreeType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import AppointThreeAddFavouriteRestaurants from "./AppointThreeAddFavouriteRestaurants";
 
 interface AppointThreeAddRestaurantProps {
     appointThree: AppointThreeType
@@ -25,7 +26,8 @@ export default function AppointThreeAddRestaurant(
                     <h3>Add your restaurant</h3>
                     <span>Your options:</span>
                     <Box className="menuIcons">
-                        <div className="favouritesRowButton"><span>Add restaurants from your </span><Button variant="contained" className="favouriteButton"><FavoriteIcon> </FavoriteIcon> Favourites </Button></div>
+                        <AppointThreeAddFavouriteRestaurants appointThree={appointThree} resetDataInput={resetDataInput} saveRestaurantData={saveRestaurantData}/>
+
                         <AppointThreeAddRestaurantManually appointThree={appointThree} resetDataInput={resetDataInput} saveRestaurantData={saveRestaurantData}/>
                     </Box>
                 </CardContent>
