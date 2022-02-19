@@ -16,10 +16,10 @@ interface VoteTimeTableProps {
     setTastyDateItemForVote: Function
     userName: string
     setUserName: Function
-    setDisplayNameEntered: Function
+    setCheckIfNameConfirmed: Function
 }
 
-export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setDisplayNameEntered}: VoteTimeTableProps) {
+export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setCheckIfNameConfirmed}: VoteTimeTableProps) {
 
     const {token} = useContext(AuthContext);
     const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(tastyDateItemForVote.infoTastyDateTimes.length).fill(false));
@@ -34,7 +34,7 @@ export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemFor
 
     const addUserVote = () => {
         if (userName !== "") {
-            setDisplayNameEntered(true);
+            setCheckIfNameConfirmed(true);
             const tastyDateId = tastyDateItemForVote.tastyDateId;
             const timeVote = {
                 displayedName: userName,
@@ -44,7 +44,6 @@ export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemFor
                 .then((response) => {
                     setTastyDateItemForVote(response.data);
                     setRowsUserTimeVote(response.data.timeVotes);
-                    console.log(rowsUserTimeVote)
                     setCountersVotesPerTime(response.data.votingResultsForOneDate)
                 })
                 .catch((err) => {

@@ -1,9 +1,8 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.model.RestaurantCard;
 import de.neuefische.backend.model.TastyDateItem;
-import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
-import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
+import de.neuefische.backend.model.settingsSubModel.vote.UserRestaurantVote;
+import de.neuefische.backend.model.settingsSubModel.vote.UserTimeVote;
 import de.neuefische.backend.repository.DateSettingsRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +10,11 @@ import java.util.*;
 
 
 @Service
-public class DateSettingsService {
+public class TastyDateSettingsService {
 
     private final DateSettingsRepository dateSettingsRepo;
 
-    public DateSettingsService(DateSettingsRepository dateSettingsRepo) {
+    public TastyDateSettingsService(DateSettingsRepository dateSettingsRepo) {
         this.dateSettingsRepo = dateSettingsRepo;
     }
 

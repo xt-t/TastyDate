@@ -23,7 +23,6 @@ export default function VoteResult() {
 
     const getTastyDateItem = () => {
         if (tastyDateId) {
-            console.log(tastyDateId)
         getTastyDateItemById(tastyDateId, token)
             .then((response)=>setTastyDateItemForVote(response.data))
         }
@@ -37,7 +36,7 @@ export default function VoteResult() {
 
     const [voteType, setVoteType] = useState(0);
     const [userName, setUserName] = useState<string>("");
-    const [displayNameEntered, setDisplayNameEntered] = useState<boolean>(false);
+    const [checkIfNameConfirmed, setCheckIfNameConfirmed] = useState<boolean>(false);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setVoteType(newValue);
@@ -61,17 +60,17 @@ export default function VoteResult() {
                            value={userName}
                            onChange={(event) => {
                                setUserName(event.target.value)}}
-                               InputProps={{readOnly: displayNameEntered}}/>
+                               InputProps={{readOnly: checkIfNameConfirmed}}/>
 
-                <VoteTimeTable tastyDateItemForVote={tastyDateItemForVote} setTastyDateItemForVote={setTastyDateItemForVote} userName={userName} setUserName={setUserName} setDisplayNameEntered={setDisplayNameEntered}/>
+                <VoteTimeTable tastyDateItemForVote={tastyDateItemForVote} setTastyDateItemForVote={setTastyDateItemForVote} userName={userName} setUserName={setUserName} setCheckIfNameConfirmed={setCheckIfNameConfirmed}/>
             </TabPanel>
             <TabPanel value={voteType} index={1}>
                 <TextField label="Your voting name" variant="standard"  value={userName}
                            onChange={(event) => {
                                setUserName(event.target.value)}}
-                               InputProps={{readOnly: displayNameEntered}}/>
+                               InputProps={{readOnly: checkIfNameConfirmed}}/>
 
-                <VoteRestaurantTable tastyDateItemForVote={tastyDateItemForVote} setTastyDateItemForVote={setTastyDateItemForVote} userName={userName} setDisplayNameEntered={setDisplayNameEntered}/>
+                <VoteRestaurantTable tastyDateItemForVote={tastyDateItemForVote} setTastyDateItemForVote={setTastyDateItemForVote} userName={userName} setCheckIfNameConfirmed={setCheckIfNameConfirmed}/>
             </TabPanel>
         </Box>
             </div>

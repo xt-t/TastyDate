@@ -18,10 +18,10 @@ interface VoteRestaurantTableProps {
     tastyDateItemForVote: TastyDateItem
     setTastyDateItemForVote: Function
     userName: string
-    setDisplayNameEntered: Function
+    setCheckIfNameConfirmed: Function
 }
 
-export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setDisplayNameEntered}: VoteRestaurantTableProps) {
+export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setCheckIfNameConfirmed}: VoteRestaurantTableProps) {
 
     const {token} = useContext(AuthContext);
 
@@ -47,7 +47,7 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
 
     const addUserVote = () => {
         if (userName !== "") {
-            setDisplayNameEntered(true);
+            setCheckIfNameConfirmed(true);
             const tastyDateId = tastyDateItemForVote.tastyDateId;
             const restaurantVote = {
                 displayedName: userName,
