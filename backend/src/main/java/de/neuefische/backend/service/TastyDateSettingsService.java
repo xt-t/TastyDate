@@ -33,17 +33,13 @@ public class TastyDateSettingsService {
     public Optional<TastyDateItem> findTastyDateById(String id) {return dateSettingsRepo.findById(id);}
 
     public TastyDateItem addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
-
-        //Optional - existiert das SettingsItem? Fehlermeldung
-
         //checking and updating the List of the UserVotes for the DateTimes
         Optional<TastyDateItem> optionalTastyDateItem = dateSettingsRepo.findById(tastyDateId);
         TastyDateItem test = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
         List<UserTimeVote> tempList = test.getTimeVotes();
-        tempList.add(timeVote);
-        test.setTimeVotes(tempList);
-        dateSettingsRepo.save(test);
-
+            tempList.add(timeVote);
+            test.setTimeVotes(tempList);
+            dateSettingsRepo.save(test);
         //generate sums of voteResult
         boolean[] checksVoteItem = timeVote.getVotesPerDateTimeFromOneUser();
         int [] amount = new int[checksVoteItem.length];
@@ -51,9 +47,7 @@ public class TastyDateSettingsService {
         for (UserTimeVote item:tempList) {
             boolean[] checksItem = item.getVotesPerDateTimeFromOneUser();
             for (int i=0; i < amount.length; i++) {
-                if (checksItem[i]) {
-                    amount[i]++;
-                }
+                if (checksItem[i]) amount[i]++;
                 }
             }
         test.setVotingResultsForOneDate(amount);
@@ -80,12 +74,8 @@ public class TastyDateSettingsService {
         for (UserRestaurantVote item:tempList) {
             boolean[] checksItem = item.getVotesPerRestaurantFromOneUser();
             for (int i=0; i < checksVoteItem.length; i++) {
-                if (checksItem[i]) {
-                    positiveAmount[i]++;
-                }
-                else {
-                    negativeAmount[i]++;
-                }
+                if (checksItem[i]) positiveAmount[i]++;
+                else negativeAmount[i]++;
             }
         }
         test.setPositiveVotingResultsForOneRestaurant(positiveAmount);

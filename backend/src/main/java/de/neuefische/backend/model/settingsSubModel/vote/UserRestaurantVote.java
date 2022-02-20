@@ -10,7 +10,9 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 
 public class UserRestaurantVote {
+    @Id
     private String displayedName;
+
     private boolean[] votesPerRestaurantFromOneUser;
 }
 

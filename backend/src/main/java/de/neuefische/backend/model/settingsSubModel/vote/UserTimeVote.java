@@ -10,6 +10,8 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 
 public class UserTimeVote {
+    @Id
     private String displayedName;
+
     private boolean[] votesPerDateTimeFromOneUser;
 }

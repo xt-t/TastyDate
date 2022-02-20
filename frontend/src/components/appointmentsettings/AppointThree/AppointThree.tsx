@@ -4,7 +4,6 @@ import AppointThreeDisplayRestaurant from "./AppointThreeDisplayRestaurant";
 import {AppointThreeType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 import {useContext} from "react";
 import {AuthContext} from "../../../context/AuthProvider";
-import jwtDecode from "jwt-decode";
 
 interface AppointThreeProps {
     appointThree: AppointThreeType
@@ -16,7 +15,7 @@ export default function AppointThree(
 
     const {jwtDecoded}=useContext(AuthContext)
 
-    const saveRestaurantData = () => {
+    const saveRestaurantDataFromManualInput = () => {
         if ((appointThree.category !== "") &&
             (appointThree.postcode !== 0) &&
             (appointThree.city !== "") &&
@@ -60,7 +59,7 @@ export default function AppointThree(
         <div className="cardThree">
             <AppointThreeAddRestaurant
                 appointThree={appointThree}
-                saveRestaurantData={saveRestaurantData}
+                saveRestaurantDataFromManualInput={saveRestaurantDataFromManualInput}
                 resetDataInput={resetDataInput}
             />
 

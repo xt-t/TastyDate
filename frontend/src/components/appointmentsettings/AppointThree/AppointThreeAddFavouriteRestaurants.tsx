@@ -16,13 +16,11 @@ import "./FavouriteRestaurants.scss"
 
 interface AppointThreeAddFavouriteRestaurantsProps {
     appointThree: AppointThreeType
-    saveRestaurantData: Function
     resetDataInput: Function
 }
 
 export default function AppointThreeAddFavouriteRestaurants({
                                                               appointThree,
-                                                              saveRestaurantData,
                                                               resetDataInput
                                                           }: AppointThreeAddFavouriteRestaurantsProps) {
     const [open, setOpen] = useState(false);
@@ -49,6 +47,36 @@ export default function AppointThreeAddFavouriteRestaurants({
         //eslint-disable-next-line
     }, []);
 
+    const handleCheck = (cardNumber: number) => {
+        const newChecked = [...checkFavouriteRestaurants];
+        newChecked[cardNumber] = !newChecked[cardNumber];
+        setCheckFavouriteRestaurants(newChecked);
+    }
+
+    const [checkFavouriteRestaurants, setCheckFavouriteRestaurants] = useState<boolean[]>(Array(restaurantCards.length).fill(false));
+
+    const transfer = (restaurant: boolean, index:number) => {
+        if (restaurant === true) {
+            const newRestaurantData = {
+                id: restaurantCards[index].id,
+                creatorName: restaurantCards[index].cardCreator,
+                pickedCategory: restaurantCards[index].category,
+                pickedPostcode: restaurantCards[index].postcode,
+                pickedCity: restaurantCards[index].city,
+                pickedRestaurantName: restaurantCards[index].restaurantName,
+                pickedRating: restaurantCards[index].rating,
+                pickedPrice: restaurantCards[index].price
+            };
+            appointThree.setRestaurantData([...appointThree.restaurantData, newRestaurantData]);
+        }
+    }
+
+    const transferSelectedRestaurantsToTastyDateItem = () => {
+        checkFavouriteRestaurants.map((restaurant, index) =>
+            transfer(restaurant, index))
+    }
+
+
 
     return (
         <div >
@@ -71,7 +99,7 @@ export default function AppointThreeAddFavouriteRestaurants({
                         <section className="fcard-list">
                             {restaurantCards.map((restaurantCard, index) => (
                                 <React.Fragment key={index}>
-                                    <AppointThreeAddFavouriteRestaurantCard restaurantCard={restaurantCard}/>
+                                    <AppointThreeAddFavouriteRestaurantCard restaurantCard={restaurantCard} cardNumber={index} handleCheck={handleCheck} checkFavouriteRestaurants={checkFavouriteRestaurants}/>
                                 </React.Fragment>))}
                         </section>
 
@@ -81,7 +109,7 @@ export default function AppointThreeAddFavouriteRestaurants({
                     <Button variant="outlined" onClick={() => resetDataInput()}> <RestartAltIcon/> Reset
                     </Button>
                     <Button variant="contained" autoFocus onClick={() =>
-                        saveRestaurantData()}> <AddIcon/> Add </Button>
+                        transferSelectedRestaurantsToTastyDateItem()}> <AddIcon/> Confirm </Button>
                 </DialogActions>
             </BootstrapDialog>
 

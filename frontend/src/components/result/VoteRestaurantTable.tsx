@@ -39,7 +39,7 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
         },
     });
 
-    const handleChange = (index: number) => {
+    const handleCheck = (index: number) => {
         const newChecked = [...checkRestaurants];
         newChecked[index] = !newChecked[index];
         setCheckRestaurants(newChecked);
@@ -110,7 +110,7 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
                 <div className="checkboxAndResults">
                 <Checkbox
                     checked={checkRestaurants[index]}
-                    onChange={(event) => handleChange(index)}
+                    onChange={(event) => handleCheck(index)}
                     inputProps={{'aria-label': 'controlled'}}
                 />
                     {(positiveVotesPerTime.length !==0) ?
