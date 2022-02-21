@@ -1,5 +1,5 @@
 import {AppointThreeType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
-import {useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState} from "react";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import {BootstrapDialog, BootstrapDialogTitle} from "./Subcomponents/DialogTitle";
@@ -29,6 +29,7 @@ export default function AppointThreeAddFavouriteRestaurants({
 
     const handleClickOpen = () => {
         setOpen(true);
+        setCheckFavouriteRestaurants([])
     };
 
     const handleClose = () => {
@@ -47,36 +48,26 @@ export default function AppointThreeAddFavouriteRestaurants({
         //eslint-disable-next-line
     }, []);
 
-    const handleCheck = (cardNumber: number) => {
-        const newChecked = [...checkFavouriteRestaurants];
-        newChecked[cardNumber] = !newChecked[cardNumber];
-        setCheckFavouriteRestaurants(newChecked);
-    }
+    const handleCheck = (restaurantCard: RestaurantCard, checked : boolean) => {
 
-    const [checkFavouriteRestaurants, setCheckFavouriteRestaurants] = useState<boolean[]>(Array(restaurantCards.length).fill(false));
-
-    const transfer = (restaurant: boolean, index:number) => {
-        if (restaurant === true) {
-            const newRestaurantData = {
-                id: restaurantCards[index].id,
-                creatorName: restaurantCards[index].cardCreator,
-                pickedCategory: restaurantCards[index].category,
-                pickedPostcode: restaurantCards[index].postcode,
-                pickedCity: restaurantCards[index].city,
-                pickedRestaurantName: restaurantCards[index].restaurantName,
-                pickedRating: restaurantCards[index].rating,
-                pickedPrice: restaurantCards[index].price
-            };
-            appointThree.setRestaurantData([...appointThree.restaurantData, newRestaurantData]);
+        if (checked) {
+        const newChecked = [...checkFavouriteRestaurants, restaurantCard];
+            setCheckFavouriteRestaurants(newChecked);
+            console.log(newChecked)
+            console.log(checkFavouriteRestaurants)
+        }
+        else {
+            const newChecked = checkFavouriteRestaurants.filter(checkFavouriteRestaurant => checkFavouriteRestaurant === restaurantCard)
+            setCheckFavouriteRestaurants(newChecked);
         }
     }
 
+    const [checkFavouriteRestaurants, setCheckFavouriteRestaurants] = useState<RestaurantCard[]>([]);
+
     const transferSelectedRestaurantsToTastyDateItem = () => {
-        checkFavouriteRestaurants.map((restaurant, index) =>
-            transfer(restaurant, index))
+        console.log(checkFavouriteRestaurants)
+        checkFavouriteRestaurants.forEach(checkFavouriteRestaurant=>appointThree.setRestaurantData([...appointThree.restaurantData, checkFavouriteRestaurant]));
     }
-
-
 
     return (
         <div >

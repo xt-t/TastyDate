@@ -36,8 +36,17 @@ public class TastyDateSettingsService {
         //checking and updating the List of the UserVotes for the DateTimes
         Optional<TastyDateItem> optionalTastyDateItem = dateSettingsRepo.findById(tastyDateId);
         TastyDateItem test = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
+
         List<UserTimeVote> tempList = test.getTimeVotes();
-            tempList.add(timeVote);
+        if (tempList.isEmpty()) {
+            tempList = new ArrayList<>();
+        }
+        System.out.println(tempList);
+        List<UserTimeVote> checkList = tempList.stream().filter(eachVote->eachVote.getDisplayedName().equals(timeVote.getDisplayedName())).toList();
+        System.out.println(checkList);
+
+
+        tempList.add(timeVote);
             test.setTimeVotes(tempList);
             dateSettingsRepo.save(test);
         //generate sums of voteResult

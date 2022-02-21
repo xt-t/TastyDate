@@ -10,7 +10,7 @@ interface AppointThreeAddFavouriteRestaurantCardProps {
     restaurantCard: RestaurantCard
     cardNumber: number
     handleCheck: Function
-    checkFavouriteRestaurants: boolean[]
+    checkFavouriteRestaurants: RestaurantCard[]
 }
 
 export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, cardNumber, handleCheck, checkFavouriteRestaurants}:AppointThreeAddFavouriteRestaurantCardProps) {
@@ -63,8 +63,7 @@ export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, 
                 </div>
                 <div className="checkBoxFavouriteRestaurant">
                     <Checkbox
-                        checked={checkFavouriteRestaurants[cardNumber]}
-                        onChange={() => handleCheck(cardNumber)}
+                        onChange={(event) => handleCheck(restaurantCard, event.target.checked)}
                         inputProps={{'aria-label': 'controlled'}}
                     />
                 </div>
