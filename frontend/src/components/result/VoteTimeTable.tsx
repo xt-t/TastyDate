@@ -22,7 +22,7 @@ interface VoteTimeTableProps {
 export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setCheckIfNameConfirmed}: VoteTimeTableProps) {
 
     const {token} = useContext(AuthContext);
-    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(tastyDateItemForVote.infoTastyDateTimes.length).fill(false));
+    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(new Array(tastyDateItemForVote.infoTastyDateTimes.length).fill(false));
     const [rowsUserTimeVote, setRowsUserTimeVote] = useState<UserTimeVote[]>([]);
     const [countersVotesPerTime, setCountersVotesPerTime] = useState<number[]>([]);
 

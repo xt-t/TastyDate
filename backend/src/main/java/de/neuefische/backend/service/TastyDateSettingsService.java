@@ -35,20 +35,17 @@ public class TastyDateSettingsService {
     public TastyDateItem addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
         //checking and updating the List of the UserVotes for the DateTimes
         Optional<TastyDateItem> optionalTastyDateItem = dateSettingsRepo.findById(tastyDateId);
-        TastyDateItem test = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
+        TastyDateItem availableTastyDateItem = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
+        List<UserTimeVote> tempList = availableTastyDateItem.getTimeVotes();
 
-        List<UserTimeVote> tempList = test.getTimeVotes();
         if (tempList.isEmpty()) {
             tempList = new ArrayList<>();
         }
-        System.out.println(tempList);
         List<UserTimeVote> checkList = tempList.stream().filter(eachVote->eachVote.getDisplayedName().equals(timeVote.getDisplayedName())).toList();
-        System.out.println(checkList);
-
-
+        if (checkList.isEmpty()) {
         tempList.add(timeVote);
-            test.setTimeVotes(tempList);
-            dateSettingsRepo.save(test);
+            availableTastyDateItem.setTimeVotes(tempList);
+            dateSettingsRepo.save(availableTastyDateItem);
         //generate sums of voteResult
         boolean[] checksVoteItem = timeVote.getVotesPerDateTimeFromOneUser();
         int [] amount = new int[checksVoteItem.length];
@@ -56,41 +53,61 @@ public class TastyDateSettingsService {
         for (UserTimeVote item:tempList) {
             boolean[] checksItem = item.getVotesPerDateTimeFromOneUser();
             for (int i=0; i < amount.length; i++) {
-                if (checksItem[i]) amount[i]++;
+                if (checksItem[i]) {
+                    amount[i]++;
+                }
                 }
             }
-        test.setVotingResultsForOneDate(amount);
-        return dateSettingsRepo.save(test);
+            availableTastyDateItem.setVotingResultsForOneDate(amount);
+        return dateSettingsRepo.save(availableTastyDateItem);}
+        else {
+            throw new IllegalArgumentException("Eintrag bereits vorhanden");
+        }
     }
 
-    public TastyDateItem addVoteRestaurantItemToTastyDate(UserRestaurantVote restaurantVote, String tastyDateId) {
+    public TastyDateItem addVoteRestaurantCardToTastyDate(UserRestaurantVote restaurantVote, String tastyDateId) {
 
         //Optional - existiert das SettingsItem? Fehlermeldung
 
         //checking and updating the List of the UserVotes for the DateTimes
 
         Optional<TastyDateItem> optionalTastyDateItem = dateSettingsRepo.findById(tastyDateId);
-        TastyDateItem test = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
-        List<UserRestaurantVote> tempList = test.getRestaurantVotes();
-        tempList.add(restaurantVote);
-        test.setRestaurantVotes(tempList);
-        dateSettingsRepo.save(test);
+        TastyDateItem availableTastyDateItem = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
+        List<UserRestaurantVote> tempList = availableTastyDateItem.getRestaurantVotes();
 
-        //generate sums of voteResult
-        boolean[] checksVoteItem = restaurantVote.getVotesPerRestaurantFromOneUser();
-        int [] positiveAmount = new int[checksVoteItem.length];
-        int [] negativeAmount = new int[checksVoteItem.length];
-        for (UserRestaurantVote item:tempList) {
-            boolean[] checksItem = item.getVotesPerRestaurantFromOneUser();
-            for (int i=0; i < checksVoteItem.length; i++) {
-                if (checksItem[i]) positiveAmount[i]++;
-                else negativeAmount[i]++;
-            }
+        if (tempList.isEmpty()) {
+            tempList = new ArrayList<>();
         }
-        test.setPositiveVotingResultsForOneRestaurant(positiveAmount);
-        test.setNegativeVotingResultsForOneRestaurant(negativeAmount);
+        List<UserRestaurantVote> checkList = tempList.stream().filter(eachVote -> eachVote.getDisplayedName().equals(restaurantVote.getDisplayedName())).toList();
+        if (checkList.isEmpty()) {
 
-        return dateSettingsRepo.save(test);
+            tempList.add(restaurantVote);
+            availableTastyDateItem.setRestaurantVotes(tempList);
+            dateSettingsRepo.save(availableTastyDateItem);
+
+            //generate sums of voteResult
+            boolean[] checksVoteItem = restaurantVote.getVotesPerRestaurantFromOneUser();
+            int[] positiveAmount = new int[checksVoteItem.length];
+            int[] negativeAmount = new int[checksVoteItem.length];
+            for (UserRestaurantVote item : tempList) {
+                boolean[] checksItem = item.getVotesPerRestaurantFromOneUser();
+                for (int i = 0; i < checksVoteItem.length; i++) {
+                    if (checksItem[i]) {
+                        positiveAmount[i]++;
+                    }
+                    else {
+                        negativeAmount[i]++;
+                    }
+                }
+            }
+            availableTastyDateItem.setPositiveVotingResultsForOneRestaurant(positiveAmount);
+            availableTastyDateItem.setNegativeVotingResultsForOneRestaurant(negativeAmount);
+
+            return dateSettingsRepo.save(availableTastyDateItem);
+        }
+        else {
+            throw new IllegalArgumentException("Eintrag bereits vorhanden");
+        }
     }
 
 }

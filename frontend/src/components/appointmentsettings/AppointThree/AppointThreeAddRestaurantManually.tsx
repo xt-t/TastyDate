@@ -6,7 +6,6 @@ import TextField from "@mui/material/TextField";
 import RestaurantRating from "./Subcomponents/RestaurantRating";
 import {AppointThreeType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 import {BootstrapDialog, BootstrapDialogTitle} from './Subcomponents/DialogTitle';
-import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import AddIcon from "@mui/icons-material/Add";
 import "../Appoint.scss"
 import {useState} from "react";
