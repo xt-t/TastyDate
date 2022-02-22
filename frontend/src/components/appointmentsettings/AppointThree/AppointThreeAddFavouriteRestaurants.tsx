@@ -60,7 +60,6 @@ export default function AppointThreeAddFavouriteRestaurants({
 
     const bookmarkNewFavouriteRestaurants = (restaurantCard: RestaurantCard, cardsNumber: number) =>
     {
-        console.log("booleanchecksRestaurant:", checksRestaurants[cardsNumber])
         if (!checksRestaurants[cardsNumber]) {
             const newBookmarkedRestaurants = [...bookmarksFavouriteRestaurants, restaurantCard];
             setBookmarksFavouriteRestaurants(newBookmarkedRestaurants);
