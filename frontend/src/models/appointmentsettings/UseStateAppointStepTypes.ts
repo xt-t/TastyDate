@@ -1,5 +1,6 @@
-import {RestaurantItem} from "./RestaurantItem";
+
 import {TimeItem} from "./TimeItem";
+import {RestaurantCard} from "../restaurants/RestaurantCard";
 
 export interface AppointOneType {
         tastyDateName: string
@@ -13,12 +14,12 @@ export interface AppointOneType {
 }
 
     export interface AppointTwoType {
-            date: Date | null,
-            setDate: Function,
-            startTime: Date | null,
-            setStartTime: Function,
-            endTime: Date | null,
-            setEndTime: Function,
+            date: Date
+            setDate: Function
+            startTime: Date
+            setStartTime: Function
+            endTime: Date
+            setEndTime: Function
             idPickedTime: number
             setIdPickedTime: Function
             dataDateTimes: TimeItem[]
@@ -26,20 +27,20 @@ export interface AppointOneType {
     }
 
     export interface AppointThreeType {
-            category: string,
-            setCategory: Function,
-            rating: number,
-            setRating: Function,
-            price: number,
-            setPrice: Function,
-            restaurantName: string,
-            setRestaurantName: Function,
-            postcode: number | null,
-            setPostcode: Function,
-            city: string,
+            category: string
+            setCategory: Function
+            rating: number
+            setRating: Function
+            price: number
+            setPrice: Function
+            restaurantName: string
+            setRestaurantName: Function
+            postcode: number
+            setPostcode: Function
+            city: string
             setCity: Function
             idPickedRestaurant: number
             setIdPickedRestaurant: Function
-            restaurantData: RestaurantItem[]
+            restaurantData: RestaurantCard[]
             setRestaurantData: Function
     }

@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {TimeItem} from "../../models/appointmentsettings/TimeItem";
-import {RestaurantItem} from "../../models/appointmentsettings/RestaurantItem";
+import {RestaurantCard} from "../../models/restaurants/RestaurantCard";
 
 export default function UseAppointSteps() {
 
@@ -11,30 +11,30 @@ export default function UseAppointSteps() {
     const [chosenDisplayName, setChosenDisplayName] = useState("");
 
     //AppointTwo
-    const [date, setDate] = useState<Date | null>(null);
-    const [startTime, setStartTime] = useState<Date | null>(null);
-    const [endTime, setEndTime] = useState<Date | null>(null);
+    const [date, setDate] = useState<Date>(new Date());
+    const [startTime, setStartTime] = useState<Date>(new Date());
+    const [endTime, setEndTime] = useState<Date>(new Date());
     const [idPickedTime, setIdPickedTime] = useState<number>(1);
     const [dataDateTimes, setDataDateTimes] = useState<TimeItem[]>([]);
 
     //AppointThree
     const [category, setCategory] = useState<string>("");
-    const [postcode, setPostcode] = useState<number>(1);
+    const [postcode, setPostcode] = useState<number>(0);
     const [city, setCity] = useState<string>("");
     const [restaurantName, setRestaurantName] = useState<string>("");
     const [rating, setRating] = useState<number>(0);
     const [price, setPrice] = useState<number>(0);
     const [idPickedRestaurant, setIdPickedRestaurant] = useState<number>(1);
-    const [restaurantData, setRestaurantData] = useState<RestaurantItem[]>([]);
+    const [restaurantData, setRestaurantData] = useState<RestaurantCard[]>([]);
 
     const handleDelete = () => {
         setTastyDateName("");
         setLocation("");
         setNotes("");
         setChosenDisplayName("");
-        setDate(null);
-        setStartTime(null);
-        setEndTime(null);
+        setDate(new Date());
+        setStartTime(new Date());
+        setEndTime(new Date());
         setIdPickedTime(1);
         setDataDateTimes([]);
         setCategory("");

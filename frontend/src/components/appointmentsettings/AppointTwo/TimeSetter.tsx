@@ -5,12 +5,12 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TimePicker from '@mui/lab/TimePicker';
 
 interface TimeSetterProps {
-    timeInput: Date | null
+    timeInput: Date
     setTimeInput: Function
-    testIfTimeRestrictionAvailable: Function
+    minimalTime?: Date
 }
 
-export default function TimeSetter({timeInput, setTimeInput, testIfTimeRestrictionAvailable}: TimeSetterProps) {
+export default function TimeSetter({timeInput, setTimeInput, minimalTime}: TimeSetterProps) {
 
 
         return (
@@ -22,7 +22,7 @@ export default function TimeSetter({timeInput, setTimeInput, testIfTimeRestricti
                     onChange={(newValue) => {
                         setTimeInput(newValue);
                     }}
-                    minTime={testIfTimeRestrictionAvailable()}
+                    minTime={minimalTime}
                     renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>
