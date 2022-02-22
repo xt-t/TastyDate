@@ -10,7 +10,7 @@ import EuroIcon from "@mui/icons-material/Euro";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import {
-    updateTastyDateWithVoteRestaurantItem,
+    updateTastyDateWithVoteRestaurantCard,
 } from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
 
@@ -25,7 +25,7 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
 
     const {token} = useContext(AuthContext);
 
-    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(tastyDateItemForVote.infoRestaurantData.length).fill(false));
+    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(new Array(tastyDateItemForVote.infoRestaurantData.length).fill(false));
     const [positiveVotesPerTime, setPositiveVotesPerTime] = useState<number[]>([]);
     const [negativeVotesPerTime, setNegativeVotesPerTime] = useState<number[]>([]);
 
@@ -53,7 +53,7 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
                 displayedName: userName,
                 votesPerRestaurantFromOneUser: checkRestaurants
             }
-            updateTastyDateWithVoteRestaurantItem(tastyDateId, restaurantVote, token)
+            updateTastyDateWithVoteRestaurantCard(tastyDateId, restaurantVote, token)
                 .then((response) => {
                     setTastyDateItemForVote(response.data);
                     setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
@@ -74,18 +74,18 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
                     <Box className="imgBx">
                         <img src={image} alt="A pic would be nicer" className="picture"></img>
                     </Box>
-                    <h3>{restaurant.pickedRestaurantName}</h3>
+                    <h3>{restaurant.restaurantName}</h3>
                     <ArrowDropDownIcon className="arrow"/>
                     <Box className="content">
                         <Box>
-                            {restaurant.pickedCategory}
+                            {restaurant.category}
                         </Box>
                         <Box
                             sx={{
                                 '& > legend': { mt: 2 },
                             }}
                         >
-                        <Rating name="read-only" value={restaurant.pickedRating} readOnly />
+                        <Rating name="read-only" value={restaurant.rating} readOnly />
                         </Box>
                             <Box
                                 sx={{
@@ -95,7 +95,7 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
                                 <StyledRating
                                     name="read-only"
                                     readOnly
-                                    value={restaurant.pickedPrice}
+                                    value={restaurant.price}
                                     precision={0.5}
                                     max={3}
                                     icon={<EuroIcon fontSize="inherit"/>}
@@ -103,7 +103,7 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
                                 />
                             </Box>
                         <Box>
-                            {restaurant.pickedPostcode} {restaurant.pickedCity}
+                            {restaurant.postcode} {restaurant.city}
                         </Box>
                     </Box>
                 </div>
