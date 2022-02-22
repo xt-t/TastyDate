@@ -10,7 +10,7 @@ body {
   min-height:40px;
 }
 
-.fcard-list {
+.favcard-list {
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -18,23 +18,23 @@ body {
   width: 550px;
 }
 
-.fcard-list::-webkit-scrollbar {
+.favcard-list::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
-.fcard-list::-webkit-scrollbar-thumb {
+.favcard-list::-webkit-scrollbar-thumb {
   background: antiquewhite;
   border-radius: 10px;
   box-shadow: inset 2px 2px 2px hsla(0,0%,39%,.25), inset -2px -2px 2px white;
 }
 
-.fcard-list::-webkit-scrollbar-track {
+.favcard-list::-webkit-scrollbar-track {
   background: linear-gradient(90deg,antiquewhite,#201c29 1px,#17141d 0,antiquewhite);
 }
 
 //RestaurantCardItem
 
-.fcard {
+.favcard {
   height: 250px;
   width: 200px;
   min-width: 250px;
@@ -50,25 +50,25 @@ body {
   position: relative;
 }
 
-.fcard:hover {
+.favcard:hover {
   transform: translateY(-2rem);
 }
 
-.fcard:hover~.fcard {
+.favcard:hover~.fcard {
   transform: translateX(130px);
 }
 
-.fcard:focus-within~.fcard, .fcard:not(:first-child) {
+.favcard:focus-within~.fcard, .fcard:not(:first-child) {
   margin-left: -130px;
 }
 
 
-.fauthor-name {
+.favauthor-name {
   grid-area: auto;
   box-sizing: border-box;
 }
 
-.fauthor-name-prefix {
+.favauthor-name-prefix {
   font-style: normal;
   font-weight: 700;
   color: #7a7a8c;

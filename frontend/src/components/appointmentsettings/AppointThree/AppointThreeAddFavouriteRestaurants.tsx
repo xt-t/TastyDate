@@ -43,13 +43,9 @@ export default function AppointThreeAddFavouriteRestaurants({
     }, []);
 
 
-
-
-
     const handleCheck = (restaurantCard: RestaurantCard, cardsNumber: number) => {
         transformChecks(restaurantCard, cardsNumber)
         bookmarkNewFavouriteRestaurants(restaurantCard, cardsNumber)
-
     }
 
     const transformChecks = (restaurantCard: RestaurantCard, cardsNumber: number) => {
@@ -74,7 +70,6 @@ export default function AppointThreeAddFavouriteRestaurants({
         handleClose();
     }
 
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -86,8 +81,12 @@ export default function AppointThreeAddFavouriteRestaurants({
 
     return (
         <div >
-            <div className="favouritesRowButton"><span>Add restaurants from your </span>
-                <Button variant="contained" onClick={handleClickOpen} className="favouriteButton"><FavoriteIcon> </FavoriteIcon> Favourites </Button>
+            <div className="favouritesRowButton">
+                <div><ul><li>Add restaurants<br/>
+                    from your </li></ul></div>
+                <div>
+                <Button className="favouriteButton" variant="contained" onClick={handleClickOpen}><FavoriteIcon></FavoriteIcon> Favourites </Button>
+                </div>
             </div>
 
             <BootstrapDialog

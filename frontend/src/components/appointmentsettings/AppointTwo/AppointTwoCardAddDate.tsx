@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import AddIcon from "@mui/icons-material/Add";
 import {AppointTwoType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
+import "../Appoint.scss"
 
 interface AppointTwoCardAddDateProps {
     appointTwo: AppointTwoType
@@ -27,18 +28,20 @@ export default function AppointTwoCardAddDate(
     return (
         <Card>
             <CardContent className="addDateTime">
-                <h3>Add your date and pick a time range</h3>
+                <h3>Choose date and time</h3>
 
-                <DateSetter date={date} setDate={setDate}/>
+                <DateSetter date={date} setDate={setDate} />
 
                 <div className="setTime">
 
                     <TimeSetter
+                        label={"Start time"}
                         timeInput={startTime}
                         setTimeInput={setStartTime}
                     />
 
                     <TimeSetter
+                        label={"End time"}
                         timeInput={endTime}
                         setTimeInput={setEndTime}
                         minimalTime={timeRestriction()}
@@ -47,8 +50,8 @@ export default function AppointTwoCardAddDate(
                 </div>
 
                 <div className="addDateTimeButtons">
-                    <Button variant="outlined" onClick={() => resetDateInput()}> <RestartAltIcon/> Reset </Button>
-                    <Button variant="contained" onClick={() => saveAppointmentData()}> <AddIcon/> Add </Button>
+                    <Button className="resetButton" variant="outlined" onClick={() => resetDateInput()}> <RestartAltIcon/> Reset </Button>
+                    <Button className="addButton" variant="contained" onClick={() => saveAppointmentData()}> <AddIcon/> Add </Button>
                 </div>
 
             </CardContent>

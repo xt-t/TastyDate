@@ -71,11 +71,11 @@ export default function AppointmentStepsWindow(
 
     return (
         <div className="window">
-            <Card sx={{border: 2, borderColor: "#1c54b2"}}>
-                <CardContent>
-
+            <div>
                     {activeStep === steps.length ? (
-                        <React.Fragment>
+                        <div className="cardFour">
+                        <Card>
+                            <CardContent className="finalSettingsWindow">
                             <Typography sx={{mt: 2, mb: 1}}>
                                 All steps completed - you&apos;re finished
                             </Typography>
@@ -88,13 +88,14 @@ export default function AppointmentStepsWindow(
                                 <Button onClick={() => proceedToVote()}>Proceed</Button>
 
                             </Box>
-                        </React.Fragment>
-
+                            </CardContent>
+                        </Card>
+                        </div>
                     ) : (
 
                         <React.Fragment>
 
-                            <Typography component={'span'} sx={{mt: 2, mb: 1}}>
+                            <Typography component={'span'} >
                                 <AppointmentStepsPages
                                     activepage={activeStep}
                                     //AppointOne
@@ -106,20 +107,18 @@ export default function AppointmentStepsWindow(
                                 />
                             </Typography>
 
-                            <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
+                            <div className="bottomNavigation">
+                                <div className="bottomNavigationCard">
                                 <Button
                                     color="inherit"
                                     disabled={activeStep === 0}
                                     onClick={() => handleBack()}
-                                    sx={{mr: 1}}
                                 >
                                     Back
                                 </Button>
 
-                                <Box sx={{flex: '1 1 auto'}}/>
-
                                 {isStepOptional(activeStep) && (
-                                    <Button color="inherit" onClick={() => handleSkip()} sx={{mr: 1}}>
+                                    <Button color="inherit" onClick={() => handleSkip()}>
                                         Skip
                                     </Button>
                                 )}
@@ -128,13 +127,11 @@ export default function AppointmentStepsWindow(
                                 <Button onClick={() => handleNext()}>
                                     {(activeStep === steps.length - 1) ? 'Finish' : 'Next'}
                                 </Button>
-
-
-                            </Box>
+                                    </div>
+                            </div>
                         </React.Fragment>
                     )}
-                </CardContent>
-            </Card>
+            </div>
         </div>
     )
 }

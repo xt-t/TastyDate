@@ -1,6 +1,6 @@
 import TextField from "@mui/material/TextField";
 import "../Appoint.scss"
-import {Box} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import {AppointOneType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 
 interface AppointOneProps {
@@ -12,8 +12,10 @@ export default function AppointOne(
 ) {
 
     return (
-        <Box className="form">
-            <h3>Settings for your TastyDate</h3>
+        <div className="cardOne">
+        <Card>
+            <CardContent className="form">
+            <h3>Your TastyDate Settings</h3>
             <TextField
                 required
                 id="standard-required"
@@ -59,6 +61,8 @@ export default function AppointOne(
                 }
                 }
             />
-        </Box>
+            </CardContent>
+        </Card>
+        </div>
     )
 }

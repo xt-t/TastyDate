@@ -9,7 +9,7 @@ export default function LoginPage() {
         <div>
             <div>
                 <DisplayMenus/>
-                <LoginComponent/>
+                <LoginComponent />
             </div>
         </div>
     )

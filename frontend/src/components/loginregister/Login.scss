@@ -1,14 +1,44 @@
-.window {
-  height: 600px;
-  border: 1px solid black;
-}
-.loginCard .registerCard {
+.loginWindow, .registerWindow {
+  height: 35rem;
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-content: center;
+  align-items: center;
 }
 
-.form {
+.loginCard, .registerCard {
+  height: 23rem;
+  width: 18rem;
   display: flex;
+  margin: 1rem;
   flex-direction: column;
+  align-content: center;
+  align-items: center;
+
+  h3 {
+    margin: 1rem 0rem 2rem 0rem;
+  }
+
+  .formLogin {
+    height: 12rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .formRegister {
+    height: 12rem;
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .formLogin > *, .formRegister > * {
+    margin: 0.2rem;
+  }
+
 }
+

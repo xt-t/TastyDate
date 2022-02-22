@@ -19,7 +19,6 @@ export default function AppointThreeAddRestaurant(
 ) {
 
     return (
-        <Box>
             <Card>
                 <CardContent className="formRestaurant">
                     <h3>Add your restaurant</h3>
@@ -31,6 +30,5 @@ export default function AppointThreeAddRestaurant(
                     </Box>
                 </CardContent>
             </Card>
-        </Box>
     )
 }

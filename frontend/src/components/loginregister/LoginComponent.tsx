@@ -33,11 +33,11 @@ export default function LoginComponent() {
     };
 
     return (
-        <div className="window">
-            <div className="loginCard">
-                <Card><CardContent>
+        <div className="loginWindow">
+            <Card >
+                <CardContent className="loginCard">
                     <h3>Login</h3>
-                    <form onSubmit={(e) => login(e)} className="form">
+                    <form onSubmit={(e) => login(e)} className="formLogin">
                         <TextField variant="outlined" label="Username" type="username" value={userName}
                                    onChange={(e) => setUserName(e.target.value)}/>
                         <TextField variant="filled" label="Password" type="password" value={userPassword}
@@ -54,7 +54,6 @@ export default function LoginComponent() {
                         <></>
                     )}
                 </CardContent></Card>
-            </div>
         </div>
     )
 }

@@ -4,6 +4,7 @@ import * as React from "react";
 import {registerPost} from "../../service/tastydate-api-service";
 import {Button, Card, CardContent, TextField} from "@mui/material";
 import {RegisterData} from "../../models/loginregister/loginregister";
+import "./Login.scss"
 
 export default function RegisterComponent() {
 
@@ -32,11 +33,12 @@ export default function RegisterComponent() {
     };
 
     return (
-        <div className="window">
-            <div className="registerCard">
-                <Card><CardContent>
+<div className="registerWindow">
+
+    <Card>
+                    <CardContent className="registerCard">
                     <h3>Register</h3>
-                    <form onSubmit={(e) => register(e)} className="form">
+                    <form className="formRegister" onSubmit={(e) => register(e)}>
                         <TextField variant="outlined" label="Username" type="username" value={userName}
                                    onChange={(e) => setUserName(e.target.value)}/>
                         <TextField variant="filled" label="Password" type="password" value={userPassword}
@@ -46,8 +48,8 @@ export default function RegisterComponent() {
                         <Button type="submit" variant="outlined">Register</Button>
                         <Link to="/login">Back to login</Link>
                     </form>
-                </CardContent></Card>
-            </div>
-        </div>
+                </CardContent>
+                </Card>
+</div>
     )
 }

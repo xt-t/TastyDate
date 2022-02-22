@@ -27,8 +27,8 @@ export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, 
 
     return (
         <React.Fragment>
-            <article className="fcard">
-                <header className="fcard-header">
+            <article className="favcard">
+                <header className="favcard-header">
                     <p>{restaurantCard.category}</p>
                     <h2>{restaurantCard.restaurantName}</h2>
                 </header>
@@ -57,8 +57,8 @@ export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, 
                 <p>
                     {restaurantCard.postcode} {restaurantCard.city}
                 </p>
-                <div className="fauthor-name">
-                    <div className="fauthor-name-prefix">Recommended by:</div>
+                <div className="favauthor-name">
+                    <div className="favauthor-name-prefix">Recommended by:</div>
                     {restaurantCard.cardCreator}
                 </div>
                 <div className="checkBoxFavouriteRestaurant">

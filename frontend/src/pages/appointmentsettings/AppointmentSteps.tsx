@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import "./Appointment.scss"
 import AppointmentStepsWindow from "./AppointmentStepsWindow";
 
-const steps = ['General information', 'Pick your dates and times', 'Pick your restaurant'];
+const steps = ['TastyDate Info', 'Date Times', 'Restaurants'];
 
 export default function AppointmentSteps() {
     const [activeStep, setActiveStep] = React.useState(0);
@@ -55,7 +55,7 @@ export default function AppointmentSteps() {
     return (
         <Box sx={{width: '95%', mt: 6}}>
 
-            <Stepper activeStep={activeStep}>
+            <Stepper activeStep={activeStep} className="progressBar">
 
                 {steps.map((label, index) => {
                     const stepProps: { completed?: boolean } = {};

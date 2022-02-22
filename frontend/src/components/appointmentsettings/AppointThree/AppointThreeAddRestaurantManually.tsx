@@ -9,6 +9,7 @@ import {BootstrapDialog, BootstrapDialogTitle} from './Subcomponents/DialogTitle
 import AddIcon from "@mui/icons-material/Add";
 import "../Appoint.scss"
 import {useState} from "react";
+import * as React from "react";
 
 interface AppointThreeSearchRestaurantProps {
     appointThree: AppointThreeType
@@ -16,11 +17,12 @@ interface AppointThreeSearchRestaurantProps {
     resetDataInput: Function
 }
 
-export default function AppointThreeAddRestaurantManually({
-                                                         appointThree,
-                                                              saveRestaurantDataFromManualInput,
-                                                         resetDataInput
-                                                     }: AppointThreeSearchRestaurantProps) {
+export default function AppointThreeAddRestaurantManually
+({
+        appointThree,
+     resetDataInput,
+        saveRestaurantDataFromManualInput
+    }: AppointThreeSearchRestaurantProps) {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -31,10 +33,14 @@ export default function AppointThreeAddRestaurantManually({
         setOpen(false);
     };
 
-
     return (
         <div>
-            Add restaurants  <Button variant="contained" onClick={handleClickOpen}> <AddIcon/> manually</Button>
+            <div className="manualRowButton">
+                <div><ul><li>Add restaurants</li></ul></div>
+                <div>
+            <Button className="manualButton" variant="contained" onClick={handleClickOpen}> <AddIcon/> manually</Button>
+                </div>
+            </div>
 
             <BootstrapDialog
                 onClose={handleClose}
@@ -95,6 +101,8 @@ export default function AppointThreeAddRestaurantManually({
                 </DialogContent>
 
                 <DialogActions>
+                    <Button variant="contained" autoFocus onClick={() =>
+                        resetDataInput()}> <AddIcon/> Reset </Button>
                     <Button variant="contained" autoFocus onClick={() =>
                         saveRestaurantDataFromManualInput()}> <AddIcon/> Add </Button>
                 </DialogActions>

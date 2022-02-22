@@ -3,20 +3,22 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TimePicker from '@mui/lab/TimePicker';
+import "../Appoint.scss"
 
 interface TimeSetterProps {
+    label: string
     timeInput: Date
     setTimeInput: Function
     minimalTime?: Date
 }
 
-export default function TimeSetter({timeInput, setTimeInput, minimalTime}: TimeSetterProps) {
+export default function TimeSetter({label, timeInput, setTimeInput, minimalTime}: TimeSetterProps) {
 
 
         return (
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <TimePicker
-                    label="Start time"
+                    label={label}
                     value={timeInput}
                     ampm={false}
                     onChange={(newValue) => {
