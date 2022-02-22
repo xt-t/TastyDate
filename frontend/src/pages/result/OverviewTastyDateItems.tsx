@@ -27,13 +27,13 @@ export default function OverviewTastyDateItems() {
         navigate(`/overview/${selectedTastyDateId}`);
     }
 
-    const getEveryTastyDateId = () => {
+    const getEveryTastyDate = () => {
         getAllTastyDateItems(token)
             .then(response => setTastyDateItems(response.data))
     }
 
     useEffect(()=>(
-        getEveryTastyDateId()
+        getEveryTastyDate()
         //eslint-disable-next-line
     ),[])
 

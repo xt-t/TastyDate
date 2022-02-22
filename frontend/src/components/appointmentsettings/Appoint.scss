@@ -16,7 +16,7 @@
   width: 60rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-content: flex-start;
   align-items: center;
 
@@ -63,7 +63,7 @@
   margin: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-content: flex-start;
   align-items: center;
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/restaurants")
 public class RestaurantListsController {
 
     private final RestaurantCardsService restaurantService;
@@ -21,35 +21,35 @@ public class RestaurantListsController {
         this.restaurantService = restaurantService;
     }
 
-    @GetMapping("/restaurantlists")
+    @GetMapping
     private ResponseEntity<List<RestaurantCard>> getAllRestaurantCards() {
         List<RestaurantCard> allRestaurantCards = restaurantService.getEveryRestaurantCard();
         return ok(allRestaurantCards);
     }
 
-    @GetMapping(value="/restaurantlists/{id}")
+    @GetMapping(value="/{id}")
     public ResponseEntity<RestaurantCard> getRestaurantCardById  (@PathVariable String id) {
         Optional<RestaurantCard> opt = restaurantService.findProductById(id);
         return ResponseEntity.of(opt);
     }
 
-    @PostMapping("/restaurantlists")
+    @PostMapping
     private ResponseEntity <RestaurantCard> transferRestaurantCardToDB (@RequestBody RestaurantCard restaurantCard, Principal principal) {
         return ok(restaurantService.addNewRestaurant(restaurantCard, principal));
     }
 
-    @PutMapping(value="/restaurantlists/{id}/update")
+    @PutMapping(value="/{id}/update")
     public ResponseEntity<RestaurantCard> updateRestaurantCard (@RequestBody RestaurantCard restaurantCard) {
         Optional<RestaurantCard> opt = restaurantService.updateRestaurantCard(restaurantCard);
         return ResponseEntity.of(opt);
     }
 
-    @DeleteMapping(value="/restaurantlists/{id}")
+    @DeleteMapping(value="/{id}")
     public String removeRestaurantCard (@PathVariable String id) {
         return restaurantService.removeRestaurantCardById(id);
     }
 
-    @DeleteMapping("/restaurantlists")
+    @DeleteMapping
     public ResponseEntity<List<RestaurantCard>>  removeRestaurantList () {
         List<RestaurantCard> noItems = restaurantService.removeAllCards();
         return ok(noItems);

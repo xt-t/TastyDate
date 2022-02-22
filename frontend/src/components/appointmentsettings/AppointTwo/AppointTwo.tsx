@@ -32,9 +32,9 @@ export default function AppointTwo(
     }
 
     const resetDateInput = () => {
-        appointTwo.setDate(null);
-        appointTwo.setStartTime(null);
-        appointTwo.setEndTime(null);
+        appointTwo.setDate(new Date());
+        appointTwo.setStartTime(new Date());
+        appointTwo.setEndTime(new Date());
     }
 
     const deletePickedDate = (id: number) => {

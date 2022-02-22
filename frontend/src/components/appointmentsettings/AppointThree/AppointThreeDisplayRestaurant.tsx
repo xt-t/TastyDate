@@ -1,10 +1,10 @@
 import * as React from "react";
 import {Button, Card, CardContent} from "@mui/material";
-import {RestaurantItem} from "../../../models/appointmentsettings/RestaurantItem";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {RestaurantCard} from "../../../models/restaurants/RestaurantCard";
 
 interface AppointThreeDisplayRestaurantProps {
-    restaurantData: RestaurantItem[]
+    restaurantData: RestaurantCard[]
     deleteRestaurantCard: Function
     deleteAllRestaurantCards: Function
 }
@@ -23,17 +23,12 @@ export default function AppointThreeDisplayRestaurant(
                         <span key={index}>
                         {index + 1}
                             <span>: </span>
-                            {restaurant.pickedCategory}
+                            {restaurant.restaurantName}
                             <span> </span>
-                            {restaurant.pickedPostcode}
+                            {restaurant.category}
                             <span> </span>
-                            {restaurant.pickedCity}
+                            {restaurant.city}
                             <span> </span>
-                            {restaurant.pickedRestaurantName}
-                            <span> </span>
-                            {restaurant.pickedRating}
-                            <span> - </span>
-                            {restaurant.pickedPrice}
 
                             <Button variant="text">
         <DeleteIcon onClick={() => deleteRestaurantCard(restaurant.id)}/></Button>

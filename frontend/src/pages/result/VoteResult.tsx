@@ -43,7 +43,7 @@ export default function VoteResult() {
         setVoteType(newValue);
     };
 
-    if (typeof tastyDateItemForVote === "object") {
+    if (tastyDateItemForVote) {
     return (
         <div>
             <div>

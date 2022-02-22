@@ -13,7 +13,7 @@ import java.util.Optional;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("/api/appointment")
+@RequestMapping("/api/tastydates")
 public class TastyDateController {
 
     private final TastyDateSettingsService dateInfoService;
@@ -23,7 +23,7 @@ public class TastyDateController {
     }
 
 
-    @GetMapping("/getAllTastyDateItems")
+    @GetMapping
     private ResponseEntity<List<TastyDateItem>> getAllTastyDateItems() {
         List<TastyDateItem> allTastyDateItems = dateInfoService.getEveryTastyDateItem();
         return ok(allTastyDateItems);
@@ -35,20 +35,20 @@ public class TastyDateController {
         return ResponseEntity.of(opt);
     }
 
-    @PostMapping("/completesettings")
+    @PostMapping
     private ResponseEntity<TastyDateItem> transferSettingsToDB (@RequestBody TastyDateItem settingsItem) {
         return ok(dateInfoService.addDateSettings(settingsItem));
     }
 
-    @PutMapping("/{tastyDateId}/timevote")
+    @PutMapping("/{tastyDateId}/timevotes")
     private ResponseEntity<TastyDateItem> updateTastyDateWithVoteTimeItem (@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
         TastyDateItem optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
         return ok(optTastyDate);
     }
 
-    @PutMapping("/{tastyDateId}/restaurantvote")
-    private ResponseEntity<TastyDateItem> updateTastyDateWithVoteRestaurantItem (@RequestBody UserRestaurantVote restaurantVote, @PathVariable String tastyDateId) {
-        TastyDateItem optTastyDate = dateInfoService.addVoteRestaurantItemToTastyDate(restaurantVote, tastyDateId);
+    @PutMapping("/{tastyDateId}/restaurantvotes")
+    private ResponseEntity<TastyDateItem> updateTastyDateWithVoteRestaurantCard (@RequestBody UserRestaurantVote restaurantVote, @PathVariable String tastyDateId) {
+        TastyDateItem optTastyDate = dateInfoService.addVoteRestaurantCardToTastyDate(restaurantVote, tastyDateId);
         return ok(optTastyDate);
     }
 }

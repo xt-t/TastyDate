@@ -5,7 +5,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
 interface DateSetterProps {
-    date: Date | null
+    date: Date
     setDate: Function
 }
 

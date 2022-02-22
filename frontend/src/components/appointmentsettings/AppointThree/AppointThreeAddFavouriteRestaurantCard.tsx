@@ -1,5 +1,5 @@
 
-import React, {useState} from "react";
+import React from "react";
 import {Box, Rating, styled} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import {RestaurantCard} from "../../../models/restaurants/RestaurantCard";
@@ -8,12 +8,12 @@ import Checkbox from "@mui/material/Checkbox";
 
 interface AppointThreeAddFavouriteRestaurantCardProps {
     restaurantCard: RestaurantCard
-    cardNumber: number
     handleCheck: Function
-    checkFavouriteRestaurants: RestaurantCard[]
+    checkRestaurants: boolean[]
+    cardsNumber: number
 }
 
-export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, cardNumber, handleCheck, checkFavouriteRestaurants}:AppointThreeAddFavouriteRestaurantCardProps) {
+export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, checkRestaurants, cardsNumber, handleCheck}:AppointThreeAddFavouriteRestaurantCardProps) {
 
     const StyledRating = styled(Rating)({
         '& .MuiRating-iconFilled': {
@@ -63,7 +63,8 @@ export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, 
                 </div>
                 <div className="checkBoxFavouriteRestaurant">
                     <Checkbox
-                        onChange={(event) => handleCheck(restaurantCard, event.target.checked)}
+                        checked={checkRestaurants[cardsNumber]}
+                        onChange={(event) => handleCheck(restaurantCard, cardsNumber)}
                         inputProps={{'aria-label': 'controlled'}}
                     />
                 </div>

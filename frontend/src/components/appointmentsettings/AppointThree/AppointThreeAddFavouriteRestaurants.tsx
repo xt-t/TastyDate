@@ -5,7 +5,6 @@ import AddIcon from "@mui/icons-material/Add";
 import {BootstrapDialog, BootstrapDialogTitle} from "./Subcomponents/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {getAllRestaurantCards} from "../../../service/tastydate-api-service";
 import {RestaurantCard} from "../../../models/restaurants/RestaurantCard";
@@ -20,27 +19,22 @@ interface AppointThreeAddFavouriteRestaurantsProps {
 }
 
 export default function AppointThreeAddFavouriteRestaurants({
-                                                              appointThree,
-                                                              resetDataInput
+                                                              appointThree
                                                           }: AppointThreeAddFavouriteRestaurantsProps) {
-    const [open, setOpen] = useState(false);
-
     const {token}=useContext(AuthContext)
 
-    const handleClickOpen = () => {
-        setOpen(true);
-        setCheckFavouriteRestaurants([])
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
+    const [checksRestaurants, setChecksRestaurants] = useState<boolean[]>([]);
+    const [bookmarksFavouriteRestaurants, setBookmarksFavouriteRestaurants] = useState<RestaurantCard[]>([]);
+    const [open, setOpen] = useState(false);
+
 
     const getEveryRestaurantCard = () => {
         getAllRestaurantCards(token)
-            .then(response => setRestaurantCards(response.data))
+            .then(response => {
+                setRestaurantCards(response.data)
+                setChecksRestaurants(new Array(response.data.length).fill(false))
+            })
     }
 
     useEffect(() => {
@@ -48,26 +42,47 @@ export default function AppointThreeAddFavouriteRestaurants({
         //eslint-disable-next-line
     }, []);
 
-    const handleCheck = (restaurantCard: RestaurantCard, checked : boolean) => {
 
-        if (checked) {
-        const newChecked = [...checkFavouriteRestaurants, restaurantCard];
-            setCheckFavouriteRestaurants(newChecked);
-            console.log(newChecked)
-            console.log(checkFavouriteRestaurants)
-        }
-        else {
-            const newChecked = checkFavouriteRestaurants.filter(checkFavouriteRestaurant => checkFavouriteRestaurant === restaurantCard)
-            setCheckFavouriteRestaurants(newChecked);
-        }
+
+
+
+    const handleCheck = (restaurantCard: RestaurantCard, cardsNumber: number) => {
+        transformChecks(restaurantCard, cardsNumber)
+        bookmarkNewFavouriteRestaurants(restaurantCard, cardsNumber)
+
     }
 
-    const [checkFavouriteRestaurants, setCheckFavouriteRestaurants] = useState<RestaurantCard[]>([]);
+    const transformChecks = (restaurantCard: RestaurantCard, cardsNumber: number) => {
+        const newChecked = [...checksRestaurants];
+        newChecked[cardsNumber] = !newChecked[cardsNumber];
+        setChecksRestaurants(newChecked)
+    }
+
+    const bookmarkNewFavouriteRestaurants = (restaurantCard: RestaurantCard, cardsNumber: number) =>
+    {
+        if (!checksRestaurants[cardsNumber]) {
+            const newBookmarkedRestaurants = [...bookmarksFavouriteRestaurants, restaurantCard];
+            setBookmarksFavouriteRestaurants(newBookmarkedRestaurants);
+        } else {
+            const newBookmarkedRestaurants = bookmarksFavouriteRestaurants.filter(checkFavouriteRestaurant => checkFavouriteRestaurant !== restaurantCard)
+            setBookmarksFavouriteRestaurants(newBookmarkedRestaurants);
+        }
+    }
 
     const transferSelectedRestaurantsToTastyDateItem = () => {
-        console.log(checkFavouriteRestaurants)
-        checkFavouriteRestaurants.forEach(checkFavouriteRestaurant=>appointThree.setRestaurantData([...appointThree.restaurantData, checkFavouriteRestaurant]));
+        appointThree.setRestaurantData([...appointThree.restaurantData ,...bookmarksFavouriteRestaurants])
+        handleClose();
     }
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setBookmarksFavouriteRestaurants( []);
+    };
 
     return (
         <div >
@@ -90,15 +105,13 @@ export default function AppointThreeAddFavouriteRestaurants({
                         <section className="fcard-list">
                             {restaurantCards.map((restaurantCard, index) => (
                                 <React.Fragment key={index}>
-                                    <AppointThreeAddFavouriteRestaurantCard restaurantCard={restaurantCard} cardNumber={index} handleCheck={handleCheck} checkFavouriteRestaurants={checkFavouriteRestaurants}/>
+                                    <AppointThreeAddFavouriteRestaurantCard restaurantCard={restaurantCard} checkRestaurants={checksRestaurants} cardsNumber={index} handleCheck={handleCheck} />
                                 </React.Fragment>))}
                         </section>
 
                 </DialogContent>
 
                 <DialogActions>
-                    <Button variant="outlined" onClick={() => resetDataInput()}> <RestartAltIcon/> Reset
-                    </Button>
                     <Button variant="contained" autoFocus onClick={() =>
                         transferSelectedRestaurantsToTastyDateItem()}> <AddIcon/> Confirm </Button>
                 </DialogActions>
