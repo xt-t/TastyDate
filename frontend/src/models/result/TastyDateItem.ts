@@ -1,8 +1,8 @@
 import {GeneralInfoDateItem} from "../appointmentsettings/GeneralInfoDateItem";
 import {UserTimeVote} from "./UserTimeVote";
 import {UserRestaurantVote} from "./UserRestaurantVote";
-import {RestaurantItem} from "../appointmentsettings/RestaurantItem";
 import {TimeItem} from "../appointmentsettings/TimeItem";
+import {RestaurantCard} from "../restaurants/RestaurantCard";
 
 
 export interface TastyDateItem {
@@ -10,7 +10,7 @@ export interface TastyDateItem {
 
     infoTastyDate: GeneralInfoDateItem,
     infoTastyDateTimes: TimeItem[],
-    infoRestaurantData: RestaurantItem[],
+    infoRestaurantData: RestaurantCard[],
     timeVotes: UserTimeVote[],
     restaurantVotes: UserRestaurantVote[],
     votingResultsForOneDate: number[]

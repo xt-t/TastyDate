@@ -25,13 +25,13 @@ export default function AppointThree(
         ) {
             const newRestaurantData = {
                 id: appointThree.idPickedRestaurant,
-                creatorName: jwtDecoded?.sub,
-                pickedCategory: appointThree.category,
-                pickedPostcode: appointThree.postcode,
-                pickedCity: appointThree.city,
-                pickedRestaurantName: appointThree.restaurantName,
-                pickedRating: appointThree.rating,
-                pickedPrice: appointThree.price
+                cardCreator: jwtDecoded?.sub,
+                category: appointThree.category,
+                postcode: appointThree.postcode,
+                city: appointThree.city,
+                restaurantName: appointThree.restaurantName,
+                rating: appointThree.rating,
+                price: appointThree.price
             }
             appointThree.setRestaurantData([...appointThree.restaurantData, newRestaurantData]);
             appointThree.setIdPickedRestaurant(appointThree.idPickedRestaurant + 1);
@@ -48,7 +48,7 @@ export default function AppointThree(
         appointThree.setCity("");
     }
 
-    const deleteRestaurantCard = (id: number) => {
+    const deleteRestaurantCard = (id: string) => {
         appointThree.setRestaurantData(appointThree.restaurantData.filter(keepRestaurantCard => keepRestaurantCard.id !== id));
     }
 
