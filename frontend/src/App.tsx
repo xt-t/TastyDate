@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 import Homepage from "./pages/general/Homepage"
@@ -9,24 +9,9 @@ import RequireAuth from './components/loginregister/RequireAuth';
 import AuthProvider from './context/AuthProvider';
 import LoginPage from './pages/loginregister/LoginPage';
 import RegisterPage from './pages/loginregister/RegisterPage';
-import {TastyDateItem} from "./models/result/TastyDateItem";
 import OverviewTastyDateItems from "./pages/result/OverviewTastyDateItems";
 
 function App() {
-    // const [transferSettingsItem, setTransferSettingsItem] = useState<TastyDateItem>(
-    //     {tastyDateId: "" ,
-    //         infoTastyDate: { pickedTastyDateName:"",
-    //             pickedLocation: "",
-    //             pickedNotes: "",
-    //             pickedChosenDisplayName: ""},
-    //     infoTastyDateTimes: [],
-    //     infoRestaurantData: [],
-    //     timeVotes: [],
-    //     restaurantVotes: [],
-    //     votingResultsForOneDate: [],
-    //     positiveVotingResultsForOneRestaurant: [],
-    //     negativeVotingResultsForOneRestaurant: []});
-
 
     return (
         <div className="App">
