@@ -1,29 +1,49 @@
-import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import DisplayMenus from "../../components/general/DisplayMenus";
-import {TastyDateItem} from "../../models/result/TastyDateItem";
 import VoteTimeTable from '../../components/result/VoteTimeTable';
-import {a11yProps, TabPanel} from "./ResultTab";
-import {useState} from "react";
+import {TabPanel} from "./TabPanelFunctions";
+import React, {useContext, useEffect, useState} from "react";
 import VoteRestaurantTable from "../../components/result/VoteRestaurantTable";
+import {TextField} from "@mui/material";
+import {useParams} from "react-router-dom";
+import {TastyDateItem} from "../../models/result/TastyDateItem";
+import {AuthContext} from "../../context/AuthProvider";
+import {getTastyDateItemById} from "../../service/tastydate-api-service";
+import Invitationlink from "../../components/result/Invitationlink";
 
 
-interface VoteResultProps {
-    transferSettingsItem: TastyDateItem
-    setTransferSettingsItem: Function
-}
+export default function VoteResult() {
 
-export default function VoteResult({transferSettingsItem, setTransferSettingsItem}:VoteResultProps) {
-    const [value, setValue] = React.useState(0);
+    const {tastyDateId}:{tastyDateId?:string} = useParams();
+
+    const {token}=useContext(AuthContext)
+
+    const [tastyDateItemForVote, setTastyDateItemForVote] = useState<TastyDateItem>();
+
+    const getTastyDateItem = () => {
+        if (tastyDateId) {
+        getTastyDateItemById(tastyDateId, token)
+            .then((response)=>setTastyDateItemForVote(response.data))
+        }
+    }
+
+    useEffect(()=>{
+        getTastyDateItem()
+        //eslint-disable-next-line
+    },[])
+
+
+    const [voteType, setVoteType] = useState(0);
     const [userName, setUserName] = useState<string>("");
-    const [tempName, setTempName] = useState<string>("");
+    const [checkIfNameConfirmed, setCheckIfNameConfirmed] = useState<boolean>(false);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
+        setVoteType(newValue);
     };
 
+    if (typeof tastyDateItemForVote === "object") {
     return (
         <div>
             <div>
@@ -31,21 +51,37 @@ export default function VoteResult({transferSettingsItem, setTransferSettingsIte
 
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Vote Time" {...a11yProps(0)} />
-                    <Tab label="Vote Restaurant" {...a11yProps(1)} />
+                <Tabs value={voteType} onChange={handleChange} aria-label="basic tabs example">
+                    <Tab label="Vote Time"/>
+                    <Tab label="Vote Restaurant"/>
+                    <Tab label="Invitationlink"/>
                 </Tabs>
             </Box>
-            <TabPanel value={value} index={0}>
-                <VoteTimeTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName} tempName={tempName} setTempName={setTempName}/>
+            <TabPanel value={voteType} index={0}>
+                <TextField label="Your voting name" variant="standard"
+                           value={userName}
+                           onChange={(event) => {
+                               setUserName(event.target.value)}}
+                               InputProps={{readOnly: checkIfNameConfirmed}}/>
+
+                <VoteTimeTable tastyDateItemForVote={tastyDateItemForVote} setTastyDateItemForVote={setTastyDateItemForVote} userName={userName} setUserName={setUserName} setCheckIfNameConfirmed={setCheckIfNameConfirmed}/>
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                <VoteRestaurantTable transferSettingsItem={transferSettingsItem} setTransferSettingsItem={setTransferSettingsItem} userName={userName} setUserName={setUserName} tempName={tempName} setTempName={setTempName}/>
+            <TabPanel value={voteType} index={1}>
+                <TextField label="Your voting name" variant="standard"  value={userName}
+                           onChange={(event) => {
+                               setUserName(event.target.value)}}
+                               InputProps={{readOnly: checkIfNameConfirmed}}/>
+
+                <VoteRestaurantTable tastyDateItemForVote={tastyDateItemForVote} setTastyDateItemForVote={setTastyDateItemForVote} userName={userName} setCheckIfNameConfirmed={setCheckIfNameConfirmed}/>
+        </TabPanel>
+            <TabPanel value={voteType} index={2}>
+                <Invitationlink tastyDateId={tastyDateId}/>
             </TabPanel>
         </Box>
             </div>
         </div>
-    );
+    );}
+    else {return (<></>);}
 }
 
 

@@ -1,12 +1,13 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.model.TastyDateItem;
-import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
-import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
-import de.neuefische.backend.service.DateSettingsService;
+import de.neuefische.backend.model.settingsSubModel.vote.UserRestaurantVote;
+import de.neuefische.backend.model.settingsSubModel.vote.UserTimeVote;
+import de.neuefische.backend.service.TastyDateSettingsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -15,10 +16,23 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("/api/appointment")
 public class TastyDateController {
 
-    private final DateSettingsService dateInfoService;
+    private final TastyDateSettingsService dateInfoService;
 
-    public TastyDateController(DateSettingsService dateInfoService) {
+    public TastyDateController(TastyDateSettingsService dateInfoService) {
         this.dateInfoService = dateInfoService;
+    }
+
+
+    @GetMapping("/getAllTastyDateItems")
+    private ResponseEntity<List<TastyDateItem>> getAllTastyDateItems() {
+        List<TastyDateItem> allTastyDateItems = dateInfoService.getEveryTastyDateItem();
+        return ok(allTastyDateItems);
+    }
+
+    @GetMapping(value="/{tastyDateId}")
+    public ResponseEntity<TastyDateItem> getTastyDateById  (@PathVariable String tastyDateId) {
+        Optional<TastyDateItem> opt = dateInfoService.findTastyDateById(tastyDateId);
+        return ResponseEntity.of(opt);
     }
 
     @PostMapping("/completesettings")

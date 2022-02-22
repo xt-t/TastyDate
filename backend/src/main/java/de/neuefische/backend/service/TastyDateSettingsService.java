@@ -1,9 +1,8 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.BackendApplication;
 import de.neuefische.backend.model.TastyDateItem;
-import de.neuefische.backend.model.settingsSubModel.result.UserRestaurantVote;
-import de.neuefische.backend.model.settingsSubModel.result.UserTimeVote;
+import de.neuefische.backend.model.settingsSubModel.vote.UserRestaurantVote;
+import de.neuefische.backend.model.settingsSubModel.vote.UserTimeVote;
 import de.neuefische.backend.repository.DateSettingsRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +10,11 @@ import java.util.*;
 
 
 @Service
-public class DateSettingsService {
+public class TastyDateSettingsService {
 
     private final DateSettingsRepository dateSettingsRepo;
 
-    public DateSettingsService(DateSettingsRepository dateSettingsRepo) {
+    public TastyDateSettingsService(DateSettingsRepository dateSettingsRepo) {
         this.dateSettingsRepo = dateSettingsRepo;
     }
 
@@ -27,18 +26,29 @@ public class DateSettingsService {
         return dateSettingsRepo.save(settingsItem);
     }
 
+    public List<TastyDateItem> getEveryTastyDateItem() {
+        return dateSettingsRepo.findAll();
+    }
+
+    public Optional<TastyDateItem> findTastyDateById(String id) {return dateSettingsRepo.findById(id);}
+
     public TastyDateItem addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
-
-        //Optional - existiert das SettingsItem? Fehlermeldung
-
         //checking and updating the List of the UserVotes for the DateTimes
         Optional<TastyDateItem> optionalTastyDateItem = dateSettingsRepo.findById(tastyDateId);
         TastyDateItem test = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
-        List<UserTimeVote> tempList = test.getTimeVotes();
-        tempList.add(timeVote);
-        test.setTimeVotes(tempList);
-        dateSettingsRepo.save(test);
 
+        List<UserTimeVote> tempList = test.getTimeVotes();
+        if (tempList.isEmpty()) {
+            tempList = new ArrayList<>();
+        }
+        System.out.println(tempList);
+        List<UserTimeVote> checkList = tempList.stream().filter(eachVote->eachVote.getDisplayedName().equals(timeVote.getDisplayedName())).toList();
+        System.out.println(checkList);
+
+
+        tempList.add(timeVote);
+            test.setTimeVotes(tempList);
+            dateSettingsRepo.save(test);
         //generate sums of voteResult
         boolean[] checksVoteItem = timeVote.getVotesPerDateTimeFromOneUser();
         int [] amount = new int[checksVoteItem.length];
@@ -46,9 +56,7 @@ public class DateSettingsService {
         for (UserTimeVote item:tempList) {
             boolean[] checksItem = item.getVotesPerDateTimeFromOneUser();
             for (int i=0; i < amount.length; i++) {
-                if (checksItem[i]) {
-                    amount[i]++;
-                }
+                if (checksItem[i]) amount[i]++;
                 }
             }
         test.setVotingResultsForOneDate(amount);
@@ -75,12 +83,8 @@ public class DateSettingsService {
         for (UserRestaurantVote item:tempList) {
             boolean[] checksItem = item.getVotesPerRestaurantFromOneUser();
             for (int i=0; i < checksVoteItem.length; i++) {
-                if (checksItem[i]) {
-                    positiveAmount[i]++;
-                }
-                else {
-                    negativeAmount[i]++;
-                }
+                if (checksItem[i]) positiveAmount[i]++;
+                else negativeAmount[i]++;
             }
         }
         test.setPositiveVotingResultsForOneRestaurant(positiveAmount);

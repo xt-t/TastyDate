@@ -5,7 +5,7 @@ import image from "./dummypic.jpg";
 import Checkbox from "@mui/material/Checkbox";
 import {useContext, useState} from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import {Box, Button, Rating, styled, TextField} from "@mui/material";
+import {Box, Button, Rating, styled} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,19 +15,17 @@ import {
 import {AuthContext} from "../../context/AuthProvider";
 
 interface VoteRestaurantTableProps {
-    transferSettingsItem: TastyDateItem
-    setTransferSettingsItem: Function
+    tastyDateItemForVote: TastyDateItem
+    setTastyDateItemForVote: Function
     userName: string
-    setUserName: Function
-    tempName: string
-    setTempName: Function
+    setCheckIfNameConfirmed: Function
 }
 
-export default function VoteRestaurantTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName, tempName, setTempName}: VoteRestaurantTableProps) {
+export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setCheckIfNameConfirmed}: VoteRestaurantTableProps) {
 
     const {token} = useContext(AuthContext);
 
-    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(transferSettingsItem.infoRestaurantData.length).fill(false));
+    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(Array(tastyDateItemForVote.infoRestaurantData.length).fill(false));
     const [positiveVotesPerTime, setPositiveVotesPerTime] = useState<number[]>([]);
     const [negativeVotesPerTime, setNegativeVotesPerTime] = useState<number[]>([]);
 
@@ -41,23 +39,23 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
         },
     });
 
-    const handleChange = (index: number) => {
+    const handleCheck = (index: number) => {
         const newChecked = [...checkRestaurants];
         newChecked[index] = !newChecked[index];
         setCheckRestaurants(newChecked);
     }
 
     const addUserVote = () => {
-        if (tempName !== "") {
-            setUserName(tempName);
-            const tastyDateId = transferSettingsItem.tastyDateId;
+        if (userName !== "") {
+            setCheckIfNameConfirmed(true);
+            const tastyDateId = tastyDateItemForVote.tastyDateId;
             const restaurantVote = {
                 displayedName: userName,
                 votesPerRestaurantFromOneUser: checkRestaurants
             }
             updateTastyDateWithVoteRestaurantItem(tastyDateId, restaurantVote, token)
                 .then((response) => {
-                    setTransferSettingsItem(response.data);
+                    setTastyDateItemForVote(response.data);
                     setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
                     setNegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant)
                 })
@@ -70,7 +68,7 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
     return (
         <div>
             <div className="container">
-                {transferSettingsItem.infoRestaurantData.map((restaurant,index) => (
+                {tastyDateItemForVote.infoRestaurantData.map((restaurant, index) => (
                     <React.Fragment key={index}>
                 <div className="resultcard">
                     <Box className="imgBx">
@@ -112,13 +110,13 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                 <div className="checkboxAndResults">
                 <Checkbox
                     checked={checkRestaurants[index]}
-                    onChange={(event) => handleChange(index)}
+                    onChange={(event) => handleCheck(index)}
                     inputProps={{'aria-label': 'controlled'}}
                 />
                     {(positiveVotesPerTime.length !==0) ?
                         (
                             <div>
-                                <CloseIcon></CloseIcon>{negativeVotesPerTime[index]} <CheckIcon></CheckIcon>{positiveVotesPerTime[index]}
+                                <CloseIcon/>{negativeVotesPerTime[index]} <CheckIcon/>{positiveVotesPerTime[index]}
                             </div>
                         )
                         :
@@ -129,14 +127,6 @@ export default function VoteRestaurantTable({transferSettingsItem, setTransferSe
                 ))}
             </div>
             <div className="applyRestaurantVote">
-                {(userName === "")? (
-            <TextField value={tempName}
-                       onChange={(event) => {
-                           setTempName(event.target.value)
-                       }}>Username</TextField>
-                    )
-                    :
-                    (<span>{userName}</span>)}
             <Button className="voteRestaurantButton" onClick={addUserVote}>Apply vote</Button>
             </div>
         </div>

@@ -13,13 +13,13 @@ import {useState} from "react";
 
 interface AppointThreeSearchRestaurantProps {
     appointThree: AppointThreeType
-    saveRestaurantData: Function
+    saveRestaurantDataFromManualInput: Function
     resetDataInput: Function
 }
 
 export default function AppointThreeAddRestaurantManually({
                                                          appointThree,
-                                                         saveRestaurantData,
+                                                              saveRestaurantDataFromManualInput,
                                                          resetDataInput
                                                      }: AppointThreeSearchRestaurantProps) {
     const [open, setOpen] = useState(false);
@@ -96,10 +96,8 @@ export default function AppointThreeAddRestaurantManually({
                 </DialogContent>
 
                 <DialogActions>
-                    <Button variant="outlined" onClick={() => resetDataInput()}> <RestartAltIcon/> Reset
-                    </Button>
                     <Button variant="contained" autoFocus onClick={() =>
-                        saveRestaurantData()}> <AddIcon/> Add </Button>
+                        saveRestaurantDataFromManualInput()}> <AddIcon/> Add </Button>
                 </DialogActions>
             </BootstrapDialog>
 

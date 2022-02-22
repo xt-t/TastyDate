@@ -1,4 +1,4 @@
-import {Button, CardContent, TextField} from '@mui/material';
+import {Box, Button, CardContent} from '@mui/material';
 import Card from '@mui/material/Card';
 import "./Tables.scss"
 import Checkbox from '@mui/material/Checkbox';
@@ -12,18 +12,17 @@ import {updateTastyDateWithVoteTimeItem} from "../../service/tastydate-api-servi
 
 
 interface VoteTimeTableProps {
-    transferSettingsItem: TastyDateItem
-    setTransferSettingsItem: Function
+    tastyDateItemForVote: TastyDateItem
+    setTastyDateItemForVote: Function
     userName: string
     setUserName: Function
-    tempName: string
-    setTempName: Function
+    setCheckIfNameConfirmed: Function
 }
 
-export default function VoteTimeTable({transferSettingsItem, setTransferSettingsItem, userName, setUserName, tempName, setTempName}: VoteTimeTableProps) {
+export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setCheckIfNameConfirmed}: VoteTimeTableProps) {
 
     const {token} = useContext(AuthContext);
-    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(transferSettingsItem.infoTastyDateTimes.length).fill(false));
+    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(Array(tastyDateItemForVote.infoTastyDateTimes.length).fill(false));
     const [rowsUserTimeVote, setRowsUserTimeVote] = useState<UserTimeVote[]>([]);
     const [countersVotesPerTime, setCountersVotesPerTime] = useState<number[]>([]);
 
@@ -34,21 +33,17 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
     }
 
     const addUserVote = () => {
-        console.log(tempName)
-        if (tempName !== "") {
-            setUserName(tempName); //Fehler
-            const tastyDateId = transferSettingsItem.tastyDateId;
-            console.log(userName)
+        if (userName !== "") {
+            setCheckIfNameConfirmed(true);
+            const tastyDateId = tastyDateItemForVote.tastyDateId;
             const timeVote = {
                 displayedName: userName,
                 votesPerDateTimeFromOneUser: checkDateTime
             }
-            console.log(timeVote)
             updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
                 .then((response) => {
-                    setTransferSettingsItem(response.data);
+                    setTastyDateItemForVote(response.data);
                     setRowsUserTimeVote(response.data.timeVotes);
-                    console.log(rowsUserTimeVote)
                     setCountersVotesPerTime(response.data.votingResultsForOneDate)
                 })
                 .catch((err) => {
@@ -62,15 +57,15 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                 <CardContent>
                     {/*Description*/}
 
-                    <div>{transferSettingsItem.infoTastyDate.pickedTastyDateName} {transferSettingsItem.infoTastyDate.pickedLocation} {transferSettingsItem.infoTastyDate.pickedChosenDisplayName}</div>
+                    <div>{tastyDateItemForVote.infoTastyDate.pickedTastyDateName} {tastyDateItemForVote.infoTastyDate.pickedLocation} {tastyDateItemForVote.infoTastyDate.pickedChosenDisplayName}</div>
                     {/*TableHeader*/}
                     <div className="grid-container" style={{
                         display: "grid",
-                        gridTemplateColumns: `repeat(${transferSettingsItem.infoTastyDateTimes.length + 2}, 1fr)`
+                        gridTemplateColumns: `repeat(${tastyDateItemForVote.infoTastyDateTimes.length + 2}, 1fr)`
                     }}>
                         <div className="grid-item"></div>
 
-                        {transferSettingsItem.infoTastyDateTimes.map((itemTime, index) => (
+                        {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
                             <div key={index} className="grid-item">
                                 <div className="th-firstrow">
                                     {itemTime.pickedDate}
@@ -123,34 +118,23 @@ export default function VoteTimeTable({transferSettingsItem, setTransferSettings
                                     <div></div>
 
 
-                                    <TextField value={tempName || ""}
-                                               onChange={(event) => {
-                                                   setTempName(event.target.value)
-                                               }}
-                                               style={{
+                                    <Box style={{
                                                    gridColumnStart: "1",
                                                    gridRowStart: `${rowsUserTimeVote.length + 3}`
                                                }}
-                                    >Username</TextField>
+                                    >Enter your vote:</Box>
                                 </React.Fragment>
 
                             )
                             :
                             (<React.Fragment>
-                                <TextField value={tempName || ""}
-                                           onChange={(event) => {
-                                               setTempName(event.target.value)
-                                           }}
-                                           style={{
-                                               gridColumnStart: "1",
-                                               gridRowStart: `${rowsUserTimeVote.length + 2}`
-                                           }}
-                                >Username</TextField></React.Fragment>)
+                                <Box style={{gridColumnStart: "1", gridRowStart: `${rowsUserTimeVote.length + 2}`}}>
+                                    Enter your vote: </Box></React.Fragment>)
 
                         }
 
                         {/*User Input*/}
-                        {transferSettingsItem.infoTastyDateTimes.map((itemTime, index) => (
+                        {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
                             <div key={index}>
                                 <Checkbox
                                     checked={checkDateTime[index]}
