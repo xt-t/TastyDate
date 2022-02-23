@@ -36,6 +36,7 @@ export default function VoteResult() {
     const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>([]);
     const [positiveVotesPerTime, setPositiveVotesPerTime] = useState<number[]>([]);
     const [negativeVotesPerTime, setNegativeVotesPerTime] = useState<number[]>([]);
+    const [allowedToVoteRestaurant, setAllowedToVoteRestaurant] = useState<boolean>(true);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setVoteType(newValue);
@@ -80,7 +81,8 @@ export default function VoteResult() {
                     .then((response) => {
                         setTastyDateItemForVote(response.data);
                         setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
-                        setNegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant)
+                        setNegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant);
+                        setAllowedToVoteRestaurant(!allowedToVoteRestaurant)
                     })
                     .catch((err) => {
                         console.error(err.message);
@@ -130,7 +132,12 @@ export default function VoteResult() {
                                            }}
                                            InputProps={{readOnly: checkIfNameConfirmed}}
                                            style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
+                                    {(countersVotesPerTime.length === 0) ?
+                                        (
                                 <Button onClick={addUserTimeVote} style={{marginTop: "-0.5rem", marginBottom: "1rem"}}>Apply Vote</Button>
+                                        )
+                                        :
+                                        (<></>)}
                                 </div>
                                 <VoteTimeTable tastyDateItemForVote={tastyDateItemForVote}
                                                checkDateTime={checkDateTime}
@@ -147,8 +154,12 @@ export default function VoteResult() {
                                                }}
                                                InputProps={{readOnly: checkIfNameConfirmed}}
                                                style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
-
+                                    {(allowedToVoteRestaurant) ?
+                                        (
                                     <Button className="voteRestaurantButton" onClick={addUserRestaurantVote} style={{marginTop: "-0.5rem", marginBottom: "1rem"}}>Apply vote</Button>
+                                        )
+                                        :
+                                        (<></>)}
                                 </div>
                                 <VoteRestaurantTable tastyDateItemForVote={tastyDateItemForVote}
                                                      checkRestaurants={checkRestaurants}
