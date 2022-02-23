@@ -1,6 +1,6 @@
 import {Box, Button, CardContent} from '@mui/material';
 import Card from '@mui/material/Card';
-import "./Tables.scss"
+import "./VoteResult.scss"
 import Checkbox from '@mui/material/Checkbox';
 import {AuthContext} from "../../context/AuthProvider";
 import CheckIcon from '@mui/icons-material/Check';
@@ -122,7 +122,7 @@ export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemFor
                                                    gridColumnStart: "1",
                                                    gridRowStart: `${rowsUserTimeVote.length + 3}`
                                                }}
-                                    >Enter your vote:</Box>
+                                    >Enter vote:</Box>
                                 </React.Fragment>
 
                             )

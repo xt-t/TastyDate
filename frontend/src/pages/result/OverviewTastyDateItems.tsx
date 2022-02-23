@@ -53,8 +53,8 @@ return (
                         onChange={(event)=>setSelectedTastyDateId(event.target.value)}
                     >
                         {tastyDateItems.map((tastyDateItem, index) => (
-                          <MenuItem value={tastyDateItem.tastyDateId}>{tastyDateItem.infoTastyDate.pickedTastyDateName}</MenuItem>
-                        ))
+                          <MenuItem key={index} value={tastyDateItem.tastyDateId}>{tastyDateItem.infoTastyDate.pickedTastyDateName}</MenuItem>
+                            ))
                         }
                     </Select>
                 </FormControl>

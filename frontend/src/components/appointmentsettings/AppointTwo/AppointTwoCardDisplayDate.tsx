@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, DialogActions, DialogContent} from "@mui/material";
+import {Button, DialogActions, DialogContent} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {TimeItem} from "../../../models/appointmentsettings/TimeItem";
 import {useState} from "react";
@@ -50,7 +50,6 @@ export default function AppointTwoCardDisplayDate
                         {dataDateTimes.map((dateTime, index) => (
                             <span key={index}>
                         {index + 1}
-                                <span>. Date </span>
                         <span>: </span>
                                 {dateTime.pickedDate}
                                 <span> </span>

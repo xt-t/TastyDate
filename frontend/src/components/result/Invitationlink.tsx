@@ -1,6 +1,6 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {Button, Card, CardContent, TextField} from "@mui/material";
-import "./Tables.scss"
+import "./VoteResult.scss"
 
 interface InvitationlinkProps {
     tastyDateId?: string
@@ -18,9 +18,10 @@ export default function Invitationlink ({tastyDateId}:InvitationlinkProps) {
     return (
         <Card className="invitationCard">
             <CardContent className="invitationCardContent">
-                <h3>Send the link to your desired participants</h3>
+                <h3>Send the link to your<br/> desired participants</h3>
                 <TextField
                     id="standard-read-only-input"
+                    multiline rows={2}
                     label=""
                     defaultValue= {link}
                     InputProps={{
