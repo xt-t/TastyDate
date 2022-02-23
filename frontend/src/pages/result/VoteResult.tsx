@@ -10,9 +10,14 @@ import {Button, TextField} from "@mui/material";
 import {useParams} from "react-router-dom";
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import {AuthContext} from "../../context/AuthProvider";
-import {getTastyDateItemById, updateTastyDateWithVoteRestaurantCard} from "../../service/tastydate-api-service";
+import {
+    getTastyDateItemById,
+    updateTastyDateWithVoteRestaurantCard,
+    updateTastyDateWithVoteTimeItem
+} from "../../service/tastydate-api-service";
 import Invitationlink from "../../components/result/Invitationlink";
 import "./OverviewVoting.scss"
+import {UserTimeVote} from "../../models/result/UserTimeVote";
 
 
 export default function VoteResult() {
@@ -23,9 +28,18 @@ export default function VoteResult() {
     const [userName, setUserName] = useState<string>("");
     const [checkIfNameConfirmed, setCheckIfNameConfirmed] = useState<boolean>(false);
     const [tastyDateItemForVote, setTastyDateItemForVote] = useState<TastyDateItem>();
+    //TimeVote
+    const [checkDateTime, setCheckDateTime] = useState<boolean[]>([]);
+    const [rowsUserTimeVote, setRowsUserTimeVote] = useState<UserTimeVote[]>([]);
+    const [countersVotesPerTime, setCountersVotesPerTime] = useState<number[]>([]);
+    //RestaurantVote
     const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>([]);
     const [positiveVotesPerTime, setPositiveVotesPerTime] = useState<number[]>([]);
     const [negativeVotesPerTime, setNegativeVotesPerTime] = useState<number[]>([]);
+
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setVoteType(newValue);
+    };
 
     const getTastyDateItem = () => {
         if (tastyDateId) {
@@ -33,6 +47,7 @@ export default function VoteResult() {
                 .then((response) => {
                     setTastyDateItemForVote(response.data)
                     setCheckRestaurants(new Array(response.data.infoRestaurantData.length).fill(false))
+                    setCheckDateTime(new Array(response.data.infoRestaurantData.length).fill(false))
                 })
         }}
 
@@ -41,19 +56,21 @@ export default function VoteResult() {
             //eslint-disable-next-line
         }, [])
 
-
-        const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-            setVoteType(newValue);
-        };
-
+    //TimeVote
+    const checkForDateTime = (index: number) => {
+        const newChecked = [...checkDateTime];
+        newChecked[index] = !newChecked[index];
+        setCheckDateTime(newChecked);
+    }
+    //RestaurantVote
         const handleCheck = (index: number) => {
             const newChecked = [...checkRestaurants];
             newChecked[index] = !newChecked[index];
             setCheckRestaurants(newChecked);
         }
 
-        const addUserVote = () => {
-            if (userName !== "" && tastyDateItemForVote && tastyDateId) {
+        const addUserRestaurantVote = () => {
+            if (userName !== "" && tastyDateId) {
                 setCheckIfNameConfirmed(true);
                 const restaurantVote = {
                     displayedName: userName,
@@ -71,6 +88,25 @@ export default function VoteResult() {
             }
         }
 
+    const addUserTimeVote = () => {
+        if (userName !== "" && tastyDateId) {
+            setCheckIfNameConfirmed(true);
+            const timeVote = {
+                displayedName: userName,
+                votesPerDateTimeFromOneUser: checkDateTime
+            }
+            updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
+                .then((response) => {
+                    setTastyDateItemForVote(response.data);
+                    setRowsUserTimeVote(response.data.timeVotes);
+                    setCountersVotesPerTime(response.data.votingResultsForOneDate)
+                })
+                .catch((err) => {
+                    console.error(err.message);
+                })
+        }
+    }
+
         if (tastyDateItemForVote) {
             return (
                 <div>
@@ -86,6 +122,7 @@ export default function VoteResult() {
                                 </Tabs>
                             </Box>
                             <TabPanel value={voteType} index={0}>
+                                <div style={{display: "flex", justifyContent: "space-between"}}>
                                 <TextField label="Your voting name" variant="standard"
                                            value={userName}
                                            onChange={(event) => {
@@ -93,11 +130,14 @@ export default function VoteResult() {
                                            }}
                                            InputProps={{readOnly: checkIfNameConfirmed}}
                                            style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
-
+                                <Button onClick={addUserTimeVote} style={{marginTop: "-0.5rem", marginBottom: "1rem"}}>Apply Vote</Button>
+                                </div>
                                 <VoteTimeTable tastyDateItemForVote={tastyDateItemForVote}
-                                               setTastyDateItemForVote={setTastyDateItemForVote} userName={userName}
-                                               setUserName={setUserName}
-                                               setCheckIfNameConfirmed={setCheckIfNameConfirmed}/>
+                                               checkDateTime={checkDateTime}
+                                rowsUserTimeVote={rowsUserTimeVote}
+                                countersVotesPerTime={countersVotesPerTime}
+                                checkForDateTime={checkForDateTime}
+                                               />
                             </TabPanel>
                             <TabPanel value={voteType} index={1}>
                                 <div style={{display: "flex", justifyContent: "space-between"}}>
@@ -108,7 +148,7 @@ export default function VoteResult() {
                                                InputProps={{readOnly: checkIfNameConfirmed}}
                                                style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
 
-                                    <Button className="voteRestaurantButton" onClick={addUserVote} style={{marginTop: "-0.5rem", marginBottom: "1rem"}}>Apply vote</Button>
+                                    <Button className="voteRestaurantButton" onClick={addUserRestaurantVote} style={{marginTop: "-0.5rem", marginBottom: "1rem"}}>Apply vote</Button>
                                 </div>
                                 <VoteRestaurantTable tastyDateItemForVote={tastyDateItemForVote}
                                                      checkRestaurants={checkRestaurants}

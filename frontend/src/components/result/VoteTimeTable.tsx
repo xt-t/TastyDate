@@ -1,72 +1,42 @@
-import {Box, Button, CardContent} from '@mui/material';
+import {Box, CardContent} from '@mui/material';
 import Card from '@mui/material/Card';
 import "./VoteResult.scss"
 import Checkbox from '@mui/material/Checkbox';
-import {AuthContext} from "../../context/AuthProvider";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import {TastyDateItem} from "../../models/result/TastyDateItem";
+import React from 'react';
+import PersonIcon from '@mui/icons-material/Person';
 import {UserTimeVote} from "../../models/result/UserTimeVote";
-import React, {useContext, useState} from 'react';
-import {updateTastyDateWithVoteTimeItem} from "../../service/tastydate-api-service";
 
 
 interface VoteTimeTableProps {
     tastyDateItemForVote: TastyDateItem
-    setTastyDateItemForVote: Function
-    userName: string
-    setUserName: Function
-    setCheckIfNameConfirmed: Function
+    checkDateTime: boolean[]
+    rowsUserTimeVote: UserTimeVote[]
+    countersVotesPerTime: number[]
+    checkForDateTime: Function
 }
 
-export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setCheckIfNameConfirmed}: VoteTimeTableProps) {
+export default function VoteTimeTable({tastyDateItemForVote, checkDateTime, rowsUserTimeVote, countersVotesPerTime, checkForDateTime}: VoteTimeTableProps) {
 
-    const {token} = useContext(AuthContext);
-    const [checkDateTime, setCheckDateTime] = useState<boolean[]>(new Array(tastyDateItemForVote.infoTastyDateTimes.length).fill(false));
-    const [rowsUserTimeVote, setRowsUserTimeVote] = useState<UserTimeVote[]>([]);
-    const [countersVotesPerTime, setCountersVotesPerTime] = useState<number[]>([]);
-
-    const checkForDateTime = (index: number) => {
-        const newChecked = [...checkDateTime];
-        newChecked[index] = !newChecked[index];
-        setCheckDateTime(newChecked);
-    }
-
-    const addUserVote = () => {
-        if (userName !== "") {
-            setCheckIfNameConfirmed(true);
-            const tastyDateId = tastyDateItemForVote.tastyDateId;
-            const timeVote = {
-                displayedName: userName,
-                votesPerDateTimeFromOneUser: checkDateTime
-            }
-            updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
-                .then((response) => {
-                    setTastyDateItemForVote(response.data);
-                    setRowsUserTimeVote(response.data.timeVotes);
-                    setCountersVotesPerTime(response.data.votingResultsForOneDate)
-                })
-                .catch((err) => {
-                    console.error(err.message);
-                })
-        }
-    }
 
     return (
-            <Card>
-                <CardContent>
+            <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
+                <CardContent className="cardShadow">
                     {/*Description*/}
 
                     <div>{tastyDateItemForVote.infoTastyDate.pickedTastyDateName} {tastyDateItemForVote.infoTastyDate.pickedLocation} {tastyDateItemForVote.infoTastyDate.pickedChosenDisplayName}</div>
                     {/*TableHeader*/}
                     <div className="grid-container" style={{
                         display: "grid",
-                        gridTemplateColumns: `repeat(${tastyDateItemForVote.infoTastyDateTimes.length + 2}, 1fr)`
+                        gridTemplateColumns: `repeat(${tastyDateItemForVote.infoTastyDateTimes.length + 1}, 8rem)`
                     }}>
-                        <div className="grid-item"></div>
+                        {/*erste Spalte*/}
+                        <div className="gridItemWithoutStyling"><PersonIcon/> User</div>
 
                         {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
-                            <div key={index} className="grid-item">
+                            <div key={index} className="gridHeader">
                                 <div className="th-firstrow">
                                     {itemTime.pickedDate}
                                 </div>
@@ -78,14 +48,14 @@ export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemFor
                             </div>
                         ))
                         }
-                        <div className="grid-item"></div>
 
 
                         {/*//VoteOneUserPerRow*/}
                         {rowsUserTimeVote.map((timeVote, index) => (
                             <React.Fragment key={index}>
 
-                                <div>
+                                {/*erste Spalte*/}
+                                <div className="gridItemWithoutStyling">
                                     {timeVote.displayedName}
                                 </div>
 
@@ -93,13 +63,13 @@ export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemFor
                                 {timeVote.votesPerDateTimeFromOneUser.map((voteTime, innerindex) => (
                                     <React.Fragment key={innerindex}>
                                         {voteTime ?
-                                            (<div><CheckIcon></CheckIcon></div>)
+                                            (<div className="gridPositiveVote"><CheckIcon ></CheckIcon></div>)
                                             :
-                                            (<div><CloseIcon></CloseIcon></div>)
+                                            (<div className="gridNegativeVote"><CloseIcon></CloseIcon></div>)
                                         }
                                     </React.Fragment>
                                 ))}
-                                <div className="grid-item"></div>
+
 
                             </React.Fragment>
 
@@ -109,42 +79,37 @@ export default function VoteTimeTable({tastyDateItemForVote, setTastyDateItemFor
                         {(countersVotesPerTime.length !== 0) ?
                             (
                                 <React.Fragment>
-                                    <div></div>
+                                    {/*erste Spalte*/}
+                                    <div className="voteSummary">Total:</div>
+
+                                    {/*Ergebnis*/}
                                     {countersVotesPerTime.map((counterVotesPerTime, index) => (
 
-                                        <div key={index}>{counterVotesPerTime}</div>
+                                        <div className="voteSummary" key={index}>{counterVotesPerTime}</div>
 
                                     ))}
-                                    <div></div>
 
-
-                                    <Box style={{
-                                                   gridColumnStart: "1",
-                                                   gridRowStart: `${rowsUserTimeVote.length + 3}`
-                                               }}
-                                    >Enter vote:</Box>
                                 </React.Fragment>
 
                             )
                             :
                             (<React.Fragment>
                                 <Box style={{gridColumnStart: "1", gridRowStart: `${rowsUserTimeVote.length + 2}`}}>
-                                    Enter your vote: </Box></React.Fragment>)
+                                    Enter your vote<br/> in this line: </Box>
+                                {/*User Input*/}
+                                {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
+                                    <div key={index}>
+                                        <Checkbox
+                                            checked={checkDateTime[index]}
+                                            onChange={() => checkForDateTime(index)}
+                                            inputProps={{'aria-label': 'controlled'}}
+                                        />
+                                    </div>
+                                ))
+                                }
+                            </React.Fragment>)
 
                         }
-
-                        {/*User Input*/}
-                        {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
-                            <div key={index}>
-                                <Checkbox
-                                    checked={checkDateTime[index]}
-                                    onChange={(event) => checkForDateTime(index)}
-                                    inputProps={{'aria-label': 'controlled'}}
-                                />
-                            </div>
-                        ))
-                        }
-                        <Button onClick={addUserVote}>Add</Button>
                     </div>
 
                 </CardContent>
