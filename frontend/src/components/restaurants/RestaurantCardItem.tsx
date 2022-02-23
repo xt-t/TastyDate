@@ -3,9 +3,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import React from "react";
 import {RestaurantCard} from "../../models/restaurants/RestaurantCard";
-import {Box, Rating, styled} from "@mui/material";
+import {Box, Rating} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import image from "../result/dummypic.jpg";
+import { StyledRating } from "../../models/restaurants/StylingRating";
 
 interface RestaurantCardItemProps {
     restaurantCard: RestaurantCard
@@ -15,14 +16,6 @@ interface RestaurantCardItemProps {
 
 export default function RestaurantCardItem({restaurantCard, deleteRestaurantCard, editRestaurantCard}:RestaurantCardItemProps) {
 
-    const StyledRating = styled(Rating)({
-        '& .MuiRating-iconFilled': {
-            color: 'hsl(222, 100%, 50%)',
-        },
-        '& .MuiRating-iconHover': {
-            color: 'hsl(222, 100%, 41%)',
-        },
-    });
 
     return (
         <React.Fragment>

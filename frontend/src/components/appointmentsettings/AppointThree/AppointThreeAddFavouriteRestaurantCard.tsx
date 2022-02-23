@@ -1,10 +1,11 @@
 
 import React from "react";
-import {Box, Rating, styled} from "@mui/material";
+import {Box, Rating} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import {RestaurantCard} from "../../../models/restaurants/RestaurantCard";
 import "./FavouriteRestaurants.scss"
 import Checkbox from "@mui/material/Checkbox";
+import { StyledRating } from "../../../models/restaurants/StylingRating";
 
 interface AppointThreeAddFavouriteRestaurantCardProps {
     restaurantCard: RestaurantCard
@@ -14,16 +15,6 @@ interface AppointThreeAddFavouriteRestaurantCardProps {
 }
 
 export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, checkRestaurants, cardsNumber, handleCheck}:AppointThreeAddFavouriteRestaurantCardProps) {
-
-    const StyledRating = styled(Rating)({
-        '& .MuiRating-iconFilled': {
-            color: 'hsl(222, 100%, 50%)',
-        },
-        '& .MuiRating-iconHover': {
-            color: 'hsl(222, 100%, 41%)',
-        },
-    });
-
 
     return (
         <React.Fragment>

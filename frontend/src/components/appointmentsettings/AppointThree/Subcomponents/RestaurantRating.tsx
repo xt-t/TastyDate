@@ -1,6 +1,7 @@
-import {Box, Rating, styled, Typography} from "@mui/material";
+import {Box, Rating, Typography} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import * as React from "react";
+import { StyledRating } from "../../../../models/restaurants/StylingRating";
 
 interface RestaurantRatingProps {
     rating: number
@@ -10,15 +11,6 @@ interface RestaurantRatingProps {
 }
 
 export default function RestaurantRating({rating, setRating, price, setPrice}: RestaurantRatingProps) {
-
-    const StyledRating = styled(Rating)({
-        '& .MuiRating-iconFilled': {
-            color: 'hsl(222, 100%, 50%)',
-        },
-        '& .MuiRating-iconHover': {
-            color: 'hsl(222, 100%, 41%)',
-        },
-    });
 
     return (
         <div>
