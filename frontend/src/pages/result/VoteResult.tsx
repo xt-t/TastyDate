@@ -48,7 +48,7 @@ export default function VoteResult() {
                 .then((response) => {
                     setTastyDateItemForVote(response.data)
                     setCheckRestaurants(new Array(response.data.infoRestaurantData.length).fill(false))
-                    setCheckDateTime(new Array(response.data.infoRestaurantData.length).fill(false))
+                    setCheckDateTime(new Array(response.data.infoTastyDateTimes.length).fill(false))
                 })
         }}
 

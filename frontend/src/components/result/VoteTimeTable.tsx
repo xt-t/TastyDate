@@ -94,11 +94,11 @@ export default function VoteTimeTable({tastyDateItemForVote, checkDateTime, rows
                             )
                             :
                             (<React.Fragment>
-                                <Box style={{gridColumnStart: "1", gridRowStart: `${rowsUserTimeVote.length + 2}`}}>
+                                <Box className="gridUserVoteRow"  style={{gridColumnStart: "1", gridRowStart: `${rowsUserTimeVote.length + 2}`}}>
                                     Enter your vote<br/> in this line: </Box>
                                 {/*User Input*/}
                                 {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
-                                    <div key={index}>
+                                    <div className="gridUserVoteRow" key={index}>
                                         <Checkbox
                                             checked={checkDateTime[index]}
                                             onChange={() => checkForDateTime(index)}
