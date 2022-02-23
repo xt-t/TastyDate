@@ -105,8 +105,9 @@ export default function AppointThreeAddRestaurantManually
                 <DialogActions>
                     <Button variant="contained" autoFocus onClick={() =>
                         resetDataInput()}> <AddIcon/> Reset </Button>
-                    <Button variant="contained" autoFocus onClick={() =>
-                        saveRestaurantDataFromManualInput()}> <AddIcon/> Add </Button>
+                    <Button variant="contained" autoFocus onClick={() => {
+                        handleClose()
+                        saveRestaurantDataFromManualInput()}}> <AddIcon/> Add </Button>
                 </DialogActions>
             </BootstrapDialog>
 

@@ -53,7 +53,7 @@ export default function AppointThreeDisplayRestaurant(
                     <div className="displayPickedRestaurants">
 
                         {restaurantData.map((restaurant, index) => (
-                            <span key={index}>
+                            <p key={index}>
                         {index + 1}
                                 <span>: </span>
                                 {restaurant.restaurantName}
@@ -65,7 +65,7 @@ export default function AppointThreeDisplayRestaurant(
 
                             <Button variant="text">
         <DeleteIcon onClick={() => deleteRestaurantCard(restaurant.id)}/></Button>
-                            </span>))}
+                            </p>))}
                     </div>
                 </DialogContent>
                 <DialogActions>

@@ -22,7 +22,7 @@ export default function VoteTimeTable({tastyDateItemForVote, checkDateTime, rows
 
 
     return (
-            <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
+            <Card style={{boxShadow: "0 0.1rem 0.3rem rgba(0, 0, 0, 0.5)"}}>
                 <CardContent className="cardShadow">
                     {/*Description*/}
 
