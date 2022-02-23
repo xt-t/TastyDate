@@ -33,7 +33,7 @@ export default function AppointThreeDisplayRestaurant(
     return (
         <div>
             <div>
-                <div>
+                <div className="taggedRestaurantsRow">
                     Your tagged restaurants
                     <Button className="previewButtonRestaurants" variant="contained" onClick={handleClickOpen}> <SearchIcon/> Preview</Button>
                 </div>

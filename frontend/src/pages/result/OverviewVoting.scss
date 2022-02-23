@@ -1,17 +1,19 @@
 .votingCard {
+  height: 35rem;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 
   .cardItems {
+    border: 2px solid #1c54b2;
+    text-align: center;
+    height: 18rem;
+    width: 18rem;
     display: flex;
     flex-direction: column;
+    align-content: center;
     align-items: center;
-    margin: 10px;
-    width: 40%;
-  }
-  Box {
-    min-width: 200px;
   }
   .votingCardElement {
     margin: 1rem;

@@ -41,8 +41,8 @@ return (
     <div>
             <DisplayMenus/>
         <div className="votingCard">
-            <Card className="cardItems">
-                <CardContent>
+            <Card >
+                <CardContent className="cardItems">
                     <h3 className="votingCardElement">Select and vote for a TastyDate</h3>
             <Box sx={{ minWidth: 120 }} className="votingCardElement">
                 <FormControl fullWidth>

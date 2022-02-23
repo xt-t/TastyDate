@@ -1,6 +1,5 @@
 import React from "react";
 import AppointTwoCardAddDate from "./AppointTwoCardAddDate";
-import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
 import {AppointTwoType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 
 interface AppointTwoProps {

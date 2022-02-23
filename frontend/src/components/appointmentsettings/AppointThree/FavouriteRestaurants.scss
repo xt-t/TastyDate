@@ -6,16 +6,15 @@ body {
 }
 
 .newWindow{
-  min-width: 600px;
-  min-height:40px;
+  min-width: 18rem;
+  min-height:20rem;
 }
 
 .favcard-list {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  min-height:300px;
-  width: 550px;
+  min-height:18rem;
+  width: 18rem;
 }
 
 .favcard-list::-webkit-scrollbar {
@@ -35,8 +34,8 @@ body {
 //RestaurantCardItem
 
 .favcard {
-  height: 250px;
-  width: 200px;
+  height: 14rem;
+  width: 4rem;
   min-width: 250px;
   padding: 1.5rem;
   border-radius: 16px;
