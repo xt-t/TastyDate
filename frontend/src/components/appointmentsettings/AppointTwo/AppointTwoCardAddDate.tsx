@@ -6,15 +6,19 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import AddIcon from "@mui/icons-material/Add";
 import {AppointTwoType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 import "../Appoint.scss"
+import AppointTwoCardDisplayDate from "./AppointTwoCardDisplayDate";
+import React from "react";
 
 interface AppointTwoCardAddDateProps {
     appointTwo: AppointTwoType
     resetDateInput: Function,
     saveAppointmentData: Function
+    deletePickedDate: Function
+    deleteAllPickedDates: Function
 }
 
 export default function AppointTwoCardAddDate(
-    {appointTwo, resetDateInput, saveAppointmentData}: AppointTwoCardAddDateProps) {
+    {appointTwo, resetDateInput, saveAppointmentData, deletePickedDate, deleteAllPickedDates}: AppointTwoCardAddDateProps) {
 
     const {date, setDate, startTime, setStartTime, endTime, setEndTime}=appointTwo;
 
@@ -52,8 +56,20 @@ export default function AppointTwoCardAddDate(
                 <div className="addDateTimeButtons">
                     <Button className="resetButton" variant="outlined" onClick={() => resetDateInput()}> <RestartAltIcon/> Reset </Button>
                     <Button className="addButton" variant="contained" onClick={() => saveAppointmentData()}> <AddIcon/> Add </Button>
-                </div>
 
+                </div>
+                <div className="previewTimes">
+                {appointTwo.dataDateTimes.length !== 0 ? (
+                    < AppointTwoCardDisplayDate
+                        dataDateTimes={appointTwo.dataDateTimes}
+                        deletePickedDate={deletePickedDate}
+                        deleteAllPickedDates={deleteAllPickedDates}
+                    />
+                ):(
+                    <></>
+                )
+                }
+                </div>
             </CardContent>
         </Card>
     )

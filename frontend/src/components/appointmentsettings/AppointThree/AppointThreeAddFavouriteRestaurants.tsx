@@ -85,7 +85,7 @@ export default function AppointThreeAddFavouriteRestaurants({
                 <div><ul><li>Add restaurants<br/>
                     from your </li></ul></div>
                 <div>
-                <Button className="favouriteButton" variant="contained" onClick={handleClickOpen}><FavoriteIcon></FavoriteIcon> Favourites </Button>
+                <Button className="favouriteButton" variant="contained" onClick={handleClickOpen}><FavoriteIcon/>Favourites </Button>
                 </div>
             </div>
 

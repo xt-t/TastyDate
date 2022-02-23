@@ -61,16 +61,9 @@ export default function AppointThree(
                 appointThree={appointThree}
                 saveRestaurantDataFromManualInput={saveRestaurantDataFromManualInput}
                 resetDataInput={resetDataInput}
-            />
-
-            {appointThree.restaurantData.length !== 0 ? (
-            <AppointThreeDisplayRestaurant
-                restaurantData={appointThree.restaurantData}
                 deleteRestaurantCard={deleteRestaurantCard}
                 deleteAllRestaurantCards={deleteAllRestaurantCards}
-            />)
-                :
-                (<></>)}
+            />
         </div>
     )
 }

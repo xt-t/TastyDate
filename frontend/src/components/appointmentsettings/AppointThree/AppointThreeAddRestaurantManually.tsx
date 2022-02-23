@@ -23,6 +23,8 @@ export default function AppointThreeAddRestaurantManually
      resetDataInput,
         saveRestaurantDataFromManualInput
     }: AppointThreeSearchRestaurantProps) {
+
+
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {

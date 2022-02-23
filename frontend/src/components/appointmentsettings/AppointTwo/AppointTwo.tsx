@@ -52,18 +52,9 @@ export default function AppointTwo(
                 appointTwo={appointTwo}
                 resetDateInput={resetDateInput}
                 saveAppointmentData={saveAppointmentData}
-            />
-
-            {appointTwo.dataDateTimes.length !== 0 ? (
-            < AppointTwoCardDisplayDate
-                dataDateTimes={appointTwo.dataDateTimes}
                 deletePickedDate={deletePickedDate}
                 deleteAllPickedDates={deleteAllPickedDates}
-                />
-            ):(
-                <></>
-            )
-            }
+            />
         </div>
     )
 }

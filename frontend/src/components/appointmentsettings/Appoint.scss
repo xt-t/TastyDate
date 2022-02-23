@@ -60,11 +60,11 @@
     }
 
     .addDateTimeButtons {
-      margin-top: 1rem;
-      margin-left: 1.6rem;
-      margin-right: 1.6rem;
+      margin-top: 0.5rem;
+      margin-left: 2rem;
+      margin-right: 2rem;
       display: grid;
-      grid-template-columns: 2fr 1fr 2fr;
+      grid-template-columns: 3fr 1fr 3fr;
     }
 
     .resetButton {
@@ -75,6 +75,10 @@
       grid-column: 3/4;
     }
 
+  }
+
+  .previewTimes {
+    margin-top: 2rem;
   }
 
 
@@ -144,6 +148,18 @@
   }
 }
 
+.taggedRestaurantsRow {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  justify-content: space-between;
+  .previewButtonRestaurants {
+    margin-top: 0.25rem;
+  }
+}
+
 //ManualAdd
 .addElements {
   margin:2rem;
@@ -188,6 +204,7 @@
 .finalSettingsWindow {
   height: 10rem;
   display: flex;
+  border: 2px solid #1c54b2;
   flex-direction: column;
   justify-content: center;
   align-content: space-around;
