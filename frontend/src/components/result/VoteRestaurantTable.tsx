@@ -1,69 +1,24 @@
 import * as React from 'react';
 import {TastyDateItem} from "../../models/result/TastyDateItem";
-import "./Tables.scss"
+import "./VoteResult.scss"
 import image from "./dummypic.jpg";
 import Checkbox from "@mui/material/Checkbox";
-import {useContext, useState} from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import {Box, Button, Rating, styled} from "@mui/material";
+import {Box, Rating} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import {
-    updateTastyDateWithVoteRestaurantCard,
-} from "../../service/tastydate-api-service";
-import {AuthContext} from "../../context/AuthProvider";
+import { StyledRating } from '../../models/restaurants/StylingRating';
 
 interface VoteRestaurantTableProps {
     tastyDateItemForVote: TastyDateItem
-    setTastyDateItemForVote: Function
-    userName: string
-    setCheckIfNameConfirmed: Function
+    checkRestaurants: boolean[]
+    positiveVotesPerTime: number[]
+    negativeVotesPerTime: number[]
+    handleCheck: Function
 }
 
-export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateItemForVote, userName, setCheckIfNameConfirmed}: VoteRestaurantTableProps) {
-
-    const {token} = useContext(AuthContext);
-
-    const [checkRestaurants, setCheckRestaurants] = useState<boolean[]>(new Array(tastyDateItemForVote.infoRestaurantData.length).fill(false));
-    const [positiveVotesPerTime, setPositiveVotesPerTime] = useState<number[]>([]);
-    const [negativeVotesPerTime, setNegativeVotesPerTime] = useState<number[]>([]);
-
-
-    const StyledRating = styled(Rating)({
-        '& .MuiRating-iconFilled': {
-            color: 'hsl(222, 100%, 50%)',
-        },
-        '& .MuiRating-iconHover': {
-            color: 'hsl(222, 100%, 41%)',
-        },
-    });
-
-    const handleCheck = (index: number) => {
-        const newChecked = [...checkRestaurants];
-        newChecked[index] = !newChecked[index];
-        setCheckRestaurants(newChecked);
-    }
-
-    const addUserVote = () => {
-        if (userName !== "") {
-            setCheckIfNameConfirmed(true);
-            const tastyDateId = tastyDateItemForVote.tastyDateId;
-            const restaurantVote = {
-                displayedName: userName,
-                votesPerRestaurantFromOneUser: checkRestaurants
-            }
-            updateTastyDateWithVoteRestaurantCard(tastyDateId, restaurantVote, token)
-                .then((response) => {
-                    setTastyDateItemForVote(response.data);
-                    setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
-                    setNegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant)
-                })
-                .catch((err) => {
-                    console.error(err.message);
-                })
-        }
-    }
+export default function VoteRestaurantTable({tastyDateItemForVote, checkRestaurants, positiveVotesPerTime, negativeVotesPerTime, handleCheck}: VoteRestaurantTableProps) {
 
     return (
         <div>
@@ -116,7 +71,7 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
                     {(positiveVotesPerTime.length !==0) ?
                         (
                             <div>
-                                <CloseIcon/>{negativeVotesPerTime[index]} <CheckIcon/>{positiveVotesPerTime[index]}
+                                <span className="amountNegativeResults"> <CloseIcon/>{negativeVotesPerTime[index]} </span> <span className="amountPositiveResults" style={{color: "hsl(145, 70%, 45%)"}}><CheckIcon/>{positiveVotesPerTime[index]}</span>
                             </div>
                         )
                         :
@@ -125,9 +80,6 @@ export default function VoteRestaurantTable({tastyDateItemForVote, setTastyDateI
                 </div>
                     </React.Fragment>
                 ))}
-            </div>
-            <div className="applyRestaurantVote">
-            <Button className="voteRestaurantButton" onClick={addUserVote}>Apply vote</Button>
             </div>
         </div>
     )
