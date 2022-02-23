@@ -15,7 +15,6 @@ export default function AppointTwo(
                 id: appointTwo.idPickedTime,
                 pickedDate: appointTwo.date.toLocaleDateString("en-US", {
                     weekday: "short",
-                    year: "numeric",
                     month: "short",
                     day: "2-digit"
                 }),

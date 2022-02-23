@@ -52,7 +52,7 @@ export default function AppointTwoCardDisplayDate
                         {index + 1}
                         <span>: </span>
                                 {dateTime.pickedDate}
-                                <span> </span>
+                                <span> / </span>
                                 {dateTime.pickedStart}
                                 <span> - </span>
                                 {dateTime.pickedEnd}

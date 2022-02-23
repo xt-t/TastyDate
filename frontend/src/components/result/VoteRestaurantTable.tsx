@@ -71,7 +71,14 @@ export default function VoteRestaurantTable({tastyDateItemForVote, checkRestaura
                     {(positiveVotesPerTime.length !==0) ?
                         (
                             <div>
-                                <span className="amountNegativeResults"> <CloseIcon/>{negativeVotesPerTime[index]} </span> <span className="amountPositiveResults" style={{color: "hsl(145, 70%, 45%)"}}><CheckIcon/>{positiveVotesPerTime[index]}</span>
+                                <span className="amountNegativeResults">
+                                    <CloseIcon className="resultIcon"/>
+                                    {negativeVotesPerTime[index]}
+                                </span>
+                                <span className="amountPositiveResults" style={{color: "hsl(145, 70%, 45%)"}}>
+                                    <CheckIcon className="resultIcon"/>
+                                    {positiveVotesPerTime[index]}
+                                </span>
                             </div>
                         )
                         :
