@@ -16,7 +16,7 @@ export default function Invitationlink ({tastyDateId}:InvitationlinkProps) {
     }
 
     return (
-        <Card className="invitationCard">
+        <Card className="invitationCard" style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
             <CardContent className="invitationCardContent">
                 <h3>Send the link to your<br/> desired participants</h3>
                 <TextField

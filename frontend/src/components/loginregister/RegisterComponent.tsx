@@ -18,7 +18,7 @@ export default function RegisterComponent() {
         return (userPassword === userPasswordVerify);
     }
 
-    const register = (event: FormEvent<HTMLFormElement>) => {
+    const registerInputData = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         if (passwordCheck()) {
             const register: RegisterData = {name: userName, password: userPassword}
@@ -35,10 +35,10 @@ export default function RegisterComponent() {
     return (
 <div className="registerWindow">
 
-    <Card>
+    <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
                     <CardContent className="registerCard">
                     <h3>Register</h3>
-                    <form className="formRegister" onSubmit={(e) => register(e)}>
+                    <form className="formRegister" onSubmit={(e) => registerInputData(e)}>
                         <TextField variant="outlined" label="Username" type="username" value={userName}
                                    onChange={(e) => setUserName(e.target.value)}/>
                         <TextField variant="filled" label="Password" type="password" value={userPassword}

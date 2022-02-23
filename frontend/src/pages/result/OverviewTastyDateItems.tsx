@@ -41,7 +41,7 @@ return (
     <div>
             <DisplayMenus/>
         <div className="votingCard">
-            <Card >
+            <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
                 <CardContent className="cardItems">
                     <h3 className="votingCardElement">Select and vote for a TastyDate</h3>
             <Box sx={{ minWidth: 120 }} className="votingCardElement">

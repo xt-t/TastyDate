@@ -13,7 +13,7 @@ export default function AppointOne(
 
     return (
         <div className="cardOne">
-        <Card>
+        <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
             <CardContent className="form">
             <h3>Your TastyDate Settings</h3>
             <TextField

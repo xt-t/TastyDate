@@ -74,7 +74,7 @@ export default function AppointmentStepsWindow(
             <div>
                     {activeStep === steps.length ? (
                         <div className="cardFour">
-                        <Card>
+                        <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
                             <CardContent className="finalSettingsWindow">
                             <Typography sx={{mt: 2, mb: 1}}>
                                 All steps completed - you&apos;re finished

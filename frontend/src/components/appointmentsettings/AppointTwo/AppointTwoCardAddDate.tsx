@@ -30,7 +30,7 @@ export default function AppointTwoCardAddDate(
 
 
     return (
-        <Card>
+        <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
             <CardContent className="addDateTime">
                 <h3>Choose date and time</h3>
 
