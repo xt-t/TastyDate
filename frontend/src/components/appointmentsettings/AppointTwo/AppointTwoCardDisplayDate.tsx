@@ -15,32 +15,32 @@ interface AppointTwoCardDisplayDateProps {
 export default function AppointTwoCardDisplayDate
 ({dataDateTimes, deletePickedDate, deleteAllPickedDates}: AppointTwoCardDisplayDateProps) {
 
-    const [open, setOpen] = useState(false);
+    const [openDialogWindow, setOpenDialogWindow] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleOpenDialogWindow = () => {
+        setOpenDialogWindow(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseDialogWindow = () => {
+        setOpenDialogWindow(false);
     };
 
     return (
         <div>
             <div className="bookmarkedDatesTimes">
                 <div className="previewButtonTimes">
-                    <Button variant="contained" onClick={handleClickOpen}>
+                    <Button variant="contained" onClick={handleOpenDialogWindow}>
                         <SearchIcon/> Preview</Button>
                 </div>
             </div>
 
             <BootstrapDialog
-                onClose={handleClose}
+                onClose={handleCloseDialogWindow}
                 aria-labelledby="customized-dialog-title"
-                open={open}
+                open={openDialogWindow}
             >
 
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleCloseDialogWindow}>
                     Selected dates and times
                 </BootstrapDialogTitle>
 

@@ -19,16 +19,16 @@ import {AuthContext} from "../../context/AuthProvider";
 export default function DisplayListRestaurants() {
 
     const {token} = useContext(AuthContext);
+    const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
+    const {newRestaurantCard, resetRestaurantCardInput} = UseNewRestaurantCard();
+    //Dialog
+    const [openDialogWindow, setOpenDialogWindow] = useState(false);
+    const [addFavouriteText, setAddFavouriteText] = useState(true);
 
     useEffect(() => {
         getEveryRestaurantCard()
         //eslint-disable-next-line
     }, []);
-
-    const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
-
-    const {newRestaurantCard, resetRestaurantCardInput} = UseNewRestaurantCard();
-
 
     const addRestaurantCard = () => {
         if ((newRestaurantCard.category !== "") &&
@@ -64,7 +64,7 @@ export default function DisplayListRestaurants() {
                 newRestaurantCard.setPrice(response.data.price)
                 newRestaurantCard.setPostcode(response.data.postcode)
                 newRestaurantCard.setCity(response.data.city)
-                handleEditOpen()
+                handleOpenWindowToEditARestaurant()
             })
     }
 
@@ -91,7 +91,7 @@ export default function DisplayListRestaurants() {
                     getEveryRestaurantCard()
                 })
             resetRestaurantCardInput();
-            handleClose();
+            handleCloseDialogWindow();
         }
     }
 
@@ -115,21 +115,19 @@ export default function DisplayListRestaurants() {
     }
 
     //Dialog
-    const [open, setOpen] = useState(false);
-    const [addFavouriteText, setAddFavouriteText] = useState(true);
 
-    const handleAddOpen = () => {
+    const handleOpenWindowToAddANewRestaurant = () => {
         resetRestaurantCardInput()
-        setOpen(true);
+        setOpenDialogWindow(true);
         setAddFavouriteText(true);
     };
 
-    const handleEditOpen = () => {
-        setOpen(true);
+    const handleOpenWindowToEditARestaurant = () => {
+        setOpenDialogWindow(true);
         setAddFavouriteText(false);
     };
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseDialogWindow = () => {
+        setOpenDialogWindow(false);
     };
 
     return (
@@ -150,15 +148,15 @@ export default function DisplayListRestaurants() {
                 </Fab>
 
                 <Box className="addRestaurantCardButton" sx={{'& > :not(style)': {m: 1}}}>
-                    <Fab color="primary" aria-label="add" onClick={handleAddOpen}>
+                    <Fab color="primary" aria-label="add" onClick={handleOpenWindowToAddANewRestaurant}>
                         <AddIcon/>
                     </Fab>
                 </Box>
             </div>
             <AddEditRestaurantCard addRestaurantCard={addRestaurantCard} addFavouriteText={addFavouriteText}
                                    newRestaurantCard={newRestaurantCard} saveRestaurantCard={saveRestaurantCard}
-                                   resetRestaurantCardInput={resetRestaurantCardInput} open={open}
-                                   handleClose={handleClose}/>
+                                   resetRestaurantCardInput={resetRestaurantCardInput} open={openDialogWindow}
+                                   handleClose={handleCloseDialogWindow}/>
         </div>
     )
 }

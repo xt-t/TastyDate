@@ -26,7 +26,7 @@ export default function AppointThreeAddFavouriteRestaurants({
     const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
     const [checksRestaurants, setChecksRestaurants] = useState<boolean[]>([]);
     const [bookmarksFavouriteRestaurants, setBookmarksFavouriteRestaurants] = useState<RestaurantCard[]>([]);
-    const [open, setOpen] = useState(false);
+    const [openWindowAddFavouriteRestaurants, setOpenWindowAddFavouriteRestaurants] = useState(false);
 
 
     const getEveryRestaurantCard = () => {
@@ -66,15 +66,15 @@ export default function AppointThreeAddFavouriteRestaurants({
 
     const transferSelectedRestaurantsToTastyDateItem = () => {
         appointThree.setRestaurantData([...appointThree.restaurantData, ...bookmarksFavouriteRestaurants])
-        handleClose();
+        handleCloseAddFavouriteRestaurantsWindow();
     }
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleOpenAddFavouriteRestaurantsWindow = () => {
+        setOpenWindowAddFavouriteRestaurants(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseAddFavouriteRestaurantsWindow = () => {
+        setOpenWindowAddFavouriteRestaurants(false);
         setBookmarksFavouriteRestaurants([]);
     };
 
@@ -89,18 +89,18 @@ export default function AppointThreeAddFavouriteRestaurants({
                     </ul>
                 </div>
                 <div>
-                    <Button className="favouriteButton" variant="contained" onClick={handleClickOpen}><FavoriteIcon/>Favourites
+                    <Button className="favouriteButton" variant="contained" onClick={handleOpenAddFavouriteRestaurantsWindow}><FavoriteIcon/>Favourites
                     </Button>
                 </div>
             </div>
 
             <BootstrapDialog
-                onClose={handleClose}
+                onClose={handleCloseAddFavouriteRestaurantsWindow}
                 aria-labelledby="customized-dialog-title"
-                open={open}
+                open={openWindowAddFavouriteRestaurants}
             >
 
-                <BootstrapDialogTitle id="dialog-title" onClose={handleClose}>
+                <BootstrapDialogTitle id="dialog-title" onClose={handleCloseAddFavouriteRestaurantsWindow}>
                     Select checkboxes to <br/>add favourite restaurants
                 </BootstrapDialogTitle>
 

@@ -25,14 +25,14 @@ export default function AppointThreeAddRestaurantManually
  }: AppointThreeSearchRestaurantProps) {
 
 
-    const [open, setOpen] = useState(false);
+    const [openWindowAddRestaurantsManually, setOpenWindowAddRestaurantsManually] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleOpenWindowAddRestaurantsManually = () => {
+        setOpenWindowAddRestaurantsManually(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseWindowAddRestaurantsManually = () => {
+        setOpenWindowAddRestaurantsManually(false);
     };
 
     return (
@@ -44,17 +44,17 @@ export default function AppointThreeAddRestaurantManually
                     </ul>
                 </div>
                 <div>
-                    <Button className="manualButton" variant="contained" onClick={handleClickOpen}> <AddIcon/> manually</Button>
+                    <Button className="manualButton" variant="contained" onClick={handleOpenWindowAddRestaurantsManually}> <AddIcon/> manually</Button>
                 </div>
             </div>
 
             <BootstrapDialog
-                onClose={handleClose}
+                onClose={handleCloseWindowAddRestaurantsManually}
                 aria-labelledby="customized-dialog-title"
-                open={open}
+                open={openWindowAddRestaurantsManually}
             >
 
-                <BootstrapDialogTitle id="titleSection" onClose={handleClose}>
+                <BootstrapDialogTitle id="titleSection" onClose={handleCloseWindowAddRestaurantsManually}>
                     Add your restaurant manually
                 </BootstrapDialogTitle>
 
@@ -110,7 +110,7 @@ export default function AppointThreeAddRestaurantManually
                     <Button variant="contained" autoFocus onClick={() =>
                         resetDataInput()}> <AddIcon/> Reset </Button>
                     <Button variant="contained" autoFocus onClick={() => {
-                        handleClose()
+                        handleCloseWindowAddRestaurantsManually()
                         saveRestaurantDataFromManualInput()
                     }}> <AddIcon/> Add </Button>
                 </DialogActions>
