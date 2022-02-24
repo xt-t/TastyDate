@@ -1,21 +1,32 @@
-//AppointOne
-.cardOne {
-  height: 29rem;
-  width: clamp(23rem, 30rem, 40rem);
+$bordercolor:hsl(218, 73%, 40%);
+
+@mixin flexrow {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-content: flex-start;
   align-items: flex-start;
 }
-
-.form {
-  height: 28rem;
-  width: 20rem;
+@mixin flexcolumn{
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #1c54b2;
+}
+
+
+//AppointOne
+.cardOne {
+  @include flexrow;
+  height: 29rem;
+  width: clamp(23rem, 30rem, 40rem);
+  display: flex;
+}
+
+.form {
+  @include flexcolumn;
+  height: 28rem;
+  width: 20rem;
+  border: 2px solid $bordercolor;
 
   h3 {
     margin: 1rem 0rem 1rem 0rem;
@@ -27,21 +38,15 @@
 
 //AppointTwo
 .cardTwo {
+  @include flexrow;
   height: 29rem;
   width: clamp(23rem, 30rem, 40rem);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: flex-start;
-  align-items: flex-start;
 
   .addDateTime {
+    @include flexcolumn;
     height: 28rem;
     width: 20rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #1c54b2;
+    border: 2px solid $bordercolor;
 
     h3 {
       margin: 1rem 0rem 2rem 0rem;
@@ -93,41 +98,31 @@
 
 //AppointThree
 .cardThree {
+  @include flexrow;
   height: 29rem;
   width: clamp(23rem, 30rem, 40rem);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: flex-start;
-  align-items: flex-start;
 }
 
 
 .formRestaurant {
+  @include flexcolumn;
   height: 28rem;
   width: 20rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid #1c54b2;
+  border: 2px solid $bordercolor;
   h3 {
     margin: 1rem 0rem 1rem 0rem;
   }
 }
 
 .menuIcons {
-  display: flex;
-  flex-direction: column;
+  @include flexcolumn;
   justify-content: space-between;
-  align-items: center;
   margin: 1rem;
 }
 
 .favouritesRowButton {
+  @include flexcolumn;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0.75rem;
   justify-content: space-between;
 
@@ -137,10 +132,8 @@
 }
 
 .manualRowButton {
+  @include flexcolumn;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-top: 0.75rem;
   justify-content: space-between;
 
@@ -150,10 +143,8 @@
 }
 
 .taggedRestaurantsRow {
+  @include flexcolumn;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-top: 2rem;
   justify-content: space-between;
   .previewButtonRestaurants {
@@ -204,10 +195,8 @@
 }
 
 .finalSettingsWindow {
+  @include flexcolumn;
   height: 10rem;
-  display: flex;
-  border: 2px solid #1c54b2;
-  flex-direction: column;
-  justify-content: center;
+  border: 2px solid $bordercolor;
   align-content: space-around;
 }

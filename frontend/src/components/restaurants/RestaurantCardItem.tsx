@@ -33,6 +33,7 @@ export default function RestaurantCardItem({index, restaurantCard, deleteRestaur
         selectedImage = image2
     }
 
+
     return (
         <React.Fragment>
         <article className="card">
