@@ -1,6 +1,5 @@
 import * as React from "react";
 import AppointThreeAddRestaurant from "./AppointThreeAddRestaurant";
-import AppointThreeDisplayRestaurant from "./AppointThreeDisplayRestaurant";
 import {AppointThreeType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 import {useContext} from "react";
 import {AuthContext} from "../../../context/AuthProvider";
