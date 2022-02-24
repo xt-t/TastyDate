@@ -24,15 +24,12 @@ export default function VoteTimeTable({tastyDateItemForVote, checkDateTime, rows
     return (
             <Card style={{boxShadow: "0 0.1rem 0.3rem rgba(0, 0, 0, 0.5)"}}>
                 <CardContent className="cardShadow">
-                    {/*Description*/}
 
-                    <div>{tastyDateItemForVote.infoTastyDate.pickedTastyDateName} {tastyDateItemForVote.infoTastyDate.pickedLocation} {tastyDateItemForVote.infoTastyDate.pickedChosenDisplayName}</div>
-                    {/*TableHeader*/}
                     <div className="grid-container" style={{
                         display: "grid",
                         gridTemplateColumns: `repeat(${tastyDateItemForVote.infoTastyDateTimes.length + 1}, 8rem)`
                     }}>
-                        {/*erste Spalte*/}
+
                         <div className="gridItemWithoutStyling"><PersonIcon/> User</div>
 
                         {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
@@ -49,16 +46,12 @@ export default function VoteTimeTable({tastyDateItemForVote, checkDateTime, rows
                         ))
                         }
 
-
-                        {/*//VoteOneUserPerRow*/}
                         {rowsUserTimeVote.map((timeVote, index) => (
                             <React.Fragment key={index}>
 
-                                {/*erste Spalte*/}
                                 <div className="gridItemWithoutStyling">
                                     {timeVote.displayedName}
                                 </div>
-
 
                                 {timeVote.votesPerDateTimeFromOneUser.map((voteTime, innerindex) => (
                                     <React.Fragment key={innerindex}>
@@ -75,14 +68,11 @@ export default function VoteTimeTable({tastyDateItemForVote, checkDateTime, rows
 
                         ))}
 
-                        {/*VoteResult - different cases: show/ don't show resultline*/}
                         {(countersVotesPerTime.length !== 0) ?
                             (
                                 <React.Fragment>
-                                    {/*erste Spalte*/}
                                     <div className="voteSummary">Total:</div>
 
-                                    {/*Ergebnis*/}
                                     {countersVotesPerTime.map((counterVotesPerTime, index) => (
 
                                         <div className="voteSummary" key={index}>{counterVotesPerTime}</div>
@@ -96,7 +86,6 @@ export default function VoteTimeTable({tastyDateItemForVote, checkDateTime, rows
                             (<React.Fragment>
                                 <Box className="gridUserVoteRow"  style={{gridColumnStart: "1", gridRowStart: `${rowsUserTimeVote.length + 2}`}}>
                                     Enter your vote<br/> in this line: </Box>
-                                {/*User Input*/}
                                 {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
                                     <div className="gridUserVoteRow" key={index}>
                                         <Checkbox

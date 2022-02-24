@@ -124,6 +124,7 @@ export default function VoteResult() {
                                 </Tabs>
                             </Box>
                             <TabPanel value={voteType} index={0}>
+                                <div style={{color: "#00458B", marginBottom: "1.5rem", marginTop: "-0.5rem"}}>TastyDate: {tastyDateItemForVote.infoTastyDate.pickedTastyDateName}</div>
                                 <div style={{display: "flex", justifyContent: "space-between"}}>
                                 <TextField label="Your voting name" variant="standard"
                                            value={userName}
@@ -147,6 +148,7 @@ export default function VoteResult() {
                                                />
                             </TabPanel>
                             <TabPanel value={voteType} index={1}>
+                                <div style={{color: "#00458B", marginBottom: "1.5rem", marginTop: "-0.5rem"}}>TastyDate: {tastyDateItemForVote.infoTastyDate.pickedTastyDateName}</div>
                                 <div style={{display: "flex", justifyContent: "space-between"}}>
                                     <TextField label="Your voting name" variant="standard" value={userName}
                                                onChange={(event) => {
