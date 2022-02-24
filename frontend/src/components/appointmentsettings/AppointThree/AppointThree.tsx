@@ -9,10 +9,11 @@ interface AppointThreeProps {
 }
 
 export default function AppointThree(
-    {appointThree
+    {
+        appointThree
     }: AppointThreeProps) {
 
-    const {jwtDecoded}=useContext(AuthContext)
+    const {jwtDecoded} = useContext(AuthContext)
 
     const saveRestaurantDataFromManualInput = () => {
         if ((appointThree.category !== "") &&

@@ -19,10 +19,10 @@ interface AppointThreeSearchRestaurantProps {
 
 export default function AppointThreeAddRestaurantManually
 ({
-        appointThree,
+     appointThree,
      resetDataInput,
-        saveRestaurantDataFromManualInput
-    }: AppointThreeSearchRestaurantProps) {
+     saveRestaurantDataFromManualInput
+ }: AppointThreeSearchRestaurantProps) {
 
 
     const [open, setOpen] = useState(false);
@@ -38,9 +38,13 @@ export default function AppointThreeAddRestaurantManually
     return (
         <div>
             <div className="manualRowButton">
-                <div><ul><li>Add restaurants</li></ul></div>
                 <div>
-            <Button className="manualButton" variant="contained" onClick={handleClickOpen}> <AddIcon/> manually</Button>
+                    <ul>
+                        <li>Add restaurants</li>
+                    </ul>
+                </div>
+                <div>
+                    <Button className="manualButton" variant="contained" onClick={handleClickOpen}> <AddIcon/> manually</Button>
                 </div>
             </div>
 
@@ -71,33 +75,34 @@ export default function AppointThreeAddRestaurantManually
 
                     <CategoryMenu category={appointThree.category} setCategory={appointThree.setCategory}/>
 
-                    <RestaurantRating rating={appointThree.rating} setRating={appointThree.setRating} price={appointThree.price} setPrice={appointThree.setPrice}/>
+                    <RestaurantRating rating={appointThree.rating} setRating={appointThree.setRating}
+                                      price={appointThree.price} setPrice={appointThree.setPrice}/>
 
-                        <TextField
-                            required
-                            id="standard-required"
-                            label="Postcode"
-                            variant="standard"
-                            className="addElements"
-                            value={appointThree.postcode}
-                            onChange={(event) => {
-                                appointThree.setPostcode(event.target.value);
-                            }
-                            }
-                            style={{marginTop: "1rem"}}
-                        />
-                        <TextField
-                            required
-                            id="standard-required"
-                            label="City"
-                            variant="standard"
-                            className="addElements"
-                            value={appointThree.city}
-                            onChange={(event) => {
-                                appointThree.setCity(event.target.value);
-                            }
-                            }
-                        />
+                    <TextField
+                        required
+                        id="standard-required"
+                        label="Postcode"
+                        variant="standard"
+                        className="addElements"
+                        value={appointThree.postcode}
+                        onChange={(event) => {
+                            appointThree.setPostcode(event.target.value);
+                        }
+                        }
+                        style={{marginTop: "1rem"}}
+                    />
+                    <TextField
+                        required
+                        id="standard-required"
+                        label="City"
+                        variant="standard"
+                        className="addElements"
+                        value={appointThree.city}
+                        onChange={(event) => {
+                            appointThree.setCity(event.target.value);
+                        }
+                        }
+                    />
 
                 </DialogContent>
 
@@ -106,7 +111,8 @@ export default function AppointThreeAddRestaurantManually
                         resetDataInput()}> <AddIcon/> Reset </Button>
                     <Button variant="contained" autoFocus onClick={() => {
                         handleClose()
-                        saveRestaurantDataFromManualInput()}}> <AddIcon/> Add </Button>
+                        saveRestaurantDataFromManualInput()
+                    }}> <AddIcon/> Add </Button>
                 </DialogActions>
             </BootstrapDialog>
 

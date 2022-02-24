@@ -35,7 +35,8 @@ export default function AppointThreeDisplayRestaurant(
             <div>
                 <div className="taggedRestaurantsRow">
                     Your tagged restaurants
-                    <Button className="previewButtonRestaurants" variant="contained" onClick={handleClickOpen}> <SearchIcon/> Preview</Button>
+                    <Button className="previewButtonRestaurants" variant="contained" onClick={handleClickOpen}>
+                        <SearchIcon/> Preview</Button>
                 </div>
             </div>
 
@@ -54,7 +55,7 @@ export default function AppointThreeDisplayRestaurant(
 
                         {restaurantData.map((restaurant, index) => (
                             <p key={index}>
-                        {index + 1}
+                                {index + 1}
                                 <span>: </span>
                                 {restaurant.restaurantName}
                                 <span> </span>
@@ -63,8 +64,8 @@ export default function AppointThreeDisplayRestaurant(
                                 {restaurant.city}
                                 <span> </span>
 
-                            <Button variant="text">
-        <DeleteIcon onClick={() => deleteRestaurantCard(restaurant.id)}/></Button>
+                                <Button variant="text">
+                                    <DeleteIcon onClick={() => deleteRestaurantCard(restaurant.id)}/></Button>
                             </p>))}
                     </div>
                 </DialogContent>

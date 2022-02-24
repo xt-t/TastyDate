@@ -3,7 +3,6 @@ import AppointmentSteps from "./AppointmentSteps";
 import "./Appointment.scss"
 
 
-
 export default function AppointmentHome() {
 
     return (

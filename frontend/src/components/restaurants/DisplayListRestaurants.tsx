@@ -25,7 +25,7 @@ export default function DisplayListRestaurants() {
         //eslint-disable-next-line
     }, []);
 
-const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
+    const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
 
     const {newRestaurantCard, resetRestaurantCardInput} = UseNewRestaurantCard();
 
@@ -47,7 +47,7 @@ const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
                 price: newRestaurantCard.price
             }
             transferRestaurantCardToDB(newRestaurantData, token)
-                .then((response)=> {
+                .then((response) => {
                     setRestaurantCards([...restaurantCards, response.data]);
                 })
             resetRestaurantCardInput();
@@ -66,7 +66,7 @@ const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
                 newRestaurantCard.setCity(response.data.city)
                 handleEditOpen()
             })
-        }
+    }
 
     const saveRestaurantCard = () => {
         if ((newRestaurantCard.category !== "") &&
@@ -87,9 +87,9 @@ const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
                 price: newRestaurantCard.price
             }
             updateRestaurantCard(newRestaurantData, token)
-                 .then(()=> {
-                     getEveryRestaurantCard()
-                 })
+                .then(() => {
+                    getEveryRestaurantCard()
+                })
             resetRestaurantCardInput();
             handleClose();
         }
@@ -97,14 +97,14 @@ const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
 
     const deleteRestaurantCard = (restaurantId: string) => {
         removeRestaurantCard(restaurantId, token)
-            .then(()=>(
-                getEveryRestaurantCard()
+            .then(() => (
+                    getEveryRestaurantCard()
+                )
             )
-        )
     }
 
     const deleteRestaurantList = () => {
-        removeRestaurantList(token).then(()=>(
+        removeRestaurantList(token).then(() => (
             getEveryRestaurantCard()
         ))
     }
@@ -139,21 +139,26 @@ const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
             <section className="cardList">
                 {restaurantCards.map((restaurantCard, index) => (
                     <React.Fragment>
-                    <RestaurantCardItem index={index} restaurantCard={restaurantCard} deleteRestaurantCard={deleteRestaurantCard} editRestaurantCard={editRestaurantCard}/>
+                        <RestaurantCardItem index={index} restaurantCard={restaurantCard}
+                                            deleteRestaurantCard={deleteRestaurantCard}
+                                            editRestaurantCard={editRestaurantCard}/>
                     </React.Fragment>))}
             </section>
             <div className="cardActionButtons">
-            <Fab aria-label="edit" style={{margin: "10px"}} onClick={()=>deleteRestaurantList()}>
-                <DeleteIcon/>
-            </Fab>
+                <Fab aria-label="edit" style={{margin: "10px"}} onClick={() => deleteRestaurantList()}>
+                    <DeleteIcon/>
+                </Fab>
 
-                <Box className="addRestaurantCardButton" sx={{ '& > :not(style)': { m: 1 } }}>
+                <Box className="addRestaurantCardButton" sx={{'& > :not(style)': {m: 1}}}>
                     <Fab color="primary" aria-label="add" onClick={handleAddOpen}>
                         <AddIcon/>
                     </Fab>
                 </Box>
             </div>
-            <AddEditRestaurantCard addRestaurantCard={addRestaurantCard} addFavouriteText={addFavouriteText} newRestaurantCard={newRestaurantCard} saveRestaurantCard={saveRestaurantCard} resetRestaurantCardInput={resetRestaurantCardInput} open={open} handleClose={handleClose} />
+            <AddEditRestaurantCard addRestaurantCard={addRestaurantCard} addFavouriteText={addFavouriteText}
+                                   newRestaurantCard={newRestaurantCard} saveRestaurantCard={saveRestaurantCard}
+                                   resetRestaurantCardInput={resetRestaurantCardInput} open={open}
+                                   handleClose={handleClose}/>
         </div>
     )
 }

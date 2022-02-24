@@ -22,7 +22,7 @@
   justify-content: center;
   align-items: center;
   background-color: hsl(200, 100%, 80%);
-  border: 0.1rem solid 	hsl(0, 0%, 100%);
+  border: 0.1rem solid hsl(0, 0%, 100%);
 }
 
 .gridPositiveVote {
@@ -32,7 +32,7 @@
   justify-content: center;
   align-items: center;
   background-color: hsl(150, 80%, 60%);
-  border: 0.1rem solid 	hsl(0, 0%, 100%);
+  border: 0.1rem solid hsl(0, 0%, 100%);
 }
 
 .gridNegativeVote {
@@ -41,8 +41,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color:  	hsl(0, 100%, 85%);
-  border: 0.1rem solid 	hsl(0, 0%, 100%);
+  background-color: hsl(0, 100%, 85%);
+  border: 0.1rem solid hsl(0, 0%, 100%);
 }
 
 .voteSummary {
@@ -50,10 +50,10 @@
   color: #00458B;
   margin-top: 0.2rem;
   padding-top: 0.2rem;
-  border-top:    0.1rem solid  #00458B;
-  border-right:  none;
+  border-top: 0.1rem solid #00458B;
+  border-right: none;
   border-bottom: none;
-  border-left:   none;
+  border-left: none;
 }
 
 .gridUserVoteRow {
@@ -68,9 +68,9 @@
 }
 
 //VoteRestaurantTable
-.container{
+.container {
   height: 29rem;
-  width: clamp(21rem,21rem, 40rem);
+  width: clamp(21rem, 21rem, 40rem);
   position: relative;
   display: flex;
   justify-content: center;
@@ -94,9 +94,9 @@
   border-radius: 1rem;
 }
 
-.container .resultcard:hover
-{
+.container .resultcard:hover {
   height: 350px;
+
   .arrow {
     visibility: hidden;
   }
@@ -109,8 +109,7 @@
   z-index: 1;
 }
 
-.container .resultcard .imgBx img
-{
+.container .resultcard .imgBx img {
   max-width: 100%;
   border-radius: 1rem;
 }
@@ -146,6 +145,7 @@
 
 .amountNegativeResults {
   color: hsl(0, 100%, 50%);
+
   .resultIcon {
     padding-top: 0.5rem;
   }
@@ -153,13 +153,14 @@
 
 .amountPositiveResults {
   color: hsl(145, 70%, 45%);
+
   .resultIcon {
     padding-top: 0.5rem;
   }
 }
 
 //Invitationlink
-.invitationCard{
+.invitationCard {
   width: 21rem;
 
   border: 2px solid #1c54b2;

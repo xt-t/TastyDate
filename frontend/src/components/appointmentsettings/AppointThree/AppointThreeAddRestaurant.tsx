@@ -25,26 +25,27 @@ export default function AppointThreeAddRestaurant(
 ) {
 
     return (
-            <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
-                <CardContent className="formRestaurant">
-                    <h3>Add your restaurant</h3>
-                    <span>Your options:</span>
-                    <Box className="menuIcons">
-                        <AppointThreeAddFavouriteRestaurants appointThree={appointThree} resetDataInput={resetDataInput}/>
+        <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
+            <CardContent className="formRestaurant">
+                <h3>Add your restaurant</h3>
+                <span>Your options:</span>
+                <Box className="menuIcons">
+                    <AppointThreeAddFavouriteRestaurants appointThree={appointThree} resetDataInput={resetDataInput}/>
 
-                        <AppointThreeAddRestaurantManually appointThree={appointThree} resetDataInput={resetDataInput} saveRestaurantDataFromManualInput={saveRestaurantDataFromManualInput}/>
+                    <AppointThreeAddRestaurantManually appointThree={appointThree} resetDataInput={resetDataInput}
+                                                       saveRestaurantDataFromManualInput={saveRestaurantDataFromManualInput}/>
 
-                        {appointThree.restaurantData.length !== 0 ? (
-                                <AppointThreeDisplayRestaurant
-                                    restaurantData={appointThree.restaurantData}
-                                    deleteRestaurantCard={deleteRestaurantCard}
-                                    deleteAllRestaurantCards={deleteAllRestaurantCards}
-                                />)
-                            :
-                            (<></>)}
+                    {appointThree.restaurantData.length !== 0 ? (
+                            <AppointThreeDisplayRestaurant
+                                restaurantData={appointThree.restaurantData}
+                                deleteRestaurantCard={deleteRestaurantCard}
+                                deleteAllRestaurantCards={deleteAllRestaurantCards}
+                            />)
+                        :
+                        (<></>)}
 
-                    </Box>
-                </CardContent>
-            </Card>
+                </Box>
+            </CardContent>
+        </Card>
     )
 }

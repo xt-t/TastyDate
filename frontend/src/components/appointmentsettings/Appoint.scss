@@ -1,4 +1,4 @@
-$bordercolor:hsl(218, 73%, 40%);
+$bordercolor: hsl(218, 73%, 40%);
 
 @mixin flexrow {
   display: flex;
@@ -7,7 +7,8 @@ $bordercolor:hsl(218, 73%, 40%);
   align-content: flex-start;
   align-items: flex-start;
 }
-@mixin flexcolumn{
+
+@mixin flexcolumn {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,6 +32,7 @@ $bordercolor:hsl(218, 73%, 40%);
   h3 {
     margin: 1rem 0rem 1rem 0rem;
   }
+
   .formelements {
     margin: 0.3rem;
   }
@@ -109,6 +111,7 @@ $bordercolor:hsl(218, 73%, 40%);
   height: 28rem;
   width: 20rem;
   border: 2px solid $bordercolor;
+
   h3 {
     margin: 1rem 0rem 1rem 0rem;
   }
@@ -147,6 +150,7 @@ $bordercolor:hsl(218, 73%, 40%);
   text-align: center;
   margin-top: 2rem;
   justify-content: space-between;
+
   .previewButtonRestaurants {
     margin-top: 0.25rem;
   }
@@ -154,7 +158,7 @@ $bordercolor:hsl(218, 73%, 40%);
 
 //ManualAdd
 .addElements {
-  margin:2rem;
+  margin: 2rem;
 }
 
 .displayPickedRestaurants {

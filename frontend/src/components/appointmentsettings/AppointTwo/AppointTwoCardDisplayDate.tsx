@@ -49,8 +49,8 @@ export default function AppointTwoCardDisplayDate
                     <div className="displayChosenDates">
                         {dataDateTimes.map((dateTime, index) => (
                             <p key={index}>
-                        {index + 1}
-                        <span>: </span>
+                                {index + 1}
+                                <span>: </span>
                                 {dateTime.pickedDate}
                                 <span> / </span>
                                 {dateTime.pickedStart}
@@ -58,8 +58,8 @@ export default function AppointTwoCardDisplayDate
                                 {dateTime.pickedEnd}
                                 <span> </span>
 
-                    <Button variant="text">
-        <DeleteIcon onClick={() => deletePickedDate(dateTime.id)}/></Button>
+                                <Button variant="text">
+                                    <DeleteIcon onClick={() => deletePickedDate(dateTime.id)}/></Button>
                             </p>))}
                     </div>
                 </DialogContent>

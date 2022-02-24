@@ -6,7 +6,7 @@ interface InvitationlinkProps {
     tastyDateId?: string
 }
 
-export default function Invitationlink ({tastyDateId}:InvitationlinkProps) {
+export default function Invitationlink({tastyDateId}: InvitationlinkProps) {
 
 
     const link = `https://tastydate.herokuapp.com/overview/${tastyDateId}`
@@ -23,7 +23,7 @@ export default function Invitationlink ({tastyDateId}:InvitationlinkProps) {
                     id="standard-read-only-input"
                     multiline rows={2}
                     label=""
-                    defaultValue= {link}
+                    defaultValue={link}
                     InputProps={{
                         readOnly: true,
                     }}

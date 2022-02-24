@@ -18,23 +18,28 @@ interface AppointTwoCardAddDateProps {
 }
 
 export default function AppointTwoCardAddDate(
-    {appointTwo, resetDateInput, saveAppointmentData, deletePickedDate, deleteAllPickedDates}: AppointTwoCardAddDateProps) {
+    {
+        appointTwo,
+        resetDateInput,
+        saveAppointmentData,
+        deletePickedDate,
+        deleteAllPickedDates
+    }: AppointTwoCardAddDateProps) {
 
-    const {date, setDate, startTime, setStartTime, endTime, setEndTime}=appointTwo;
+    const {date, setDate, startTime, setStartTime, endTime, setEndTime} = appointTwo;
 
     const timeRestriction = () => {
-            var tempTime = new Date (startTime)
-            tempTime.setMinutes(startTime.getMinutes()+30)
-            return tempTime
+        var tempTime = new Date(startTime)
+        tempTime.setMinutes(startTime.getMinutes() + 30)
+        return tempTime
     }
-
 
     return (
         <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
             <CardContent className="addDateTime">
                 <h3>Choose date and time</h3>
 
-                <DateSetter date={date} setDate={setDate} />
+                <DateSetter date={date} setDate={setDate}/>
 
                 <div className="setTime">
 
@@ -54,21 +59,23 @@ export default function AppointTwoCardAddDate(
                 </div>
 
                 <div className="addDateTimeButtons">
-                    <Button className="resetButton" variant="outlined" onClick={() => resetDateInput()}> <RestartAltIcon/> Reset </Button>
-                    <Button className="addButton" variant="contained" onClick={() => saveAppointmentData()}> <AddIcon/> Add </Button>
+                    <Button className="resetButton" variant="outlined" onClick={() => resetDateInput()}>
+                        <RestartAltIcon/> Reset </Button>
+                    <Button className="addButton" variant="contained" onClick={() => saveAppointmentData()}>
+                        <AddIcon/> Add </Button>
 
                 </div>
                 <div className="previewTimes">
-                {appointTwo.dataDateTimes.length !== 0 ? (
-                    < AppointTwoCardDisplayDate
-                        dataDateTimes={appointTwo.dataDateTimes}
-                        deletePickedDate={deletePickedDate}
-                        deleteAllPickedDates={deleteAllPickedDates}
-                    />
-                ):(
-                    <></>
-                )
-                }
+                    {appointTwo.dataDateTimes.length !== 0 ? (
+                        < AppointTwoCardDisplayDate
+                            dataDateTimes={appointTwo.dataDateTimes}
+                            deletePickedDate={deletePickedDate}
+                            deleteAllPickedDates={deleteAllPickedDates}
+                        />
+                    ) : (
+                        <></>
+                    )
+                    }
                 </div>
             </CardContent>
         </Card>

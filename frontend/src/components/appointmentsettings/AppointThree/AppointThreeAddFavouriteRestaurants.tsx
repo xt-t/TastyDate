@@ -1,5 +1,5 @@
 import {AppointThreeType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
-import { useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import {BootstrapDialog, BootstrapDialogTitle} from "./Subcomponents/DialogTitle";
@@ -19,9 +19,9 @@ interface AppointThreeAddFavouriteRestaurantsProps {
 }
 
 export default function AppointThreeAddFavouriteRestaurants({
-                                                              appointThree
-                                                          }: AppointThreeAddFavouriteRestaurantsProps) {
-    const {token}=useContext(AuthContext)
+                                                                appointThree
+                                                            }: AppointThreeAddFavouriteRestaurantsProps) {
+    const {token} = useContext(AuthContext)
 
     const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
     const [checksRestaurants, setChecksRestaurants] = useState<boolean[]>([]);
@@ -54,8 +54,7 @@ export default function AppointThreeAddFavouriteRestaurants({
         setChecksRestaurants(newChecked)
     }
 
-    const bookmarkNewFavouriteRestaurants = (restaurantCard: RestaurantCard, cardsNumber: number) =>
-    {
+    const bookmarkNewFavouriteRestaurants = (restaurantCard: RestaurantCard, cardsNumber: number) => {
         if (!checksRestaurants[cardsNumber]) {
             const newBookmarkedRestaurants = [...bookmarksFavouriteRestaurants, restaurantCard];
             setBookmarksFavouriteRestaurants(newBookmarkedRestaurants);
@@ -66,7 +65,7 @@ export default function AppointThreeAddFavouriteRestaurants({
     }
 
     const transferSelectedRestaurantsToTastyDateItem = () => {
-        appointThree.setRestaurantData([...appointThree.restaurantData ,...bookmarksFavouriteRestaurants])
+        appointThree.setRestaurantData([...appointThree.restaurantData, ...bookmarksFavouriteRestaurants])
         handleClose();
     }
 
@@ -76,16 +75,22 @@ export default function AppointThreeAddFavouriteRestaurants({
 
     const handleClose = () => {
         setOpen(false);
-        setBookmarksFavouriteRestaurants( []);
+        setBookmarksFavouriteRestaurants([]);
     };
 
     return (
-        <div >
+        <div>
             <div className="favouritesRowButton">
-                <div><ul><li>Add restaurants<br/>
-                    from your </li></ul></div>
                 <div>
-                <Button className="favouriteButton" variant="contained" onClick={handleClickOpen}><FavoriteIcon/>Favourites </Button>
+                    <ul>
+                        <li>Add restaurants<br/>
+                            from your
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <Button className="favouriteButton" variant="contained" onClick={handleClickOpen}><FavoriteIcon/>Favourites
+                    </Button>
                 </div>
             </div>
 
@@ -101,12 +106,14 @@ export default function AppointThreeAddFavouriteRestaurants({
 
                 <DialogContent dividers className="newWindow">
 
-                        <section className="favcard-list">
-                            {restaurantCards.map((restaurantCard, index) => (
-                                <React.Fragment key={index}>
-                                    <AppointThreeAddFavouriteRestaurantCard restaurantCard={restaurantCard} checkRestaurants={checksRestaurants} cardsNumber={index} handleCheck={handleCheck} />
-                                </React.Fragment>))}
-                        </section>
+                    <section className="favcard-list">
+                        {restaurantCards.map((restaurantCard, index) => (
+                            <React.Fragment key={index}>
+                                <AppointThreeAddFavouriteRestaurantCard restaurantCard={restaurantCard}
+                                                                        checkRestaurants={checksRestaurants}
+                                                                        cardsNumber={index} handleCheck={handleCheck}/>
+                            </React.Fragment>))}
+                    </section>
 
                 </DialogContent>
 

@@ -1,4 +1,4 @@
-export interface NewRestaurantCardType{
+export interface NewRestaurantCardType {
     id: string
     setId: Function
     cardCreator: string

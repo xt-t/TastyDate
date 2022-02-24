@@ -21,7 +21,7 @@ export default function DateSetter({date, setDate}: DateSetterProps) {
                 onChange={(newValue) => {
                     setDate(newValue);
                 }}
-                minDate={currentDate.setDate(currentDate.getDate()+1)}
+                minDate={currentDate.setDate(currentDate.getDate() + 1)}
                 renderInput={(params) => <TextField {...params} />}
             />
         </LocalizationProvider>

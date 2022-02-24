@@ -16,11 +16,9 @@ import {useNavigate} from "react-router-dom";
 
 export default function OverviewTastyDateItems() {
 
-    const {token}=useContext(AuthContext);
-
-    const [selectedTastyDateId, setSelectedTastyDateId]=useState<string>("");
-    const [tastyDateItems, setTastyDateItems]=useState<TastyDateItem[]>([]);
-
+    const {token} = useContext(AuthContext);
+    const [selectedTastyDateId, setSelectedTastyDateId] = useState<string>("");
+    const [tastyDateItems, setTastyDateItems] = useState<TastyDateItem[]>([]);
     const navigate = useNavigate();
 
     const switchPageToCertainVote = () => {
@@ -32,37 +30,38 @@ export default function OverviewTastyDateItems() {
             .then(response => setTastyDateItems(response.data))
     }
 
-    useEffect(()=>(
+    useEffect(() => (
         getEveryTastyDate()
         //eslint-disable-next-line
-    ),[])
+    ), [])
 
-return (
-    <div>
+    return (
+        <div>
             <DisplayMenus/>
-        <div className="votingCard">
-            <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
-                <CardContent className="cardItems">
-                    <h3 className="votingCardElement">Select and vote for a TastyDate</h3>
-            <Box sx={{ minWidth: 120 }} className="votingCardElement">
-                <FormControl fullWidth>
-                    <InputLabel variant="outlined">TastyDate</InputLabel>
-                    <Select
-                        value={selectedTastyDateId}
-                        label="TastyDate"
-                        onChange={(event)=>setSelectedTastyDateId(event.target.value)}
-                    >
-                        {tastyDateItems.map((tastyDateItem, index) => (
-                          <MenuItem key={index} value={tastyDateItem.tastyDateId}>{tastyDateItem.infoTastyDate.pickedTastyDateName}</MenuItem>
-                            ))
-                        }
-                    </Select>
-                </FormControl>
-            </Box>
-                    <Button variant="text" className="votingCardElement" onClick={switchPageToCertainVote}>Go to vote<NavigateNextIcon/></Button>
-                </CardContent>
-            </Card>
+            <div className="votingCard">
+                <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
+                    <CardContent className="cardItems">
+                        <h3 className="votingCardElement">Select and vote for a TastyDate</h3>
+                        <Box sx={{minWidth: 120}} className="votingCardElement">
+                            <FormControl fullWidth>
+                                <InputLabel variant="outlined">TastyDate</InputLabel>
+                                <Select
+                                    value={selectedTastyDateId}
+                                    label="TastyDate"
+                                    onChange={(event) => setSelectedTastyDateId(event.target.value)}
+                                >
+                                    {tastyDateItems.map((tastyDateItem, index) => (
+                                        <MenuItem key={index}
+                                                  value={tastyDateItem.tastyDateId}>{tastyDateItem.infoTastyDate.pickedTastyDateName}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                        <Button variant="text" className="votingCardElement" onClick={switchPageToCertainVote}>Go to
+                            vote<NavigateNextIcon/></Button>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
-    </div>
-)
-    }
+    )
+}

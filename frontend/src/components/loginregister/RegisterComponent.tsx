@@ -33,10 +33,10 @@ export default function RegisterComponent() {
     };
 
     return (
-<div className="registerWindow">
+        <div className="registerWindow">
 
-    <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
-                    <CardContent className="registerCard">
+            <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
+                <CardContent className="registerCard">
                     <h3>Register</h3>
                     <form className="formRegister" onSubmit={(e) => registerInputData(e)}>
                         <TextField variant="outlined" label="Username" type="username" value={userName}
@@ -49,7 +49,7 @@ export default function RegisterComponent() {
                         <Link to="/login">Back to login</Link>
                     </form>
                 </CardContent>
-                </Card>
-</div>
+            </Card>
+        </div>
     )
 }

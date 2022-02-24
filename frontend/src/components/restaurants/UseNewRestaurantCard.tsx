@@ -12,12 +12,12 @@ export default function UseNewRestaurantCard() {
     const [city, setCity] = useState<string>("");
 
     const resetRestaurantCardInput = () => {
-            setRestaurantName("");
-            setCategory("");
-            setRating(0);
-            setPrice(0);
+        setRestaurantName("");
+        setCategory("");
+        setRating(0);
+        setPrice(0);
         setPostcode(0);
-            setCity("");
+        setCity("");
     }
 
     return {

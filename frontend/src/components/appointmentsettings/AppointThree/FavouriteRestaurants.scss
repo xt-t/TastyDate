@@ -1,4 +1,4 @@
-.newWindow{
+.newWindow {
   width: 21rem;
   height: 22rem;
   background-image: url("../../../background.jpg");
@@ -33,11 +33,11 @@
   transform: translateY(-1rem);
 }
 
-.favcard:hover~.favcard {
+.favcard:hover ~ .favcard {
   transform: translateX(3rem);
 }
 
-.favcard:focus-within~.favcard, .favcard:not(:first-child) {
+.favcard:focus-within ~ .favcard, .favcard:not(:first-child) {
   margin-left: -3rem;
 }
 

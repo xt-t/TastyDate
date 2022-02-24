@@ -1,11 +1,10 @@
-
 import React from "react";
 import {Box, Rating} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import {RestaurantCard} from "../../../models/restaurants/RestaurantCard";
 import "./FavouriteRestaurants.scss"
 import Checkbox from "@mui/material/Checkbox";
-import { StyledRating } from "../../../models/restaurants/StylingRating";
+import {StyledRating} from "../../../models/restaurants/StylingRating";
 
 interface AppointThreeAddFavouriteRestaurantCardProps {
     restaurantCard: RestaurantCard
@@ -14,7 +13,12 @@ interface AppointThreeAddFavouriteRestaurantCardProps {
     cardsNumber: number
 }
 
-export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, checkRestaurants, cardsNumber, handleCheck}:AppointThreeAddFavouriteRestaurantCardProps) {
+export default function AppointThreeAddFavouriteRestaurantCard({
+                                                                   restaurantCard,
+                                                                   checkRestaurants,
+                                                                   cardsNumber,
+                                                                   handleCheck
+                                                               }: AppointThreeAddFavouriteRestaurantCardProps) {
 
     return (
         <React.Fragment>
@@ -23,18 +27,10 @@ export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, 
                     <p>{restaurantCard.category}</p>
                     <h2>{restaurantCard.restaurantName}</h2>
                 </header>
-                <Box
-                    sx={{
-                        '& > legend': { mt: 2 },
-                    }}
-                >
-                    <Rating name="read-only" value={restaurantCard.rating} readOnly />
+                <Box sx={{'& > legend': {mt: 2},}}>
+                    <Rating name="read-only" value={restaurantCard.rating} readOnly/>
                 </Box>
-                <Box
-                    sx={{
-                        '& > legend': {mt: 2},
-                    }}
-                >
+                <Box sx={{'& > legend': {mt: 2},}}>
                     <StyledRating
                         name="read-only"
                         readOnly

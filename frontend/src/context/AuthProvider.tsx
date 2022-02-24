@@ -18,10 +18,11 @@ export default function AuthProvider({children}: { children: ReactElement<any, a
     const [token, setToken] = useState<string | undefined>(localStorage.getItem(STORAGE_KEY) || undefined);
     const [jwtDecoded, setJwtDecoded] = useState();
 
-        React.useEffect(() => {
-            if (token !== undefined) {
-            localStorage.setItem(STORAGE_KEY, token)}
-        }, [token]);
+    React.useEffect(() => {
+        if (token !== undefined) {
+            localStorage.setItem(STORAGE_KEY, token)
+        }
+    }, [token]);
 
     const setJwt = (jwt: string) => {
         if (jwt === "") {

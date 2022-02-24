@@ -15,18 +15,18 @@ interface TimeSetterProps {
 export default function TimeSetter({label, timeInput, setTimeInput, minimalTime}: TimeSetterProps) {
 
 
-        return (
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <TimePicker
-                    label={label}
-                    value={timeInput}
-                    ampm={false}
-                    onChange={(newValue) => {
-                        setTimeInput(newValue);
-                    }}
-                    minTime={minimalTime}
-                    renderInput={(params) => <TextField {...params} />}
-                />
-            </LocalizationProvider>
-        );
+    return (
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <TimePicker
+                label={label}
+                value={timeInput}
+                ampm={false}
+                onChange={(newValue) => {
+                    setTimeInput(newValue);
+                }}
+                minTime={minimalTime}
+                renderInput={(params) => <TextField {...params} />}
+            />
+        </LocalizationProvider>
+    );
 }

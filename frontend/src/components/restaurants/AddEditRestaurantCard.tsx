@@ -21,10 +21,11 @@ interface AddRestaurantCardProps {
 }
 
 export default function AddEditRestaurantCard(
-    {newRestaurantCard, saveRestaurantCard, resetRestaurantCardInput,
+    {
+        newRestaurantCard, saveRestaurantCard, resetRestaurantCardInput,
         open,
-        handleClose, addFavouriteText, addRestaurantCard}:AddRestaurantCardProps) {
-
+        handleClose, addFavouriteText, addRestaurantCard
+    }: AddRestaurantCardProps) {
 
 
     return (
@@ -32,14 +33,14 @@ export default function AddEditRestaurantCard(
 
 
             <BootstrapDialog
-                onClose={()=>handleClose()}
+                onClose={() => handleClose()}
                 aria-labelledby="customized-dialog-title"
                 open={open}
             >
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={()=>handleClose()}>
-                    {addFavouriteText?
+                <BootstrapDialogTitle id="customized-dialog-title" onClose={() => handleClose()}>
+                    {addFavouriteText ?
                         (<span>Add a new favourite restaurant</span>
-                        ):(
+                        ) : (
                             <span>Edit your favourite restaurant</span>)}
                 </BootstrapDialogTitle>
 
@@ -60,7 +61,8 @@ export default function AddEditRestaurantCard(
 
                     <CategoryMenu category={newRestaurantCard.category} setCategory={newRestaurantCard.setCategory}/>
 
-                    <RestaurantRating rating={newRestaurantCard.rating} setRating={newRestaurantCard.setRating} price={newRestaurantCard.price} setPrice={newRestaurantCard.setPrice}/>
+                    <RestaurantRating rating={newRestaurantCard.rating} setRating={newRestaurantCard.setRating}
+                                      price={newRestaurantCard.price} setPrice={newRestaurantCard.setPrice}/>
 
                     <div>
                         <TextField
@@ -94,10 +96,10 @@ export default function AddEditRestaurantCard(
                 <DialogActions>
                     <Button variant="outlined" onClick={() => resetRestaurantCardInput()}> <RestartAltIcon/> Reset
                     </Button>
-                    {addFavouriteText?
+                    {addFavouriteText ?
                         (
-                    <Button variant="contained" autoFocus onClick={() =>
-                        addRestaurantCard()}> <AddIcon/> Add </Button>)
+                            <Button variant="contained" autoFocus onClick={() =>
+                                addRestaurantCard()}> <AddIcon/> Add </Button>)
                         :
                         (
                             <Button variant="contained" autoFocus onClick={() =>

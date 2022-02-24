@@ -1,7 +1,7 @@
 import {FormEvent, useContext, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../context/AuthProvider";
-import { loginPost} from "../../service/tastydate-api-service";
+import {loginPost} from "../../service/tastydate-api-service";
 import {Alert, AlertTitle, Button, Card, CardContent, TextField} from "@mui/material";
 import * as React from "react";
 import "./Login.scss"

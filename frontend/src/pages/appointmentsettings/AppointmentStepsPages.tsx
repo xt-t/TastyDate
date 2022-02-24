@@ -1,7 +1,11 @@
 import AppointOne from "../../components/appointmentsettings/AppointOne/AppointOne"
 import AppointTwo from "../../components/appointmentsettings/AppointTwo/AppointTwo";
 import AppointThree from "../../components/appointmentsettings/AppointThree/AppointThree";
-import {AppointOneType, AppointThreeType, AppointTwoType} from "../../models/appointmentsettings/UseStateAppointStepTypes";
+import {
+    AppointOneType,
+    AppointThreeType,
+    AppointTwoType
+} from "../../models/appointmentsettings/UseStateAppointStepTypes";
 
 export interface Appointmentpagesprops {
     appointOne: AppointOneType
@@ -12,7 +16,6 @@ export interface Appointmentpagesprops {
 
 export default function AppointmentStepsPages(
     {appointOne, appointTwo, appointThree, activepage}: Appointmentpagesprops) {
-
 
     if (activepage === 0) {
         return (

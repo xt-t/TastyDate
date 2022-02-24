@@ -34,12 +34,12 @@ export default function AppointmentStepsWindow(
         handleNext
     }: AppointmentStepsWindowProps) {
 
-    const {token}=useContext(AuthContext)
+    const {token} = useContext(AuthContext)
 
     const navigate = useNavigate();
 
     //UseStateAppointVariables
-    const {appointOne, appointTwo, appointThree, handleDelete } = UseAppointSteps();
+    const {appointOne, appointTwo, appointThree, handleDelete} = UseAppointSteps();
 
     const handleRemove = () => {
         handleDelete();
@@ -53,7 +53,7 @@ export default function AppointmentStepsWindow(
             pickedNotes: appointOne.notes,
             pickedChosenDisplayName: appointOne.chosenDisplayName
         }
-        const settingsItem : DateSettingsItemDTO =
+        const settingsItem: DateSettingsItemDTO =
             {
                 infoTastyDate: newDataInfoDate,
                 infoTastyDateTimes: appointTwo.dataDateTimes,
@@ -72,43 +72,43 @@ export default function AppointmentStepsWindow(
     return (
         <div className="window">
             <div>
-                    {activeStep === steps.length ? (
-                        <div className="cardFour">
+                {activeStep === steps.length ? (
+                    <div className="cardFour">
                         <Card style={{boxShadow: "0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"}}>
                             <CardContent className="finalSettingsWindow">
-                            <Typography sx={{mt: 2, mb: 1}}>
-                                All steps completed - you&apos;re finished
-                            </Typography>
-                            <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
-                                <Button onClick={() => handleRemove()}>Delete</Button>
-                                <Box sx={{flex: '1 1 auto'}}/>
-                                <Button onClick={() => handleEdit()}>Edit</Button>
-                                <Box sx={{flex: '1 1 auto'}}/>
+                                <Typography sx={{mt: 2, mb: 1}}>
+                                    All steps completed - you&apos;re finished
+                                </Typography>
+                                <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
+                                    <Button onClick={() => handleRemove()}>Delete</Button>
+                                    <Box sx={{flex: '1 1 auto'}}/>
+                                    <Button onClick={() => handleEdit()}>Edit</Button>
+                                    <Box sx={{flex: '1 1 auto'}}/>
 
-                                <Button onClick={() => proceedToVote()}>Proceed</Button>
+                                    <Button onClick={() => proceedToVote()}>Proceed</Button>
 
-                            </Box>
+                                </Box>
                             </CardContent>
                         </Card>
-                        </div>
-                    ) : (
+                    </div>
+                ) : (
 
-                        <React.Fragment>
+                    <React.Fragment>
 
-                            <Typography component={'span'} >
-                                <AppointmentStepsPages
-                                    activepage={activeStep}
-                                    //AppointOne
-                                    appointOne={appointOne}
-                                    //AppointTwo
-                                    appointTwo={appointTwo}
-                                    //AppointThree
-                                    appointThree={appointThree}
-                                />
-                            </Typography>
+                        <Typography component={'span'}>
+                            <AppointmentStepsPages
+                                activepage={activeStep}
+                                //AppointOne
+                                appointOne={appointOne}
+                                //AppointTwo
+                                appointTwo={appointTwo}
+                                //AppointThree
+                                appointThree={appointThree}
+                            />
+                        </Typography>
 
-                            <div className="bottomNavigation">
-                                <div className="bottomNavigationCard">
+                        <div className="bottomNavigation">
+                            <div className="bottomNavigationCard">
                                 <Button
                                     color="inherit"
                                     disabled={activeStep === 0}
@@ -127,10 +127,10 @@ export default function AppointmentStepsWindow(
                                 <Button onClick={() => handleNext()}>
                                     {(activeStep === steps.length - 1) ? 'Finish' : 'Next'}
                                 </Button>
-                                    </div>
                             </div>
-                        </React.Fragment>
-                    )}
+                        </div>
+                    </React.Fragment>
+                )}
             </div>
         </div>
     )

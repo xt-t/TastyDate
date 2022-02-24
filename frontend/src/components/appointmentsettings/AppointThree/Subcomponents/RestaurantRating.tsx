@@ -1,7 +1,7 @@
 import {Box, Rating, Typography} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import * as React from "react";
-import { StyledRating } from "../../../../models/restaurants/StylingRating";
+import {StyledRating} from "../../../../models/restaurants/StylingRating";
 
 interface RestaurantRatingProps {
     rating: number
@@ -14,11 +14,7 @@ export default function RestaurantRating({rating, setRating, price, setPrice}: R
 
     return (
         <div>
-            <Box
-                sx={{
-                    '& > legend': {mt: 2},
-                }}
-            >
+            <Box sx={{'& > legend': {mt: 2},}}>
                 <Typography component="legend">Your rating</Typography>
                 <Rating
                     name="simple-controlled"
@@ -31,11 +27,7 @@ export default function RestaurantRating({rating, setRating, price, setPrice}: R
                 />
             </Box>
 
-            <Box
-                sx={{
-                    '& > legend': {mt: 2},
-                }}
-            >
+            <Box sx={{'& > legend': {mt: 2},}}>
                 <Typography component="legend">Price category</Typography>
                 <StyledRating
                     name="customized-color"
