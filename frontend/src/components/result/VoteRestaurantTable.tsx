@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import "./VoteResult.scss"
-import image from "../../backgroundAppointmentWindow.jpg";
 import Checkbox from "@mui/material/Checkbox";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {Box, Rating} from "@mui/material";
@@ -9,6 +8,8 @@ import EuroIcon from "@mui/icons-material/Euro";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { StyledRating } from '../../models/restaurants/StylingRating';
+import image1 from "../restaurants/burger.jpg";
+import image0 from "../restaurants/japaneseRestaurant.jpg";
 
 interface VoteRestaurantTableProps {
     tastyDateItemForVote: TastyDateItem
@@ -20,6 +21,7 @@ interface VoteRestaurantTableProps {
 
 export default function VoteRestaurantTable({tastyDateItemForVote, checkRestaurants, positiveVotesPerTime, negativeVotesPerTime, handleCheck}: VoteRestaurantTableProps) {
 
+
     return (
         <div>
             <div className="container">
@@ -27,7 +29,9 @@ export default function VoteRestaurantTable({tastyDateItemForVote, checkRestaura
                     <React.Fragment key={index}>
                 <div className="resultcard">
                     <Box className="imgBx">
-                        <img src={image} alt="A pic would be nicer" className="picture"></img>
+                        {(index===1) ? (<img src={image0} alt="A pic would be nicer" className="picture"/>)
+                            :
+                            (<img src={image1} alt="A pic would be nicer" className="picture"/>)}
                     </Box>
                     <h3>{restaurant.restaurantName}</h3>
                     <ArrowDropDownIcon className="arrow"/>
