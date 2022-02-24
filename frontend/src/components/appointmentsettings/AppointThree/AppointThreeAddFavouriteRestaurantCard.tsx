@@ -49,13 +49,13 @@ export default function AppointThreeAddFavouriteRestaurantCard({restaurantCard, 
                     {restaurantCard.postcode} {restaurantCard.city}
                 </p>
                 <div className="favauthor-name">
-                    <div className="favauthor-name-prefix">Recommended by:</div>
+                    <div className="favauthor-name-prefix">From:</div>
                     {restaurantCard.cardCreator}
                 </div>
                 <div className="checkBoxFavouriteRestaurant">
                     <Checkbox
                         checked={checkRestaurants[cardsNumber]}
-                        onChange={(event) => handleCheck(restaurantCard, cardsNumber)}
+                        onChange={() => handleCheck(restaurantCard, cardsNumber)}
                         inputProps={{'aria-label': 'controlled'}}
                     />
                 </div>

@@ -95,13 +95,13 @@ export default function AppointThreeAddFavouriteRestaurants({
                 open={open}
             >
 
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Add restaurants from your favourites
+                <BootstrapDialogTitle id="dialog-title" onClose={handleClose}>
+                    Select checkboxes to <br/>add favourite restaurants
                 </BootstrapDialogTitle>
 
                 <DialogContent dividers className="newWindow">
 
-                        <section className="fcard-list">
+                        <section className="favcard-list">
                             {restaurantCards.map((restaurantCard, index) => (
                                 <React.Fragment key={index}>
                                     <AppointThreeAddFavouriteRestaurantCard restaurantCard={restaurantCard} checkRestaurants={checksRestaurants} cardsNumber={index} handleCheck={handleCheck} />

@@ -50,11 +50,11 @@ export default function AppointThreeAddRestaurantManually
                 open={open}
             >
 
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                <BootstrapDialogTitle id="titleSection" onClose={handleClose}>
                     Add your restaurant manually
                 </BootstrapDialogTitle>
 
-                <DialogContent dividers>
+                <DialogContent dividers className="contentManualAddRestaurant">
 
                     <TextField
                         required
@@ -73,7 +73,6 @@ export default function AppointThreeAddRestaurantManually
 
                     <RestaurantRating rating={appointThree.rating} setRating={appointThree.setRating} price={appointThree.price} setPrice={appointThree.setPrice}/>
 
-                    <div>
                         <TextField
                             required
                             id="standard-required"
@@ -82,9 +81,10 @@ export default function AppointThreeAddRestaurantManually
                             className="addElements"
                             value={appointThree.postcode}
                             onChange={(event) => {
-                                appointThree.setPostcode(parseInt(event.target.value));
+                                appointThree.setPostcode(event.target.value);
                             }
                             }
+                            style={{marginTop: "1rem"}}
                         />
                         <TextField
                             required
@@ -98,7 +98,6 @@ export default function AppointThreeAddRestaurantManually
                             }
                             }
                         />
-                    </div>
 
                 </DialogContent>
 

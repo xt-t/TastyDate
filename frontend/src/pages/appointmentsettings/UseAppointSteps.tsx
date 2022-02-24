@@ -38,7 +38,7 @@ export default function UseAppointSteps() {
         setIdPickedTime(1);
         setDataDateTimes([]);
         setCategory("");
-        setPostcode(1);
+        setPostcode(0);
         setCity("");
         setRestaurantName("");
         setRating(0);
