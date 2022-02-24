@@ -5,17 +5,33 @@ import React from "react";
 import {RestaurantCard} from "../../models/restaurants/RestaurantCard";
 import {Box, Rating} from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
-import image from "../result/dummypic.jpg";
+import image0 from "./burger.jpg"
+import image1 from "./japaneseRestaurant.jpg"
+import image2 from "./pizza.jpg"
 import { StyledRating } from "../../models/restaurants/StylingRating";
 
 interface RestaurantCardItemProps {
     restaurantCard: RestaurantCard
     deleteRestaurantCard: Function,
     editRestaurantCard: Function,
+    index: number
 }
 
-export default function RestaurantCardItem({restaurantCard, deleteRestaurantCard, editRestaurantCard}:RestaurantCardItemProps) {
+export default function RestaurantCardItem({index, restaurantCard, deleteRestaurantCard, editRestaurantCard}:RestaurantCardItemProps) {
+    if(index>2) {
+        index=2;
+    }
 
+    let selectedImage;
+    if (index === 0) {
+        selectedImage = image0
+    }
+    if (index === 1) {
+        selectedImage = image1
+    }
+    if (index === 2) {
+        selectedImage = image2
+    }
 
     return (
         <React.Fragment>
@@ -25,7 +41,7 @@ export default function RestaurantCardItem({restaurantCard, deleteRestaurantCard
                 <h2>{restaurantCard.restaurantName}</h2>
             </header>
             <Box className="imgBx">
-                <img src={image} alt="A pic would be nicer" className="picture"></img>
+                <img src={selectedImage} alt="A pic would be nicer" className="picture"/>
             </Box>
             <Box
                 sx={{
@@ -57,8 +73,8 @@ export default function RestaurantCardItem({restaurantCard, deleteRestaurantCard
                     {restaurantCard.cardCreator}
                 </div>
             <div className="cardIcons">
-            <DeleteIcon onClick={()=>deleteRestaurantCard(restaurantCard.id)}/>
-            <EditIcon onClick={()=>editRestaurantCard(restaurantCard.id)}/>
+            <DeleteIcon className="deleteIcon" onClick={()=>deleteRestaurantCard(restaurantCard.id)}/>
+            <EditIcon className="editIcon" onClick={()=>editRestaurantCard(restaurantCard.id)}/>
             </div>
         </article>
         </React.Fragment>

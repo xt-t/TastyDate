@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import "./VoteResult.scss"
-import image from "./dummypic.jpg";
+import image from "../../backgroundAppointmentWindow.jpg";
 import Checkbox from "@mui/material/Checkbox";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {Box, Rating} from "@mui/material";

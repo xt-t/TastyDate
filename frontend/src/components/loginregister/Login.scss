@@ -1,9 +1,11 @@
 .loginWindow, .registerWindow {
-  height: 35rem;
+  height: 39rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  background-image: url("../../background.jpg");
+  background-size: cover;
 }
 
 .loginCard, .registerCard {

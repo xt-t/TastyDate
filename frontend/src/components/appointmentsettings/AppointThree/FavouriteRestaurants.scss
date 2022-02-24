@@ -1,45 +1,25 @@
-
-body {
-  padding: 0;
-  margin: 0;
-  color: black;
-}
-
 .newWindow{
-  min-width: 18rem;
-  min-height:20rem;
+  width: 21rem;
+  height: 22rem;
+  background-image: url("../../../background.jpg");
+  background-size: cover;
 }
 
 .favcard-list {
+  height: 19.5rem;
   display: flex;
-  justify-content: center;
-  min-height:18rem;
-  width: 18rem;
-}
-
-.favcard-list::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-.favcard-list::-webkit-scrollbar-thumb {
-  background: antiquewhite;
-  border-radius: 10px;
-  box-shadow: inset 2px 2px 2px hsla(0,0%,39%,.25), inset -2px -2px 2px white;
-}
-
-.favcard-list::-webkit-scrollbar-track {
-  background: linear-gradient(90deg,antiquewhite,#201c29 1px,#17141d 0,antiquewhite);
+  flex-direction: row;
+  align-items: center;
 }
 
 //RestaurantCardItem
 
 .favcard {
-  height: 14rem;
-  width: 4rem;
-  min-width: 250px;
+  height: 16rem;
+  width: 14rem;
   padding: 1.5rem;
   border-radius: 16px;
-  background: whitesmoke;
+  background: white;
   box-shadow: -0.2rem 0 0.3rem #000;
   display: flex;
   flex-direction: column;
@@ -50,15 +30,15 @@ body {
 }
 
 .favcard:hover {
-  transform: translateY(-2rem);
+  transform: translateY(-1rem);
 }
 
-.favcard:hover~.fcard {
-  transform: translateX(130px);
+.favcard:hover~.favcard {
+  transform: translateX(3rem);
 }
 
-.favcard:focus-within~.fcard, .fcard:not(:first-child) {
-  margin-left: -130px;
+.favcard:focus-within~.favcard, .favcard:not(:first-child) {
+  margin-left: -3rem;
 }
 
 
@@ -72,3 +52,4 @@ body {
   font-weight: 700;
   color: #7a7a8c;
 }
+

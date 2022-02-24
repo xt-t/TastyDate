@@ -1,47 +1,43 @@
 
-body {
-  padding: 0;
-  margin: 0;
-  color: black;
-}
-
 .cardListBox{
-  margin-top: 1.5rem;
-  min-width: 20rem;
+  width: 100%;
+  height: 39rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-}
-.card-list {
-  display: flex;
   justify-content: center;
-  padding: 3rem;
+  background-image: url("../../background.jpg");
+  background-size: cover;
+}
+
+.cardList {
+  height: 32rem;
+  display: flex;
+  align-items: center;
   overflow-x: scroll;
 }
 
-.card-list::-webkit-scrollbar {
+.cardList::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
-.card-list::-webkit-scrollbar-thumb {
-  background: antiquewhite;
+.cardList::-webkit-scrollbar-thumb {
+  background: white;
   border-radius: 10px;
   box-shadow: inset 2px 2px 2px hsla(0,0%,39%,.25), inset -2px -2px 2px white;
 }
 
-.card-list::-webkit-scrollbar-track {
-  background: linear-gradient(90deg,antiquewhite,#201c29 1px,#17141d 0,antiquewhite);
+.cardList::-webkit-scrollbar-track {
+  background: linear-gradient(90deg,black,#201c29 1px,#17141d 0,antiquewhite);
 }
 
 //RestaurantCardItem
 
 .card {
-  height: 350px;
-  width: 200px;
-  min-width: 250px;
+  height: 24rem;
+  width: 16rem;
   padding: 1.5rem;
   border-radius: 16px;
-  background: whitesmoke;
+  background: white;
   box-shadow: -0.2rem 0 0.3rem #000;
   display: flex;
   flex-direction: column;
@@ -52,8 +48,8 @@ body {
 
   .imgBx {
     position: relative;
-    width: 200px;
-    height: 150px;
+    width: 13rem;
+    height: 10rem;
   }
 
   .imgBx img
@@ -68,11 +64,11 @@ body {
 }
 
 .card:hover~.card {
-  transform: translateX(180px);
+  transform: translateX(6rem);
 }
 
 .card:focus-within~.card, .card:not(:first-child) {
-  margin-left: -180px;
+  margin-left: -6rem;
 }
 
 .author-name {
@@ -95,3 +91,22 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
+.cardIcons {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+
+  .deleteIcon {
+    color: darkgray;
+
+  }
+
+  .editIcon {
+
+    color: #00458B;
+
+  }
+
+}
+

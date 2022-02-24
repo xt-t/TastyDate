@@ -136,10 +136,10 @@ const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
         <div className="cardListBox">
 
 
-            <section className="card-list">
+            <section className="cardList">
                 {restaurantCards.map((restaurantCard, index) => (
-                    <React.Fragment key={index}>
-                    <RestaurantCardItem restaurantCard={restaurantCard} deleteRestaurantCard={deleteRestaurantCard} editRestaurantCard={editRestaurantCard}/>
+                    <React.Fragment>
+                    <RestaurantCardItem index={index} restaurantCard={restaurantCard} deleteRestaurantCard={deleteRestaurantCard} editRestaurantCard={editRestaurantCard}/>
                     </React.Fragment>))}
             </section>
             <div className="cardActionButtons">
