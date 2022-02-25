@@ -32,4 +32,4 @@ public class TastyDateItem {
     private int[] votingResultsForOneDate;
     private int[] positiveVotingResultsForOneRestaurant;
     private int[] negativeVotingResultsForOneRestaurant;
-    }
+}

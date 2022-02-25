@@ -27,30 +27,30 @@ public class RestaurantListsController {
         return ok(allRestaurantCards);
     }
 
-    @GetMapping(value="/{id}")
-    public ResponseEntity<RestaurantCard> getRestaurantCardById  (@PathVariable String id) {
-        Optional<RestaurantCard> opt = restaurantService.findProductById(id);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<RestaurantCard> getRestaurantCardById(@PathVariable String id) {
+        Optional<RestaurantCard> opt = restaurantService.findRestaurantCardById(id);
         return ResponseEntity.of(opt);
     }
 
     @PostMapping
-    private ResponseEntity <RestaurantCard> transferRestaurantCardToDB (@RequestBody RestaurantCard restaurantCard, Principal principal) {
+    private ResponseEntity<RestaurantCard> transferRestaurantCardToDB(@RequestBody RestaurantCard restaurantCard, Principal principal) {
         return ok(restaurantService.addNewRestaurant(restaurantCard, principal));
     }
 
-    @PutMapping(value="/{id}/update")
-    public ResponseEntity<RestaurantCard> updateRestaurantCard (@RequestBody RestaurantCard restaurantCard) {
+    @PutMapping(value = "/{id}/update")
+    public ResponseEntity<RestaurantCard> updateRestaurantCard(@RequestBody RestaurantCard restaurantCard) {
         Optional<RestaurantCard> opt = restaurantService.updateRestaurantCard(restaurantCard);
         return ResponseEntity.of(opt);
     }
 
-    @DeleteMapping(value="/{id}")
-    public String removeRestaurantCard (@PathVariable String id) {
+    @DeleteMapping(value = "/{id}")
+    public String removeRestaurantCard(@PathVariable String id) {
         return restaurantService.removeRestaurantCardById(id);
     }
 
     @DeleteMapping
-    public ResponseEntity<List<RestaurantCard>>  removeRestaurantList () {
+    public ResponseEntity<List<RestaurantCard>> removeRestaurantList() {
         List<RestaurantCard> noItems = restaurantService.removeAllCards();
         return ok(noItems);
     }

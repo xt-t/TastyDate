@@ -24,7 +24,9 @@ public class RestaurantCardsService {
         return restaurantCardList.findAll();
     }
 
-    public Optional<RestaurantCard> findProductById(String id) {return restaurantCardList.findById(id);}
+    public Optional<RestaurantCard> findRestaurantCardById(String id) {
+        return restaurantCardList.findById(id);
+    }
 
     public RestaurantCard addNewRestaurant(RestaurantCard restaurantCard, Principal principal) {
         String cardCreatorName = principal.getName();
@@ -41,8 +43,9 @@ public class RestaurantCardsService {
         if (restaurantCardList.existsById(id)) {
             restaurantCardList.deleteById(id);
             return "Deleted!";
+        } else {
+            return "Something went wrong";
         }
-        else {return "Something went wrong";}
     }
 
     public List<RestaurantCard> removeAllCards() {

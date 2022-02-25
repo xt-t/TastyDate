@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 
-@Document ("User")
+@Document("User")
 public class User implements UserDetails {
 
     public static User newUser(String username, String password, List<GrantedAuthority> authorities) {

@@ -46,8 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             LOG.warn("Error while parsing token", e);
         }
         filterChain.doFilter(request, response);
@@ -58,7 +57,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (authHeader == null) {
             return null;
         } else {
-            return authHeader.replace("Bearer","").trim();
+            return authHeader.replace("Bearer", "").trim();
         }
     }
 }

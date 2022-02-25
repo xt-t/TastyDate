@@ -29,25 +29,25 @@ public class TastyDateController {
         return ok(allTastyDateItems);
     }
 
-    @GetMapping(value="/{tastyDateId}")
-    public ResponseEntity<TastyDateItem> getTastyDateById  (@PathVariable String tastyDateId) {
+    @GetMapping(value = "/{tastyDateId}")
+    public ResponseEntity<TastyDateItem> getTastyDateById(@PathVariable String tastyDateId) {
         Optional<TastyDateItem> opt = dateInfoService.findTastyDateById(tastyDateId);
         return ResponseEntity.of(opt);
     }
 
     @PostMapping
-    private ResponseEntity<TastyDateItem> transferSettingsToDB (@RequestBody TastyDateItem settingsItem) {
+    private ResponseEntity<TastyDateItem> transferSettingsToDB(@RequestBody TastyDateItem settingsItem) {
         return ok(dateInfoService.addDateSettings(settingsItem));
     }
 
     @PutMapping("/{tastyDateId}/timevotes")
-    private ResponseEntity<TastyDateItem> updateTastyDateWithVoteTimeItem (@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
+    private ResponseEntity<TastyDateItem> updateTastyDateWithVoteTimeItem(@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
         TastyDateItem optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
         return ok(optTastyDate);
     }
 
     @PutMapping("/{tastyDateId}/restaurantvotes")
-    private ResponseEntity<TastyDateItem> updateTastyDateWithVoteRestaurantCard (@RequestBody UserRestaurantVote restaurantVote, @PathVariable String tastyDateId) {
+    private ResponseEntity<TastyDateItem> updateTastyDateWithVoteRestaurantCard(@RequestBody UserRestaurantVote restaurantVote, @PathVariable String tastyDateId) {
         TastyDateItem optTastyDate = dateInfoService.addVoteRestaurantCardToTastyDate(restaurantVote, tastyDateId);
         return ok(optTastyDate);
     }

@@ -3,7 +3,7 @@ package de.neuefische.backend.service;
 import de.neuefische.backend.model.TastyDateItem;
 import de.neuefische.backend.model.settingsSubModel.vote.UserRestaurantVote;
 import de.neuefische.backend.model.settingsSubModel.vote.UserTimeVote;
-import de.neuefische.backend.repository.DateSettingsRepository;
+import de.neuefische.backend.repository.TastyDateSettingsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,9 +12,9 @@ import java.util.*;
 @Service
 public class TastyDateSettingsService {
 
-    private final DateSettingsRepository dateSettingsRepo;
+    private final TastyDateSettingsRepository dateSettingsRepo;
 
-    public TastyDateSettingsService(DateSettingsRepository dateSettingsRepo) {
+    public TastyDateSettingsService(TastyDateSettingsRepository dateSettingsRepo) {
         this.dateSettingsRepo = dateSettingsRepo;
     }
 
@@ -30,7 +30,9 @@ public class TastyDateSettingsService {
         return dateSettingsRepo.findAll();
     }
 
-    public Optional<TastyDateItem> findTastyDateById(String id) {return dateSettingsRepo.findById(id);}
+    public Optional<TastyDateItem> findTastyDateById(String id) {
+        return dateSettingsRepo.findById(id);
+    }
 
     public TastyDateItem addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
         //checking and updating the List of the UserVotes for the DateTimes
@@ -41,26 +43,26 @@ public class TastyDateSettingsService {
         if (tempList.isEmpty()) {
             tempList = new ArrayList<>();
         }
-        List<UserTimeVote> checkList = tempList.stream().filter(eachVote->eachVote.getDisplayedName().equals(timeVote.getDisplayedName())).toList();
+        List<UserTimeVote> checkList = tempList.stream().filter(eachVote -> eachVote.getDisplayedName().equals(timeVote.getDisplayedName())).toList();
         if (checkList.isEmpty()) {
-        tempList.add(timeVote);
+            tempList.add(timeVote);
             availableTastyDateItem.setTimeVotes(tempList);
             dateSettingsRepo.save(availableTastyDateItem);
-        //generate sums of voteResult
-        boolean[] checksVoteItem = timeVote.getVotesPerDateTimeFromOneUser();
-        int [] amount = new int[checksVoteItem.length];
+            //generate sums of voteResult
+            boolean[] checksVoteItem = timeVote.getVotesPerDateTimeFromOneUser();
+            int[] amount = new int[checksVoteItem.length];
 
-        for (UserTimeVote item:tempList) {
-            boolean[] checksItem = item.getVotesPerDateTimeFromOneUser();
-            for (int i=0; i < amount.length; i++) {
-                if (checksItem[i]) {
-                    amount[i]++;
-                }
+            for (UserTimeVote item : tempList) {
+                boolean[] checksItem = item.getVotesPerDateTimeFromOneUser();
+                for (int i = 0; i < amount.length; i++) {
+                    if (checksItem[i]) {
+                        amount[i]++;
+                    }
                 }
             }
             availableTastyDateItem.setVotingResultsForOneDate(amount);
-        return dateSettingsRepo.save(availableTastyDateItem);}
-        else {
+            return dateSettingsRepo.save(availableTastyDateItem);
+        } else {
             throw new IllegalArgumentException("Eintrag bereits vorhanden");
         }
     }
@@ -94,8 +96,7 @@ public class TastyDateSettingsService {
                 for (int i = 0; i < checksVoteItem.length; i++) {
                     if (checksItem[i]) {
                         positiveAmount[i]++;
-                    }
-                    else {
+                    } else {
                         negativeAmount[i]++;
                     }
                 }
@@ -104,8 +105,7 @@ public class TastyDateSettingsService {
             availableTastyDateItem.setNegativeVotingResultsForOneRestaurant(negativeAmount);
 
             return dateSettingsRepo.save(availableTastyDateItem);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Eintrag bereits vorhanden");
         }
     }
