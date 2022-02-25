@@ -79,7 +79,6 @@ public class TastyDateSettingsService {
         }
         List<UserRestaurantVote> checkList = tempList.stream().filter(eachVote -> eachVote.getDisplayedName().equals(restaurantVote.getDisplayedName())).toList();
         if (checkList.isEmpty()) {
-
             tempList.add(restaurantVote);
             availableTastyDateItem.setRestaurantVotes(tempList);
             dateSettingsRepo.save(availableTastyDateItem);
