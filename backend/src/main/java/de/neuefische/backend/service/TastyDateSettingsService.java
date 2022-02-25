@@ -69,10 +69,7 @@ public class TastyDateSettingsService {
 
     public TastyDateItem addVoteRestaurantCardToTastyDate(UserRestaurantVote restaurantVote, String tastyDateId) {
 
-        //Optional - existiert das SettingsItem? Fehlermeldung
-
         //checking and updating the List of the UserVotes for the DateTimes
-
         Optional<TastyDateItem> optionalTastyDateItem = dateSettingsRepo.findById(tastyDateId);
         TastyDateItem availableTastyDateItem = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + tastyDateId + " does not exists!"));
         List<UserRestaurantVote> tempList = availableTastyDateItem.getRestaurantVotes();
