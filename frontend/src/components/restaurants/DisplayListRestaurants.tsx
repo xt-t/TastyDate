@@ -133,7 +133,6 @@ export default function DisplayListRestaurants() {
     return (
         <div className="cardListBox">
 
-
             <section className="cardList">
                 {restaurantCards.map((restaurantCard, index) => (
                     <React.Fragment>

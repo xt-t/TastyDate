@@ -31,7 +31,6 @@ export default function AddEditRestaurantCard(
     return (
         <div>
 
-
             <BootstrapDialog
                 onClose={() => handleClose()}
                 aria-labelledby="customized-dialog-title"

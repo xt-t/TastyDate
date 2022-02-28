@@ -32,7 +32,7 @@ export default function VoteTimeTable({
 
                 <div className="grid-container" style={{
                     display: "grid",
-                    gridTemplateColumns: `repeat(${tastyDateItemForVote.infoTastyDateTimes.length + 1}, 8rem)`
+                    gridTemplateColumns: `repeat(${tastyDateItemForVote.infoTastyDateTimes.length + 1}, 6rem)`
                 }}>
 
                     <div className="gridItemWithoutStyling"><PersonIcon/> User</div>

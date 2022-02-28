@@ -10,6 +10,7 @@ import AuthProvider from './context/AuthProvider';
 import LoginPage from './pages/loginregister/LoginPage';
 import RegisterPage from './pages/loginregister/RegisterPage';
 import OverviewTastyDateItems from "./pages/result/OverviewTastyDateItems";
+import Tutorial from "./pages/general/Tutorial";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/register" element={<RegisterPage/>}/>
                     <Route path="/" element={<Homepage/>}/>
+                    <Route path="/tutorial" element={<Tutorial/>}/>
                     <Route path="/createDate" element={<RequireAuth><AppointmentHome/></RequireAuth>}/>
                     <Route path="/restaurants" element={<RequireAuth><OverviewRestaurants/></RequireAuth>}/>
                     <Route path="/overview" element={<RequireAuth><OverviewTastyDateItems/></RequireAuth>}/>
