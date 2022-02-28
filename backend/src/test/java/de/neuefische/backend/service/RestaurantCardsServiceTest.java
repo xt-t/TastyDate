@@ -18,13 +18,6 @@ class RestaurantCardsServiceTest {
     private final RestaurantCardsService restaurantCardsService = new RestaurantCardsService(restaurantCardsRepository);
 
     @Test
-    void getEveryRestaurantCard() {
-        //GIVEN
-        //WHEN
-        //THEN
-    }
-
-    @Test
     void findRestaurantCardById() {
         //GIVEN
         RestaurantCard expected = RestaurantCard.builder()
