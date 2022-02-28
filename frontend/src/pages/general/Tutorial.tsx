@@ -31,7 +31,7 @@ export default function Tutorial() {
                         <Card className="tutorialCard">
                             <CardContent className="tutorialCardContent">
                                 <h4>2. Your favourites</h4>
-                                <p className="descriptionTutorial">This application enables you to save your favourites restaurants to facilitate the
+                                <p className="descriptionTutorial">This application enables you to save your favourite restaurants to facilitate the
                                     creation of a new TastyDate. </p>
                                 <img src={tastyDateFavourites} alt="TastyDateSettings" className="pictureTastyDate"/>
                             </CardContent>
@@ -42,7 +42,7 @@ export default function Tutorial() {
                         <Card className="tutorialCard">
                             <CardContent className="tutorialCardContent">
                                 <h4>3. The vote: Time ... </h4>
-                                <p className="descriptionTutorial">The invited users can participate to vote for specific dates</p>
+                                <p className="descriptionTutorial">The invited users can participate to vote for specific dates.</p>
                                 <img src={tastyDateTimeVote} alt="TastyDateSettings" className="pictureTastyDate"/>
                             </CardContent>
                         </Card>
