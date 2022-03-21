@@ -1,0 +1,8 @@
+spring.data.mongodb:
+  uri: ${MONGODB_URI}
+
+secret: ${SECRET_KEY}
+
+server:
+  error:
+    include-message: always
