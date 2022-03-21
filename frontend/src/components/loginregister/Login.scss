@@ -1,0 +1,46 @@
+.loginWindow, .registerWindow {
+  height: 39rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../background.jpg");
+  background-size: cover;
+}
+
+.loginCard, .registerCard {
+  height: 26rem;
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  border: 2px solid #1c54b2;
+
+  h3 {
+    margin: 1rem 0rem 2rem 0rem;
+  }
+
+  .formLogin {
+    height: 12rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .formRegister {
+    height: 12rem;
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .formLogin > *, .formRegister > * {
+    margin: 0.2rem;
+  }
+
+}
+

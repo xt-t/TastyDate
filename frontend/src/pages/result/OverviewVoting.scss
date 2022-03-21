@@ -1,0 +1,38 @@
+.votingCard {
+  height: 39rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../background.jpg");
+  background-size: cover;
+
+  .cardItems {
+    border: 2px solid #1c54b2;
+    text-align: center;
+    height: 18rem;
+    width: 18rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
+
+  .votingCardElement {
+    margin: 1rem;
+  }
+
+  .votingCardElement:first-child {
+    width: 300px;
+    padding: 10px;
+  }
+
+}
+
+//VoteResult
+.applyRestaurantVote {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+

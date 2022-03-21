@@ -1,0 +1,213 @@
+$bordercolor: hsl(218, 73%, 40%);
+
+@mixin flexrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+@mixin flexcolumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+//AppointOne
+.cardOne {
+  @include flexrow;
+  height: 29rem;
+  width: clamp(23rem, 30rem, 40rem);
+  display: flex;
+}
+
+.form {
+  @include flexcolumn;
+  height: 28rem;
+  width: 20rem;
+  border: 2px solid $bordercolor;
+
+  h3 {
+    margin: 1rem 0rem 1rem 0rem;
+  }
+
+  .formelements {
+    margin: 0.3rem;
+  }
+}
+
+//AppointTwo
+.cardTwo {
+  @include flexrow;
+  height: 29rem;
+  width: clamp(23rem, 30rem, 40rem);
+
+  .addDateTime {
+    @include flexcolumn;
+    height: 28rem;
+    width: 20rem;
+    border: 2px solid $bordercolor;
+
+    h3 {
+      margin: 1rem 0rem 2rem 0rem;
+    }
+
+    .setTime {
+      margin: 1rem 0rem 0rem 0rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .setTime > * {
+      margin-bottom: 0.75rem;
+    }
+
+    .addDateTimeButtons {
+      margin-top: 0.5rem;
+      margin-left: 2rem;
+      margin-right: 2rem;
+      display: grid;
+      grid-template-columns: 3fr 1fr 3fr;
+    }
+
+    .resetButton {
+      grid-column: 1/2;
+    }
+
+    .addButton {
+      grid-column: 3/4;
+    }
+
+  }
+
+  .previewTimes {
+    margin-top: 2rem;
+  }
+
+
+  .displayChosenDates {
+    margin: 20px;
+    height: 270px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+}
+
+//AppointThree
+.cardThree {
+  @include flexrow;
+  height: 29rem;
+  width: clamp(23rem, 30rem, 40rem);
+}
+
+
+.formRestaurant {
+  @include flexcolumn;
+  height: 28rem;
+  width: 20rem;
+  border: 2px solid $bordercolor;
+
+  h3 {
+    margin: 1rem 0rem 1rem 0rem;
+  }
+}
+
+.menuIcons {
+  @include flexcolumn;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+.favouritesRowButton {
+  @include flexcolumn;
+  text-align: center;
+  margin: 0.75rem;
+  justify-content: space-between;
+
+  .favouriteButton {
+    margin-top: 0.25rem;
+  }
+}
+
+.manualRowButton {
+  @include flexcolumn;
+  text-align: center;
+  margin-top: 0.75rem;
+  justify-content: space-between;
+
+  .manualButton {
+    margin-top: 0.25rem;
+  }
+}
+
+.taggedRestaurantsRow {
+  @include flexcolumn;
+  text-align: center;
+  margin-top: 2rem;
+  justify-content: space-between;
+
+  .previewButtonRestaurants {
+    margin-top: 0.25rem;
+  }
+}
+
+//ManualAdd
+.addElements {
+  margin: 2rem;
+}
+
+.displayPickedRestaurants {
+  margin: 20px;
+  height: 16rem;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+
+
+//bottomNavigationBar
+
+.bottomNavigation {
+  width: clamp(23rem, 30rem, 40rem);
+  display: flex;
+  justify-content: center;
+}
+
+.bottomNavigationCard {
+  height: 2.5rem;
+  width: 20rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+//CardFour
+.cardFour {
+  height: 29rem;
+  width: clamp(23rem, 30rem, 40rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: center;
+}
+
+.finalSettingsWindow {
+  @include flexcolumn;
+  height: 10rem;
+  border: 2px solid $bordercolor;
+  align-content: space-around;
+}
+
+.finalSettingsWindowWithAlert {
+  @include flexcolumn;
+  height: 14rem;
+  border: 2px solid $bordercolor;
+  align-content: space-around;
+}

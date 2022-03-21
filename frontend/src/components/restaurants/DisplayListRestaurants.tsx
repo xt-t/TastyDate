@@ -1,0 +1,161 @@
+import "./Restaurants.scss"
+import {useContext, useEffect, useState} from "react";
+import {RestaurantCard} from "../../models/restaurants/RestaurantCard";
+import RestaurantCardItem from "./RestaurantCardItem";
+import AddEditRestaurantCard from "./AddEditRestaurantCard";
+import UseNewRestaurantCard from "./UseNewRestaurantCard";
+import {Box, Fab} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import * as React from "react";
+import AddIcon from "@mui/icons-material/Add";
+import {
+    getAllRestaurantCards, getRestaurantCardById,
+    removeRestaurantCard, removeRestaurantList,
+    transferRestaurantCardToDB, updateRestaurantCard
+} from "../../service/tastydate-api-service";
+import {AuthContext} from "../../context/AuthProvider";
+
+
+export default function DisplayListRestaurants() {
+
+    const {token} = useContext(AuthContext);
+    const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
+    const {newRestaurantCard, resetRestaurantCardInput} = UseNewRestaurantCard();
+    //Dialog
+    const [openDialogWindow, setOpenDialogWindow] = useState(false);
+    const [addFavouriteText, setAddFavouriteText] = useState(true);
+
+    useEffect(() => {
+        getEveryRestaurantCard()
+        //eslint-disable-next-line
+    }, []);
+
+    const addRestaurantCard = () => {
+        if ((newRestaurantCard.category !== "") &&
+            (newRestaurantCard.postcode !== 0) &&
+            (newRestaurantCard.city !== "") &&
+            (newRestaurantCard.restaurantName !== "") &&
+            (newRestaurantCard.rating !== 0) &&
+            (newRestaurantCard.price !== 0)
+        ) {
+            const newRestaurantData = {
+                category: newRestaurantCard.category,
+                postcode: newRestaurantCard.postcode,
+                city: newRestaurantCard.city,
+                restaurantName: newRestaurantCard.restaurantName,
+                rating: newRestaurantCard.rating,
+                price: newRestaurantCard.price
+            }
+            transferRestaurantCardToDB(newRestaurantData, token)
+                .then((response) => {
+                    setRestaurantCards([...restaurantCards, response.data]);
+                })
+            resetRestaurantCardInput();
+        }
+    }
+
+    const editRestaurantCard = (restaurantId: string) => {
+        getRestaurantCardById(restaurantId, token)
+            .then((response) => {
+                newRestaurantCard.setId(response.data.id)
+                newRestaurantCard.setRestaurantName(response.data.restaurantName)
+                newRestaurantCard.setCategory(response.data.category)
+                newRestaurantCard.setRating(response.data.rating)
+                newRestaurantCard.setPrice(response.data.price)
+                newRestaurantCard.setPostcode(response.data.postcode)
+                newRestaurantCard.setCity(response.data.city)
+                handleOpenWindowToEditARestaurant()
+            })
+    }
+
+    const saveRestaurantCard = () => {
+        if ((newRestaurantCard.category !== "") &&
+            (newRestaurantCard.postcode !== 0) &&
+            (newRestaurantCard.city !== "") &&
+            (newRestaurantCard.restaurantName !== "") &&
+            (newRestaurantCard.rating !== 0) &&
+            (newRestaurantCard.price !== 0)
+        ) {
+            const newRestaurantData = {
+                id: newRestaurantCard.id,
+                cardCreator: newRestaurantCard.cardCreator,
+                category: newRestaurantCard.category,
+                postcode: newRestaurantCard.postcode,
+                city: newRestaurantCard.city,
+                restaurantName: newRestaurantCard.restaurantName,
+                rating: newRestaurantCard.rating,
+                price: newRestaurantCard.price
+            }
+            updateRestaurantCard(newRestaurantData, token)
+                .then(() => {
+                    getEveryRestaurantCard()
+                })
+            resetRestaurantCardInput();
+            handleCloseDialogWindow();
+        }
+    }
+
+    const deleteRestaurantCard = (restaurantId: string) => {
+        removeRestaurantCard(restaurantId, token)
+            .then(() => (
+                    getEveryRestaurantCard()
+                )
+            )
+    }
+
+    const deleteRestaurantList = () => {
+        removeRestaurantList(token).then(() => (
+            getEveryRestaurantCard()
+        ))
+    }
+
+    const getEveryRestaurantCard = () => {
+        getAllRestaurantCards(token)
+            .then(response => setRestaurantCards(response.data))
+    }
+
+    //Dialog
+
+    const handleOpenWindowToAddANewRestaurant = () => {
+        resetRestaurantCardInput()
+        setOpenDialogWindow(true);
+        setAddFavouriteText(true);
+    };
+
+    const handleOpenWindowToEditARestaurant = () => {
+        setOpenDialogWindow(true);
+        setAddFavouriteText(false);
+    };
+    const handleCloseDialogWindow = () => {
+        setOpenDialogWindow(false);
+    };
+
+    return (
+        <div className="cardListBox">
+
+            <section className="cardList">
+                {restaurantCards.map((restaurantCard, index) => (
+                    <React.Fragment>
+                        <RestaurantCardItem index={index} restaurantCard={restaurantCard}
+                                            deleteRestaurantCard={deleteRestaurantCard}
+                                            editRestaurantCard={editRestaurantCard}/>
+                    </React.Fragment>))}
+            </section>
+            <div className="cardActionButtons">
+                <Fab aria-label="edit" style={{margin: "10px"}} onClick={() => deleteRestaurantList()}>
+                    <DeleteIcon/>
+                </Fab>
+
+                <Box className="addRestaurantCardButton" sx={{'& > :not(style)': {m: 1}}}>
+                    <Fab color="primary" aria-label="add" onClick={handleOpenWindowToAddANewRestaurant}>
+                        <AddIcon/>
+                    </Fab>
+                </Box>
+            </div>
+            <AddEditRestaurantCard addRestaurantCard={addRestaurantCard} addFavouriteText={addFavouriteText}
+                                   newRestaurantCard={newRestaurantCard} saveRestaurantCard={saveRestaurantCard}
+                                   resetRestaurantCardInput={resetRestaurantCardInput} open={openDialogWindow}
+                                   handleClose={handleCloseDialogWindow}/>
+        </div>
+    )
+}

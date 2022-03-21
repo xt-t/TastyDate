@@ -1,0 +1,83 @@
+.contentHomepage {
+  height: 39rem;
+  background-image: url("../../background.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.homepageCard {
+  height: auto;
+  width: 21rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: white;
+  box-shadow: -0.2rem 0 0.3rem #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #1c54b2;
+}
+
+.homepageTitle {
+  margin: 0.7rem;
+}
+
+.textParagraph {
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
+}
+
+//Tutorial
+.tutorialTitle {
+  margin-top: 0.8rem;
+  color: white;
+}
+
+.contentTutorial {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../background.jpg");
+  background-size: contain;
+}
+
+h4 {
+  margin-bottom: 0.4rem;
+  position: relative;
+}
+.pictureTastyDate {
+  width: 9rem;
+  height: 15rem;
+}
+
+.tutorialCard {
+  height: auto;
+  width: 16rem;
+  padding: 0.5rem;
+  border-radius: 16px;
+  background: white;
+  box-shadow: -0.2rem 0 0.3rem #000;
+  border: 2px solid #1c54b2;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tutorialCardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  color: white;
+}
+
+.descriptionTutorial {
+  margin-bottom: 0.7rem;
+}
