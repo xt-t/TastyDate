@@ -131,7 +131,6 @@ export default function AppointmentStepsWindow(
                         </Card>
                     </div>
                 ) : (
-
                     <React.Fragment>
 
                         <Typography component={'span'}>
