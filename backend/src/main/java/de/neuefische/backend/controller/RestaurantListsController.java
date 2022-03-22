@@ -27,6 +27,12 @@ public class RestaurantListsController {
         return ok(allRestaurantCards);
     }
 
+    @GetMapping(value="/userlist")
+    private ResponseEntity<List<RestaurantCard>> getUsersRestaurantList(Principal principal) {
+        List<RestaurantCard> allUsersRestaurants = restaurantService.getUsersRestaurantCards(principal);
+        return ok(allUsersRestaurants);
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<RestaurantCard> getRestaurantCardById(@PathVariable String id) {
         Optional<RestaurantCard> opt = restaurantService.findRestaurantCardById(id);

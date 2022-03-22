@@ -46,6 +46,9 @@ export const updateTastyDateWithVoteRestaurantCard = (tastyDateId: string, resta
 export const getAllRestaurantCards = (token?: string) =>
     axios.get(`/api/restaurants`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
+export const getUsersRestaurantList = (token?: string) =>
+    axios.get(`/api/restaurants/userlist`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
+
 export const getRestaurantCardById = (id: string, token?: string) =>
     axios.get(`/api/restaurants/${id}`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 

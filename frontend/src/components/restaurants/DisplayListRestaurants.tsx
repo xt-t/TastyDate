@@ -4,29 +4,32 @@ import {RestaurantCard} from "../../models/restaurants/RestaurantCard";
 import RestaurantCardItem from "./RestaurantCardItem";
 import AddEditRestaurantCard from "./AddEditRestaurantCard";
 import UseNewRestaurantCard from "./UseNewRestaurantCard";
-import {Box, Fab} from "@mui/material";
+import {Box, Button, Fab, FormControl, InputLabel, Select} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import * as React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import {
-    getAllRestaurantCards, getRestaurantCardById,
+    getAllRestaurantCards, getRestaurantCardById, getUsersRestaurantList,
     removeRestaurantCard, removeRestaurantList,
     transferRestaurantCardToDB, updateRestaurantCard
 } from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
+import MenuItem from "@mui/material/MenuItem";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 
 export default function DisplayListRestaurants() {
 
     const {token} = useContext(AuthContext);
     const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
-    const {newRestaurantCard, resetRestaurantCardInput} = UseNewRestaurantCard();
+    const [restaurantList, setRestaurantList] = useState<string>("All");
+        const {newRestaurantCard, resetRestaurantCardInput} = UseNewRestaurantCard();
     //Dialog
     const [openDialogWindow, setOpenDialogWindow] = useState(false);
     const [addFavouriteText, setAddFavouriteText] = useState(true);
 
     useEffect(() => {
-        getEveryRestaurantCard()
+        getEveryRestaurantCard(restaurantList)
         //eslint-disable-next-line
     }, []);
 
@@ -88,7 +91,7 @@ export default function DisplayListRestaurants() {
             }
             updateRestaurantCard(newRestaurantData, token)
                 .then(() => {
-                    getEveryRestaurantCard()
+                    getEveryRestaurantCard(restaurantList)
                 })
             resetRestaurantCardInput();
             handleCloseDialogWindow();
@@ -98,20 +101,26 @@ export default function DisplayListRestaurants() {
     const deleteRestaurantCard = (restaurantId: string) => {
         removeRestaurantCard(restaurantId, token)
             .then(() => (
-                    getEveryRestaurantCard()
+                    getEveryRestaurantCard(restaurantList)
                 )
             )
     }
 
     const deleteRestaurantList = () => {
         removeRestaurantList(token).then(() => (
-            getEveryRestaurantCard()
+            getEveryRestaurantCard(restaurantList)
         ))
     }
 
-    const getEveryRestaurantCard = () => {
+    const getEveryRestaurantCard = (displayRestaurantList:string) => {
+        if (displayRestaurantList === "All") {
         getAllRestaurantCards(token)
             .then(response => setRestaurantCards(response.data))
+        }
+        else if (displayRestaurantList === "MyOwn") {
+            getUsersRestaurantList(token)
+                .then(response => setRestaurantCards(response.data))
+        }
     }
 
     //Dialog
@@ -132,6 +141,21 @@ export default function DisplayListRestaurants() {
 
     return (
         <div className="cardListBox">
+
+            <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                    <InputLabel>Restaurantlist</InputLabel>
+                    <Select
+                        value={restaurantList}
+                        label="RestaurantList"
+                        onChange={event => setRestaurantList(event.target.value)}
+                    >
+                        <MenuItem value={"All"}>All</MenuItem>
+                        <MenuItem value={"MyOwn"}>MyOwn</MenuItem>
+                    </Select>
+                </FormControl>
+                <Button variant="text" onClick={()=>getEveryRestaurantCard(restaurantList)}>Switch Restaurantlist</Button>
+            </Box>
 
             <section className="cardList">
                 {restaurantCards.map((restaurantCard, index) => (
