@@ -1,4 +1,5 @@
 import "./Restaurants.scss"
+import * as React from "react";
 import {useContext, useEffect, useState} from "react";
 import {RestaurantCard} from "../../models/restaurants/RestaurantCard";
 import RestaurantCardItem from "./RestaurantCardItem";
@@ -6,16 +7,18 @@ import AddEditRestaurantCard from "./AddEditRestaurantCard";
 import UseNewRestaurantCard from "./UseNewRestaurantCard";
 import {Box, Button, Fab, FormControl, InputLabel, Select} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import * as React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import {
-    getAllRestaurantCards, getRestaurantCardById, getUsersRestaurantList,
-    removeRestaurantCard, removeRestaurantList,
-    transferRestaurantCardToDB, updateRestaurantCard
+    getAllRestaurantCards,
+    getRestaurantCardById,
+    getUsersRestaurantList,
+    removeRestaurantCard,
+    removeRestaurantList,
+    transferRestaurantCardToDB,
+    updateRestaurantCard
 } from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
 import MenuItem from "@mui/material/MenuItem";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 
 export default function DisplayListRestaurants() {
@@ -23,7 +26,7 @@ export default function DisplayListRestaurants() {
     const {token} = useContext(AuthContext);
     const [restaurantCards, setRestaurantCards] = useState<RestaurantCard[]>([]);
     const [restaurantList, setRestaurantList] = useState<string>("All");
-        const {newRestaurantCard, resetRestaurantCardInput} = UseNewRestaurantCard();
+    const {newRestaurantCard, resetRestaurantCardInput} = UseNewRestaurantCard();
     //Dialog
     const [openDialogWindow, setOpenDialogWindow] = useState(false);
     const [addFavouriteText, setAddFavouriteText] = useState(true);
@@ -112,12 +115,11 @@ export default function DisplayListRestaurants() {
         ))
     }
 
-    const getEveryRestaurantCard = (displayRestaurantList:string) => {
+    const getEveryRestaurantCard = (displayRestaurantList: string) => {
         if (displayRestaurantList === "All") {
-        getAllRestaurantCards(token)
-            .then(response => setRestaurantCards(response.data))
-        }
-        else if (displayRestaurantList === "MyOwn") {
+            getAllRestaurantCards(token)
+                .then(response => setRestaurantCards(response.data))
+        } else if (displayRestaurantList === "MyOwn") {
             getUsersRestaurantList(token)
                 .then(response => setRestaurantCards(response.data))
         }
@@ -142,7 +144,7 @@ export default function DisplayListRestaurants() {
     return (
         <div className="cardListBox">
 
-            <Box sx={{ minWidth: 120 }}>
+            <Box sx={{minWidth: 120}}>
                 <FormControl fullWidth>
                     <InputLabel>Restaurantlist</InputLabel>
                     <Select
@@ -154,7 +156,8 @@ export default function DisplayListRestaurants() {
                         <MenuItem value={"MyOwn"}>MyOwn</MenuItem>
                     </Select>
                 </FormControl>
-                <Button variant="text" onClick={()=>getEveryRestaurantCard(restaurantList)}>Switch Restaurantlist</Button>
+                <Button variant="text" onClick={() => getEveryRestaurantCard(restaurantList)}>Switch
+                    Restaurantlist</Button>
             </Box>
 
             <section className="cardList">
