@@ -77,7 +77,7 @@ export default function AppointmentStepsWindow(
 
     const dataCompleted = ():boolean => {
         return (appointOne.tastyDateName !== "") &&
-            (appointOne.notes !== "") &&
+            (appointOne.location !== "") &&
             (appointOne.chosenDisplayName !== "") &&
             (appointTwo.dataDateTimes.length !== 0) &&
             (appointThree.restaurantData.length !== 0);

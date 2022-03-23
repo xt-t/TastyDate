@@ -1,6 +1,7 @@
 package de.neuefische.backend.service;
 
 import de.neuefische.backend.model.RestaurantCard;
+import de.neuefische.backend.repository.MongoUserRepository;
 import de.neuefische.backend.repository.RestaurantCardsRepository;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,8 @@ import static org.mockito.Mockito.when;
 class RestaurantCardsServiceTest {
 
     private final RestaurantCardsRepository restaurantCardsRepository = mock(RestaurantCardsRepository.class);
-    private final RestaurantCardsService restaurantCardsService = new RestaurantCardsService(restaurantCardsRepository);
+    private final MongoUserRepository userRepository = mock(MongoUserRepository.class);
+    private final RestaurantCardsService restaurantCardsService = new RestaurantCardsService(restaurantCardsRepository, userRepository);
 
     @Test
     void findRestaurantCardById() {
