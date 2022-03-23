@@ -44,6 +44,22 @@ public class RestaurantCardsService {
         return userRestauarantList;
     }
 
+    public void addRestaurantCardToUserList (String restaurantId, String cardCreatorName) {
+        Optional<User> optionalUser = userRepository.findByUsername(cardCreatorName);
+        User user = optionalUser.orElseThrow(() -> new NoSuchElementException("User " + cardCreatorName + " does not exists!"));
+        if (user.getFavouriteRestaurantsIds() == null) {
+            List<String> tempRestaurantsListUser = new ArrayList<>();
+            tempRestaurantsListUser.add(restaurantId);
+            user.setFavouriteRestaurantsIds(tempRestaurantsListUser);
+        } else {
+            List<String> tempRestaurantsListUser = user.getFavouriteRestaurantsIds();
+            tempRestaurantsListUser.add(restaurantId);
+            user.setFavouriteRestaurantsIds(tempRestaurantsListUser);
+        }
+        userRepository.save(user);
+        LOG.info(user.getFavouriteRestaurantsIds());
+    }
+
     public Optional<RestaurantCard> findRestaurantCardById(String id) {
         return restaurantCardList.findById(id);
     }
@@ -51,20 +67,10 @@ public class RestaurantCardsService {
     public RestaurantCard addNewRestaurant(RestaurantCard restaurantCard, Principal principal) {
         String cardCreatorName = principal.getName();
         restaurantCard.setCardCreator(cardCreatorName);
-        Optional<User> optionalUser = userRepository.findByUsername(cardCreatorName);
-        User user = optionalUser.orElseThrow(() -> new NoSuchElementException("User " + cardCreatorName + " does not exists!"));
-        if (user.getFavouriteRestaurantsIds() == null) {
-            List<String> tempRestaurantsListUser = new ArrayList<>();
-            tempRestaurantsListUser.add(restaurantCard.getId());
-            user.setFavouriteRestaurantsIds(tempRestaurantsListUser);
-        } else {
-            List<String> tempRestaurantsListUser = user.getFavouriteRestaurantsIds();
-            tempRestaurantsListUser.add(restaurantCard.getId());
-            user.setFavouriteRestaurantsIds(tempRestaurantsListUser);
-        }
-        userRepository.save(user);
-        LOG.info(user.getFavouriteRestaurantsIds());
-        return restaurantCardList.insert(restaurantCard);
+        restaurantCardList.insert(restaurantCard);
+        String restaurantId = restaurantCard.getId();
+        addRestaurantCardToUserList(restaurantId, cardCreatorName);
+        return restaurantCard;
     }
 
     public Optional<RestaurantCard> updateRestaurantCard(RestaurantCard restaurantCard) {
@@ -75,6 +81,7 @@ public class RestaurantCardsService {
     public String removeRestaurantCardById(String id) {
         if (restaurantCardList.existsById(id)) {
             restaurantCardList.deleteById(id);
+
             return "Deleted!";
         } else {
             return "Something went wrong";
