@@ -13,7 +13,7 @@ import {
     getRestaurantCardById,
     getUsersRestaurantList,
     removeRestaurantCard,
-    removeRestaurantList,
+    removeUsersRestaurantList,
     transferRestaurantCardToDB,
     updateRestaurantCard
 } from "../../service/tastydate-api-service";
@@ -110,7 +110,7 @@ export default function DisplayListRestaurants() {
     }
 
     const deleteRestaurantList = () => {
-        removeRestaurantList(token).then(() => (
+        removeUsersRestaurantList(token).then(() => (
             getEveryRestaurantCard(restaurantList)
         ))
     }
