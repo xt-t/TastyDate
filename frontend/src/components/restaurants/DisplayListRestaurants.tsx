@@ -144,20 +144,21 @@ export default function DisplayListRestaurants() {
     return (
         <div className="cardListBox">
 
-            <Box sx={{minWidth: 120}}>
-                <FormControl fullWidth>
-                    <InputLabel>Restaurantlist</InputLabel>
+            <Box sx={{width: "20rem", marginTop: "1rem"}}>
+                <FormControl color="primary" fullWidth style={{borderColor: "white"}}>
+                    <InputLabel style={{color:"white"}}>Restaurantlist</InputLabel>
                     <Select
                         value={restaurantList}
                         label="RestaurantList"
+                        style={{color:"white"}}
                         onChange={event => setRestaurantList(event.target.value)}
                     >
                         <MenuItem value={"All"}>All</MenuItem>
                         <MenuItem value={"MyOwn"}>MyOwn</MenuItem>
                     </Select>
                 </FormControl>
-                <Button variant="text" onClick={() => getEveryRestaurantCard(restaurantList)}>Switch
-                    Restaurantlist</Button>
+                <Button variant="contained" style={{color:"white", marginTop: "0.2rem"}} onClick={() => getEveryRestaurantCard(restaurantList)}>Switch
+                    List</Button>
             </Box>
 
             <section className="cardList">
