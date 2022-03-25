@@ -51,13 +51,13 @@ public class RestaurantListsController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String removeRestaurantCard(@PathVariable String id) {
-        return restaurantService.removeRestaurantCardById(id);
+    public String removeRestaurantCard(@PathVariable String id, Principal principal) {
+        return restaurantService.removeRestaurantCardById(id, principal);
     }
 
     @DeleteMapping
-    public ResponseEntity<List<RestaurantCard>> removeRestaurantList() {
-        List<RestaurantCard> noItems = restaurantService.removeAllCards();
+    public ResponseEntity<List<String>> removeUsersRestaurantList(Principal principal) {
+        List<String> noItems = restaurantService.removeUsersRestaurantCards(principal);
         return ok(noItems);
     }
 

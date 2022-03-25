@@ -4,8 +4,6 @@ import de.neuefische.backend.model.RestaurantCard;
 import de.neuefische.backend.model.loginregister.User;
 import de.neuefische.backend.repository.MongoUserRepository;
 import de.neuefische.backend.repository.RestaurantCardsRepository;
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -19,7 +17,7 @@ public class RestaurantCardsService {
 
     final RestaurantCardsRepository restaurantCardList;
     final MongoUserRepository userRepository;
-    private final static Log LOG = LogFactory.getLog(RestaurantCardsService.class);
+//    private final static Log LOG = LogFactory.getLog(RestaurantCardsService.class);
 
     public RestaurantCardsService(RestaurantCardsRepository restaurantCardList, MongoUserRepository userRepository) {
         this.restaurantCardList = restaurantCardList;
@@ -34,7 +32,6 @@ public class RestaurantCardsService {
         String currentUser = principal.getName();
         Optional<User> optionalUser = userRepository.findByUsername(currentUser);
         User user = optionalUser.orElseThrow(() -> new NoSuchElementException("User " + currentUser + " does not exists!"));
-        LOG.info(user.getFavouriteRestaurantsIds());
         List<RestaurantCard> userRestauarantList = new ArrayList<>();
         List<String> userIdsRestaurants = user.getFavouriteRestaurantsIds();
         for (String userIdsRestaurant : userIdsRestaurants) {
@@ -57,7 +54,6 @@ public class RestaurantCardsService {
             user.setFavouriteRestaurantsIds(tempRestaurantsListUser);
         }
         userRepository.save(user);
-        LOG.info(user.getFavouriteRestaurantsIds());
     }
 
     public Optional<RestaurantCard> findRestaurantCardById(String id) {
@@ -78,19 +74,27 @@ public class RestaurantCardsService {
         return restaurantCardList.findById(restaurantCard.getId());
     }
 
-    public String removeRestaurantCardById(String id) {
+    public String removeRestaurantCardById(String id, Principal principal) {
+        String currentUser = principal.getName();
         if (restaurantCardList.existsById(id)) {
-            restaurantCardList.deleteById(id);
-
+//            restaurantCardList.deleteById(id);
+            Optional<User> optionalUser = userRepository.findByUsername(currentUser);
+            User user = optionalUser.orElseThrow(() -> new NoSuchElementException("User " + currentUser + " does not exists!"));
+            user.getFavouriteRestaurantsIds().remove(id);
+            userRepository.save(user);
             return "Deleted!";
         } else {
             return "Something went wrong";
         }
     }
 
-    public List<RestaurantCard> removeAllCards() {
-        restaurantCardList.deleteAll();
-        return restaurantCardList.findAll();
+    public List<String> removeUsersRestaurantCards(Principal principal) {
+        String currentUser = principal.getName();
+        Optional<User> optionalUser = userRepository.findByUsername(currentUser);
+        User user = optionalUser.orElseThrow(() -> new NoSuchElementException("User " + currentUser + " does not exists!"));
+        user.setFavouriteRestaurantsIds(new ArrayList<>());
+        userRepository.save(user);
+        return user.getFavouriteRestaurantsIds();
     }
 
 }

@@ -61,6 +61,6 @@ export const updateRestaurantCard = (changeRestaurantCard: RestaurantCard, token
 export const removeRestaurantCard = (id: string, token?: string) =>
     axios.delete(`/api/restaurants/${id}`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
-export const removeRestaurantList = (token?: string) =>
+export const removeUsersRestaurantList = (token?: string) =>
     axios.delete(`/api/restaurants`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
