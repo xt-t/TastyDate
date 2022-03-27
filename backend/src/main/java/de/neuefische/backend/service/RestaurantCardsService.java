@@ -74,7 +74,7 @@ public class RestaurantCardsService {
         return restaurantCardList.findById(restaurantCard.getId());
     }
 
-    public String removeRestaurantCardById(String id, Principal principal) {
+    public String removeUsersRestaurantCardById(String id, Principal principal) {
         String currentUser = principal.getName();
         if (restaurantCardList.existsById(id)) {
 //            restaurantCardList.deleteById(id);
@@ -88,13 +88,27 @@ public class RestaurantCardsService {
         }
     }
 
-    public List<String> removeUsersRestaurantCards(Principal principal) {
+    public String removeUsersRestaurantCards(Principal principal) {
         String currentUser = principal.getName();
         Optional<User> optionalUser = userRepository.findByUsername(currentUser);
         User user = optionalUser.orElseThrow(() -> new NoSuchElementException("User " + currentUser + " does not exists!"));
-        user.setFavouriteRestaurantsIds(new ArrayList<>());
+        user.getFavouriteRestaurantsIds().clear();
         userRepository.save(user);
-        return user.getFavouriteRestaurantsIds();
+        return "Deleted!";
+    }
+
+    public String removeRestaurantCardById(String id) {
+        if (restaurantCardList.existsById(id)) {
+            restaurantCardList.deleteById(id);
+            return "Deleted!";
+        } else {
+            return "Something went wrong";
+        }
+    }
+
+    public String removeRestaurantCards() {
+        restaurantCardList.deleteAll();
+        return "Deleted!";
     }
 
 }

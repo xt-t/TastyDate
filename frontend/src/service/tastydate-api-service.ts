@@ -58,9 +58,15 @@ export const transferRestaurantCardToDB = (newRestaurantCard: RestaurantCardDTO,
 export const updateRestaurantCard = (changeRestaurantCard: RestaurantCard, token?: string) =>
     axios.put(`/api/restaurants/${changeRestaurantCard.id}/update`, changeRestaurantCard, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
+export const removeUsersRestaurantCard = (id: string, token?: string) =>
+    axios.delete(`/api/restaurants/userlist/${id}`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
+
+export const removeUsersRestaurantList = (token?: string) =>
+    axios.delete(`/api/restaurants/userlist`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
+
 export const removeRestaurantCard = (id: string, token?: string) =>
     axios.delete(`/api/restaurants/${id}`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
-export const removeUsersRestaurantList = (token?: string) =>
+export const removeRestaurantList = (token?: string) =>
     axios.delete(`/api/restaurants`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 

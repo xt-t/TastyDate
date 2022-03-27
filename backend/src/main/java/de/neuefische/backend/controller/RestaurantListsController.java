@@ -50,16 +50,25 @@ public class RestaurantListsController {
         return ResponseEntity.of(opt);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public String removeRestaurantCard(@PathVariable String id, Principal principal) {
-        return restaurantService.removeRestaurantCardById(id, principal);
+    @DeleteMapping(value = "/userlist/{id}")
+    public String removeUsersRestaurantCard(@PathVariable String id, Principal principal) {
+        return restaurantService.removeUsersRestaurantCardById(id, principal);
     }
 
-    @DeleteMapping
-    public ResponseEntity<List<String>> removeUsersRestaurantList(Principal principal) {
-        List<String> noItems = restaurantService.removeUsersRestaurantCards(principal);
+    @DeleteMapping(value = "/userlist")
+    public ResponseEntity<String> removeUsersRestaurantList(Principal principal) {
+        String noItems = restaurantService.removeUsersRestaurantCards(principal);
         return ok(noItems);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public String removeRestaurantCard(@PathVariable String id) {
+        return restaurantService.removeRestaurantCardById(id);
+    }
 
+    @DeleteMapping
+    public ResponseEntity<String> removeRestaurantList() {
+        String noItems = restaurantService.removeRestaurantCards();
+        return ok(noItems);
+    }
 }
