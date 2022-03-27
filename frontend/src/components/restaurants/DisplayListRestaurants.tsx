@@ -11,8 +11,8 @@ import AddIcon from "@mui/icons-material/Add";
 import {
     getAllRestaurantCards,
     getRestaurantCardById,
-    getUsersRestaurantList,
-    removeRestaurantCard,
+    getUsersRestaurantList, removeRestaurantCard, removeRestaurantList,
+    removeUsersRestaurantCard,
     removeUsersRestaurantList,
     transferRestaurantCardToDB,
     updateRestaurantCard
@@ -102,17 +102,29 @@ export default function DisplayListRestaurants() {
     }
 
     const deleteRestaurantCard = (restaurantId: string) => {
-        removeRestaurantCard(restaurantId, token)
-            .then(() => (
-                    getEveryRestaurantCard(restaurantList)
+        if (restaurantList === "All") {
+            removeRestaurantCard(restaurantId, token)
+                .then(() => (
+                        getEveryRestaurantCard(restaurantList)
+                    )
                 )
-            )
+        } else if (restaurantList === "MyOwn") {
+            removeUsersRestaurantCard(restaurantId, token)
+                .then(() => (
+                        getEveryRestaurantCard(restaurantList)
+                    )
+                )
+        }
     }
 
     const deleteRestaurantList = () => {
-        removeUsersRestaurantList(token).then(() => (
-            getEveryRestaurantCard(restaurantList)
-        ))
+        if (restaurantList === "All") {
+            removeRestaurantList(token).then(() => (
+                getEveryRestaurantCard(restaurantList)))
+        } else if (restaurantList === "MyOwn") {
+            removeUsersRestaurantList(token).then(() => (
+                getEveryRestaurantCard(restaurantList)))
+        }
     }
 
     const getEveryRestaurantCard = (displayRestaurantList: string) => {
