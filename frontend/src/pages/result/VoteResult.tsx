@@ -23,7 +23,7 @@ import {UserTimeVote} from "../../models/result/UserTimeVote";
 export default function VoteResult() {
 
     const {tastyDateId}: { tastyDateId?: string } = useParams();
-    const {token} = useContext(AuthContext)
+    const {token, jwtDecoded} = useContext(AuthContext)
     const [voteType, setVoteType] = useState(0);
     const [userName, setUserName] = useState<string>("");
     const [checkIfNameConfirmed, setCheckIfNameConfirmed] = useState<boolean>(false);
@@ -53,8 +53,16 @@ export default function VoteResult() {
         }
     }
 
+    const getLoggedUserName = () => {
+        if (jwtDecoded && jwtDecoded.sub) {
+            setUserName(jwtDecoded.sub);
+            setCheckIfNameConfirmed(true);
+        }
+    }
+
     useEffect(() => {
-        getTastyDateItem()
+        getTastyDateItem();
+        getLoggedUserName();
         //eslint-disable-next-line
     }, [])
 
@@ -160,12 +168,14 @@ export default function VoteResult() {
                                 marginTop: "-0.5rem"
                             }}>TastyDate: {tastyDateItemForVote.infoTastyDate.pickedTastyDateName}</div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
-                                <TextField label="Your voting name" variant="standard" value={userName}
-                                           onChange={(event) => {
-                                               setUserName(event.target.value)
-                                           }}
-                                           InputProps={{readOnly: checkIfNameConfirmed}}
-                                           style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
+
+                                    <TextField label="Your voting name" variant="standard" value={userName}
+                                               onChange={(event) => {
+                                                   setUserName(event.target.value)
+                                               }}
+                                               InputProps={{readOnly: checkIfNameConfirmed}}
+                                               style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
+
                                 {(allowedToVoteRestaurant) ?
                                     (
                                         <Button className="voteRestaurantButton" onClick={addUserRestaurantVote}
