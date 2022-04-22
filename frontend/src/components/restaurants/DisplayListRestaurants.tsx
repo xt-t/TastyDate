@@ -156,8 +156,8 @@ export default function DisplayListRestaurants() {
     return (
         <div className="cardListBox">
 
-            <Box sx={{width: "20rem", marginTop: "1rem"}}>
-                <FormControl color="primary" fullWidth style={{borderColor: "white"}}>
+            <div className="choseRestaurantList">
+                <FormControl color="primary" style={{borderColor: "white", width: "15rem"}}>
                     <InputLabel style={{color:"white"}}>Restaurantlist</InputLabel>
                     <Select
                         value={restaurantList}
@@ -169,9 +169,9 @@ export default function DisplayListRestaurants() {
                         <MenuItem value={"MyOwn"}>MyOwn</MenuItem>
                     </Select>
                 </FormControl>
-                <Button variant="contained" style={{color:"white", marginTop: "0.2rem"}} onClick={() => getEveryRestaurantCard(restaurantList)}>Switch
+                <Button variant="contained" style={{color:"white", }} onClick={() => getEveryRestaurantCard(restaurantList)}>Switch
                     List</Button>
-            </Box>
+            </div>
 
             <section className="cardList">
                 {restaurantCards.map((restaurantCard, index) => (

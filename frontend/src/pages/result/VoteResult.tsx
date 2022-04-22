@@ -11,6 +11,7 @@ import {useParams} from "react-router-dom";
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import {AuthContext} from "../../context/AuthProvider";
 import {
+    getLoggedUserName,
     getTastyDateItemById,
     updateTastyDateWithVoteRestaurantCard,
     updateTastyDateWithVoteTimeItem
@@ -53,16 +54,19 @@ export default function VoteResult() {
         }
     }
 
-    const getLoggedUserName = () => {
-        if (jwtDecoded && jwtDecoded.sub) {
-            setUserName(jwtDecoded.sub);
+    const getLoggedUser = () => {
+        if (token) {
+            getLoggedUserName(token)
+                .then((response) => {
+                    setUserName(response.data);
+                })
             setCheckIfNameConfirmed(true);
         }
     }
 
     useEffect(() => {
         getTastyDateItem();
-        getLoggedUserName();
+        getLoggedUser();
         //eslint-disable-next-line
     }, [])
 

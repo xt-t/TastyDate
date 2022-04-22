@@ -7,8 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from "@mui/icons-material/Menu";
 import {Link} from 'react-router-dom';
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthProvider";
+import {getLoggedUserName} from "../../service/tastydate-api-service";
 
 interface NavigationBarProps {
     showSidebar: () => void
@@ -17,12 +18,28 @@ interface NavigationBarProps {
 export default function NavigationBar({showSidebar}: NavigationBarProps) {
 
     const {token, setJwt} = useContext(AuthContext);
+    const [userName, setUserName] = useState<string>("");
 
     const handleLogout = () => {
         if (token !== "") {
             setJwt("");
+            setUserName("");
         }
     }
+
+    const getLoggedUser = () => {
+        if (token) {
+            getLoggedUserName(token)
+                .then((response) => {
+                    setUserName(response.data);
+                })
+        }
+    }
+
+    useEffect(() => {
+        getLoggedUser();
+        //eslint-disable-next-line
+    }, [])
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -47,6 +64,7 @@ export default function NavigationBar({showSidebar}: NavigationBarProps) {
                             color="inherit"
                         >
                             <AccountCircle/>
+                            <span style={{fontSize: "1rem"}}>&nbsp;{userName}&nbsp;</span>
                         </IconButton>
                         {token ? (
                             <span className="logintext">
