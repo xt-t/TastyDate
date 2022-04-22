@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {getAllTastyDateItems} from "../../service/tastydate-api-service";
+import {getAllTastyDateItems, getUsersTastyDateItems} from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
 import {Button, Card, CardContent} from "@mui/material";
 import "./OverviewVoting.scss"
@@ -25,13 +25,23 @@ export default function OverviewTastyDateItems() {
         navigate(`/overview/${selectedTastyDateId}`);
     }
 
-    const getEveryTastyDate = () => {
-        getAllTastyDateItems(token)
+    // const getEveryTastyDate = () => {
+    //     getAllTastyDateItems(token)
+    //         .then(response => setTastyDateItems(response.data))
+    // }
+    //
+    // useEffect(() => (
+    //     getEveryTastyDate()
+    //     //eslint-disable-next-line
+    // ), [])
+
+    const getUsersTastyDates = () => {
+        getUsersTastyDateItems(token)
             .then(response => setTastyDateItems(response.data))
     }
 
     useEffect(() => (
-        getEveryTastyDate()
+        getUsersTastyDates()
         //eslint-disable-next-line
     ), [])
 

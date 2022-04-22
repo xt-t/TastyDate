@@ -7,6 +7,7 @@ import de.neuefische.backend.service.TastyDateSettingsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,12 @@ public class TastyDateController {
     private ResponseEntity<List<TastyDateItem>> getAllTastyDateItems() {
         List<TastyDateItem> allTastyDateItems = dateInfoService.getEveryTastyDateItem();
         return ok(allTastyDateItems);
+    }
+
+    @GetMapping(value = "/userstastydates")
+    private ResponseEntity<List<TastyDateItem>> getUsersTastyDateItems(Principal principal) {
+        List<TastyDateItem> usersTastyDates = dateInfoService.findUsersTastyDates(principal);
+        return ok(usersTastyDates);
     }
 
     @GetMapping(value = "/{tastyDateId}")

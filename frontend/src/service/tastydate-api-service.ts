@@ -31,6 +31,9 @@ export const registerPost = (register: RegisterData): Promise<string> =>
 export const getAllTastyDateItems = (token?: string) =>
     axios.get(`/api/tastydates/`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
+export const getUsersTastyDateItems = (token?: string) =>
+    axios.get(`/api/tastydates/userstastydates`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
+
 export const getTastyDateItemById = (tastyDateId: string, token?: string) =>
     axios.get(`/api/tastydates/${tastyDateId}`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
