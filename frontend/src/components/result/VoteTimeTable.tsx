@@ -16,6 +16,7 @@ interface VoteTimeTableProps {
     rowsUserTimeVote: UserTimeVote[]
     countersVotesPerTime: number[]
     checkForDateTime: Function
+    allowedForTimeVote: boolean
 }
 
 export default function VoteTimeTable({
@@ -23,7 +24,8 @@ export default function VoteTimeTable({
                                           checkDateTime,
                                           rowsUserTimeVote,
                                           countersVotesPerTime,
-                                          checkForDateTime
+                                          checkForDateTime,
+                                          allowedForTimeVote
                                       }: VoteTimeTableProps) {
 
     return (
@@ -73,21 +75,7 @@ export default function VoteTimeTable({
 
                     ))}
 
-                    {(countersVotesPerTime.length !== 0) ?
-                        (
-                            <React.Fragment>
-                                <div className="voteSummary">Total:</div>
-
-                                {countersVotesPerTime.map((counterVotesPerTime, index) => (
-
-                                    <div className="voteSummary" key={index}>{counterVotesPerTime}</div>
-
-                                ))}
-
-                            </React.Fragment>
-
-                        )
-                        :
+                    {(allowedForTimeVote) ?
                         (<React.Fragment>
                             <Box className="gridUserVoteRow"
                                  style={{gridColumnStart: "1", gridRowStart: `${rowsUserTimeVote.length + 2}`}}>
@@ -103,6 +91,20 @@ export default function VoteTimeTable({
                             ))
                             }
                         </React.Fragment>)
+                        :
+                        (
+                            <React.Fragment>
+                                <div className="voteSummary">Total:</div>
+
+                                {countersVotesPerTime.map((counterVotesPerTime, index) => (
+
+                                    <div className="voteSummary" key={index}>{counterVotesPerTime}</div>
+
+                                ))}
+
+                            </React.Fragment>
+
+                        )
 
                     }
                 </div>

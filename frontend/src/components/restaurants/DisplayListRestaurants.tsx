@@ -175,7 +175,7 @@ export default function DisplayListRestaurants() {
 
             <section className="cardList">
                 {restaurantCards.map((restaurantCard, index) => (
-                    <React.Fragment>
+                    <React.Fragment key={index}>
                         <RestaurantCardItem index={index} restaurantCard={restaurantCard}
                                             deleteRestaurantCard={deleteRestaurantCard}
                                             editRestaurantCard={editRestaurantCard}/>

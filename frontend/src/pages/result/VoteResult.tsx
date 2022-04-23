@@ -11,6 +11,8 @@ import {useParams} from "react-router-dom";
 import {TastyDateItem} from "../../models/result/TastyDateItem";
 import {AuthContext} from "../../context/AuthProvider";
 import {
+    checkIfUserHasVotedRestaurant,
+    checkIfUserHasVotedTime,
     getLoggedUserName,
     getTastyDateItemById,
     updateTastyDateWithVoteRestaurantCard,
@@ -24,10 +26,10 @@ import {UserTimeVote} from "../../models/result/UserTimeVote";
 export default function VoteResult() {
 
     const {tastyDateId}: { tastyDateId?: string } = useParams();
-    const {token, jwtDecoded} = useContext(AuthContext)
+    const {token} = useContext(AuthContext)
     const [voteType, setVoteType] = useState(0);
     const [userName, setUserName] = useState<string>("");
-    const [checkIfNameConfirmed, setCheckIfNameConfirmed] = useState<boolean>(false);
+    const [allowedForTimeVote, setAllowedForTimeVote] = useState<boolean>(true);
     const [tastyDateItemForVote, setTastyDateItemForVote] = useState<TastyDateItem>();
     //TimeVote
     const [checkDateTime, setCheckDateTime] = useState<boolean[]>([]);
@@ -42,6 +44,9 @@ export default function VoteResult() {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setVoteType(newValue);
     };
+
+    console.log("time "+allowedForTimeVote);
+    console.log("restaurant "+allowedToVoteRestaurant);
 
     const getTastyDateItem = () => {
         if (tastyDateId) {
@@ -60,13 +65,36 @@ export default function VoteResult() {
                 .then((response) => {
                     setUserName(response.data);
                 })
-            setCheckIfNameConfirmed(true);
         }
     }
 
-    useEffect(() => {
+    const checkIfUserVotedTime = () => {
+        if (token && tastyDateId) {
+            checkIfUserHasVotedTime(tastyDateId, token)
+                .then((response) => {
+                    setAllowedForTimeVote(response.data);
+                })
+        }
+    }
+
+    const checkIfUserVotedRestaurant = () => {
+        if (token && tastyDateId) {
+            checkIfUserHasVotedRestaurant(tastyDateId, token)
+                .then((response) => {
+                    setAllowedToVoteRestaurant(response.data);
+                })
+        }
+    }
+
+    const refreshWebsite = () => {
         getTastyDateItem();
         getLoggedUser();
+        checkIfUserVotedTime();
+        checkIfUserVotedRestaurant();
+    }
+
+    useEffect(() => {
+        refreshWebsite();
         //eslint-disable-next-line
     }, [])
 
@@ -85,7 +113,7 @@ export default function VoteResult() {
 
     const addUserRestaurantVote = () => {
         if (userName !== "" && tastyDateId) {
-            setCheckIfNameConfirmed(true);
+            setAllowedToVoteRestaurant(false);
             const restaurantVote = {
                 displayedName: userName,
                 votesPerRestaurantFromOneUser: checkRestaurants
@@ -95,7 +123,6 @@ export default function VoteResult() {
                     setTastyDateItemForVote(response.data);
                     setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
                     setNegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant);
-                    setAllowedToVoteRestaurant(!allowedToVoteRestaurant)
                 })
                 .catch((err) => {
                     console.error(err.message);
@@ -105,7 +132,7 @@ export default function VoteResult() {
 
     const addUserTimeVote = () => {
         if (userName !== "" && tastyDateId) {
-            setCheckIfNameConfirmed(true);
+            setAllowedForTimeVote(false);
             const timeVote = {
                 displayedName: userName,
                 votesPerDateTimeFromOneUser: checkDateTime
@@ -148,9 +175,9 @@ export default function VoteResult() {
                                            onChange={(event) => {
                                                setUserName(event.target.value)
                                            }}
-                                           InputProps={{readOnly: checkIfNameConfirmed}}
+                                           InputProps={{readOnly: allowedForTimeVote}}
                                            style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
-                                {(countersVotesPerTime.length === 0) ?
+                                {(countersVotesPerTime.length === 0 && allowedForTimeVote) ?
                                     (
                                         <Button onClick={addUserTimeVote}
                                                 style={{marginTop: "-0.5rem", marginBottom: "1rem"}}>Apply Vote</Button>
@@ -163,6 +190,7 @@ export default function VoteResult() {
                                            rowsUserTimeVote={rowsUserTimeVote}
                                            countersVotesPerTime={countersVotesPerTime}
                                            checkForDateTime={checkForDateTime}
+                                           allowedForTimeVote={allowedForTimeVote}
                             />
                         </TabPanel>
                         <TabPanel value={voteType} index={1}>
@@ -177,7 +205,7 @@ export default function VoteResult() {
                                                onChange={(event) => {
                                                    setUserName(event.target.value)
                                                }}
-                                               InputProps={{readOnly: checkIfNameConfirmed}}
+                                               InputProps={{readOnly: allowedForTimeVote}}
                                                style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
 
                                 {(allowedToVoteRestaurant) ?
@@ -192,7 +220,8 @@ export default function VoteResult() {
                                                  checkRestaurants={checkRestaurants}
                                                  positiveVotesPerTime={positiveVotesPerTime}
                                                  negativeVotesPerTime={negativeVotesPerTime}
-                                                 handleCheck={handleCheck}/>
+                                                 handleCheck={handleCheck}
+                                                 allowedToVoteRestaurant={allowedToVoteRestaurant}/>
                         </TabPanel>
                         <TabPanel value={voteType} index={2}>
                             <Invitationlink tastyDateId={tastyDateId}/>

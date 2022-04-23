@@ -49,6 +49,12 @@ export const updateTastyDateWithVoteTimeItem = (tastyDateId: string, timeVote: U
 export const updateTastyDateWithVoteRestaurantCard = (tastyDateId: string, restaurantVote: UserRestaurantVote, token?: string) =>
     axios.put(`/api/tastydates/${tastyDateId}/restaurantvotes`, restaurantVote, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
+export const checkIfUserHasVotedTime = (tastyDateId: string, token?: string) =>
+    axios.get(`/api/tastydates/${tastyDateId}/checkifuserhasvotedfortime`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
+
+export const checkIfUserHasVotedRestaurant = (tastyDateId: string, token?: string) =>
+    axios.get(`/api/tastydates/${tastyDateId}/checkifuserhasvotedforrestaurant`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
+
 export const getAllRestaurantCards = (token?: string) =>
     axios.get(`/api/restaurants`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 

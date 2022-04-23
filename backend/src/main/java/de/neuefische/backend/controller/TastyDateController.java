@@ -53,6 +53,18 @@ public class TastyDateController {
         return ok(optTastyDate);
     }
 
+    @GetMapping("/{tastyDateId}/checkifuserhasvotedfortime")
+    private ResponseEntity<Boolean> checkIfUserHasVotedTime(@PathVariable String tastyDateId, Principal principal) {
+        Boolean optTastyDate = dateInfoService.checkUserHasVotedTime(principal, tastyDateId);
+        return ok(optTastyDate);
+    }
+
+    @GetMapping("/{tastyDateId}/checkifuserhasvotedforrestaurant")
+    private ResponseEntity<Boolean> checkIfUserHasVotedRestaurant(@PathVariable String tastyDateId, Principal principal) {
+        Boolean optTastyDate = dateInfoService.checkUserHasVotedRestaurant(principal, tastyDateId);
+        return ok(optTastyDate);
+    }
+
     @PutMapping("/{tastyDateId}/restaurantvotes")
     private ResponseEntity<TastyDateItem> updateTastyDateWithVoteRestaurantCard(@RequestBody UserRestaurantVote restaurantVote, @PathVariable String tastyDateId) {
         TastyDateItem optTastyDate = dateInfoService.addVoteRestaurantCardToTastyDate(restaurantVote, tastyDateId);
