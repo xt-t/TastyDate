@@ -4,6 +4,7 @@ import {Card, CardContent} from "@mui/material";
 import {AppointOneType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
 import React, {useContext, useEffect} from "react";
 import {AuthContext} from "../../../context/AuthProvider";
+import {getLoggedUserName} from "../../../service/tastydate-api-service";
 
 interface AppointOneProps {
     appointOne: AppointOneType
@@ -13,16 +14,19 @@ export default function AppointOne(
     {appointOne}: AppointOneProps
 ) {
 
-    const {jwtDecoded} = useContext(AuthContext)
+    const {token} = useContext(AuthContext)
 
-    const getLoggedUserName = () => {
-        if (jwtDecoded && jwtDecoded.sub) {
-            appointOne.setChosenDisplayName(jwtDecoded.sub)
+    const getUserName = () => {
+        if (token) {
+            getLoggedUserName(token)
+                .then((response) => {
+                    appointOne.setChosenDisplayName(response.data)
+                });
         }
     }
 
     useEffect(() => {
-        getLoggedUserName();
+        getUserName();
         //eslint-disable-next-line
     }, [])
 

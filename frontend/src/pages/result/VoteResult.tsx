@@ -53,8 +53,17 @@ export default function VoteResult() {
             getTastyDateItemById(tastyDateId, token)
                 .then((response) => {
                     setTastyDateItemForVote(response.data)
-                    setCheckRestaurants(new Array(response.data.infoRestaurantData.length).fill(false))
-                    setCheckDateTime(new Array(response.data.infoTastyDateTimes.length).fill(false))
+                    if ((response.data.positiveVotingResultsForOneRestaurant !== null)&&
+                        (response.data.negativeVotingResultsForOneRestaurant !== null)) {
+                        setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
+                        setNegativeVotesPerTime(response.data.negativeVotingResultsForOneRestaurant);
+                    }
+                    if (response.data.votingResultsForOneDate !== null) {
+                        setRowsUserTimeVote(response.data.timeVotes);
+                        setCountersVotesPerTime(response.data.votingResultsForOneDate);
+                    }
+                    setCheckRestaurants(new Array(response.data.infoRestaurantData.length).fill(false));
+                    setCheckDateTime(new Array(response.data.infoTastyDateTimes.length).fill(false));
                 })
         }
     }
@@ -177,7 +186,7 @@ export default function VoteResult() {
                                            }}
                                            InputProps={{readOnly: allowedForTimeVote}}
                                            style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
-                                {(countersVotesPerTime.length === 0 && allowedForTimeVote) ?
+                                {(allowedForTimeVote) ?
                                     (
                                         <Button onClick={addUserTimeVote}
                                                 style={{marginTop: "-0.5rem", marginBottom: "1rem"}}>Apply Vote</Button>
