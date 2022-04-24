@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {getAllTastyDateItems, getUsersTastyDateItems} from "../../service/tastydate-api-service";
+import {getUsersTastyDateItems} from "../../service/tastydate-api-service";
 import {AuthContext} from "../../context/AuthProvider";
 import {Button, Card, CardContent} from "@mui/material";
 import "./OverviewVoting.scss"
