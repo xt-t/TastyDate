@@ -7,6 +7,7 @@ import de.neuefische.backend.service.TastyDateSettingsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,12 @@ public class TastyDateController {
         return ok(allTastyDateItems);
     }
 
+    @GetMapping(value = "/userstastydates")
+    private ResponseEntity<List<TastyDateItem>> getUsersTastyDateItems(Principal principal) {
+        List<TastyDateItem> usersTastyDates = dateInfoService.findUsersTastyDates(principal);
+        return ok(usersTastyDates);
+    }
+
     @GetMapping(value = "/{tastyDateId}")
     public ResponseEntity<TastyDateItem> getTastyDateById(@PathVariable String tastyDateId) {
         Optional<TastyDateItem> opt = dateInfoService.findTastyDateById(tastyDateId);
@@ -43,6 +50,18 @@ public class TastyDateController {
     @PutMapping("/{tastyDateId}/timevotes")
     private ResponseEntity<TastyDateItem> updateTastyDateWithVoteTimeItem(@RequestBody UserTimeVote timeVote, @PathVariable String tastyDateId) {
         TastyDateItem optTastyDate = dateInfoService.addVoteTimeItemToTastyDate(timeVote, tastyDateId);
+        return ok(optTastyDate);
+    }
+
+    @GetMapping("/{tastyDateId}/checkifuserhasvotedfortime")
+    private ResponseEntity<Boolean> checkIfUserHasVotedTime(@PathVariable String tastyDateId, Principal principal) {
+        Boolean optTastyDate = dateInfoService.checkUserHasVotedTime(principal, tastyDateId);
+        return ok(optTastyDate);
+    }
+
+    @GetMapping("/{tastyDateId}/checkifuserhasvotedforrestaurant")
+    private ResponseEntity<Boolean> checkIfUserHasVotedRestaurant(@PathVariable String tastyDateId, Principal principal) {
+        Boolean optTastyDate = dateInfoService.checkUserHasVotedRestaurant(principal, tastyDateId);
         return ok(optTastyDate);
     }
 

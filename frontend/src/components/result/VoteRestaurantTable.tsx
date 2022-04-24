@@ -17,6 +17,7 @@ interface VoteRestaurantTableProps {
     positiveVotesPerTime: number[]
     negativeVotesPerTime: number[]
     handleCheck: Function
+    allowedToVoteRestaurant: boolean
 }
 
 export default function VoteRestaurantTable({
@@ -24,7 +25,8 @@ export default function VoteRestaurantTable({
                                                 checkRestaurants,
                                                 positiveVotesPerTime,
                                                 negativeVotesPerTime,
-                                                handleCheck
+                                                handleCheck,
+                                                allowedToVoteRestaurant
                                             }: VoteRestaurantTableProps) {
 
     return (
@@ -72,26 +74,26 @@ export default function VoteRestaurantTable({
                             </Box>
                         </div>
                         <div className="checkboxAndResults">
-                            <Checkbox
-                                checked={checkRestaurants[index]}
-                                onChange={(event) => handleCheck(index)}
-                                inputProps={{'aria-label': 'controlled'}}
-                            />
-                            {(positiveVotesPerTime.length !== 0) ?
+                            {(allowedToVoteRestaurant) ?
                                 (
-                                    <div>
-                                <span className="amountNegativeResults">
-                                    <CloseIcon className="resultIcon"/>
-                                    {negativeVotesPerTime[index]}
-                                </span>
+                                <React.Fragment>
+                                    <Checkbox
+                                        checked={checkRestaurants[index]}
+                                        onChange={(event) => handleCheck(index)}
+                                        inputProps={{'aria-label': 'controlled'}}
+                                    />
+                                </React.Fragment>)
+                                :
+                                (<div>
                                         <span className="amountPositiveResults" style={{color: "hsl(145, 70%, 45%)"}}>
                                     <CheckIcon className="resultIcon"/>
                                             {positiveVotesPerTime[index]}
                                 </span>
-                                    </div>
-                                )
-                                :
-                                (<></>)
+                                    <span className="amountNegativeResults">
+                                    <CloseIcon className="resultIcon"/>
+                                        {negativeVotesPerTime[index]}
+                                </span>
+                                </div>)
                             }
                         </div>
                     </React.Fragment>

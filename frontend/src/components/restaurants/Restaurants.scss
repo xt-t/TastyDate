@@ -9,6 +9,15 @@
   background-size: cover;
 }
 
+.choseRestaurantList {
+  width: 24rem;
+  margin-Top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+}
+
 .cardList {
   height: 32rem;
   display: flex;

@@ -6,6 +6,8 @@ import de.neuefische.backend.model.settingsSubModel.vote.UserTimeVote;
 import de.neuefische.backend.repository.TastyDateSettingsRepository;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.security.Principal;
 import java.util.*;
 
 
@@ -30,9 +32,56 @@ public class TastyDateSettingsService {
         return dateSettingsRepo.findAll();
     }
 
+    public List<TastyDateItem> findUsersTastyDates(Principal principal) {
+        String userName = principal.getName();
+        //chosenDisplayName appointsettings
+        List<TastyDateItem> allTastyDateItemList = dateSettingsRepo.findAll();
+        List<TastyDateItem> filteredTastyDateItemList = new ArrayList<>();
+        for (TastyDateItem currentTastyDateItem:allTastyDateItemList) {
+            boolean userIsCreator = currentTastyDateItem.getInfoTastyDate().getPickedChosenDisplayName().equals(userName);
+
+            List<UserTimeVote> tempList = currentTastyDateItem.getTimeVotes();
+            if (tempList.isEmpty()) {
+                tempList = new ArrayList<>();
+            }
+            List<UserTimeVote> filteredTempList = tempList.stream().filter(userTimeVote -> userTimeVote.getDisplayedName().equals(userName)).toList();
+
+            if (filteredTempList.size() != 0 || userIsCreator) {
+                filteredTastyDateItemList.add(currentTastyDateItem);
+            }
+        }
+        return filteredTastyDateItemList;
+    }
+
     public Optional<TastyDateItem> findTastyDateById(String id) {
         return dateSettingsRepo.findById(id);
     }
+
+    public Boolean checkUserHasVotedTime(Principal principal, String id) {
+        if (principal==null) {
+            return true;
+        }
+        else {
+            String userName = principal.getName();
+            Optional<TastyDateItem> optionalTastyDateItem = findTastyDateById(id);
+            TastyDateItem availableTastyDateItem = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + id + " does not exists!"));
+            List<UserTimeVote> checkIfUserNameInList = availableTastyDateItem.getTimeVotes().stream().filter(timeVote -> timeVote.getDisplayedName().equals(userName)).toList();
+            return checkIfUserNameInList.isEmpty();
+        }
+    }
+    public boolean checkUserHasVotedRestaurant(Principal principal, String id) {
+        if (principal==null) {
+            return true;
+        }
+        else {
+            String userName = principal.getName();
+            Optional<TastyDateItem> optionalTastyDateItem = findTastyDateById(id);
+            TastyDateItem availableTastyDateItem = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + id + " does not exists!"));
+            List<UserRestaurantVote> checkIfUserNameInList = availableTastyDateItem.getRestaurantVotes().stream().filter(restaurantVote -> restaurantVote.getDisplayedName().equals(userName)).toList();
+            return checkIfUserNameInList.isEmpty();
+        }
+    }
+
 
     public TastyDateItem addVoteTimeItemToTastyDate(UserTimeVote timeVote, String tastyDateId) {
         //checking and updating the List of the UserVotes for the DateTimes

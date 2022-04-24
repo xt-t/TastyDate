@@ -2,6 +2,9 @@ import TextField from "@mui/material/TextField";
 import "../Appoint.scss"
 import {Card, CardContent} from "@mui/material";
 import {AppointOneType} from "../../../models/appointmentsettings/UseStateAppointStepTypes";
+import React, {useContext, useEffect} from "react";
+import {AuthContext} from "../../../context/AuthProvider";
+import {getLoggedUserName} from "../../../service/tastydate-api-service";
 
 interface AppointOneProps {
     appointOne: AppointOneType
@@ -10,6 +13,22 @@ interface AppointOneProps {
 export default function AppointOne(
     {appointOne}: AppointOneProps
 ) {
+
+    const {token} = useContext(AuthContext)
+
+    const getUserName = () => {
+        if (token) {
+            getLoggedUserName(token)
+                .then((response) => {
+                    appointOne.setChosenDisplayName(response.data)
+                });
+        }
+    }
+
+    useEffect(() => {
+        getUserName();
+        //eslint-disable-next-line
+    }, [])
 
     return (
         <div className="cardOne">
@@ -49,18 +68,10 @@ export default function AppointOne(
                             appointOne.setNotes(event.target.value);
                         }}
                     />
-                    <TextField
-                        required
-                        id="standard-required"
-                        label="Your name"
-                        variant="standard"
-                        className="formelements"
-                        value={appointOne.chosenDisplayName}
-                        onChange={(event) => {
-                            appointOne.setChosenDisplayName(event.target.value);
-                        }
-                        }
-                    />
+
+                    <TextField label="Your voting name" className="formelements" variant="standard" value={appointOne.chosenDisplayName}
+                               InputProps={{readOnly: true}}/>
+
                 </CardContent>
             </Card>
         </div>
