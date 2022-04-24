@@ -50,7 +50,7 @@ export default function VoteResult() {
 
     const getTastyDateItem = () => {
         if (tastyDateId) {
-            getTastyDateItemById(tastyDateId)
+            getTastyDateItemById(tastyDateId, token)
                 .then((response) => {
                     setTastyDateItemForVote(response.data)
                     setCheckRestaurants(new Array(response.data.infoRestaurantData.length).fill(false));
@@ -78,8 +78,8 @@ export default function VoteResult() {
     }
 
     const checkIfUserVotedTime = () => {
-        if (tastyDateId) {
-            checkIfUserHasVotedTime(tastyDateId)
+        if (token && tastyDateId) {
+            checkIfUserHasVotedTime(tastyDateId, token)
                 .then((response) => {
                     setAllowedForTimeVote(response.data);
                 })
@@ -87,8 +87,8 @@ export default function VoteResult() {
     }
 
     const checkIfUserVotedRestaurant = () => {
-        if (tastyDateId) {
-            checkIfUserHasVotedRestaurant(tastyDateId)
+        if (token && tastyDateId) {
+            checkIfUserHasVotedRestaurant(tastyDateId, token)
                 .then((response) => {
                     setAllowedToVoteRestaurant(response.data);
                 })
@@ -127,7 +127,7 @@ export default function VoteResult() {
                 displayedName: userName,
                 votesPerRestaurantFromOneUser: checkRestaurants
             }
-            updateTastyDateWithVoteRestaurantCard(tastyDateId, restaurantVote)
+            updateTastyDateWithVoteRestaurantCard(tastyDateId, restaurantVote, token)
                 .then((response) => {
                     setTastyDateItemForVote(response.data);
                     setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
@@ -146,7 +146,7 @@ export default function VoteResult() {
                 displayedName: userName,
                 votesPerDateTimeFromOneUser: checkDateTime
             }
-            updateTastyDateWithVoteTimeItem(tastyDateId, timeVote)
+            updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
                 .then((response) => {
                     setTastyDateItemForVote(response.data);
                     setRowsUserTimeVote(response.data.timeVotes);
