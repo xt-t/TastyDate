@@ -58,28 +58,18 @@ public class TastyDateSettingsService {
     }
 
     public Boolean checkUserHasVotedTime(Principal principal, String id) {
-        if (principal==null) {
-            return true;
-        }
-        else {
-            String userName = principal.getName();
-            Optional<TastyDateItem> optionalTastyDateItem = findTastyDateById(id);
-            TastyDateItem availableTastyDateItem = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + id + " does not exists!"));
-            List<UserTimeVote> checkIfUserNameInList = availableTastyDateItem.getTimeVotes().stream().filter(timeVote -> timeVote.getDisplayedName().equals(userName)).toList();
-            return checkIfUserNameInList.isEmpty();
-        }
+        String userName = principal.getName();
+        Optional<TastyDateItem> optionalTastyDateItem = findTastyDateById(id);
+        TastyDateItem availableTastyDateItem = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + id + " does not exists!"));
+        List<UserTimeVote> checkIfUserNameInList = availableTastyDateItem.getTimeVotes().stream().filter(timeVote -> timeVote.getDisplayedName().equals(userName)).toList();
+        return checkIfUserNameInList.isEmpty();
     }
     public boolean checkUserHasVotedRestaurant(Principal principal, String id) {
-        if (principal==null) {
-            return true;
-        }
-        else {
-            String userName = principal.getName();
-            Optional<TastyDateItem> optionalTastyDateItem = findTastyDateById(id);
-            TastyDateItem availableTastyDateItem = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + id + " does not exists!"));
-            List<UserRestaurantVote> checkIfUserNameInList = availableTastyDateItem.getRestaurantVotes().stream().filter(restaurantVote -> restaurantVote.getDisplayedName().equals(userName)).toList();
-            return checkIfUserNameInList.isEmpty();
-        }
+        String userName = principal.getName();
+        Optional<TastyDateItem> optionalTastyDateItem = findTastyDateById(id);
+        TastyDateItem availableTastyDateItem = optionalTastyDateItem.orElseThrow(() -> new NoSuchElementException("TastyDateItem with id: " + id + " does not exists!"));
+        List<UserRestaurantVote> checkIfUserNameInList = availableTastyDateItem.getRestaurantVotes().stream().filter(restaurantVote -> restaurantVote.getDisplayedName().equals(userName)).toList();
+        return checkIfUserNameInList.isEmpty();
     }
 
 

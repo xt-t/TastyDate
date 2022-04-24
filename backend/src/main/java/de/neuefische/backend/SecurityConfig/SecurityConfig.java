@@ -35,9 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/restaurants").authenticated()
-                .antMatchers("/api/tastydates").authenticated()
-                .antMatchers("/api/tastydates/userstastydates").authenticated()
-                .antMatchers("/api/tastydates/${tastyDateId}").permitAll()
+                .antMatchers("/api/tastydate").permitAll()
                 .antMatchers("/**").permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

@@ -37,23 +37,23 @@ export const getAllTastyDateItems = (token?: string) =>
 export const getUsersTastyDateItems = (token?: string) =>
     axios.get(`/api/tastydates/userstastydates`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
-export const getTastyDateItemById = (tastyDateId: string) =>
-    axios.get(`/api/tastydates/${tastyDateId}`)
+export const getTastyDateItemById = (tastyDateId: string, token?: string) =>
+    axios.get(`/api/tastydates/${tastyDateId}`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
 export const transferSettingsToDB = (settingsItem: DateSettingsItemDTO, token?: string) =>
     axios.post(`/api/tastydates`, settingsItem, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
-export const updateTastyDateWithVoteTimeItem = (tastyDateId: string, timeVote: UserTimeVote) =>
-    axios.put(`/api/tastydates/${tastyDateId}/timevotes`, timeVote)
+export const updateTastyDateWithVoteTimeItem = (tastyDateId: string, timeVote: UserTimeVote, token?: string) =>
+    axios.put(`/api/tastydates/${tastyDateId}/timevotes`, timeVote, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
-export const updateTastyDateWithVoteRestaurantCard = (tastyDateId: string, restaurantVote: UserRestaurantVote) =>
-    axios.put(`/api/tastydates/${tastyDateId}/restaurantvotes`, restaurantVote)
+export const updateTastyDateWithVoteRestaurantCard = (tastyDateId: string, restaurantVote: UserRestaurantVote, token?: string) =>
+    axios.put(`/api/tastydates/${tastyDateId}/restaurantvotes`, restaurantVote, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
-export const checkIfUserHasVotedTime = (tastyDateId: string) =>
-    axios.get(`/api/tastydates/${tastyDateId}/checkifuserhasvotedfortime`)
+export const checkIfUserHasVotedTime = (tastyDateId: string, token?: string) =>
+    axios.get(`/api/tastydates/${tastyDateId}/checkifuserhasvotedfortime`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
-export const checkIfUserHasVotedRestaurant = (tastyDateId: string) =>
-    axios.get(`/api/tastydates/${tastyDateId}/checkifuserhasvotedforrestaurant`)
+export const checkIfUserHasVotedRestaurant = (tastyDateId: string, token?: string) =>
+    axios.get(`/api/tastydates/${tastyDateId}/checkifuserhasvotedforrestaurant`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
 
 export const getAllRestaurantCards = (token?: string) =>
     axios.get(`/api/restaurants`, token ? {headers: {"Authorization": "Bearer" + token}} : {})
