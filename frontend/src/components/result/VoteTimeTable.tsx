@@ -53,27 +53,9 @@ export default function VoteTimeTable({
                     ))
                     }
 
-                    {rowsUserTimeVote.map((timeVote, index) => (
-                        <React.Fragment key={index}>
-
-                            <div className="gridItemWithoutStyling">
-                                {timeVote.displayedName}
-                            </div>
-
-                            {timeVote.votesPerDateTimeFromOneUser.map((voteTime, innerindex) => (
-                                <React.Fragment key={innerindex}>
-                                    {voteTime ?
-                                        (<div className="gridPositiveVote"><CheckIcon></CheckIcon></div>)
-                                        :
-                                        (<div className="gridNegativeVote"><CloseIcon></CloseIcon></div>)
-                                    }
-                                </React.Fragment>
-                            ))}
 
 
-                        </React.Fragment>
 
-                    ))}
 
                     {(allowedForTimeVote) ?
                         (<React.Fragment>
@@ -81,11 +63,10 @@ export default function VoteTimeTable({
                                  style={{gridColumnStart: "1", gridRowStart: `${rowsUserTimeVote.length + 2}`}}>
                                 Enter your vote<br/> in this line: </Box>
                             {tastyDateItemForVote.infoTastyDateTimes.map((itemTime, index) => (
-                                <div className="gridUserVoteRow" key={index}>
+                                <div className="gridUserVoteRow" key={index} style={{gridRowStart: `${rowsUserTimeVote.length + 2}`}}>
                                     <Checkbox
-                                        checked={checkDateTime[index]}
+                                        checked={checkDateTime[index] || false}
                                         onChange={() => checkForDateTime(index)}
-                                        inputProps={{'aria-label': 'controlled'}}
                                     />
                                 </div>
                             ))
@@ -94,6 +75,24 @@ export default function VoteTimeTable({
                         :
                         (
                             <React.Fragment>
+                                {rowsUserTimeVote.map((timeVote, index) => (
+                                    <React.Fragment key={index}>
+
+                                        <div className="gridItemWithoutStyling">
+                                            {timeVote.displayedName}
+                                        </div>
+
+                                        {timeVote.votesPerDateTimeFromOneUser.map((voteTime, innerindex) => (
+                                            <React.Fragment key={innerindex}>
+                                                {voteTime ?
+                                                    (<div className="gridPositiveVote"><CheckIcon></CheckIcon></div>)
+                                                    :
+                                                    (<div className="gridNegativeVote"><CloseIcon></CloseIcon></div>)
+                                                }
+                                            </React.Fragment>
+                                        ))}
+                                    </React.Fragment>
+                                ))}
                                 <div className="voteSummary">Total:</div>
 
                                 {countersVotesPerTime.map((counterVotesPerTime, index) => (

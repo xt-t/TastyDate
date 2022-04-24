@@ -50,9 +50,11 @@ export default function VoteResult() {
 
     const getTastyDateItem = () => {
         if (tastyDateId) {
-            getTastyDateItemById(tastyDateId, token)
+            getTastyDateItemById(tastyDateId)
                 .then((response) => {
                     setTastyDateItemForVote(response.data)
+                    setCheckRestaurants(new Array(response.data.infoRestaurantData.length).fill(false));
+                    setCheckDateTime(new Array(response.data.infoTastyDateTimes.length).fill(false));
                     if ((response.data.positiveVotingResultsForOneRestaurant !== null)&&
                         (response.data.negativeVotingResultsForOneRestaurant !== null)) {
                         setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
@@ -62,8 +64,6 @@ export default function VoteResult() {
                         setRowsUserTimeVote(response.data.timeVotes);
                         setCountersVotesPerTime(response.data.votingResultsForOneDate);
                     }
-                    setCheckRestaurants(new Array(response.data.infoRestaurantData.length).fill(false));
-                    setCheckDateTime(new Array(response.data.infoTastyDateTimes.length).fill(false));
                 })
         }
     }
@@ -78,8 +78,8 @@ export default function VoteResult() {
     }
 
     const checkIfUserVotedTime = () => {
-        if (token && tastyDateId) {
-            checkIfUserHasVotedTime(tastyDateId, token)
+        if (tastyDateId) {
+            checkIfUserHasVotedTime(tastyDateId)
                 .then((response) => {
                     setAllowedForTimeVote(response.data);
                 })
@@ -87,8 +87,8 @@ export default function VoteResult() {
     }
 
     const checkIfUserVotedRestaurant = () => {
-        if (token && tastyDateId) {
-            checkIfUserHasVotedRestaurant(tastyDateId, token)
+        if (tastyDateId) {
+            checkIfUserHasVotedRestaurant(tastyDateId)
                 .then((response) => {
                     setAllowedToVoteRestaurant(response.data);
                 })
@@ -127,7 +127,7 @@ export default function VoteResult() {
                 displayedName: userName,
                 votesPerRestaurantFromOneUser: checkRestaurants
             }
-            updateTastyDateWithVoteRestaurantCard(tastyDateId, restaurantVote, token)
+            updateTastyDateWithVoteRestaurantCard(tastyDateId, restaurantVote)
                 .then((response) => {
                     setTastyDateItemForVote(response.data);
                     setPositiveVotesPerTime(response.data.positiveVotingResultsForOneRestaurant);
@@ -146,7 +146,7 @@ export default function VoteResult() {
                 displayedName: userName,
                 votesPerDateTimeFromOneUser: checkDateTime
             }
-            updateTastyDateWithVoteTimeItem(tastyDateId, timeVote, token)
+            updateTastyDateWithVoteTimeItem(tastyDateId, timeVote)
                 .then((response) => {
                     setTastyDateItemForVote(response.data);
                     setRowsUserTimeVote(response.data.timeVotes);
@@ -180,11 +180,11 @@ export default function VoteResult() {
                             }}>TastyDate: {tastyDateItemForVote.infoTastyDate.pickedTastyDateName}</div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
                                 <TextField label="Your voting name" variant="standard"
-                                           value={userName}
+                                           value={userName || ""}
                                            onChange={(event) => {
                                                setUserName(event.target.value)
                                            }}
-                                           InputProps={{readOnly: allowedForTimeVote}}
+                                           InputProps={{readOnly: !allowedForTimeVote}}
                                            style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
                                 {(allowedForTimeVote) ?
                                     (
@@ -210,11 +210,11 @@ export default function VoteResult() {
                             }}>TastyDate: {tastyDateItemForVote.infoTastyDate.pickedTastyDateName}</div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
 
-                                    <TextField label="Your voting name" variant="standard" value={userName}
+                                    <TextField label="Your voting name" variant="standard" value={userName || ""}
                                                onChange={(event) => {
                                                    setUserName(event.target.value)
                                                }}
-                                               InputProps={{readOnly: allowedForTimeVote}}
+                                               InputProps={{readOnly: !allowedForTimeVote}}
                                                style={{marginTop: "-1rem", marginBottom: "1rem"}}/>
 
                                 {(allowedToVoteRestaurant) ?
